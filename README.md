@@ -47,6 +47,10 @@ The node checks for each optional dependency at generation time and gives a clea
 3. Write the pose/angle plan for the turnaround in the CUT timeline, then generate.
 4. Extract the 5 turnaround frames from the rendered video (one `ImageFromBatch` per frame) and feed them into **Muse Character Sheet Compositor** to get one composed sheet.
 
+## Example Workflow
+
+[`workflows/H3 Character Sheet.json`](workflows/H3%20Character%20Sheet.json) — a ready-to-load example, requires the custom nodes listed above.
+
 ## Status
 
 Actively developed by Muse Collective. Expect changes.
