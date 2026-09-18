@@ -20,10 +20,14 @@ Built as a stripped-down, single-call derivative of Muse Collective's MiniMax H3
 
 ## Requirements
 
+**ComfyUI's own "Install Missing Custom Nodes" will not catch any of the packages below.** They're looked up internally by this node's own code, not placed as separate nodes on the canvas, so nothing flags them as missing — you'll only find out when a render fails partway through with an error naming exactly what's missing.
+
 - **ComfyUI** with native MiniMax H3 support (`comfy_extras.nodes_minimax_h3`) — ships with recent ComfyUI core builds.
 - **PyAV** (`av`) and **psutil** Python packages.
-- **[ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo)** — only required if you enable `two_stage_sampling` (uses its `LTXVSeparateAVLatent`/`LTXVConcatAVLatent` nodes).
-- **ComfyUI-MiniMaxH3Mod** (community package, install via ComfyUI Manager) — only required if you enable `use_refmod`.
+- **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — loads `model`/`clip`/`vae` for this workflow.
+- **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Unified Loader for SageAttention support, which is on by default.
+- **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — only required if you enable `two_stage_sampling` (registers `MinimaxH3LatentUpscaler3D`, `LTXVSeparateAVLatent`, `LTXVConcatAVLatent`). Off by default.
+- **[ComfyUI-MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod)** (community package) — only required if you enable `use_refmod`. Add **Load H3 RefMods** (or **Create H3 RefMod** directly) to the canvas and wire its `mods` output into this node's `refmod_bundle` input — **Apply H3 RefMod** doesn't need placing separately, this node calls it internally. Off by default.
 
 The node checks for each optional dependency at generation time and gives a clear error naming exactly what's missing, rather than failing to load.
 
