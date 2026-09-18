@@ -1378,28 +1378,28 @@ class MuseCharacterSheetH3:
                 "clip": ("CLIP",),
                 "vae": ("VAE",),
                 "audio_vae": ("VAE", {"tooltip": "Needed for final audio decode — H3 always builds a joint audio+video latent internally, even though this is Reference mode."}),
-                "aspect_ratio": (ASPECT_RATIO_OPTIONS, {"default": AspectRatio.WIDESCREEN_H.value}),
-                "megapixels": ("FLOAT", {"default": 0.98, "min": 0.2, "max": 2.0, "step": 0.02}),
+                "aspect_ratio": (ASPECT_RATIO_OPTIONS, {"default": AspectRatio.WIDESCREEN_V.value}),
+                "megapixels": ("FLOAT", {"default": 0.5, "min": 0.2, "max": 2.0, "step": 0.02}),
                 "multiple": ("INT", {"default": 32, "min": 8, "max": 128, "step": 4, "advanced": True}),
                 "duration_seconds": ("FLOAT", {"default": 10.0, "min": 3.0, "max": 15.0, "step": 0.5,
                     "tooltip": "Length of this generation call. H3's own trained range tops out around "
                                "15s per call (its own node source flags longer as untested) — this node "
                                "always renders exactly one H3 call, no chunking/splitting."}),
                 "ref_image_size": (["match", "max"], {
-                    "default": "match",
+                    "default": "max",
                     "tooltip": "'match' scales references down to the generation's pixel area (faster). "
                                "'max' keeps up to a 2048px short edge for stronger identity fidelity, but "
                                "reference tokens ride every sampling step so it's several times slower.",
                 }),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "seed": ("INT", {"default": 100, "min": 0, "max": 0xffffffffffffffff}),
                 "use_prompt_override": ("BOOLEAN", {"default": False, "tooltip":
                     "When on, the prompt is replaced with whatever's wired into prompt_override, exactly as "
                     "typed — the timeline's characters/CUTs/soundscape are ignored for prompt purposes "
                     "(reference images and sampling still work normally). For someone who already has a "
                     "fully-formatted H3 prompt and wants to skip this node's own compiler entirely, same as "
                     "typing directly into the stock node's prompt box."}),
-                "steps": ("INT", {"default": 20, "min": 1, "max": 100}),
-                "sampler_name": (["res_multistep", "euler", "euler_ancestral", "dpmpp_2m"], {"default": "res_multistep"}),
+                "steps": ("INT", {"default": 8, "min": 1, "max": 100}),
+                "sampler_name": (["res_multistep", "euler", "euler_ancestral", "dpmpp_2m"], {"default": "euler"}),
                 "scheduler": (["simple", "normal", "beta", "sgm_uniform"], {"default": "simple"}),
                 "two_stage_sampling": ("BOOLEAN", {"default": False, "tooltip":
                     "Experimental. Runs the first few steps at a lower resolution, upscales the "
@@ -1411,13 +1411,15 @@ class MuseCharacterSheetH3:
                     "2 is the reference workflow's own saved default (2-3 is the tested range); "
                     "more than 3 risks the low-res pass locking in a broken composition before "
                     "the upscale can recover it."}),
-                "two_stage_latent_upscale_model": (_scan_latent_upscale_models(), {"tooltip":
+                "two_stage_latent_upscale_model": (_scan_latent_upscale_models(), {
+                    "default": "minimax_h3_latent_upscaler_3d_fp16.safetensors",
+                    "tooltip":
                     "Which trained latent-upscale checkpoint to use (from "
                     "ComfyUI/models/latent_upscale_models/). Real learned network, not interpolation."}),
-                "two_stage_target_megapixels": ("FLOAT", {"default": 1.0, "min": 0.2, "max": 2.0, "step": 0.01, "tooltip":
+                "two_stage_target_megapixels": ("FLOAT", {"default": 2.0, "min": 0.2, "max": 2.0, "step": 0.01, "tooltip":
                     "Target resolution for the Stage-2 upscale, in megapixels. Aspect ratio is preserved "
                     "and the result is aligned to MiniMax H3's 32-pixel canvas grid."}),
-                "two_stage_enable_temporal_chunking": ("BOOLEAN", {"default": False, "tooltip":
+                "two_stage_enable_temporal_chunking": ("BOOLEAN", {"default": True, "tooltip":
                     "Only used when two_stage_sampling is on. The Stage-2 latent upscaler "
                     "(MinimaxH3LatentUpscaler3D) internally splits long chunks into overlapping "
                     "temporal pieces and blends them, rather than upscaling the whole clip as one "
