@@ -1,6 +1,11 @@
 # Muse Character Sheet H3
 
-A ComfyUI custom node for generating consistent character turnaround sheets with **MiniMax H3**, using its Reference (Omni) mode. Give it up to 8 character/prop reference images (and optionally a reference video as an identity source), write a short pose/turnaround prompt using MiniMax's own CHUNK/CUT authoring format, and it renders one H3 call producing a clean multi-angle turnaround of your character.
+A ComfyUI custom node pack for generating consistent character turnaround sheets with **MiniMax H3**, using its Reference (Omni) mode. Give it up to 8 character/prop reference images (and optionally a reference video as an identity source), write a short pose/turnaround prompt using MiniMax's own CHUNK/CUT authoring format, and it renders one H3 call producing a clean multi-angle turnaround of your character. A second, companion node then lays the extracted turnaround frames out into one finished character sheet.
+
+This pack registers two nodes:
+
+- **Muse Character Sheet H3** — the generation node described below.
+- **Muse Character Sheet Compositor** — takes the 5 individual frames extracted from a turnaround render (Close-up, Front, Left Profile, Right Profile, Back — each pulled out with its own `ImageFromBatch` node upstream) and composites them side by side onto one finished sheet, close-up shown full width and the other four given a centered crop to read as slimmer panels next to it.
 
 Built as a stripped-down, single-call derivative of Muse Collective's MiniMax H3 Director line — same CHUNK/CUT prompt-authoring UI and reference-mode prompt compiler, but permanently locked to one chunk, no chunk-splitting, no disk streaming, no Seed Hunt. It's meant to be small, fast, and easy to understand.
 
@@ -29,14 +34,14 @@ The node checks for each optional dependency at generation time and gives a clea
    git clone https://github.com/muse-collective-26/Muse-CharacterSheet-H3.git
    ```
 2. Restart ComfyUI.
-3. Add the **Muse Character Sheet H3** node from the `Muse Collective` category.
+3. Both nodes — **Muse Character Sheet H3** and **Muse Character Sheet Compositor** — appear under the `Muse Collective` category.
 
 ## Usage
 
-1. Wire up `model`, `clip`, `vae`, `audio_vae` from your MiniMax H3 loader.
+1. Wire up `model`, `clip`, `vae`, `audio_vae` from your MiniMax H3 loader into **Muse Character Sheet H3**.
 2. Drop reference images into the Ref 1–8 slots (Analyze each one to auto-fill its description, or type your own).
-3. Write the pose/angle plan for the turnaround in the CUT timeline.
-4. Generate.
+3. Write the pose/angle plan for the turnaround in the CUT timeline, then generate.
+4. Extract the 5 turnaround frames from the rendered video (one `ImageFromBatch` per frame) and feed them into **Muse Character Sheet Compositor** to get one composed sheet.
 
 ## Status
 
