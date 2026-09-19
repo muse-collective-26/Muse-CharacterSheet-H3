@@ -30,6 +30,23 @@ _BG_COLORS = {
     "mid gray": (128, 128, 128),
 }
 
+# [2026-09-19] The final canvas's aspect ratio was never directly settable —
+# it just fell out of panel_height/body_width_pct/gap and the source frames'
+# own shape, landing at ~1.95:1 for a 9:16-sourced sheet at the defaults. A
+# viewer asked for 16:9 specifically. Rather than making people hand-tune
+# body_width_pct to hit an arbitrary target, solve for it automatically:
+# close_up always stays full width, uncropped — target_aspect_ratio only
+# changes how much the other 4 panels get cropped to make the total width
+# land exactly on the requested ratio.
+_ASPECT_RATIOS = {
+    "off (use body_width_pct manually)": None,
+    "16:9": 16 / 9,
+    "4:3": 4 / 3,
+    "1:1": 1.0,
+    "3:2": 3 / 2,
+    "21:9": 21 / 9,
+}
+
 
 def _tensor_to_pil(image_tensor: torch.Tensor) -> Image.Image:
     # ComfyUI IMAGE tensors are (batch, H, W, C) float 0-1 — take the first
@@ -80,6 +97,12 @@ class MuseCharacterSheetCompositor:
                     "Pixel spacing between panels, and around the outer edge."}),
                 "background_color": (list(_BG_COLORS.keys()), {"default": "white", "tooltip":
                     "Fills the gaps and outer edge around the panels."}),
+                "target_aspect_ratio": (list(_ASPECT_RATIOS.keys()), {"default": "off (use body_width_pct manually)", "tooltip":
+                    "When set, ignores body_width_pct and instead solves for the crop percentage on "
+                    "front/left_profile/right_profile/back that makes the final canvas land exactly on "
+                    "this ratio. close_up is never cropped either way — only the other 4 panels' width "
+                    "changes. If the target can't be reached within the 20-100% crop range at this "
+                    "panel_height/gap, it clamps to the closest possible and logs a warning."}),
             },
         }
 
@@ -89,11 +112,28 @@ class MuseCharacterSheetCompositor:
     CATEGORY = CATEGORY
 
     def execute(self, close_up, front, left_profile, right_profile, back,
-                panel_height, body_width_pct, gap, background_color):
+                panel_height, body_width_pct, gap, background_color,
+                target_aspect_ratio="off (use body_width_pct manually)"):
         panel_h = max(1, int(panel_height))
         bg_rgb = _BG_COLORS.get(background_color, (255, 255, 255))
 
-        panels = [_scale_to_height(_tensor_to_pil(close_up), panel_h, 100.0)] + [
+        close_up_panel = _scale_to_height(_tensor_to_pil(close_up), panel_h, 100.0)
+
+        target_ratio = _ASPECT_RATIOS.get(target_aspect_ratio)
+        if target_ratio is not None:
+            canvas_h = panel_h + gap * 2
+            # canvas_w = close_up_w * (1 + 4*bp/100) + 6*gap — solve for bp.
+            needed_multiplier = (target_ratio * canvas_h - gap * 6) / close_up_panel.width
+            solved_bp = (needed_multiplier - 1) * 25
+            clamped_bp = max(20.0, min(100.0, solved_bp))
+            if abs(clamped_bp - solved_bp) > 0.5:
+                print(f"[MuseCharacterSheetCompositor] target_aspect_ratio {target_aspect_ratio} would need "
+                      f"body_width_pct={solved_bp:.1f}%, outside the 20-100% range — clamped to "
+                      f"{clamped_bp:.1f}%. Result won't hit the exact target ratio; try a different "
+                      f"panel_height/gap, or a less extreme target.")
+            body_width_pct = clamped_bp
+
+        panels = [close_up_panel] + [
             _scale_to_height(_tensor_to_pil(img), panel_h, float(body_width_pct))
             for img in (front, left_profile, right_profile, back)
         ]

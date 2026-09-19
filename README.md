@@ -5,7 +5,7 @@ A ComfyUI custom node pack for generating consistent character turnaround sheets
 This pack registers two nodes:
 
 - **Muse Character Sheet H3** — the generation node described below.
-- **Muse Character Sheet Compositor** — takes the 5 individual frames extracted from a turnaround render (Close-up, Front, Left Profile, Right Profile, Back — each pulled out with its own `ImageFromBatch` node upstream) and composites them side by side onto one finished sheet, close-up shown full width and the other four given a centered crop to read as slimmer panels next to it.
+- **Muse Character Sheet Compositor** — takes the 5 individual frames extracted from a turnaround render (Close-up, Front, Left Profile, Right Profile, Back — each pulled out with its own `ImageFromBatch` node upstream) and composites them side by side onto one finished sheet, close-up shown full width and the other four given a centered crop to read as slimmer panels next to it. Set `target_aspect_ratio` (16:9, 4:3, 1:1, 3:2, 21:9) to have it solve the crop automatically instead of hand-tuning `body_width_pct`.
 
 Built as a stripped-down, single-call derivative of Muse Collective's MiniMax H3 Director line — same CHUNK/CUT prompt-authoring UI and reference-mode prompt compiler, but permanently locked to one chunk, no chunk-splitting, no disk streaming, no Seed Hunt. It's meant to be small, fast, and easy to understand.
 
