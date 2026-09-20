@@ -327,14 +327,14 @@
       ],
       "title": "Full",
       "properties": {
-        "cnr_id": "comfyui-workflow-encrypt",
-        "ver": "5ec45fdac73d8bd6d732af76bbe81c94413b3e36",
+        "ver": "4ee72c065db22c9d96c2427954dc69e7b908444b",
         "Node name for S&R": "VHS_VideoCombine",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        }
+        },
+        "aux_id": "Kosinkadink/ComfyUI-VideoHelperSuite"
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -498,14 +498,14 @@
         }
       ],
       "properties": {
-        "cnr_id": "comfyui-workflow-encrypt",
-        "ver": "5ec45fdac73d8bd6d732af76bbe81c94413b3e36",
+        "ver": "ebe75a158b8c19d69a5e4e24c1f25085babda5b4",
         "Node name for S&R": "iToolsPreviewText",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        }
+        },
+        "aux_id": "MohammadAboulEla/ComfyUI-iTools"
       },
       "color": "#222",
       "bgcolor": "#000"
@@ -540,8 +540,7 @@
         }
       ],
       "properties": {
-        "cnr_id": "comfyui-workflow-encrypt",
-        "ver": "d0aea3429393cb8517ce9720a54c539371f0f363",
+        "ver": "6131c1f62c612a074d6aac8435c26ffa19c00563",
         "Node name for S&R": "MiniMaxH3RefModsLoader",
         "refmod_visible_slots": [
           1
@@ -1911,9 +1910,9 @@
               }
             ],
             "properties": {
-              "cnr_id": "comfyui-workflow-encrypt",
-              "ver": "1.0.0",
-              "Node name for S&R": "RMBG"
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
+              "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
               "RMBG-2.0",
@@ -1985,9 +1984,9 @@
               }
             ],
             "properties": {
-              "cnr_id": "comfyui-workflow-encrypt",
-              "ver": "1.0.0",
-              "Node name for S&R": "RMBG"
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
+              "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
               "RMBG-2.0",
@@ -2059,9 +2058,9 @@
               }
             ],
             "properties": {
-              "cnr_id": "comfyui-workflow-encrypt",
-              "ver": "1.0.0",
-              "Node name for S&R": "RMBG"
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
+              "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
               "RMBG-2.0",
@@ -2133,9 +2132,9 @@
               }
             ],
             "properties": {
-              "cnr_id": "comfyui-workflow-encrypt",
-              "ver": "1.0.0",
-              "Node name for S&R": "RMBG"
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
+              "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
               "RMBG-2.0",
@@ -2207,9 +2206,9 @@
               }
             ],
             "properties": {
-              "cnr_id": "comfyui-workflow-encrypt",
-              "ver": "1.0.0",
-              "Node name for S&R": "RMBG"
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
+              "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
               "RMBG-2.0",
@@ -2971,14 +2970,14 @@
               }
             ],
             "properties": {
-              "cnr_id": "comfyui-workflow-encrypt",
-              "ver": "5ec45fdac73d8bd6d732af76bbe81c94413b3e36",
+              "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
               "Node name for S&R": "MiniMaxH3MemoryEfficientSageAttentionPatch",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              }
+              },
+              "aux_id": "kijai/ComfyUI-KJNodes"
             }
           },
           {
@@ -3014,9 +3013,9 @@
               }
             ],
             "properties": {
-              "cnr_id": "comfyui-workflow-encrypt",
-              "ver": "1.0.0",
-              "Node name for S&R": "MiniMaxLowVRAMAttention"
+              "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
+              "Node name for S&R": "MiniMaxLowVRAMAttention",
+              "aux_id": "kijai/ComfyUI-KJNodes"
             },
             "widgets_values": [
               4
@@ -3058,9 +3057,9 @@
               }
             ],
             "properties": {
-              "cnr_id": "comfyui-workflow-encrypt",
-              "ver": "1.0.0",
-              "Node name for S&R": "MiniMaxChunkFeedForward"
+              "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
+              "Node name for S&R": "MiniMaxChunkFeedForward",
+              "aux_id": "kijai/ComfyUI-KJNodes"
             },
             "widgets_values": [
               2,
