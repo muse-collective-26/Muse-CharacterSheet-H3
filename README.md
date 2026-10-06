@@ -20,10 +20,11 @@ Built as a stripped-down, single-call derivative of Muse Collective's MiniMax H3
 
 ## Requirements
 
-**ComfyUI's own "Install Missing Custom Nodes" will not catch any of the packages below.** They're looked up internally by this node's own code, not placed as separate nodes on the canvas, so nothing flags them as missing — you'll only find out when a render fails partway through with an error naming exactly what's missing.
+**Install the required packages below before running the example workflow.** Some dependencies are called internally and may not be detected by ComfyUI's "Install Missing Custom Nodes". Others, including RMBG, appear as workflow nodes, including inside subgraphs. Check this list even if no missing nodes are reported.
 
 - **ComfyUI** with native MiniMax H3 support (`comfy_extras.nodes_minimax_h3`) — ships with recent ComfyUI core builds.
 - **PyAV** (`av`) and **psutil** Python packages.
+- **[ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG)** — required for the five background-removal nodes in the example character-sheet workflow. These use the **RMBG-2.0** model to remove the background from each extracted character view before assembling the sheet.
 - **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — loads `model`/`clip`/`vae` for this workflow.
 - **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Unified Loader for SageAttention support, which is on by default.
 - **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — only required if you enable `two_stage_sampling` (registers `MinimaxH3LatentUpscaler3D`, `LTXVSeparateAVLatent`, `LTXVConcatAVLatent`). Off by default.

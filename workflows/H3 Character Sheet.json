@@ -327,6 +327,7 @@
       ],
       "title": "Full",
       "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
         "ver": "4ee72c065db22c9d96c2427954dc69e7b908444b",
         "Node name for S&R": "VHS_VideoCombine",
         "ue_properties": {
@@ -498,6 +499,7 @@
         }
       ],
       "properties": {
+        "cnr_id": "comfyui-itools",
         "ver": "ebe75a158b8c19d69a5e4e24c1f25085babda5b4",
         "Node name for S&R": "iToolsPreviewText",
         "ue_properties": {
@@ -540,6 +542,7 @@
         }
       ],
       "properties": {
+        "cnr_id": "ComfyUI-MiniMaxH3Mod",
         "ver": "6131c1f62c612a074d6aac8435c26ffa19c00563",
         "Node name for S&R": "MiniMaxH3RefModsLoader",
         "refmod_visible_slots": [
@@ -681,110 +684,6 @@
       "bgcolor": "#000"
     },
     {
-      "id": 6121,
-      "type": "a236f843-ef8b-45ae-8dfb-14a4a11965dd",
-      "pos": [
-        7607.399266619768,
-        6687.452981876768
-      ],
-      "size": [
-        180.228125,
-        26
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 14856
-        }
-      ],
-      "outputs": [
-        {
-          "name": "character_sheet",
-          "type": "IMAGE",
-          "links": [
-            14857
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.36.0",
-        "previewExposures": [
-          {
-            "name": "$$canvas-image-preview",
-            "sourceNodeId": "14",
-            "sourcePreviewName": "$$canvas-image-preview"
-          },
-          {
-            "name": "$$canvas-image-preview_1",
-            "sourceNodeId": "15",
-            "sourcePreviewName": "$$canvas-image-preview"
-          },
-          {
-            "name": "$$canvas-image-preview_2",
-            "sourceNodeId": "17",
-            "sourcePreviewName": "$$canvas-image-preview"
-          },
-          {
-            "name": "$$canvas-image-preview_3",
-            "sourceNodeId": "16",
-            "sourcePreviewName": "$$canvas-image-preview"
-          },
-          {
-            "name": "$$canvas-image-preview_4",
-            "sourceNodeId": "18",
-            "sourcePreviewName": "$$canvas-image-preview"
-          }
-        ]
-      }
-    },
-    {
-      "id": 27,
-      "type": "SaveImage",
-      "pos": [
-        6566.082788927595,
-        6476.842445635543
-      ],
-      "size": [
-        2576.928970588273,
-        1777.1668128354468
-      ],
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 14857
-        }
-      ],
-      "outputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.34.2",
-        "Node name for S&R": "SaveImage"
-      },
-      "widgets_values": [
-        "ComfyUI"
-      ],
-      "widgets_values_named": {
-        "filename_prefix": "ComfyUI"
-      },
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 1,
       "type": "MuseCharacterSheetH3",
       "pos": [
@@ -793,7 +692,7 @@
       ],
       "size": [
         3342.3869457829555,
-        2611
+        2723
       ],
       "flags": {},
       "order": 7,
@@ -874,6 +773,16 @@
           "name": "ref_audio_3_used",
           "type": "AUDIO",
           "links": null
+        },
+        {
+          "name": "final_latent",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "refine_context",
+          "type": "MUSE_H3_REFINE_CONTEXT",
+          "links": null
         }
       ],
       "properties": {
@@ -912,6 +821,7 @@
         0,
         "",
         "",
+        false,
         ""
       ],
       "widgets_values_named": {
@@ -945,6 +855,7 @@
         "refmod_max_total_tokens": 0,
         "refmod_graph_preset": "",
         "refmod_save_preset_as": "",
+        "test_author_refine_schedule": false,
         "mch3_timeline_ui": ""
       },
       "color": "#222",
@@ -959,7 +870,7 @@
       ],
       "size": [
         1207.2600280258162,
-        1494
+        1518
       ],
       "flags": {},
       "order": 4,
@@ -1008,6 +919,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "muse-minimax-h3-unified-loader",
+        "ver": "6dc439fb0ae84ab3b0cec298e374a95cc53e3586",
         "Node name for S&R": "MuseMiniMaxH3UnifiedLoader",
         "muse_loader_final_collapsed": {
           "profile": false,
@@ -1022,29 +935,29 @@
         }
       },
       "widgets_values": [
-        "VRAM QUALITY PROFILE",
+        null,
         "Automatic",
-        "PINNED MEMORY POOL",
+        null,
         "10 GB",
-        "REFERENCE MODEL",
+        null,
         "ref2va\\MiniMax-H3-ref2va-curve-Q4_0.gguf",
         "MiniMax-H3-ref2va-curve-Q5_1.gguf",
         "minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
-        "FIRST / LAST-FRAME MODEL",
+        null,
         "fl2va\\MiniMax-H3-fl2va-curve-Q4_0.gguf",
         "MiniMax-H3-fl2va-curve-Q5_1.gguf",
         "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
-        "SHARED CLIP ENCODER",
+        null,
         "MiniMax-H3-encoder-Q4_K_M.gguf",
         "(auto)",
         "MiniMax-H3-encoder-Q4_K_M.gguf",
         "(auto)",
         "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
         "(auto)",
-        "VAE MODELS",
+        null,
         "minimax_h3_video_vae_fp16.safetensors",
         "minimax_h3_audio_vae_fp32.safetensors",
-        "LoRAs",
+        null,
         "H3\\minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
         1,
         "Both models",
@@ -1054,7 +967,8 @@
         "H3\\h3-realism-people-t2v-i2v-r2v.safetensors",
         0.8,
         "Both models",
-        "ATTENTION & MEMORY",
+        null,
+        null,
         true,
         "Off",
         true,
@@ -1064,35 +978,29 @@
         true,
         2,
         4096,
-        "ADVANCED",
+        null,
         0,
-        "MODELS TO LOAD",
-        "Both / Mixed"
+        null,
+        "Both / Mixed",
+        "[]"
       ],
       "widgets_values_named": {
-        "muse_final_section_profile": "VRAM QUALITY PROFILE",
         "profile": "Automatic",
-        "muse_final_section_pinned": "PINNED MEMORY POOL",
         "pinned_memory_cap": "10 GB",
-        "muse_final_section_reference": "REFERENCE MODEL",
         "low_vram_model": "ref2va\\MiniMax-H3-ref2va-curve-Q4_0.gguf",
         "balanced_model": "MiniMax-H3-ref2va-curve-Q5_1.gguf",
         "maximum_quality_model": "minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
-        "muse_final_section_fl2va": "FIRST / LAST-FRAME MODEL",
         "low_vram_fl2va": "fl2va\\MiniMax-H3-fl2va-curve-Q4_0.gguf",
         "balanced_fl2va": "MiniMax-H3-fl2va-curve-Q5_1.gguf",
         "maximum_quality_fl2va": "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
-        "muse_final_section_clip": "SHARED CLIP ENCODER",
         "low_vram_clip": "MiniMax-H3-encoder-Q4_K_M.gguf",
         "low_vram_mmproj": "(auto)",
         "balanced_clip": "MiniMax-H3-encoder-Q4_K_M.gguf",
         "balanced_mmproj": "(auto)",
         "maximum_quality_clip": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
         "maximum_quality_mmproj": "(auto)",
-        "muse_final_section_vae": "VAE MODELS",
         "video_vae": "minimax_h3_video_vae_fp16.safetensors",
         "audio_vae": "minimax_h3_audio_vae_fp32.safetensors",
-        "muse_final_section_loras": "LoRAs",
         "lora_1": "H3\\minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
         "lora_1_strength": 1,
         "lora_1_target": "Both models",
@@ -1102,7 +1010,6 @@
         "lora_3": "H3\\h3-realism-people-t2v-i2v-r2v.safetensors",
         "lora_3_strength": 0.8,
         "lora_3_target": "Both models",
-        "muse_final_section_attention": "ATTENTION & MEMORY",
         "attention_enabled": true,
         "attention_backend": "Off",
         "sage_attention": true,
@@ -1112,10 +1019,113 @@
         "chunk_feed_forward": true,
         "feed_forward_chunks": 2,
         "feed_forward_threshold": 4096,
-        "muse_final_section_advanced": "ADVANCED",
         "activation_reserve_gb": 0,
-        "muse_final_section_model_selection": "MODELS TO LOAD",
-        "models_to_load": "Both / Mixed"
+        "models_to_load": "Both / Mixed",
+        "extra_loras": "[]"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 6121,
+      "type": "a236f843-ef8b-45ae-8dfb-14a4a11965dd",
+      "pos": [
+        7607.399266619768,
+        6687.452981876768
+      ],
+      "size": [
+        180.228125,
+        26
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 14856
+        }
+      ],
+      "outputs": [
+        {
+          "name": "character_sheet",
+          "type": "IMAGE",
+          "links": [
+            14857
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.36.0",
+        "previewExposures": [
+          {
+            "name": "$$canvas-image-preview",
+            "sourceNodeId": "14",
+            "sourcePreviewName": "$$canvas-image-preview"
+          },
+          {
+            "name": "$$canvas-image-preview_1",
+            "sourceNodeId": "15",
+            "sourcePreviewName": "$$canvas-image-preview"
+          },
+          {
+            "name": "$$canvas-image-preview_2",
+            "sourceNodeId": "17",
+            "sourcePreviewName": "$$canvas-image-preview"
+          },
+          {
+            "name": "$$canvas-image-preview_3",
+            "sourceNodeId": "16",
+            "sourcePreviewName": "$$canvas-image-preview"
+          },
+          {
+            "name": "$$canvas-image-preview_4",
+            "sourceNodeId": "18",
+            "sourcePreviewName": "$$canvas-image-preview"
+          }
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "type": "SaveImage",
+      "pos": [
+        6610.47930826559,
+        6456.53584133622
+      ],
+      "size": [
+        2576.928970588273,
+        1777.1668128354468
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 14857
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.34.2",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "ComfyUI"
       },
       "color": "#222",
       "bgcolor": "#000"
@@ -1145,10 +1155,10 @@
         }
       },
       "widgets_values": [
-        "# Muse Character Sheet H3\n\n[MiniMax H3](https://www.minimax.io/blog/minimax-h3) is MiniMax's general-purpose, omni-modal generation model. It jointly understands text, image, video, and audio, and generates video with **native stereo audio**: voice, sound effects, and music are modeled jointly in a single forward pass, not layered on afterward. Output is up to 2K resolution, 24fps, and up to about 15 seconds per single generation call.\n\n**Muse Character Sheet H3** is a single-call turnaround-sheet node built on top of the stock `MiniMaxH3ReferenceToVideo` node, in H3's Reference (Omni) mode. Instead of manually writing `<Picture N>` / `<Video N>` tags into a single prompt box, you build the turnaround visually:\n\n- Drop up to 8 character/prop images into **Ref 1-8** and an optional **Location** image, write a description for each (or click **Analyze**)\n- Optionally describe a person visible in an uploaded reference video, so H3 uses it as an identity source alongside — or instead of — an image\n- Write the pose/angle plan for the turnaround along the **CUT** timeline\n\nIt compiles all of that into MiniMax H3's own official Reference-mode prompt format, with every tag numbered exactly the way H3 itself assigns them. This node always renders exactly one H3 call (no chunking, no continuation, no Seed Hunt) — check the `compiled_prompt` output any time you want to see exactly what was sent to H3.\n\nA second, companion node — **Muse Character Sheet Compositor** — is bundled in the same install and takes the 5 frames you extract from the rendered turnaround (Close-up, Front, Left Profile, Right Profile, Back) and lays them out on one finished sheet.\n\n## ⚠️ Required custom nodes — install these BEFORE you run anything\n\n**ComfyUI's own \"Install Missing Custom Nodes\" will NOT catch any of these.** They're used internally by other nodes' own code, not as separate nodes on the canvas, so nothing will flag them as missing — you'll only find out when a render fails partway through with an error. Install all of these now:\n\n- **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — loads model/CLIP/VAE for this workflow.\n- **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Muse Unified Loader for SageAttention support, which is **on by default**.\n- **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — required whenever Two-Stage Sampling runs. **Off by default** on this node, so only install if you turn it on.\n\nOptional:\n\n- **[ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)** — only if you're using the lower-VRAM GGUF route (Low VRAM / Balanced quality profiles).\n- **[ComfyUI-MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod)** — only if you enable RefMod Override. Add **Load H3 RefMods** (or **Create H3 RefMod** directly) to the canvas and wire its `mods` output into this node's `refmod_bundle` input. **Off by default.**\n- **[ComfyUI-H3RefModPicker](https://github.com/FranckyB/ComfyUI-H3RefModPicker)** — Companion add-on for ComfyUI-MiniMaxH3Mod\n\n## Model Links\n\n### Standard MiniMax H3 Models (used by the Maximum Quality profile)\n\n[🤗 Comfy-Org/MiniMax-H3](https://huggingface.co/Comfy-Org/MiniMax-H3)\n\n**vae**\n- [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors)\n- [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors)\n\n[🤗 Kijai/MiniMax-H3-experimental](https://huggingface.co/Kijai/MiniMax-H3-experimental)\n- [minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors](https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors) — this node only ever runs Reference mode, so this is the only diffusion model you need\n\n**text_encoders**\n- [qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors)\n\n### Stage-2 Upscale Model (only if you turn on Two-Stage Sampling — off by default)\n\n[🤗 LBH-123-AI/Minimax_h3_latent_Upscaler](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler)\n\n- [minimax_h3_latent_upscaler_3d_fp16.safetensors](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_fp16.safetensors) — the version this node's own default selects\n\n### Lower-VRAM GGUF Models (used by the Low VRAM and Balanced profiles)\n\n[🤗 MiniMax-H3 Curve GGUF](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF)\n\n**diffusion_models — reference model**\n- [MiniMax-H3-ref2va-curve-Q4_0.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q4_0.gguf) — used by the Low VRAM profile\n- [MiniMax-H3-ref2va-curve-Q5_1.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q5_1.gguf) — used by the Balanced profile\n\nThis node has no First/Last-Frame mode, so you don't need any `fl2va/` files from this repo.\n\n[🤗 MiniMax-H3 Encoder GGUF](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF)\n\n**text_encoders — used by the Low VRAM and Balanced profiles**\n- [MiniMax-H3-encoder-Q4_K_M.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-Q4_K_M.gguf)\n- [MiniMax-H3-encoder-mmproj-F16.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-mmproj-F16.gguf) — required matching projector\n\nThe GGUF encoder and matching `mmproj` file must remain together in the same folder. Do not rename either file. For the H3 CLIP loader: set `type` to `minimax`, select the encoder file, select the mmproj file as the matching projector.\n\n### LoRAs\n\n[🤗 lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo)\n- [minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors)\n\n**MysticXXX_MMH3-V1.safetensors** and **H3-GalaxyAce.safetensors** — originally from CivitAI, but bundled directly in this GitHub repo/release under `loras/` instead of linked externally, since not everyone has CivitAI access. *(Link to the actual repo release once these are pushed.)*\n\n### Preview Models (optional — cosmetic sampling preview only, workflow runs fine without them)\n\n[🤗 Kijai/MiniMax-H3-TAE](https://huggingface.co/Kijai/MiniMax-H3-TAE)\n\n- [taeh3.safetensors](https://huggingface.co/Kijai/MiniMax-H3-TAE/resolve/main/vae_approx/taeh3.safetensors)\n- [taeltx2_3.safetensors](https://github.com/madebyollin/taehv/raw/main/safetensors/taeltx2_3.safetensors) — lightweight preview VAE\n\n## Model Storage Locations\n\n- `ComfyUI/models/vae/` — `minimax_h3_video_vae_fp16.safetensors`, `minimax_h3_audio_vae_fp32.safetensors`, `taeltx2_3.safetensors`\n- `ComfyUI/models/vae_approx/` — `taeh3.safetensors`\n- `ComfyUI/models/diffusion_models/` — `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`, `MiniMax-H3-ref2va-curve-Q4_0.gguf`, `MiniMax-H3-ref2va-curve-Q5_1.gguf`\n- `ComfyUI/models/text_encoders/` — `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors`, `MiniMax-H3-encoder-Q4_K_M.gguf`, `MiniMax-H3-encoder-mmproj-F16.gguf`\n- `ComfyUI/models/loras/H3/` — `minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors`, `MysticXXX_MMH3-V1.safetensors`, `H3-GalaxyAce.safetensors`\n- `ComfyUI/models/latent_upscale_models/` — `minimax_h3_latent_upscaler_3d_fp16.safetensors` *(this folder doesn't exist by default — create it yourself; only needed if Two-Stage Sampling is on)*\n\n## Report Issue\n\nPlease update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and make sure the required models and custom nodes above are installed before reporting a bug.\n\n- Muse Character Sheet H3 itself — CUT timeline UI, reference/video identity, compiled prompt: [Muse-CharacterSheet-H3/issues](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/issues)\n- ComfyUI core or the stock MiniMax H3 nodes: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI/frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n\n## Links\n- [MiniMax H3 on Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-H3)\n- [🤗 Comfy-Org/MiniMax-H3 (ComfyUI-ready weights)](https://huggingface.co/Comfy-Org/MiniMax-H3)\n- [Muse Character Sheet H3 on GitHub](https://github.com/muse-collective-26/Muse-CharacterSheet-H3)\n- [MiniMax H3 official prompt-writing guide](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md)\n\n**Sampling defaults**: `euler` sampler, `simple` scheduler, 8 steps, 0.5 megapixels, 9:16 aspect ratio."
+        "# Muse Character Sheet H3\n\n[MiniMax H3](https://www.minimax.io/blog/minimax-h3) is MiniMax's general-purpose, omni-modal generation model. It jointly understands text, image, video, and audio, and generates video with **native stereo audio**: voice, sound effects, and music are modeled jointly in a single forward pass, not layered on afterward. Output is up to 2K resolution, 24fps, and up to about 15 seconds per single generation call.\n\n**Muse Character Sheet H3** is a single-call turnaround-sheet node built on top of the stock `MiniMaxH3ReferenceToVideo` node, in H3's Reference (Omni) mode. Instead of manually writing `<Picture N>` / `<Video N>` tags into a single prompt box, you build the turnaround visually:\n\n- Drop up to 8 character/prop images into **Ref 1-8** and an optional **Location** image, write a description for each (or click **Analyze**)\n- Optionally describe a person visible in an uploaded reference video, so H3 uses it as an identity source alongside — or instead of — an image\n- Write the pose/angle plan for the turnaround along the **CUT** timeline\n\nIt compiles all of that into MiniMax H3's own official Reference-mode prompt format, with every tag numbered exactly the way H3 itself assigns them. This node always renders exactly one H3 call (no chunking, no continuation, no Seed Hunt) — check the `compiled_prompt` output any time you want to see exactly what was sent to H3.\n\nA second, companion node — **Muse Character Sheet Compositor** — is bundled in the same install and takes the 5 frames you extract from the rendered turnaround (Close-up, Front, Left Profile, Right Profile, Back) and lays them out on one finished sheet.\n\n## ⚠️ Required custom nodes — install these BEFORE you run anything\n\n**ComfyUI's own \"Install Missing Custom Nodes\" will NOT catch any of these.** They're used internally by other nodes' own code, not as separate nodes on the canvas, so nothing will flag them as missing — you'll only find out when a render fails partway through with an error. Install all of these now:\n\n- **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — loads model/CLIP/VAE for this workflow.\n- **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Muse Unified Loader for SageAttention support, which is **on by default**.\n- **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — required whenever Two-Stage Sampling runs. **Off by default** on this node, so only install if you turn it on.\n- **[ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG)** — required for the five background-removal nodes in the character-sheet workflow. These use the **RMBG-2.0** model to remove the background from each extracted character view before assembling the sheet.\n\nOptional:\n\n- **[ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)** — only if you're using the lower-VRAM GGUF route (Low VRAM / Balanced quality profiles).\n- **[ComfyUI-MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod)** — only if you enable RefMod Override. Add **Load H3 RefMods** (or **Create H3 RefMod** directly) to the canvas and wire its `mods` output into this node's `refmod_bundle` input. **Off by default.**\n- **[ComfyUI-H3RefModPicker](https://github.com/FranckyB/ComfyUI-H3RefModPicker)** — Companion add-on for ComfyUI-MiniMaxH3Mod\n\n## Model Links\n\n### Standard MiniMax H3 Models (used by the Maximum Quality profile)\n\n[🤗 Comfy-Org/MiniMax-H3](https://huggingface.co/Comfy-Org/MiniMax-H3)\n\n**vae**\n- [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors)\n- [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors)\n\n[🤗 Kijai/MiniMax-H3-experimental](https://huggingface.co/Kijai/MiniMax-H3-experimental)\n- [minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors](https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors) — this node only ever runs Reference mode, so this is the only diffusion model you need\n\n**text_encoders**\n- [qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors)\n\n### Stage-2 Upscale Model (only if you turn on Two-Stage Sampling — off by default)\n\n[🤗 LBH-123-AI/Minimax_h3_latent_Upscaler](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler)\n\n- [minimax_h3_latent_upscaler_3d_fp16.safetensors](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_fp16.safetensors) — the version this node's own default selects\n\n### Lower-VRAM GGUF Models (used by the Low VRAM and Balanced profiles)\n\n[🤗 MiniMax-H3 Curve GGUF](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF)\n\n**diffusion_models — reference model**\n- [MiniMax-H3-ref2va-curve-Q4_0.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q4_0.gguf) — used by the Low VRAM profile\n- [MiniMax-H3-ref2va-curve-Q5_1.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q5_1.gguf) — used by the Balanced profile\n\nThis node has no First/Last-Frame mode, so you don't need any `fl2va/` files from this repo.\n\n[🤗 MiniMax-H3 Encoder GGUF](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF)\n\n**text_encoders — used by the Low VRAM and Balanced profiles**\n- [MiniMax-H3-encoder-Q4_K_M.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-Q4_K_M.gguf)\n- [MiniMax-H3-encoder-mmproj-F16.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-mmproj-F16.gguf) — required matching projector\n\nThe GGUF encoder and matching `mmproj` file must remain together in the same folder. Do not rename either file. For the H3 CLIP loader: set `type` to `minimax`, select the encoder file, select the mmproj file as the matching projector.\n\n### LoRAs\n\n[🤗 lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo)\n- [minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors)\n\n**MysticXXX_MMH3-V1.safetensors** and **H3-GalaxyAce.safetensors** — originally from CivitAI, but bundled directly in this GitHub repo/release under `loras/` instead of linked externally, since not everyone has CivitAI access. *(Link to the actual repo release once these are pushed.)*\n\n### Preview Models (optional — cosmetic sampling preview only, workflow runs fine without them)\n\n[🤗 Kijai/MiniMax-H3-TAE](https://huggingface.co/Kijai/MiniMax-H3-TAE)\n\n- [taeh3.safetensors](https://huggingface.co/Kijai/MiniMax-H3-TAE/resolve/main/vae_approx/taeh3.safetensors)\n- [taeltx2_3.safetensors](https://github.com/madebyollin/taehv/raw/main/safetensors/taeltx2_3.safetensors) — lightweight preview VAE\n\n## Model Storage Locations\n\n- `ComfyUI/models/vae/` — `minimax_h3_video_vae_fp16.safetensors`, `minimax_h3_audio_vae_fp32.safetensors`, `taeltx2_3.safetensors`\n- `ComfyUI/models/vae_approx/` — `taeh3.safetensors`\n- `ComfyUI/models/diffusion_models/` — `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`, `MiniMax-H3-ref2va-curve-Q4_0.gguf`, `MiniMax-H3-ref2va-curve-Q5_1.gguf`\n- `ComfyUI/models/text_encoders/` — `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors`, `MiniMax-H3-encoder-Q4_K_M.gguf`, `MiniMax-H3-encoder-mmproj-F16.gguf`\n- `ComfyUI/models/loras/H3/` — `minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors`, `MysticXXX_MMH3-V1.safetensors`, `H3-GalaxyAce.safetensors`\n- `ComfyUI/models/latent_upscale_models/` — `minimax_h3_latent_upscaler_3d_fp16.safetensors` *(this folder doesn't exist by default — create it yourself; only needed if Two-Stage Sampling is on)*\n\n## Report Issue\n\nPlease update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and make sure the required models and custom nodes above are installed before reporting a bug.\n\n- Muse Character Sheet H3 itself — CUT timeline UI, reference/video identity, compiled prompt: [Muse-CharacterSheet-H3/issues](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/issues)\n- ComfyUI core or the stock MiniMax H3 nodes: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI/frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n\n## Links\n- [MiniMax H3 on Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-H3)\n- [🤗 Comfy-Org/MiniMax-H3 (ComfyUI-ready weights)](https://huggingface.co/Comfy-Org/MiniMax-H3)\n- [Muse Character Sheet H3 on GitHub](https://github.com/muse-collective-26/Muse-CharacterSheet-H3)\n- [MiniMax H3 official prompt-writing guide](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md)\n\n**Sampling defaults**: `euler` sampler, `simple` scheduler, 8 steps, 0.5 megapixels, 9:16 aspect ratio."
       ],
       "widgets_values_named": {
-        "text": "# Muse Character Sheet H3\n\n[MiniMax H3](https://www.minimax.io/blog/minimax-h3) is MiniMax's general-purpose, omni-modal generation model. It jointly understands text, image, video, and audio, and generates video with **native stereo audio**: voice, sound effects, and music are modeled jointly in a single forward pass, not layered on afterward. Output is up to 2K resolution, 24fps, and up to about 15 seconds per single generation call.\n\n**Muse Character Sheet H3** is a single-call turnaround-sheet node built on top of the stock `MiniMaxH3ReferenceToVideo` node, in H3's Reference (Omni) mode. Instead of manually writing `<Picture N>` / `<Video N>` tags into a single prompt box, you build the turnaround visually:\n\n- Drop up to 8 character/prop images into **Ref 1-8** and an optional **Location** image, write a description for each (or click **Analyze**)\n- Optionally describe a person visible in an uploaded reference video, so H3 uses it as an identity source alongside — or instead of — an image\n- Write the pose/angle plan for the turnaround along the **CUT** timeline\n\nIt compiles all of that into MiniMax H3's own official Reference-mode prompt format, with every tag numbered exactly the way H3 itself assigns them. This node always renders exactly one H3 call (no chunking, no continuation, no Seed Hunt) — check the `compiled_prompt` output any time you want to see exactly what was sent to H3.\n\nA second, companion node — **Muse Character Sheet Compositor** — is bundled in the same install and takes the 5 frames you extract from the rendered turnaround (Close-up, Front, Left Profile, Right Profile, Back) and lays them out on one finished sheet.\n\n## ⚠️ Required custom nodes — install these BEFORE you run anything\n\n**ComfyUI's own \"Install Missing Custom Nodes\" will NOT catch any of these.** They're used internally by other nodes' own code, not as separate nodes on the canvas, so nothing will flag them as missing — you'll only find out when a render fails partway through with an error. Install all of these now:\n\n- **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — loads model/CLIP/VAE for this workflow.\n- **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Muse Unified Loader for SageAttention support, which is **on by default**.\n- **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — required whenever Two-Stage Sampling runs. **Off by default** on this node, so only install if you turn it on.\n\nOptional:\n\n- **[ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)** — only if you're using the lower-VRAM GGUF route (Low VRAM / Balanced quality profiles).\n- **[ComfyUI-MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod)** — only if you enable RefMod Override. Add **Load H3 RefMods** (or **Create H3 RefMod** directly) to the canvas and wire its `mods` output into this node's `refmod_bundle` input. **Off by default.**\n- **[ComfyUI-H3RefModPicker](https://github.com/FranckyB/ComfyUI-H3RefModPicker)** — Companion add-on for ComfyUI-MiniMaxH3Mod\n\n## Model Links\n\n### Standard MiniMax H3 Models (used by the Maximum Quality profile)\n\n[🤗 Comfy-Org/MiniMax-H3](https://huggingface.co/Comfy-Org/MiniMax-H3)\n\n**vae**\n- [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors)\n- [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors)\n\n[🤗 Kijai/MiniMax-H3-experimental](https://huggingface.co/Kijai/MiniMax-H3-experimental)\n- [minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors](https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors) — this node only ever runs Reference mode, so this is the only diffusion model you need\n\n**text_encoders**\n- [qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors)\n\n### Stage-2 Upscale Model (only if you turn on Two-Stage Sampling — off by default)\n\n[🤗 LBH-123-AI/Minimax_h3_latent_Upscaler](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler)\n\n- [minimax_h3_latent_upscaler_3d_fp16.safetensors](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_fp16.safetensors) — the version this node's own default selects\n\n### Lower-VRAM GGUF Models (used by the Low VRAM and Balanced profiles)\n\n[🤗 MiniMax-H3 Curve GGUF](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF)\n\n**diffusion_models — reference model**\n- [MiniMax-H3-ref2va-curve-Q4_0.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q4_0.gguf) — used by the Low VRAM profile\n- [MiniMax-H3-ref2va-curve-Q5_1.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q5_1.gguf) — used by the Balanced profile\n\nThis node has no First/Last-Frame mode, so you don't need any `fl2va/` files from this repo.\n\n[🤗 MiniMax-H3 Encoder GGUF](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF)\n\n**text_encoders — used by the Low VRAM and Balanced profiles**\n- [MiniMax-H3-encoder-Q4_K_M.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-Q4_K_M.gguf)\n- [MiniMax-H3-encoder-mmproj-F16.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-mmproj-F16.gguf) — required matching projector\n\nThe GGUF encoder and matching `mmproj` file must remain together in the same folder. Do not rename either file. For the H3 CLIP loader: set `type` to `minimax`, select the encoder file, select the mmproj file as the matching projector.\n\n### LoRAs\n\n[🤗 lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo)\n- [minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors)\n\n**MysticXXX_MMH3-V1.safetensors** and **H3-GalaxyAce.safetensors** — originally from CivitAI, but bundled directly in this GitHub repo/release under `loras/` instead of linked externally, since not everyone has CivitAI access. *(Link to the actual repo release once these are pushed.)*\n\n### Preview Models (optional — cosmetic sampling preview only, workflow runs fine without them)\n\n[🤗 Kijai/MiniMax-H3-TAE](https://huggingface.co/Kijai/MiniMax-H3-TAE)\n\n- [taeh3.safetensors](https://huggingface.co/Kijai/MiniMax-H3-TAE/resolve/main/vae_approx/taeh3.safetensors)\n- [taeltx2_3.safetensors](https://github.com/madebyollin/taehv/raw/main/safetensors/taeltx2_3.safetensors) — lightweight preview VAE\n\n## Model Storage Locations\n\n- `ComfyUI/models/vae/` — `minimax_h3_video_vae_fp16.safetensors`, `minimax_h3_audio_vae_fp32.safetensors`, `taeltx2_3.safetensors`\n- `ComfyUI/models/vae_approx/` — `taeh3.safetensors`\n- `ComfyUI/models/diffusion_models/` — `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`, `MiniMax-H3-ref2va-curve-Q4_0.gguf`, `MiniMax-H3-ref2va-curve-Q5_1.gguf`\n- `ComfyUI/models/text_encoders/` — `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors`, `MiniMax-H3-encoder-Q4_K_M.gguf`, `MiniMax-H3-encoder-mmproj-F16.gguf`\n- `ComfyUI/models/loras/H3/` — `minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors`, `MysticXXX_MMH3-V1.safetensors`, `H3-GalaxyAce.safetensors`\n- `ComfyUI/models/latent_upscale_models/` — `minimax_h3_latent_upscaler_3d_fp16.safetensors` *(this folder doesn't exist by default — create it yourself; only needed if Two-Stage Sampling is on)*\n\n## Report Issue\n\nPlease update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and make sure the required models and custom nodes above are installed before reporting a bug.\n\n- Muse Character Sheet H3 itself — CUT timeline UI, reference/video identity, compiled prompt: [Muse-CharacterSheet-H3/issues](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/issues)\n- ComfyUI core or the stock MiniMax H3 nodes: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI/frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n\n## Links\n- [MiniMax H3 on Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-H3)\n- [🤗 Comfy-Org/MiniMax-H3 (ComfyUI-ready weights)](https://huggingface.co/Comfy-Org/MiniMax-H3)\n- [Muse Character Sheet H3 on GitHub](https://github.com/muse-collective-26/Muse-CharacterSheet-H3)\n- [MiniMax H3 official prompt-writing guide](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md)\n\n**Sampling defaults**: `euler` sampler, `simple` scheduler, 8 steps, 0.5 megapixels, 9:16 aspect ratio."
+        "text": "# Muse Character Sheet H3\n\n[MiniMax H3](https://www.minimax.io/blog/minimax-h3) is MiniMax's general-purpose, omni-modal generation model. It jointly understands text, image, video, and audio, and generates video with **native stereo audio**: voice, sound effects, and music are modeled jointly in a single forward pass, not layered on afterward. Output is up to 2K resolution, 24fps, and up to about 15 seconds per single generation call.\n\n**Muse Character Sheet H3** is a single-call turnaround-sheet node built on top of the stock `MiniMaxH3ReferenceToVideo` node, in H3's Reference (Omni) mode. Instead of manually writing `<Picture N>` / `<Video N>` tags into a single prompt box, you build the turnaround visually:\n\n- Drop up to 8 character/prop images into **Ref 1-8** and an optional **Location** image, write a description for each (or click **Analyze**)\n- Optionally describe a person visible in an uploaded reference video, so H3 uses it as an identity source alongside — or instead of — an image\n- Write the pose/angle plan for the turnaround along the **CUT** timeline\n\nIt compiles all of that into MiniMax H3's own official Reference-mode prompt format, with every tag numbered exactly the way H3 itself assigns them. This node always renders exactly one H3 call (no chunking, no continuation, no Seed Hunt) — check the `compiled_prompt` output any time you want to see exactly what was sent to H3.\n\nA second, companion node — **Muse Character Sheet Compositor** — is bundled in the same install and takes the 5 frames you extract from the rendered turnaround (Close-up, Front, Left Profile, Right Profile, Back) and lays them out on one finished sheet.\n\n## ⚠️ Required custom nodes — install these BEFORE you run anything\n\n**ComfyUI's own \"Install Missing Custom Nodes\" will NOT catch any of these.** They're used internally by other nodes' own code, not as separate nodes on the canvas, so nothing will flag them as missing — you'll only find out when a render fails partway through with an error. Install all of these now:\n\n- **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — loads model/CLIP/VAE for this workflow.\n- **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Muse Unified Loader for SageAttention support, which is **on by default**.\n- **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — required whenever Two-Stage Sampling runs. **Off by default** on this node, so only install if you turn it on.\n- **[ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG)** — required for the five background-removal nodes in the character-sheet workflow. These use the **RMBG-2.0** model to remove the background from each extracted character view before assembling the sheet.\n\nOptional:\n\n- **[ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)** — only if you're using the lower-VRAM GGUF route (Low VRAM / Balanced quality profiles).\n- **[ComfyUI-MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod)** — only if you enable RefMod Override. Add **Load H3 RefMods** (or **Create H3 RefMod** directly) to the canvas and wire its `mods` output into this node's `refmod_bundle` input. **Off by default.**\n- **[ComfyUI-H3RefModPicker](https://github.com/FranckyB/ComfyUI-H3RefModPicker)** — Companion add-on for ComfyUI-MiniMaxH3Mod\n\n## Model Links\n\n### Standard MiniMax H3 Models (used by the Maximum Quality profile)\n\n[🤗 Comfy-Org/MiniMax-H3](https://huggingface.co/Comfy-Org/MiniMax-H3)\n\n**vae**\n- [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors)\n- [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors)\n\n[🤗 Kijai/MiniMax-H3-experimental](https://huggingface.co/Kijai/MiniMax-H3-experimental)\n- [minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors](https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors) — this node only ever runs Reference mode, so this is the only diffusion model you need\n\n**text_encoders**\n- [qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors)\n\n### Stage-2 Upscale Model (only if you turn on Two-Stage Sampling — off by default)\n\n[🤗 LBH-123-AI/Minimax_h3_latent_Upscaler](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler)\n\n- [minimax_h3_latent_upscaler_3d_fp16.safetensors](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_fp16.safetensors) — the version this node's own default selects\n\n### Lower-VRAM GGUF Models (used by the Low VRAM and Balanced profiles)\n\n[🤗 MiniMax-H3 Curve GGUF](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF)\n\n**diffusion_models — reference model**\n- [MiniMax-H3-ref2va-curve-Q4_0.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q4_0.gguf) — used by the Low VRAM profile\n- [MiniMax-H3-ref2va-curve-Q5_1.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q5_1.gguf) — used by the Balanced profile\n\nThis node has no First/Last-Frame mode, so you don't need any `fl2va/` files from this repo.\n\n[🤗 MiniMax-H3 Encoder GGUF](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF)\n\n**text_encoders — used by the Low VRAM and Balanced profiles**\n- [MiniMax-H3-encoder-Q4_K_M.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-Q4_K_M.gguf)\n- [MiniMax-H3-encoder-mmproj-F16.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-mmproj-F16.gguf) — required matching projector\n\nThe GGUF encoder and matching `mmproj` file must remain together in the same folder. Do not rename either file. For the H3 CLIP loader: set `type` to `minimax`, select the encoder file, select the mmproj file as the matching projector.\n\n### LoRAs\n\n[🤗 lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo)\n- [minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors)\n\n**MysticXXX_MMH3-V1.safetensors** and **H3-GalaxyAce.safetensors** — originally from CivitAI, but bundled directly in this GitHub repo/release under `loras/` instead of linked externally, since not everyone has CivitAI access. *(Link to the actual repo release once these are pushed.)*\n\n### Preview Models (optional — cosmetic sampling preview only, workflow runs fine without them)\n\n[🤗 Kijai/MiniMax-H3-TAE](https://huggingface.co/Kijai/MiniMax-H3-TAE)\n\n- [taeh3.safetensors](https://huggingface.co/Kijai/MiniMax-H3-TAE/resolve/main/vae_approx/taeh3.safetensors)\n- [taeltx2_3.safetensors](https://github.com/madebyollin/taehv/raw/main/safetensors/taeltx2_3.safetensors) — lightweight preview VAE\n\n## Model Storage Locations\n\n- `ComfyUI/models/vae/` — `minimax_h3_video_vae_fp16.safetensors`, `minimax_h3_audio_vae_fp32.safetensors`, `taeltx2_3.safetensors`\n- `ComfyUI/models/vae_approx/` — `taeh3.safetensors`\n- `ComfyUI/models/diffusion_models/` — `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`, `MiniMax-H3-ref2va-curve-Q4_0.gguf`, `MiniMax-H3-ref2va-curve-Q5_1.gguf`\n- `ComfyUI/models/text_encoders/` — `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors`, `MiniMax-H3-encoder-Q4_K_M.gguf`, `MiniMax-H3-encoder-mmproj-F16.gguf`\n- `ComfyUI/models/loras/H3/` — `minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors`, `MysticXXX_MMH3-V1.safetensors`, `H3-GalaxyAce.safetensors`\n- `ComfyUI/models/latent_upscale_models/` — `minimax_h3_latent_upscaler_3d_fp16.safetensors` *(this folder doesn't exist by default — create it yourself; only needed if Two-Stage Sampling is on)*\n\n## Report Issue\n\nPlease update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and make sure the required models and custom nodes above are installed before reporting a bug.\n\n- Muse Character Sheet H3 itself — CUT timeline UI, reference/video identity, compiled prompt: [Muse-CharacterSheet-H3/issues](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/issues)\n- ComfyUI core or the stock MiniMax H3 nodes: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI/frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n\n## Links\n- [MiniMax H3 on Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-H3)\n- [🤗 Comfy-Org/MiniMax-H3 (ComfyUI-ready weights)](https://huggingface.co/Comfy-Org/MiniMax-H3)\n- [Muse Character Sheet H3 on GitHub](https://github.com/muse-collective-26/Muse-CharacterSheet-H3)\n- [MiniMax H3 official prompt-writing guide](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md)\n\n**Sampling defaults**: `euler` sampler, `simple` scheduler, 8 steps, 0.5 megapixels, 9:16 aspect ratio."
       },
       "color": "#222",
       "bgcolor": "#000"
@@ -1669,9 +1679,7 @@
                 "input_ue_unconnectable": {},
                 "version": "7.8"
               }
-            },
-            "widgets_values": [],
-            "widgets_values_named": {}
+            }
           },
           {
             "id": 15,
@@ -1717,9 +1725,7 @@
                 "input_ue_unconnectable": {},
                 "version": "7.8"
               }
-            },
-            "widgets_values": [],
-            "widgets_values_named": {}
+            }
           },
           {
             "id": 17,
@@ -1765,9 +1771,7 @@
                 "input_ue_unconnectable": {},
                 "version": "7.8"
               }
-            },
-            "widgets_values": [],
-            "widgets_values_named": {}
+            }
           },
           {
             "id": 16,
@@ -1813,9 +1817,7 @@
                 "input_ue_unconnectable": {},
                 "version": "7.8"
               }
-            },
-            "widgets_values": [],
-            "widgets_values_named": {}
+            }
           },
           {
             "id": 18,
@@ -1861,83 +1863,7 @@
                 "input_ue_unconnectable": {},
                 "version": "7.8"
               }
-            },
-            "widgets_values": [],
-            "widgets_values_named": {}
-          },
-          {
-            "id": 28,
-            "type": "RMBG",
-            "pos": [
-              8653.888413078776,
-              5992.555022387089
-            ],
-            "size": [
-              340,
-              292
-            ],
-            "flags": {},
-            "order": 10,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "Image",
-                "name": "image",
-                "type": "IMAGE",
-                "link": 35
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "IMAGE",
-                "name": "IMAGE",
-                "type": "IMAGE",
-                "links": [
-                  45
-                ]
-              },
-              {
-                "localized_name": "MASK",
-                "name": "MASK",
-                "type": "MASK",
-                "links": null
-              },
-              {
-                "localized_name": "MASK IMAGE",
-                "name": "MASK_IMAGE",
-                "type": "IMAGE",
-                "links": null
-              }
-            ],
-            "properties": {
-              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
-              "Node name for S&R": "RMBG",
-              "aux_id": "1038lab/ComfyUI-RMBG"
-            },
-            "widgets_values": [
-              "RMBG-2.0",
-              1,
-              1024,
-              0,
-              0,
-              false,
-              false,
-              "Color",
-              "#ffffff"
-            ],
-            "widgets_values_named": {
-              "model": "RMBG-2.0",
-              "sensitivity": 1,
-              "process_res": 1024,
-              "mask_blur": 0,
-              "mask_offset": 0,
-              "invert_output": false,
-              "refine_foreground": false,
-              "background": "Color",
-              "background_color": "#ffffff"
-            },
-            "color": "#222e40",
-            "bgcolor": "#364254"
+            }
           },
           {
             "id": 31,
@@ -1984,6 +1910,7 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-rmbg",
               "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
               "Node name for S&R": "RMBG",
               "aux_id": "1038lab/ComfyUI-RMBG"
@@ -2058,6 +1985,7 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-rmbg",
               "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
               "Node name for S&R": "RMBG",
               "aux_id": "1038lab/ComfyUI-RMBG"
@@ -2132,6 +2060,7 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-rmbg",
               "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
               "Node name for S&R": "RMBG",
               "aux_id": "1038lab/ComfyUI-RMBG"
@@ -2206,6 +2135,7 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-rmbg",
               "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
               "Node name for S&R": "RMBG",
               "aux_id": "1038lab/ComfyUI-RMBG"
@@ -2244,7 +2174,7 @@
             ],
             "size": [
               328.46640625,
-              210
+              234
             ],
             "flags": {},
             "order": 15,
@@ -2300,14 +2230,91 @@
               1080,
               60,
               12,
-              "white"
+              "white",
+              "off (use body_width_pct manually)"
             ],
             "widgets_values_named": {
               "panel_height": 1080,
               "body_width_pct": 60,
               "gap": 12,
-              "background_color": "white"
+              "background_color": "white",
+              "target_aspect_ratio": "off (use body_width_pct manually)"
             }
+          },
+          {
+            "id": 28,
+            "type": "RMBG",
+            "pos": [
+              8653.888413078776,
+              5992.555022387089
+            ],
+            "size": [
+              340,
+              292
+            ],
+            "flags": {},
+            "order": 10,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "Image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 35
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  45
+                ]
+              },
+              {
+                "localized_name": "MASK",
+                "name": "MASK",
+                "type": "MASK",
+                "links": null
+              },
+              {
+                "localized_name": "MASK IMAGE",
+                "name": "MASK_IMAGE",
+                "type": "IMAGE",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui-rmbg",
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
+              "aux_id": "1038lab/ComfyUI-RMBG"
+            },
+            "widgets_values": [
+              "RMBG-2.0",
+              1,
+              1024,
+              0,
+              0,
+              false,
+              false,
+              "Color",
+              "#ffffff"
+            ],
+            "widgets_values_named": {
+              "model": "RMBG-2.0",
+              "sensitivity": 1,
+              "process_res": 1024,
+              "mask_blur": 0,
+              "mask_offset": 0,
+              "invert_output": false,
+              "refine_foreground": false,
+              "background": "Color",
+              "background_color": "#ffffff"
+            },
+            "color": "#222e40",
+            "bgcolor": "#364254"
           }
         ],
         "groups": [],
@@ -2970,6 +2977,7 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-kjnodes",
               "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
               "Node name for S&R": "MiniMaxH3MemoryEfficientSageAttentionPatch",
               "ue_properties": {
@@ -3013,6 +3021,7 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-kjnodes",
               "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
               "Node name for S&R": "MiniMaxLowVRAMAttention",
               "aux_id": "kijai/ComfyUI-KJNodes"
@@ -3057,6 +3066,7 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-kjnodes",
               "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
               "Node name for S&R": "MiniMaxChunkFeedForward",
               "aux_id": "kijai/ComfyUI-KJNodes"
@@ -3415,18 +3425,18 @@
   },
   "config": {},
   "extra": {
-    "ds": {
-      "scale": 0.20806230037973494,
-      "offset": [
-        1823.9329850706677,
-        -5012.172541136842
-      ]
-    },
     "frontendVersion": "1.52.7",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
-    "VHS_KeepIntermediate": true
+    "VHS_KeepIntermediate": true,
+    "ds": {
+      "scale": 0.1891475457997598,
+      "offset": [
+        3157.051126834834,
+        -4122.814291797751
+      ]
+    }
   },
   "version": 0.4
 }
