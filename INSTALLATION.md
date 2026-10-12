@@ -112,7 +112,10 @@ reference selections; upload your own references and choose your own RefMods.
 Paths pointing to the author's computer are not distributed assets.
 
 For Enhanced, the supplied settings retain 8 H3 steps and the Ref2V 8-step Turbo
-LoRA. The maximum-quality reference model is Singularity v1.3 INT8, with an INT8
+LoRA. The revised saved example uses 2 megapixels and also selects the author's
+`Minimax_H3_Unlocked_V2.safetensors` extra LoRA at strength 1; that file is not
+bundled. Select your own available weights before running. The maximum-quality
+reference model is Singularity v1.3 INT8, with an INT8
 H3 text encoder; Automatic may choose another profile according to VRAM.
 Use the exact model creators' sources for those custom weights; they are not
 bundled. The older FastVideo links in the general model notes are alternatives,

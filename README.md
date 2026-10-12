@@ -64,6 +64,14 @@ Both include corrected custom-node source metadata and setup notes. The Enhanced
 workflow preserves the author's saved model selections: weights and reference
 assets are not bundled. See [setup and DLSS instructions](INSTALLATION.md).
 
+The Enhanced workflow's five Qwen/DLSS processing wrappers are now expanded,
+with each preview connected directly to its DLSS output. This layout passed the
+author's save/close/reopen check after the nested wrappers produced five missing
+preview-input errors. The outer sheet group and Qwen subgraphs remain. Download
+the updated workflow and open it; updating the node pack does not rewrite your
+previously saved workflows. A fresh full render of this revised export has not
+yet been verified.
+
 The compositor accepts both RGB and RGBA inputs without changing its node ID or
 input/output interface. This supports background-removal outputs in both examples.
 Structural and CPU regression tests are included; Enhanced is not yet certified

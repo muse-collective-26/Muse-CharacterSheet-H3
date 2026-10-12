@@ -51,6 +51,21 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(h3['outputs'].__len__(), 7)
         self.assertTrue(all(g['links'] for g in w['definitions']['subgraphs']))
 
+    def test_enhanced_preview_sources_are_direct(self):
+        w = json.loads((ROOT / 'workflows/H3 Character Sheet Enhanced.json').read_text(encoding='utf8'))
+        previews = []
+        for graph in [w] + w['definitions']['subgraphs']:
+            nodes = {n['id']: n for n in graph['nodes']}
+            links = {l['id'] if isinstance(l, dict) else l[0]: l for l in graph['links']}
+            for node in graph['nodes']:
+                if node['type'] != 'PreviewImage':
+                    continue
+                previews.append(node)
+                link = links[node['inputs'][0]['link']]
+                origin = link['origin_id'] if isinstance(link, dict) else link[1]
+                self.assertEqual(nodes[origin]['type'], 'DLSS5EnhanceImages')
+        self.assertEqual(len(previews), 5)
+
 
 class InstallerTests(unittest.TestCase):
     def test_selection_and_existing_alias(self):
