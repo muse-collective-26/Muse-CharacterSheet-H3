@@ -20,15 +20,20 @@ Built as a stripped-down, single-call derivative of Muse Collective's MiniMax H3
 
 ## Requirements
 
+**Choose Standard or Enhanced:** see [complete installation instructions](INSTALLATION.md)
+and the [dependency installer](Installers/install_dependencies.py). Both workflows
+use this same node pack. Enhanced adds Qwen Image 2.1 and DLSS; Standard does not
+require DLSS. Third-party packages are installed separately, not bundled here.
+
 **Install the required packages below before running the example workflow.** Some dependencies are called internally and may not be detected by ComfyUI's "Install Missing Custom Nodes". Others, including RMBG, appear as workflow nodes, including inside subgraphs. Check this list even if no missing nodes are reported.
 
 - **ComfyUI** with native MiniMax H3 support (`comfy_extras.nodes_minimax_h3`) — ships with recent ComfyUI core builds.
 - **PyAV** (`av`) and **psutil** Python packages.
 - **[ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG)** — required for the five background-removal nodes in the example character-sheet workflow. These use the **RMBG-2.0** model to remove the background from each extracted character view before assembling the sheet.
-- **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — loads `model`/`clip`/`vae` for this workflow.
+- **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — active in Enhanced; retained as a bypassed alternative in Standard, which uses its separate Models & Loras group.
 - **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Unified Loader for SageAttention support, which is on by default.
 - **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — only required if you enable `two_stage_sampling` (registers `MinimaxH3LatentUpscaler3D`, `LTXVSeparateAVLatent`, `LTXVConcatAVLatent`). Off by default.
-- **[ComfyUI-MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod)** (community package) — only required if you enable `use_refmod`. Add **Load H3 RefMods** (or **Create H3 RefMod** directly) to the canvas and wire its `mods` output into this node's `refmod_bundle` input — **Apply H3 RefMod** doesn't need placing separately, this node calls it internally. Off by default.
+- **[ComfyUI-MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod)** (community package) — the provided workflows contain its loader, so install it to open them without a missing node. RefMod application is off by default. **Apply H3 RefMod** is called internally when enabled.
 
 The node checks for each optional dependency at generation time and gives a clear error naming exactly what's missing, rather than failing to load.
 
@@ -38,8 +43,10 @@ The node checks for each optional dependency at generation time and gives a clea
    ```
    git clone https://github.com/muse-collective-26/Muse-CharacterSheet-H3.git
    ```
-2. Restart ComfyUI.
-3. Both nodes — **Muse Character Sheet H3** and **Muse Character Sheet Compositor** — appear under the `Muse Collective` category.
+2. Install the packages and Python requirements using [INSTALLATION.md](INSTALLATION.md).
+   For Enhanced, complete the separate DLSS runtime setup there as well.
+3. Restart ComfyUI.
+4. Both nodes — **Muse Character Sheet H3** and **Muse Character Sheet Compositor** — appear under the `Muse Collective` category.
 
 ## Usage
 
@@ -50,7 +57,19 @@ The node checks for each optional dependency at generation time and gives a clea
 
 ## Example Workflow
 
-[`workflows/H3 Character Sheet.json`](workflows/H3%20Character%20Sheet.json) — a ready-to-load example, requires the custom nodes listed above.
+- [H3 Character Sheet — Standard](workflows/H3%20Character%20Sheet.json): original generation and assembly workflow; existing filename retained.
+- [H3 Character Sheet Enhanced](workflows/H3%20Character%20Sheet%20Enhanced.json): 8-step H3 with Ref2V Turbo LoRA, five Qwen refinement branches, DLSS image/video enhancement, and RGB conversion before background removal.
+
+Both include corrected custom-node source metadata and setup notes. The Enhanced
+workflow preserves the author's saved model selections: weights and reference
+assets are not bundled. See [setup and DLSS instructions](INSTALLATION.md).
+
+The compositor accepts both RGB and RGBA inputs without changing its node ID or
+input/output interface. This supports background-removal outputs in both examples.
+Structural and CPU regression tests are included; Enhanced is not yet certified
+by a clean-install end-to-end GPU render.
+
+[Muse Collective community](https://www.skool.com/muse-collective-7594)
 
 ## Status
 

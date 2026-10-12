@@ -48,11 +48,19 @@ _ASPECT_RATIOS = {
 }
 
 
-def _tensor_to_pil(image_tensor: torch.Tensor) -> Image.Image:
+def _tensor_to_pil(image_tensor: torch.Tensor, background_rgb=(255, 255, 255)) -> Image.Image:
     # ComfyUI IMAGE tensors are (batch, H, W, C) float 0-1 — take the first
     # frame of whatever batch arrives (a single extracted frame is batch=1).
-    frame = image_tensor[0].clamp(0.0, 1.0).mul(255.0).round().to(torch.uint8).cpu().numpy()
-    return Image.fromarray(frame, mode="RGB")
+    if (image_tensor.ndim != 4 or image_tensor.shape[0] < 1
+            or image_tensor.shape[1] < 1 or image_tensor.shape[2] < 1
+            or image_tensor.shape[-1] not in (3, 4)):
+        raise ValueError("Compositor input must be a nonempty RGB/RGBA IMAGE batch.")
+    frame = image_tensor[0].detach().clamp(0.0, 1.0).mul(255.0).round().to(torch.uint8).cpu().numpy()
+    image = Image.fromarray(frame)
+    if image.mode == "RGBA":
+        background = Image.new("RGBA", image.size, tuple(background_rgb) + (255,))
+        image = Image.alpha_composite(background, image)
+    return image.convert("RGB")
 
 
 def _pil_to_tensor(image: Image.Image) -> torch.Tensor:
@@ -117,7 +125,7 @@ class MuseCharacterSheetCompositor:
         panel_h = max(1, int(panel_height))
         bg_rgb = _BG_COLORS.get(background_color, (255, 255, 255))
 
-        close_up_panel = _scale_to_height(_tensor_to_pil(close_up), panel_h, 100.0)
+        close_up_panel = _scale_to_height(_tensor_to_pil(close_up, bg_rgb), panel_h, 100.0)
 
         target_ratio = _ASPECT_RATIOS.get(target_aspect_ratio)
         if target_ratio is not None:
@@ -134,7 +142,7 @@ class MuseCharacterSheetCompositor:
             body_width_pct = clamped_bp
 
         panels = [close_up_panel] + [
-            _scale_to_height(_tensor_to_pil(img), panel_h, float(body_width_pct))
+            _scale_to_height(_tensor_to_pil(img, bg_rgb), panel_h, float(body_width_pct))
             for img in (front, left_profile, right_profile, back)
         ]
 
