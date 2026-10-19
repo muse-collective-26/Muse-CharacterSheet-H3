@@ -1,5 +1,11 @@
 # Release notes
 
+## 2026-10-19 — Updated default Enhanced workflow
+
+- Replaced `workflows/H3 Character Sheet Enhanced.json` with Andy's supplied Enhanced (5) workflow, retaining its nodes, connections and saved settings.
+- Corrected the Qwen detailer repository URL in its notes. No additional loaders were added.
+- Standard remains unchanged: selected-frame composition and background removal without the Enhanced Qwen/DLSS processing.
+
 ## 2026-10-19 — DLSS runtime download correction
 
 - The existing Windows installer now offers DLSS runtime setup using the working `v3.0` release URL, overriding the upstream script's broken `3.0` URL.
