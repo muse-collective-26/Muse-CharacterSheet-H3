@@ -6,11 +6,14 @@ See [release notes](CHANGELOG.md) for the current node fixes, trigger-word contr
 
 ### Quick start — Windows portable
 
-1. Download this repository using **Code → Download ZIP**, extract it, and place the folder in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`. Avoid a second nested copy. Git users can clone it into `custom_nodes` instead.
-2. Close ComfyUI. Double-click **[Installers/Install-Windows.bat](Installers/Install-Windows.bat)** inside that folder. Git must be installed and available on PATH. The launcher finds portable Python (or `.venv`), displays the plan and asks before installing.
-3. The installer includes the **Unified Loader** and the other workflow node dependencies. Existing node folders are retained. **Model weights are not downloaded.** Download/select models using [the model list and setup instructions](INSTALLATION.md).
-4. For Enhanced, complete the separate **DLSS runtime** installation in that guide. Enhanced targets Windows; Standard does not require DLSS. Standard-only and non-portable installation commands are also in the guide.
-5. Restart ComfyUI, refresh the browser, then open the [Enhanced workflow](workflows/H3%20Character%20Sheet%20Enhanced.json) or [Standard workflow](workflows/H3%20Character%20Sheet.json). Upload your own references and select installed model files.
+**Download the complete repository ZIP, not the BAT file on its own. The BAT needs the supporting files included in the ZIP.**
+
+1. **[Download the complete package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/archive/refs/heads/master.zip)** (or use **Code → Download ZIP** above).
+2. Extract the ZIP first. Rename the extracted `Muse-CharacterSheet-H3-master` folder to `Muse-CharacterSheet-H3` and place that whole folder inside your ComfyUI instance's `custom_nodes` folder. Do not move just the BAT file, and do not run it from inside the ZIP.
+3. Close ComfyUI. Open `ComfyUI/custom_nodes/Muse-CharacterSheet-H3/Installers` and double-click `Install-Windows.bat`. Keep it in that folder beside `install_dependencies.py` and `dependencies.json`. Git must be installed and available on PATH. The launcher displays the plan and asks before installing.
+4. The installer includes the **Unified Loader** and the other workflow node dependencies. Existing node folders are retained. **Model weights are not downloaded.** Download/select models using [the model list and setup instructions](INSTALLATION.md).
+5. For Enhanced, complete the separate **DLSS runtime** installation in that guide. Enhanced targets Windows; Standard does not require DLSS. Standard-only and non-portable installation commands are also in the guide.
+6. Restart ComfyUI, refresh the browser, then open the [Enhanced workflow](workflows/H3%20Character%20Sheet%20Enhanced.json) or [Standard workflow](workflows/H3%20Character%20Sheet.json). Upload your own references and select installed model files.
 
 ### Updating an existing installation
 

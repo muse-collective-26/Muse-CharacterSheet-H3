@@ -49,6 +49,17 @@ requirements stop installation rather than silently switching the GPU build.
 
 ### Windows portable
 
+**Download the complete ZIP, not the BAT file separately.**
+
+1. [Download the repository ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/archive/refs/heads/master.zip), or click **Code → Download ZIP** on GitHub.
+2. Extract it. Rename `Muse-CharacterSheet-H3-master` to `Muse-CharacterSheet-H3` and put the entire folder inside `ComfyUI/custom_nodes`.
+3. Close ComfyUI. Open that package's `Installers` folder and double-click `Install-Windows.bat`. Do not run it inside the ZIP or move it away from its supporting files.
+4. Confirm the displayed plan. After installation, set up the models and separate DLSS runtime as described below, restart ComfyUI and refresh the browser.
+
+The BAT, `install_dependencies.py` and `dependencies.json` are all required and already included in the ZIP. Git must be installed and available on PATH.
+
+#### Alternative: command-line installation
+
 Open a terminal in the portable root containing `python_embeded` and `ComfyUI`.
 Preview the plan:
 
@@ -168,5 +179,5 @@ Your own references and RefMods must be supplied locally. Saved preview paths an
 
 ### Windows installer
 
-Install this repository in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`, close ComfyUI, then double-click `Installers/Install-Windows.bat`.
+Download and extract the **complete repository ZIP** as explained above. Put the whole package in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`, close ComfyUI, then open its `Installers` folder and double-click `Install-Windows.bat`. Do not download or move the BAT separately.
 It previews the target and requests confirmation, installs missing node packages including the Unified Loader, GGUF and H3 Multishot, and installs Python requirements with the existing PyTorch versions constrained. Existing node folders are retained, not overwritten or updated. Models, SageAttention binaries, and the separately licensed DLSS native runtime are not downloaded. Follow the DLSS runtime instructions above after node installation.

@@ -2,6 +2,8 @@
 
 ## 2026-10-19 — Character Sheet H3 update
 
+- Clarified installation: download and extract the complete repository ZIP, place the entire package in custom_nodes, then run the included BAT from its Installers folder. Do not download the BAT separately.
+
 - Updated Enhanced workflow and exact model download notes: Singularity v1.3 INT8, H3 INT8 encoder, Reference-mode 8-step Turbo, latent upscaler, Qwen refinement models, Texture-Fix VAE and detailer.
 - SageAttention and High-Res Stability are off in the Enhanced template. Memory-saving attention/feed-forward chunking remains enabled. Existing user workflows are not rewritten.
 - Added Windows dependency installer launcher. Includes Unified Loader, H3 Multishot and GGUF support alongside the workflow's other node packages; does not download model weights or install SageAttention binaries.
