@@ -10,7 +10,7 @@ Opening the workflow does not automatically install its custom nodes, models or 
 
 ## Installation
 
-1. Download the complete [Muse Character Sheet H3 Windows package](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.2/Muse-CharacterSheet-H3-Windows.zip).
+1. Download the complete [Muse Character Sheet H3 Windows package](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/archive/refs/heads/master.zip).
 2. Extract the ZIP.
 3. Place the package folder directly inside `ComfyUI/custom_nodes`.
 4. Close ComfyUI.
@@ -42,10 +42,10 @@ The installer installs missing dependencies and their Python requirements. It re
 | [KJNodes](https://github.com/kijai/ComfyUI-KJNodes) | Set/Get nodes, image-size utilities and H3 memory-saving patches |
 | [MiniMax H3 Latent Upscaler](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler) | Required when two-stage sampling is enabled |
 | [MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod) | RefMod loader |
-| [RMBG](https://github.com/1038lab/ComfyUI-RMBG) | Background removal |
+| Bundled Muse Remove Background | Background removal; no separate RMBG node pack needed |
 | [VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite) | Video output |
 | [iTools](https://github.com/MohammadAboulEla/ComfyUI-iTools) | Prompt preview |
-| [WAS Node Suite (Revised)](https://github.com/ltdrdata/was-node-suite-comfyui) | Text saving and RGB conversion |
+| Bundled Muse Save Text and Muse Images to RGB | Text saving and RGB conversion; no WAS required |
 | [Memory Cleanup](https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup) | RAM and VRAM cleanup |
 | [DLSS5 Enhancer](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer) | Image and video enhancement; requires its separate runtime |
 
@@ -53,7 +53,7 @@ Use a ComfyUI version with native MiniMax H3 and Qwen Image 2.1 support.
 
 Qwen refinement uses core nodes including `TextEncodeQwenImage21`, `QwenImage21Cache` and `ComfySwitchNode`. These are not separate Muse downloads.
 
-Follow RMBG's model-installation instructions for its selected background-removal model.
+Muse Remove Background reuses models/RMBG and downloads missing selected model files on first use. Model licences and access restrictions still apply. INSPYRENET additionally needs transparent-background; the supplied workflows use RMBG-2.0.
 
 ## Saved generation settings
 

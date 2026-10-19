@@ -20,14 +20,6 @@
     ]
   },
   {
-    "folder": "ComfyUI-RMBG",
-    "repo": "1038lab/ComfyUI-RMBG",
-    "cnr": "comfyui-rmbg",
-    "nodes": [
-      "RMBG"
-    ]
-  },
-  {
     "folder": "ComfyUI-VideoHelperSuite",
     "repo": "Kosinkadink/ComfyUI-VideoHelperSuite",
     "cnr": "comfyui-videohelpersuite",
@@ -41,15 +33,6 @@
     "cnr": "comfyui-itools",
     "nodes": [
       "iToolsPreviewText"
-    ]
-  },
-  {
-    "folder": "was-ns",
-    "repo": "ltdrdata/was-node-suite-comfyui",
-    "cnr": "was-ns",
-    "nodes": [
-      "Save Text File",
-      "Images to RGB"
     ]
   },
   {

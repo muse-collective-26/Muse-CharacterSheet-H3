@@ -1,0 +1,6 @@
+huggingface-hub>=0.19.0
+transformers>=4.30.0
+safetensors
+timm
+einops
+opencv-python

@@ -55,7 +55,7 @@ class WorkflowTests(unittest.TestCase):
     def test_enhanced_settings(self):
         w = json.loads((ROOT / 'workflows/H3 Character Sheet Enhanced.json').read_text(encoding='utf8'))
         h3 = next(n for n in w['nodes'] if n['type'] == 'MuseCharacterSheetH3')
-        self.assertEqual(h3['widgets_values_named']['steps'], 8)
+        self.assertEqual(h3['widgets_values_named']['steps'], 10)
         loader = next(n for n in w['nodes'] if n['type'] == 'MuseMiniMaxH3UnifiedLoader')
         self.assertIn('ref2v_turbo_8step', loader['widgets_values_named']['lora_1'])
         self.assertEqual(h3['outputs'].__len__(), 9)
@@ -98,8 +98,8 @@ class InstallerTests(unittest.TestCase):
 
     def test_selection_and_existing_alias(self):
         installer = module('installer', ROOT / 'Installers/install_dependencies.py')
-        self.assertEqual(len(installer.packages(False)), 11)
-        self.assertEqual(len(installer.packages(True)), 12)
+        self.assertEqual(len(installer.packages(False)), 9)
+        self.assertEqual(len(installer.packages(True)), 10)
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             alias = root / 'different-name'

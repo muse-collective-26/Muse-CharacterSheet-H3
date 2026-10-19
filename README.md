@@ -1,6 +1,12 @@
 # Muse Character Sheet H3
 
-## Latest update — 19 October 2026
+The three Muse utility nodes are now included in this package and installed by the existing **Install-Windows.bat**. No separate utility ZIPs are required. The supplied Standard and Enhanced workflows no longer require WAS Node Suite or the original ComfyUI-RMBG package. Do not remove those packs if other workflows still use them.
+
+If you previously installed the standalone Muse utility folders, move those backup copies outside `custom_nodes` after updating this pack, so there is only one registration of each utility. The installer does not delete existing folders automatically.
+
+The background-removal engine is GPL-3.0: see [third-party notices](THIRD_PARTY_NOTICES.md). The combined distribution must respect those terms; model weights have separate terms.
+
+## Latest update — 20 October 2026
 
 See [release notes](CHANGELOG.md) for the current node fixes, trigger-word controls, updated Enhanced workflow and safer attention defaults.
 
@@ -10,7 +16,7 @@ The default Enhanced workflow is `workflows/H3 Character Sheet Enhanced.json`: H
 
 **Download the complete repository ZIP, not the BAT file on its own. The BAT needs the supporting files included in the ZIP.**
 
-1. **[Download Windows package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.2/Muse-CharacterSheet-H3-Windows.zip)** (or use **Code → Download ZIP** above).
+1. **[Download Windows package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/archive/refs/heads/master.zip)** (or use **Code → Download ZIP** above).
 2. Extract the ZIP first. Rename the extracted `Muse-CharacterSheet-H3-master` folder to `Muse-CharacterSheet-H3` and place that whole folder inside your ComfyUI instance's `custom_nodes` folder. Do not move just the BAT file, and do not run it from inside the ZIP.
 3. Close ComfyUI. Open `ComfyUI/custom_nodes/Muse-CharacterSheet-H3` and double-click the top-level `Install-Windows.bat`. Keep the `Installers` folder beside it. Git must be installed and available on PATH. The launcher displays the plan and asks before installing.
 4. The installer includes the **Unified Loader** and the other workflow node dependencies. Existing node folders are retained. **Model weights are not downloaded.** Download/select models using [the model list and setup instructions](INSTALLATION.md).
@@ -25,7 +31,11 @@ Download the new workflow explicitly to receive its new notes and defaults. Upda
 
 A ComfyUI custom node pack for generating consistent character turnaround sheets with **MiniMax H3**, using its Reference (Omni) mode. Give it up to 8 character/prop reference images (and optionally a reference video as an identity source), write a short pose/turnaround prompt using MiniMax's own CHUNK/CUT authoring format, and it renders one H3 call producing a clean multi-angle turnaround of your character. A second, companion node then lays the extracted turnaround frames out into one finished character sheet.
 
-This pack registers two nodes:
+This pack registers five nodes:
+
+- **Muse Save Text** — portable text saving.
+- **Muse Images to RGB** — RGB conversion, alpha preservation or colour compositing.
+- **Muse Remove Background** — background removal with IMAGE, MASK and MASK_IMAGE outputs. Bundled with its attributed GPL-3.0 engine.
 
 - **Muse Character Sheet H3** — the generation node described below.
 - **Muse Character Sheet Compositor** — takes the 5 individual frames extracted from a turnaround render (Close-up, Front, Left Profile, Right Profile, Back — each pulled out with its own `ImageFromBatch` node upstream) and composites them side by side onto one finished sheet, close-up shown full width and the other four given a centered crop to read as slimmer panels next to it. Set `target_aspect_ratio` (16:9, 4:3, 1:1, 3:2, 21:9) to have it solve the crop automatically instead of hand-tuning `body_width_pct`.
@@ -52,7 +62,7 @@ require DLSS. Third-party packages are installed separately, not bundled here.
 
 - **ComfyUI** with native MiniMax H3 support (`comfy_extras.nodes_minimax_h3`) — ships with recent ComfyUI core builds.
 - **PyAV** (`av`) and **psutil** Python packages.
-- **[ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG)** — required for the five background-removal nodes in the example character-sheet workflow. These use the **RMBG-2.0** model to remove the background from each extracted character view before assembling the sheet.
+- **Muse Remove Background is included** — the installer installs its Python requirements. The selected model is downloaded on first use if absent; existing models/RMBG files are reused.
 - **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — active in Enhanced; retained as a bypassed alternative in Standard, which uses its separate Models & Loras group.
 - **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Unified Loader's memory/attention patches. SageAttention is optional and off in the updated Enhanced template.
 - **[MiniMax H3 Latent Upscaler](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler)** — supplies `MinimaxH3LatentUpscaler3D` for two-stage sampling; included by the dependency installer. Its model weights are a separate download (see INSTALLATION.md). H3 Multishot does not supply this upscaler. Single-stage and two-stage sampling are supported.

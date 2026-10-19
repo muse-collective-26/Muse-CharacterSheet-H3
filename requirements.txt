@@ -1,2 +1,3 @@
 av
 psutil
+-r muse_remove_background/requirements.txt

@@ -64,3 +64,11 @@ The dependency installer retains existing node folders rather than replacing the
 ### Validation and limits
 
 Python/JavaScript checks and CPU regression tests accompany this release. Local single-stage and two-stage character-sheet renders have been exercised; this is not a clean-install certification across all GPUs. Enhanced DLSS requires its separate Windows runtime and license acceptance. Models and personal reference assets are not bundled. Polyhedron's Civitai listing is supplied, but its current download could not be independently verified.
+# 20 October 2026 — bundled Muse utilities
+
+- Included Muse Save Text, Muse Images to RGB and Muse Remove Background directly in the character-sheet pack.
+- Replaced Standard and Enhanced templates with Andy's supplied `(2)` and `(7)` workflows, retaining their established download filenames. Migrated the remaining Standard WAS text saver to Muse Save Text.
+- Removed WAS and ComfyUI-RMBG from installer dependencies. The existing installer now includes the bundled background-removal Python requirements through the root requirements file, retaining its existing PyTorch constraints.
+- Main download instructions now point to the current repository ZIP rather than the older release asset.
+- Background-removal colour handling and postprocessing passed synthetic-mask tests; cross-platform/model inference coverage is not claimed. No models or DLSS runtime are bundled.
+
