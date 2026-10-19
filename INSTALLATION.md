@@ -190,4 +190,4 @@ The Windows ZIP contains one `Muse-CharacterSheet-H3` package folder. Extract Al
 Correct: `ComfyUI/custom_nodes/Muse-CharacterSheet-H3/__init__.py`.
 Incorrect: `ComfyUI/custom_nodes/Muse-CharacterSheet-H3-Windows/Muse-CharacterSheet-H3/__init__.py`.
 
-The launcher now finds ComfyUI by searching parent folders and detects extra nesting before installing. It prints the exact inner folder to move and the destination. It never moves or overwrites your files automatically. A `-master` suffix is accepted when the package is directly inside custom_nodes. The old BAT inside Installers forwards to the new launcher for compatibility.
+The launcher finds ComfyUI by searching parent folders and detects extra nesting before installing. It prints the exact inner folder to move and the destination. It never moves or overwrites your files automatically. A `-master` suffix is accepted when the package is directly inside custom_nodes. Run the single Install-Windows.bat at the package root.
