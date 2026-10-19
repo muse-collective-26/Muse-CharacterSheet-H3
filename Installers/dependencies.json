@@ -78,6 +78,13 @@
     ]
   },
   {
+    "folder": "Comfyui_Minimax_h3_latent_Upscaler",
+    "repo": "LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler",
+    "nodes": [
+      "MinimaxH3LatentUpscaler3D"
+    ]
+  },
+  {
     "folder": "ComfyUI-H3-Multishot",
     "repo": "jlucasmcrell/ComfyUI-H3-Multishot"
   },

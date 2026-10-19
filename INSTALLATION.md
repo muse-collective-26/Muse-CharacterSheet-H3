@@ -112,8 +112,8 @@ protection indiscriminately if a downloaded executable is flagged.
 - Unified Loader Low VRAM/Balanced profiles require
   [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) and matching encoder/projector weights.
 - Two-stage H3 sampling requires
-  [ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)
-  and a compatible latent upscaler. Single-stage and two-stage sampling are both supported; download the latent upscaler if using two-stage sampling.
+  [Comfyui_Minimax_h3_latent_Upscaler](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler)
+  and its compatible model weights. The installer includes this node package for both Standard and Enhanced workflows. H3 Multishot does not provide it. Single-stage and two-stage sampling are both supported; download the latent upscaler model if using two-stage sampling.
 - Analyze requires a configured vision-capable backend. You can type reference
   descriptions manually; downloading this workflow does not install an LLM server.
 
@@ -180,7 +180,7 @@ Your own references and RefMods must be supplied locally. Saved preview paths an
 ### Windows installer
 
 Download and extract the **complete repository ZIP** as explained above. Put the whole package in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`, close ComfyUI, then double-click its top-level `Install-Windows.bat`. Do not download or move the BAT separately.
-It previews the target and requests confirmation, installs missing node packages including the Unified Loader, GGUF and H3 Multishot, and installs Python requirements with the existing PyTorch versions constrained. Existing node folders are retained, not overwritten or updated. Models, SageAttention binaries, and the separately licensed DLSS native runtime are not downloaded. Follow the DLSS runtime instructions above after node installation.
+It previews the target and requests confirmation, installs missing node packages including the Unified Loader, MiniMax H3 Latent Upscaler, GGUF and H3 Multishot, and installs Python requirements with the existing PyTorch versions constrained. Existing node folders are retained, not overwritten or updated. Models, SageAttention binaries, and the separately licensed DLSS native runtime are not downloaded. Follow the DLSS runtime instructions above after node installation.
 
 
 ### If Windows Extract All creates an extra folder

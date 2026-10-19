@@ -16,8 +16,11 @@ def run(args):
 
 
 def packages(enhanced):
-    return [p for p in json.loads((HERE / 'dependencies.json').read_text())
-            if enhanced or not p.get('enhanced_only')]
+    selected = [p for p in json.loads((HERE / 'dependencies.json').read_text())
+                if enhanced or not p.get('enhanced_only')]
+    if not any(p['repo'] == 'LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler' for p in selected):
+        raise RuntimeError('Installer files are mismatched: the latent upscaler dependency is missing. Extract the complete corrected package; do not copy the BAT alone.')
+    return selected
 
 
 def locate(custom, package):
@@ -38,6 +41,7 @@ def locate(custom, package):
 
 
 def main():
+    print('Muse H3 dependency setup (includes MiniMax H3 Latent Upscaler)', flush=True)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--comfyui', required=True, type=Path)
     parser.add_argument('--enhanced', action='store_true', help='Also install the DLSS node pack (NOT its runtime).')
@@ -73,7 +77,7 @@ def main():
         run([sys.executable, '-m', 'pip', 'install', '-c', constraints, '-r', HERE.parent / 'requirements.txt'])
     print('Dependency commands finished. Existing packages were retained, not updated.')
     print('Restart ComfyUI and check missing nodes/models before rendering. This is NOT a render certification.')
-    print('GGUF and H3 Multishot node packages are included. Model weights and SageAttention binaries are not; see INSTALLATION.md.')
+    print('MiniMax H3 Latent Upscaler, GGUF and H3 Multishot node packages are included. Model weights and SageAttention binaries are not; see INSTALLATION.md.')
     if args.enhanced:
         print('DLSS runtime is NOT installed. Follow INSTALLATION.md before using Enhanced.')
 

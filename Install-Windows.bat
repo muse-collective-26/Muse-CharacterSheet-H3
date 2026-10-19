@@ -1,5 +1,6 @@
 @echo off
 setlocal
+echo Muse Character Sheet H3 - dependency setup
 if not exist "%~dp0Installers\launch_windows.ps1" (
   echo Download and extract the COMPLETE ZIP, not this BAT alone.
   echo Keep this BAT beside __init__.py and the Installers folder.

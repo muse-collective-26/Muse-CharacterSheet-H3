@@ -1,5 +1,13 @@
 # Release notes
 
+## 2026-10-19 — Installer correction
+
+- Added the actual `Comfyui_Minimax_h3_latent_Upscaler` package to both Standard and Enhanced installer plans. H3 Multishot does not supply `MinimaxH3LatentUpscaler3D`.
+- Corrected the installation guide and added a regression test for rerunning setup with every other dependency already installed.
+- Rerun the corrected package's `Install-Windows.bat`, then restart ComfyUI. Upscaler model weights remain a separate download.
+- Corrected the existing installer and Windows package in place; no separate installer is needed. The helper rejects an older manifest missing the required upscaler.
+- The package has one BAT launcher, `Install-Windows.bat` at its root; removed the redundant forwarding BAT from Installers.
+
 ## 2026-10-19.2 — Portable templates and layout restoration
 
 - Cleared personal RefMod selections in Standard and Enhanced templates; all eight slots start at `(none)`.
@@ -32,7 +40,7 @@
 
 ### Install or update
 
-See the README quick start and INSTALLATION.md. Update this node pack, close ComfyUI, run Installers/Install-Windows.bat, then restart ComfyUI and refresh the browser. Download the updated Enhanced workflow separately; saved workflows do not automatically receive new model selections or defaults.
+See the README quick start and INSTALLATION.md. Update this node pack, close ComfyUI, run the root Install-Windows.bat, then restart ComfyUI and refresh the browser. Download the updated Enhanced workflow separately; saved workflows do not automatically receive new model selections or defaults.
 
 The dependency installer retains existing node folders rather than replacing them. Update an existing Unified Loader or other dependency through ComfyUI Manager or its normal Git update method. Back up local changes first.
 

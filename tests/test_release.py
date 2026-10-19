@@ -83,8 +83,8 @@ class WorkflowTests(unittest.TestCase):
 class InstallerTests(unittest.TestCase):
     def test_selection_and_existing_alias(self):
         installer = module('installer', ROOT / 'Installers/install_dependencies.py')
-        self.assertEqual(len(installer.packages(False)), 10)
-        self.assertEqual(len(installer.packages(True)), 11)
+        self.assertEqual(len(installer.packages(False)), 11)
+        self.assertEqual(len(installer.packages(True)), 12)
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             alias = root / 'different-name'
@@ -105,6 +105,29 @@ class InstallerTests(unittest.TestCase):
             with patch('sys.argv', ['installer', '--comfyui', tmp, '--enhanced']), patch.object(installer, 'run') as run:
                 installer.main()
                 run.assert_not_called()
+
+    def test_missing_upscaler_is_installed_in_both_modes(self):
+        installer = module('installer_upscaler', ROOT / 'Installers/install_dependencies.py')
+        repo = 'LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler'
+        for enhanced in (False, True):
+            with self.subTest(enhanced=enhanced), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                (root / 'main.py').touch()
+                custom = root / 'custom_nodes'
+                custom.mkdir()
+                package = next(p for p in installer.packages(enhanced) if p['repo'] == repo)
+                self.assertIn('MinimaxH3LatentUpscaler3D', package['nodes'])
+                # Reproduce this install: every other package already present.
+                for p in installer.packages(enhanced):
+                    if p != package:
+                        (custom / p['folder']).mkdir()
+                argv = ['installer', '--comfyui', tmp, '--install']
+                if enhanced:
+                    argv.append('--enhanced')
+                with patch('sys.argv', argv), patch.object(installer, 'run') as run, patch.object(installer.importlib.metadata, 'version', return_value='2.9.1'):
+                    installer.main()
+                clones = [c.args[0] for c in run.call_args_list if c.args[0][0] == 'git']
+                self.assertEqual(clones, [['git', 'clone', 'https://github.com/' + repo + '.git', custom / package['folder']]])
 
 
 class CompositorTests(unittest.TestCase):
