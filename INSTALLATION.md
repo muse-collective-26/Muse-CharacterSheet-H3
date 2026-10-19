@@ -51,7 +51,7 @@ requirements stop installation rather than silently switching the GPU build.
 
 **Download the complete ZIP, not the BAT file separately.**
 
-1. [Download Windows package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.1/Muse-CharacterSheet-H3-Windows.zip), or click **Code → Download ZIP** on GitHub.
+1. [Download Windows package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.2/Muse-CharacterSheet-H3-Windows.zip), or click **Code → Download ZIP** on GitHub.
 2. Extract it. Rename `Muse-CharacterSheet-H3-master` to `Muse-CharacterSheet-H3` and put the entire folder inside `ComfyUI/custom_nodes`.
 3. Close ComfyUI. Open the package folder containing `__init__.py` and double-click the top-level `Install-Windows.bat`. Do not run it inside the ZIP or move it away from its supporting files.
 4. Confirm the displayed plan. After installation, set up the models and separate DLSS runtime as described below, restart ComfyUI and refresh the browser.

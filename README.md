@@ -8,7 +8,7 @@ See [release notes](CHANGELOG.md) for the current node fixes, trigger-word contr
 
 **Download the complete repository ZIP, not the BAT file on its own. The BAT needs the supporting files included in the ZIP.**
 
-1. **[Download Windows package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.1/Muse-CharacterSheet-H3-Windows.zip)** (or use **Code → Download ZIP** above).
+1. **[Download Windows package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.2/Muse-CharacterSheet-H3-Windows.zip)** (or use **Code → Download ZIP** above).
 2. Extract the ZIP first. Rename the extracted `Muse-CharacterSheet-H3-master` folder to `Muse-CharacterSheet-H3` and place that whole folder inside your ComfyUI instance's `custom_nodes` folder. Do not move just the BAT file, and do not run it from inside the ZIP.
 3. Close ComfyUI. Open `ComfyUI/custom_nodes/Muse-CharacterSheet-H3` and double-click the top-level `Install-Windows.bat`. Keep the `Installers` folder beside it. Git must be installed and available on PATH. The launcher displays the plan and asks before installing.
 4. The installer includes the **Unified Loader** and the other workflow node dependencies. Existing node folders are retained. **Model weights are not downloaded.** Download/select models using [the model list and setup instructions](INSTALLATION.md).
