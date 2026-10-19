@@ -1,5 +1,10 @@
 # Release notes
 
+## 2026-10-19 — Updated Standard workflow
+
+- Replaced `workflows/H3 Character Sheet.json` with Andy's supplied `H3 Character Sheet (1).json`, unchanged. Enhanced remains as previously updated.
+- Rebuilt the existing Windows package with both current workflows; no additional workflow variants or installers added.
+
 ## 2026-10-19 — Updated default Enhanced workflow
 
 - Replaced `workflows/H3 Character Sheet Enhanced.json` with Andy's supplied Enhanced (5) workflow, retaining its nodes, connections and saved settings.

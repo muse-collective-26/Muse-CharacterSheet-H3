@@ -2,7 +2,7 @@
   "id": "829449db-a033-4d81-9eed-a9df5173458c",
   "revision": 0,
   "last_node_id": 6147,
-  "last_link_id": 14888,
+  "last_link_id": 14890,
   "nodes": [
     {
       "id": 22,
@@ -163,8 +163,9 @@
       ],
       "outputs": [],
       "properties": {
-        "Node name for S&R": "Save Text File",
         "cnr_id": "was-ns",
+        "ver": "44de705818d4663fefefde57ffe0ea5a9ea39df4",
+        "Node name for S&R": "Save Text File",
         "aux_id": "ltdrdata/was-node-suite-comfyui"
       },
       "widgets_values": [
@@ -216,8 +217,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "RAMCleanup",
         "cnr_id": "comfyui_memory_cleanup",
+        "ver": "58de13a6090e04408e343501ff8902c034d9f518",
+        "Node name for S&R": "RAMCleanup",
         "aux_id": "LAOGOU-666/Comfyui-Memory_Cleanup"
       },
       "widgets_values": [
@@ -265,8 +267,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "VRAMCleanup",
         "cnr_id": "comfyui_memory_cleanup",
+        "ver": "58de13a6090e04408e343501ff8902c034d9f518",
+        "Node name for S&R": "VRAMCleanup",
         "aux_id": "LAOGOU-666/Comfyui-Memory_Cleanup"
       },
       "widgets_values": [
@@ -287,7 +290,7 @@
       ],
       "size": [
         850.8656130275613,
-        1814.23343475452
+        334
       ],
       "flags": {
         "collapsed": false
@@ -330,14 +333,15 @@
       ],
       "title": "Full",
       "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "4d907bee61e92c2e65af3bd6383a4e4d356126d1",
         "Node name for S&R": "VHS_VideoCombine",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
         },
-        "aux_id": "Kosinkadink/ComfyUI-VideoHelperSuite",
-        "cnr_id": "comfyui-videohelpersuite"
+        "aux_id": "Kosinkadink/ComfyUI-VideoHelperSuite"
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -444,25 +448,25 @@
       },
       "widgets_values": [
         "minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
-        "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
         "minimax_h3_video_vae_fp16.safetensors",
         "minimax_h3_audio_vae_fp32.safetensors",
-        "H3\\minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
-        "H3\\MysticXXX_MMH3-V1.safetensors",
-        0.25,
+        "H3\\minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+        "H3\\polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors",
+        0.6,
         "H3\\h3-realism-people-t2v-i2v-r2v.safetensors",
-        0.8
+        1
       ],
       "widgets_values_named": {
         "unet_name": "minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
-        "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "clip_name": "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
         "vae_name": "minimax_h3_video_vae_fp16.safetensors",
         "vae_name_1": "minimax_h3_audio_vae_fp32.safetensors",
-        "lora_name": "H3\\minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
-        "lora_name_1": "H3\\MysticXXX_MMH3-V1.safetensors",
-        "strength_model": 0.25,
+        "lora_name": "H3\\minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+        "lora_name_1": "H3\\polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors",
+        "strength_model": 0.6,
         "lora_name_2": "H3\\h3-realism-people-t2v-i2v-r2v.safetensors",
-        "strength_model_1": 0.8
+        "strength_model_1": 1
       },
       "color": "#222",
       "bgcolor": "#000"
@@ -501,14 +505,21 @@
         }
       ],
       "properties": {
+        "cnr_id": "comfyui-itools",
+        "ver": "a8f2fef227ca5b0cb9321c39ac7b874a906b1a5b",
         "Node name for S&R": "iToolsPreviewText",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
         },
-        "aux_id": "MohammadAboulEla/ComfyUI-iTools",
-        "cnr_id": "comfyui-itools"
+        "aux_id": "MohammadAboulEla/ComfyUI-iTools"
+      },
+      "widgets_values": [
+        "r34l1sm, perfe8ct,\nsubject_definitions:\n<Subject 1> is A dark-skinned woman with long curly blonde hair, standing in profile wearing a black bandeau bikini top and high-waisted thong briefs. (from `<Picture 1>`).\n\nsummary:\n[reference generation] The target video shows <Subject 1>.\n\nretention_analysis:\n<Subject 1> (present throughout): fully_preserved - matches `<Picture 1>`.\n\ndetailed_description:\nA plain, seamless WHITE void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue, no other performers.\n[Shot 1] REF 1 stands facing the camera directly, full body visible from head to\ntoe, feet shoulder-width apart, arms relaxed at their sides. The pose is\nalready settled at the start of the cut and holds completely still,\nsquare-on to camera, for the full 3 seconds.\n[Shot 2] At 00:02.041, REF 1 begins turning smoothly to their own left, completing the rotation to\na full side-on left-profile view within the first half of this cut, full\nbody still visible head to toe. They hold that profile position, still and\nlevel, for the remainder of the cut.\n[Shot 3] At 00:04.044, REF 1 continues the same steady rotation, completing the turn to face\ndirectly away from camera - a full back view, full body visible head to\ntoe - within the first half of this cut, then holds that position still for\nthe remainder.\n[Shot 4] At 00:06.033, REF 1 continues the same steady rotation, completing the turn to a full\nside-on right-profile view, full body visible head to toe, within the first\nhalf of this cut, then holds that position still for the remainder.\n[Shot 5] At 00:08.050, REF 1 completes the rotation back to face the camera directly, full body\nvisible, within the first half of this cut. Simultaneously, the camera\nperforms a slow push-in that ends framed as a close-up on the head and\nshoulders only, face square to camera. Both the turn and the push-in finish\nby the midpoint of the cut; the final close-up composition holds completely\nstill for the remainder.\n\noverall_soundscape:\nN/A\n\nnon_diegetic_music:\nN/A"
+      ],
+      "widgets_values_named": {
+        "text2": "r34l1sm, perfe8ct,\nsubject_definitions:\n<Subject 1> is A dark-skinned woman with long curly blonde hair, standing in profile wearing a black bandeau bikini top and high-waisted thong briefs. (from `<Picture 1>`).\n\nsummary:\n[reference generation] The target video shows <Subject 1>.\n\nretention_analysis:\n<Subject 1> (present throughout): fully_preserved - matches `<Picture 1>`.\n\ndetailed_description:\nA plain, seamless WHITE void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue, no other performers.\n[Shot 1] REF 1 stands facing the camera directly, full body visible from head to\ntoe, feet shoulder-width apart, arms relaxed at their sides. The pose is\nalready settled at the start of the cut and holds completely still,\nsquare-on to camera, for the full 3 seconds.\n[Shot 2] At 00:02.041, REF 1 begins turning smoothly to their own left, completing the rotation to\na full side-on left-profile view within the first half of this cut, full\nbody still visible head to toe. They hold that profile position, still and\nlevel, for the remainder of the cut.\n[Shot 3] At 00:04.044, REF 1 continues the same steady rotation, completing the turn to face\ndirectly away from camera - a full back view, full body visible head to\ntoe - within the first half of this cut, then holds that position still for\nthe remainder.\n[Shot 4] At 00:06.033, REF 1 continues the same steady rotation, completing the turn to a full\nside-on right-profile view, full body visible head to toe, within the first\nhalf of this cut, then holds that position still for the remainder.\n[Shot 5] At 00:08.050, REF 1 completes the rotation back to face the camera directly, full body\nvisible, within the first half of this cut. Simultaneously, the camera\nperforms a slow push-in that ends framed as a close-up on the head and\nshoulders only, face square to camera. Both the turn and the push-in finish\nby the midpoint of the cut; the final close-up composition holds completely\nstill for the remainder.\n\noverall_soundscape:\nN/A\n\nnon_diegetic_music:\nN/A"
       },
       "color": "#222",
       "bgcolor": "#000"
@@ -543,6 +554,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "ComfyUI-MiniMaxH3Mod",
+        "ver": "517e8c419a8584fbf69fceb487bc39d83e6a6ec8",
         "Node name for S&R": "MiniMaxH3RefModsLoader",
         "refmod_visible_slots": [
           1
@@ -667,6 +680,8 @@
         "components_8": "All",
         "visual_strength_8": 1,
         "audio_strength_8": 1,
+        "Refresh RefMods": null,
+        "RefMod library": null,
         "Remove RefMod 1": null,
         "Remove RefMod 2": null,
         "Remove RefMod 3": null,
@@ -675,9 +690,7 @@
         "Remove RefMod 6": null,
         "Remove RefMod 7": null,
         "Remove RefMod 8": null,
-        "+ Add RefMod": null,
-        "Refresh RefMods": null,
-        "RefMod library": null
+        "+ Add RefMod": null
       },
       "color": "#222",
       "bgcolor": "#000"
@@ -691,7 +704,7 @@
       ],
       "size": [
         3342.3869457829555,
-        2723
+        2686
       ],
       "flags": {},
       "order": 7,
@@ -772,6 +785,16 @@
           "name": "ref_audio_3_used",
           "type": "AUDIO",
           "links": null
+        },
+        {
+          "name": "final_latent",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "refine_context",
+          "type": "MUSE_H3_REFINE_CONTEXT",
+          "links": null
         }
       ],
       "properties": {
@@ -780,7 +803,7 @@
       },
       "widgets_values": [
         "9:16 (Portrait Widescreen)",
-        0.5,
+        1,
         32,
         10,
         "max",
@@ -795,7 +818,7 @@
         "minimax_h3_latent_upscaler_3d_fp16.safetensors",
         2,
         true,
-        "{\"combo_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"combo_project_name\":\"Character Sheet\",\"streaming_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"characters\":[{\"file\":\"musedirector/807590324_1674054714722824_8846000798808854419_n.jpg\",\"fileName\":\"807590324_1674054714722824_8846000798808854419_n.jpg\",\"description\":\"a blonde woman with a curled updo, wearing a sheer lace top with yellow bra details, a black floral skirt, thigh-high stockings, and black heels.\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/a4b7a149-5745-432a-8549-02990e2d5ef4\"},null,null,null,null,null,null,null],\"chunk_color_match\":\"luminance\",\"chunks\":[{\"segments\":[{\"prompt\":\"r34l1sm, REF 1 stands facing the camera directly, full body visible from head to toe, feet shoulder-width apart, arms relaxed at their sides. The pose is already settled at the start of the cut and holds completely still, square-on to camera, for the full 3 seconds.\",\"weight\":0.6011626431222432,\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[]},{\"prompt\":\"r34l1sm, REF 1 begins turning smoothly to their own left, completing the rotation to a full side-on left-profile view within the first half of this cut, full body still visible head to toe. They hold that profile position, still and level, for the remainder of the cut.\",\"weight\":0.6001327414262277,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 continues the same steady rotation, completing the turn to face directly away from camera - a full back view, full body visible head to toe - within the first half of this cut, then holds that position still for the remainder.\",\"weight\":0.6008477862254508,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 continues the same steady rotation, completing the turn to a full side-on right-profile view, full body visible head to toe, within the first half of this cut, then holds that position still for the remainder.\",\"weight\":0.5978568292260782,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 completes the rotation back to face the camera directly, full body visible, within the first half of this cut. Simultaneously, the camera\\nperforms a slow push-in that ends framed as a close-up on the head and shoulders only, face square to camera. Both the turn and the push-in finish by the midpoint of the cut; the final close-up composition holds completely\\nstill for the remainder.\",\"weight\":0.6000000000000001,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null}],\"prompt_gen_enabled\":false,\"prompt_gen_brief\":\"\",\"prompt_gen_draft_text\":\"\",\"prompt_gen_committed_text\":\"\",\"style_line\":\"A plain, seamless white void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue. \",\"overall_soundscape\":\"\",\"non_diegetic_music\":\"\",\"firstFrameImage\":{},\"lastFrameImage\":{},\"localCharacters\":[{\"file\":\"musedirector/emma_00015_.png\",\"fileName\":\"emma_00015_.png\",\"description\":\"the young woman, with shoulder-length wavy light brown hair, slender build, wearing a black leather mini-jacket with fur trim and dark cowboy boots.\",\"fit\":\"original\",\"retention\":\"fully_preserved\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/4fd7c060-46a1-45c7-8fa8-3fba0f9d32c7\"},null,null,null,null,null,null,null],\"localLocations\":[null],\"localGuides\":[],\"localRefVideos\":[null,null,null],\"localRefAudios\":[null,null,null],\"seed_override\":null,\"_previewToken\":\"ddc86e199cab7e2ab5934ffa642bc163c634665a7689de5edd349262bda5da98\"}],\"background\":null,\"locations\":[{\"chunk\":1}],\"firstFrameImage\":{},\"lastFrameImage\":{},\"guideImages\":[],\"refVideos\":[null,null,null],\"refAudios\":[null,null,null],\"dialogue_language\":\"English\",\"prompt_gen_provider\":\"ollama\",\"prompt_gen_base_url\":\"\",\"prompt_gen_model\":\"\",\"prompt_gen_master_enabled\":false,\"prompt_gen_master_brief\":\"\",\"prompt_gen_master_system_prompt\":\"\",\"prompt_gen_master_system_prompt_collapsed\":true,\"prompt_gen_master_draft_text\":\"\",\"prompt_gen_master_committed_text\":\"\",\"prompt_gen_master_format_version\":3,\"prompt_gen_master_upgrade_required\":false}",
+        "{\"combo_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"combo_project_name\":\"Character Sheet\",\"streaming_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"characters\":[null,null,null,null,null,null,null,null],\"chunk_color_match\":\"luminance\",\"chunks\":[{\"segments\":[{\"prompt\":\"r34l1sm, REF 1 stands facing the camera directly, full body visible from head to toe, feet shoulder-width apart, arms relaxed at their sides. The pose is already settled at the start of the cut and holds completely still, square-on to camera, for the full 3 seconds.\",\"weight\":0.6011626431222432,\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[]},{\"prompt\":\"r34l1sm, REF 1 begins turning smoothly to their own left, completing the rotation to a full side-on left-profile view within the first half of this cut, full body still visible head to toe. They hold that profile position, still and level, for the remainder of the cut.\",\"weight\":0.6001327414262277,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 continues the same steady rotation, completing the turn to face directly away from camera - a full back view, full body visible head to toe - within the first half of this cut, then holds that position still for the remainder.\",\"weight\":0.6008477862254508,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 continues the same steady rotation, completing the turn to a full side-on right-profile view, full body visible head to toe, within the first half of this cut, then holds that position still for the remainder.\",\"weight\":0.5978568292260782,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 completes the rotation back to face the camera directly, full body visible, within the first half of this cut. Simultaneously, the camera\\nperforms a slow push-in that ends framed as a close-up on the head and shoulders only, face square to camera. Both the turn and the push-in finish by the midpoint of the cut; the final close-up composition holds completely\\nstill for the remainder.\",\"weight\":0.6000000000000001,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null}],\"prompt_gen_enabled\":false,\"prompt_gen_brief\":\"\",\"prompt_gen_draft_text\":\"\",\"prompt_gen_committed_text\":\"\",\"style_line\":\"A plain, seamless white void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue. \",\"overall_soundscape\":\"\",\"non_diegetic_music\":\"\",\"firstFrameImage\":{},\"lastFrameImage\":{},\"localCharacters\":[{\"file\":\"musedirector/emma_00015_.png\",\"fileName\":\"emma_00015_.png\",\"description\":\"the young woman, with shoulder-length wavy light brown hair, slender build, wearing a black leather mini-jacket with fur trim and dark cowboy boots.\",\"fit\":\"original\",\"retention\":\"fully_preserved\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/4fd7c060-46a1-45c7-8fa8-3fba0f9d32c7\"},null,null,null,null,null,null,null],\"localLocations\":[null],\"localGuides\":[],\"localRefVideos\":[null,null,null],\"localRefAudios\":[null,null,null],\"seed_override\":null,\"_previewToken\":\"25c4135a18e52c2b613c0c89bdad4c4698618b5f20b028b7e7db93e02ebac8a1\"}],\"background\":null,\"locations\":[{\"chunk\":1}],\"firstFrameImage\":{},\"lastFrameImage\":{},\"guideImages\":[],\"refVideos\":[null,null,null],\"refAudios\":[null,null,null],\"dialogue_language\":\"English\",\"prompt_gen_provider\":\"ollama\",\"prompt_gen_base_url\":\"\",\"prompt_gen_model\":\"\",\"prompt_gen_master_enabled\":false,\"prompt_gen_master_brief\":\"\",\"prompt_gen_master_system_prompt\":\"\",\"prompt_gen_master_system_prompt_collapsed\":true,\"prompt_gen_master_draft_text\":\"\",\"prompt_gen_master_committed_text\":\"\",\"prompt_gen_master_format_version\":3,\"prompt_gen_master_upgrade_required\":false}",
         false,
         1,
         "",
@@ -809,12 +832,11 @@
         0,
         "",
         "",
-        false,
         ""
       ],
       "widgets_values_named": {
         "aspect_ratio": "9:16 (Portrait Widescreen)",
-        "megapixels": 0.5,
+        "megapixels": 1,
         "multiple": 32,
         "duration_seconds": 10,
         "ref_image_size": "max",
@@ -829,7 +851,7 @@
         "two_stage_latent_upscale_model": "minimax_h3_latent_upscaler_3d_fp16.safetensors",
         "two_stage_target_megapixels": 2,
         "two_stage_enable_temporal_chunking": true,
-        "timeline_data": "{\"combo_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"combo_project_name\":\"Character Sheet\",\"streaming_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"characters\":[{\"file\":\"musedirector/807590324_1674054714722824_8846000798808854419_n.jpg\",\"fileName\":\"807590324_1674054714722824_8846000798808854419_n.jpg\",\"description\":\"a blonde woman with a curled updo, wearing a sheer lace top with yellow bra details, a black floral skirt, thigh-high stockings, and black heels.\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/a4b7a149-5745-432a-8549-02990e2d5ef4\"},null,null,null,null,null,null,null],\"chunk_color_match\":\"luminance\",\"chunks\":[{\"segments\":[{\"prompt\":\"r34l1sm, REF 1 stands facing the camera directly, full body visible from head to toe, feet shoulder-width apart, arms relaxed at their sides. The pose is already settled at the start of the cut and holds completely still, square-on to camera, for the full 3 seconds.\",\"weight\":0.6011626431222432,\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[]},{\"prompt\":\"r34l1sm, REF 1 begins turning smoothly to their own left, completing the rotation to a full side-on left-profile view within the first half of this cut, full body still visible head to toe. They hold that profile position, still and level, for the remainder of the cut.\",\"weight\":0.6001327414262277,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 continues the same steady rotation, completing the turn to face directly away from camera - a full back view, full body visible head to toe - within the first half of this cut, then holds that position still for the remainder.\",\"weight\":0.6008477862254508,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 continues the same steady rotation, completing the turn to a full side-on right-profile view, full body visible head to toe, within the first half of this cut, then holds that position still for the remainder.\",\"weight\":0.5978568292260782,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 completes the rotation back to face the camera directly, full body visible, within the first half of this cut. Simultaneously, the camera\\nperforms a slow push-in that ends framed as a close-up on the head and shoulders only, face square to camera. Both the turn and the push-in finish by the midpoint of the cut; the final close-up composition holds completely\\nstill for the remainder.\",\"weight\":0.6000000000000001,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null}],\"prompt_gen_enabled\":false,\"prompt_gen_brief\":\"\",\"prompt_gen_draft_text\":\"\",\"prompt_gen_committed_text\":\"\",\"style_line\":\"A plain, seamless white void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue. \",\"overall_soundscape\":\"\",\"non_diegetic_music\":\"\",\"firstFrameImage\":{},\"lastFrameImage\":{},\"localCharacters\":[{\"file\":\"musedirector/emma_00015_.png\",\"fileName\":\"emma_00015_.png\",\"description\":\"the young woman, with shoulder-length wavy light brown hair, slender build, wearing a black leather mini-jacket with fur trim and dark cowboy boots.\",\"fit\":\"original\",\"retention\":\"fully_preserved\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/4fd7c060-46a1-45c7-8fa8-3fba0f9d32c7\"},null,null,null,null,null,null,null],\"localLocations\":[null],\"localGuides\":[],\"localRefVideos\":[null,null,null],\"localRefAudios\":[null,null,null],\"seed_override\":null,\"_previewToken\":\"ddc86e199cab7e2ab5934ffa642bc163c634665a7689de5edd349262bda5da98\"}],\"background\":null,\"locations\":[{\"chunk\":1}],\"firstFrameImage\":{},\"lastFrameImage\":{},\"guideImages\":[],\"refVideos\":[null,null,null],\"refAudios\":[null,null,null],\"dialogue_language\":\"English\",\"prompt_gen_provider\":\"ollama\",\"prompt_gen_base_url\":\"\",\"prompt_gen_model\":\"\",\"prompt_gen_master_enabled\":false,\"prompt_gen_master_brief\":\"\",\"prompt_gen_master_system_prompt\":\"\",\"prompt_gen_master_system_prompt_collapsed\":true,\"prompt_gen_master_draft_text\":\"\",\"prompt_gen_master_committed_text\":\"\",\"prompt_gen_master_format_version\":3,\"prompt_gen_master_upgrade_required\":false}",
+        "timeline_data": "{\"combo_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"combo_project_name\":\"Character Sheet\",\"streaming_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"characters\":[null,null,null,null,null,null,null,null],\"chunk_color_match\":\"luminance\",\"chunks\":[{\"segments\":[{\"prompt\":\"r34l1sm, REF 1 stands facing the camera directly, full body visible from head to toe, feet shoulder-width apart, arms relaxed at their sides. The pose is already settled at the start of the cut and holds completely still, square-on to camera, for the full 3 seconds.\",\"weight\":0.6011626431222432,\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[]},{\"prompt\":\"r34l1sm, REF 1 begins turning smoothly to their own left, completing the rotation to a full side-on left-profile view within the first half of this cut, full body still visible head to toe. They hold that profile position, still and level, for the remainder of the cut.\",\"weight\":0.6001327414262277,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 continues the same steady rotation, completing the turn to face directly away from camera - a full back view, full body visible head to toe - within the first half of this cut, then holds that position still for the remainder.\",\"weight\":0.6008477862254508,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 continues the same steady rotation, completing the turn to a full side-on right-profile view, full body visible head to toe, within the first half of this cut, then holds that position still for the remainder.\",\"weight\":0.5978568292260782,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"r34l1sm, REF 1 completes the rotation back to face the camera directly, full body visible, within the first half of this cut. Simultaneously, the camera\\nperforms a slow push-in that ends framed as a close-up on the head and shoulders only, face square to camera. Both the turn and the push-in finish by the midpoint of the cut; the final close-up composition holds completely\\nstill for the remainder.\",\"weight\":0.6000000000000001,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null}],\"prompt_gen_enabled\":false,\"prompt_gen_brief\":\"\",\"prompt_gen_draft_text\":\"\",\"prompt_gen_committed_text\":\"\",\"style_line\":\"A plain, seamless white void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue. \",\"overall_soundscape\":\"\",\"non_diegetic_music\":\"\",\"firstFrameImage\":{},\"lastFrameImage\":{},\"localCharacters\":[{\"file\":\"musedirector/emma_00015_.png\",\"fileName\":\"emma_00015_.png\",\"description\":\"the young woman, with shoulder-length wavy light brown hair, slender build, wearing a black leather mini-jacket with fur trim and dark cowboy boots.\",\"fit\":\"original\",\"retention\":\"fully_preserved\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/4fd7c060-46a1-45c7-8fa8-3fba0f9d32c7\"},null,null,null,null,null,null,null],\"localLocations\":[null],\"localGuides\":[],\"localRefVideos\":[null,null,null],\"localRefAudios\":[null,null,null],\"seed_override\":null,\"_previewToken\":\"25c4135a18e52c2b613c0c89bdad4c4698618b5f20b028b7e7db93e02ebac8a1\"}],\"background\":null,\"locations\":[{\"chunk\":1}],\"firstFrameImage\":{},\"lastFrameImage\":{},\"guideImages\":[],\"refVideos\":[null,null,null],\"refAudios\":[null,null,null],\"dialogue_language\":\"English\",\"prompt_gen_provider\":\"ollama\",\"prompt_gen_base_url\":\"\",\"prompt_gen_model\":\"\",\"prompt_gen_master_enabled\":false,\"prompt_gen_master_brief\":\"\",\"prompt_gen_master_system_prompt\":\"\",\"prompt_gen_master_system_prompt_collapsed\":true,\"prompt_gen_master_draft_text\":\"\",\"prompt_gen_master_committed_text\":\"\",\"prompt_gen_master_format_version\":3,\"prompt_gen_master_upgrade_required\":false}",
         "use_refmod": false,
         "refmod_retention": 1,
         "refmod_description": "",
@@ -843,7 +865,6 @@
         "refmod_max_total_tokens": 0,
         "refmod_graph_preset": "",
         "refmod_save_preset_as": "",
-        "test_author_refine_schedule": false,
         "mch3_timeline_ui": ""
       },
       "color": "#222",
@@ -858,7 +879,7 @@
       ],
       "size": [
         1207.2600280258162,
-        1518
+        1542
       ],
       "flags": {},
       "order": 4,
@@ -907,6 +928,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "muse-minimax-h3-unified-loader",
+        "ver": "6efcff3a73593966c8ff4194545bc3e8f0ad15cf",
         "Node name for S&R": "MuseMiniMaxH3UnifiedLoader",
         "muse_loader_final_collapsed": {
           "profile": false,
@@ -917,35 +940,27 @@
           "vae": false,
           "loras": false,
           "attention": false,
-          "advanced": true
+          "advanced": false
         },
-        "cnr_id": "muse-minimax-h3-unified-loader",
         "aux_id": "muse-collective-26/Muse-MiniMax-H3-Unified-Loader"
       },
       "widgets_values": [
-        null,
         "Automatic",
-        null,
         "10 GB",
-        null,
         "ref2va\\MiniMax-H3-ref2va-curve-Q4_0.gguf",
         "MiniMax-H3-ref2va-curve-Q5_1.gguf",
         "minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
-        null,
         "fl2va\\MiniMax-H3-fl2va-curve-Q4_0.gguf",
         "MiniMax-H3-fl2va-curve-Q5_1.gguf",
         "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
-        null,
         "MiniMax-H3-encoder-Q4_K_M.gguf",
         "(auto)",
         "MiniMax-H3-encoder-Q4_K_M.gguf",
         "(auto)",
         "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
         "(auto)",
-        null,
         "minimax_h3_video_vae_fp16.safetensors",
         "minimax_h3_audio_vae_fp32.safetensors",
-        null,
         "H3\\minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
         1,
         "Both models",
@@ -955,10 +970,7 @@
         "H3\\h3-realism-people-t2v-i2v-r2v.safetensors",
         0.8,
         "Both models",
-        null,
-        null,
         true,
-        "Off",
         true,
         true,
         true,
@@ -966,9 +978,8 @@
         true,
         2,
         4096,
-        null,
+        "Off",
         0,
-        null,
         "Both / Mixed",
         "[]"
       ],
@@ -999,7 +1010,6 @@
         "lora_3_strength": 0.8,
         "lora_3_target": "Both models",
         "attention_enabled": true,
-        "attention_backend": "Off",
         "sage_attention": true,
         "high_res_stability": true,
         "low_vram_attention": true,
@@ -1007,6 +1017,7 @@
         "chunk_feed_forward": true,
         "feed_forward_chunks": 2,
         "feed_forward_threshold": 4096,
+        "attention_backend": "Off",
         "activation_reserve_gb": 0,
         "models_to_load": "Both / Mixed",
         "extra_loras": "[]"
@@ -1080,8 +1091,8 @@
       "id": 27,
       "type": "SaveImage",
       "pos": [
-        6610.47930826559,
-        6456.53584133622
+        6567.907703870918,
+        6458.410301101975
       ],
       "size": [
         2576.928970588273,
@@ -1143,10 +1154,10 @@
         }
       },
       "widgets_values": [
-        "# H3 Character Sheet Enhanced\n\n# Standard and Enhanced workflow setup\n\nInstall **Muse-CharacterSheet-H3 once**. It supplies `MuseCharacterSheetH3` and\n`MuseCharacterSheetCompositor` for both workflows. The JSON files describe the\nconnections; opening them does **not** automatically install packages or models.\n\n- **Standard:** `workflows/H3 Character Sheet.json` (existing download path retained).\n- **Enhanced:** `workflows/H3 Character Sheet Enhanced.json`.\n\nEnhanced adds five Qwen Image 2.1 refinement passes, five DLSS image passes,\nRGB conversion before background removal, and a separate DLSS video output.\nStandard does not execute these enhanced branches. Installing their dependencies\ndoes not add enhancement processing to Standard.\n\n## Required packages for the supplied workflows\n\n| Package | Nodes supplied |\n| --- | --- |\n| [Muse Character Sheet H3](https://github.com/muse-collective-26/Muse-CharacterSheet-H3) | H3 generation and sheet compositor; bundled here |\n| [Muse Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader) | Unified model loader |\n| [KJNodes](https://github.com/kijai/ComfyUI-KJNodes) | Set/Get, H3 attention and feed-forward patches |\n| [RMBG](https://github.com/1038lab/ComfyUI-RMBG) | Background removal; follow its RMBG-2.0 model setup |\n| [VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite) | Video Combine; also needs FFmpeg |\n| [iTools](https://github.com/MohammadAboulEla/ComfyUI-iTools) | Preview Text |\n| [WAS Node Suite (Revised)](https://github.com/ltdrdata/was-node-suite-comfyui) | Save Text File; Enhanced also uses Images to RGB |\n| [Memory Cleanup](https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup) | RAMCleanup and VRAMCleanup |\n| [MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod) | RefMod loader present in both examples, even when use_refmod is off |\n| [DLSS5 Enhancer](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer) | Enhanced only: DLSS5 Settings and Enhance Images |\n\nUse ComfyUI with native MiniMax H3 support. Enhanced also requires core\n`TextEncodeQwenImage21`, `QwenImage21Cache`, `ComfySwitchNode` and `SeedNode`.\nThese are not separate Muse packages. Update ComfyUI if they are unavailable.\nSubgraphs are included in the workflow, not separately installed custom nodes.\n\nThe workflow metadata identifies the correct providers. Manager can help with\nvisible missing nodes, but internal dependencies and native runtimes still need\nthe checks below. There is no Workflow Encrypt dependency.\n\n## Install dependencies\n\nFirst install this repository under `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`.\nClose the ComfyUI instance being configured. Use **that instance's Python**.\nThe helper installs missing packages alongside this one and their requirements;\nit does not vendor third-party source, update ComfyUI, replace existing packages,\nor download model weights. Existing PyTorch versions are constrained; incompatible\nrequirements stop installation rather than silently switching the GPU build.\n\n### Windows portable\n\n**Download the complete ZIP, not the BAT file separately.**\n\n1. [Download Windows package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.2/Muse-CharacterSheet-H3-Windows.zip), or click **Code → Download ZIP** on GitHub.\n2. Extract it. Rename `Muse-CharacterSheet-H3-master` to `Muse-CharacterSheet-H3` and put the entire folder inside `ComfyUI/custom_nodes`.\n3. Close ComfyUI. Open the package folder containing `__init__.py` and double-click the top-level `Install-Windows.bat`. Do not run it inside the ZIP or move it away from its supporting files.\n4. Confirm the displayed plan. After installation, set up the models and separate DLSS runtime as described below, restart ComfyUI and refresh the browser.\n\nThe BAT, `install_dependencies.py` and `dependencies.json` are all required and already included in the ZIP. Git must be installed and available on PATH.\n\n#### Alternative: command-line installation\n\nOpen a terminal in the portable root containing `python_embeded` and `ComfyUI`.\nPreview the plan:\n\n```bat\npython_embeded\\python.exe ComfyUI\\custom_nodes\\Muse-CharacterSheet-H3\\Installers\\install_dependencies.py --comfyui ComfyUI --enhanced\n```\n\nCheck the printed paths, then install:\n\n```bat\npython_embeded\\python.exe ComfyUI\\custom_nodes\\Muse-CharacterSheet-H3\\Installers\\install_dependencies.py --comfyui ComfyUI --enhanced --install\n```\n\nOmit `--enhanced` for Standard-only installation. Non-portable users should\nreplace `python_embeded\\python.exe` with their ComfyUI environment's Python and\npass the actual ComfyUI folder. Do not use an unrelated system Python.\n\nAlready installed packages are retained to protect local work. Update outdated\ndependencies through their normal update mechanism, restart, and check again.\nThe helper is not a guarantee that old installed packages are compatible.\n\n## DLSS 5 setup — Enhanced only\n\nFollow the [upstream installation and requirements](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer#installation).\nThis enhanced workflow targets the Windows native D3D12 runtime, not RunPod/Linux.\nCheck upstream GPU and driver compatibility before choosing Enhanced.\n\n1. Install the DLSS5 node package (the helper above does this, or use Manager).\n2. From the Windows portable root, run:\n\n   ```bat\n   python_embeded\\python.exe ComfyUI\\custom_nodes\\ComfyUI-DLSS5-Enhancer\\install_runtime.py --url https://github.com/Merserk/dlss5-visual-enhancer/releases/download/v3.0/DLSS.5.Visual.Enhancer.v3.0.zip\n   ```\n\n3. Read and accept the upstream runtime licensing notice if you agree. The setup\n   downloads the separate runtime. It is not bundled in Muse's repository. The root BAT now offers this same setup after installing the nodes. The explicit URL uses the correct `v3.0` release tag; the upstream default `/3.0/` URL returns 404. No licensing confirmation is bypassed.\n4. Restart ComfyUI. If using an existing external runtime, follow upstream's\n   `--runtime-dir` instructions. Keep the workflow's DLSS controls unchanged.\n\nInstalling only the node pack is insufficient: it can appear on the canvas and\nstill fail at execution if its runtime is missing. Do not disable security\nprotection indiscriminately if a downloaded executable is flagged.\n\n## Other conditional requirements\n\n- SageAttention and High-Res Stability are OFF by default in this Enhanced template. Only enable SageAttention after installing a compatible extension; enable High-Res Stability only when using SageAttention. KJNodes supplies its patch node,\n  but the compatible [SageAttention](https://github.com/thu-ml/SageAttention)\n  extension must also be installed for the user's GPU/PyTorch/CUDA environment.\n  Do not assume a universal wheel works on every computer.\n- Unified Loader Low VRAM/Balanced profiles require\n  [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) and matching encoder/projector weights.\n- Two-stage H3 sampling requires\n  [Comfyui_Minimax_h3_latent_Upscaler](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler)\n  and its compatible model weights. The installer includes this node package for both Standard and Enhanced workflows. H3 Multishot does not provide it. Single-stage and two-stage sampling are both supported; download the latent upscaler model if using two-stage sampling.\n- Analyze requires a configured vision-capable backend. You can type reference\n  descriptions manually; downloading this workflow does not install an LLM server.\n\n## Models and personal assets\n\nNode installation is separate from model downloads. Select files that actually\nexist in your installation. The examples contain the author's saved model and\nreference selections; upload your own references and choose your own RefMods.\nPaths pointing to the author's computer are not distributed assets.\n\nFor Enhanced, the supplied settings retain 8 H3 steps and the Ref2V 8-step Turbo\nLoRA. The maximum-quality reference model is Singularity v1.3 INT8, with an INT8\nH3 text encoder; Automatic may choose another profile according to VRAM.\nUse the exact model creators' sources for those custom weights; they are not\nbundled. The downloads below match the saved Enhanced selections.\n\nAdditional Qwen models: [Comfy-Org/Qwen-Image-2.1](https://huggingface.co/Comfy-Org/Qwen-Image-2.1).\nPlace diffusion weights in `models/diffusion_models`, encoders in\n`models/text_encoders`, VAEs in `models/vae`, and LoRAs in `models/loras`.\nCheck the selected Qwen VAE and detailer LoRA in each refinement subgraph: custom\nVAE/LoRA files are separate downloads, not included in Comfy-Org's base set.\nH3 Turbo source: [lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo).\n\nNo MysticXXX, GalaxyAce, Polyhedron, Realism, or detailer weights are bundled here.\nObtain the selected LoRAs from their creators, or deliberately select alternatives.\n\n## Before rendering\n\nRestart ComfyUI after installation, reload the workflow and resolve missing nodes\nand models. Test Standard and Enhanced separately. Structural workflow checks and\ndependency-script tests are not an end-to-end GPU render test.\n\n[Muse Collective community](https://www.skool.com/muse-collective-7594)\n\n\n\n## Exact model downloads for this Enhanced workflow\n\nModels are not installed by the dependency installer. Existing models are left untouched.\n\n- **Singularity reference model:** [Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors](https://huggingface.co/WarmBloodAban/Minimax-h3_Singularity/resolve/main/Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors) — `ComfyUI/models/diffusion_models/`\n- **H3 INT8 text encoder:** [qwen3vl_32b_minimax_h3_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_int8_convrot.safetensors) — `ComfyUI/models/text_encoders/`\n- **H3 video VAE:** [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors) — `ComfyUI/models/vae/`\n- **H3 audio VAE:** [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors) — `ComfyUI/models/vae/`\n- **Reference-mode Turbo, 8 steps, 768p (not FL2V):** [minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors) — `ComfyUI/models/loras/H3/`\n- **Realism People; trigger r34l1sm:** [h3-realism-people-t2v-i2v-r2v.safetensors](https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors) — `ComfyUI/models/loras/H3/`\n- **H3 latent upscaler; needed for two-stage sampling:** [h3_upscaler_lms_v0.1_fp32.safetensors](https://huggingface.co/Alissonerdx/Minimax-H3-ComfyUI/resolve/main/latent_upscaler/h3_upscaler_lms_v0.1_fp32.safetensors) — `ComfyUI/models/latent_upscale_models/`\n- **Qwen refinement model:** [qwen_image_2.1_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors) — `ComfyUI/models/diffusion_models/`\n- **Qwen refinement encoder:** [qwen3vl_8b_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors) — `ComfyUI/models/text_encoders/`\n- **Texture-Fix VAE (selected in refinement controls):** [texture_fix_vae_for_qwen_image_2.1_bf16.safetensors](https://huggingface.co/madebyollin/texture-fix-vae-for-qwen-image-2.1/resolve/main/texture_fix_vae_for_qwen_image_2.1_bf16.safetensors) — `ComfyUI/models/vae/`\n- **Qwen detailer LoRA:** [elusarcas-qwen2-1-detailer-v1.safetensors](https://huggingface.co/reverentelusarca/elusarcas-qwen-2.1-detail-enhancer-lora/resolve/main/elusarcas-qwen2-1-detailer-v1.safetensors) — `ComfyUI/models/loras/`\n\n### Polyhedron LoRA\n\nThe saved selection is `polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors`, strength 0.6, trigger `perfe8ct`, in `models/loras/H3/`.\n[Polyhedron creator listing on Civitai](https://civitai.com/models/2899220). This listing was located, but automated access could not verify its current download. Check the filename before downloading. If unavailable, select `(disabled)` for this LoRA; no replacement is downloaded automatically.\n\n### Other saved selections\n\nThe Unified Loader is saved as `Both / Mixed`, with `minimax_h3_fl2va_pruned_int8_convrot.safetensors` selected for its other branch. Character Sheet itself uses Reference mode. To avoid needing that unused branch, choose the loader's Reference-only setting. Otherwise obtain the matching file from [Comfy-Org's diffusion models](https://huggingface.co/Comfy-Org/MiniMax-H3/tree/main/diffusion_models).\nAutomatic profiles depend on VRAM. Low-VRAM and Balanced model slots in this file are disabled: configure suitable GGUF models and their matching encoder/projector before using those profiles. The installer includes GGUF node support, not weights.\nYour own references and RefMods must be supplied locally. Saved preview paths and personal assets are not included.\n\n### Windows installer\n\nDownload and extract the **complete repository ZIP** as explained above. Put the whole package in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`, close ComfyUI, then double-click its top-level `Install-Windows.bat`. Do not download or move the BAT separately.\nIt previews the target and requests confirmation, installs missing node packages including the Unified Loader, MiniMax H3 Latent Upscaler, GGUF and H3 Multishot, and installs Python requirements with the existing PyTorch versions constrained. Existing node folders are retained, not overwritten or updated. Models and SageAttention binaries are not downloaded. The BAT then offers the separate DLSS runtime download using the verified v3.0 link, retaining the upstream licensing notice and confirmation. You can skip it if a runtime is already configured. The runtime binaries are not bundled or redistributed by Muse.\n\n\n### If Windows Extract All creates an extra folder\n\nThe Windows ZIP contains one `Muse-CharacterSheet-H3` package folder. Extract All may put that inside another folder named after the ZIP. Copy only the inner folder containing `__init__.py`, `Install-Windows.bat` and `Installers` directly into `ComfyUI/custom_nodes`.\n\nCorrect: `ComfyUI/custom_nodes/Muse-CharacterSheet-H3/__init__.py`.\nIncorrect: `ComfyUI/custom_nodes/Muse-CharacterSheet-H3-Windows/Muse-CharacterSheet-H3/__init__.py`.\n\nThe launcher finds ComfyUI by searching parent folders and detects extra nesting before installing. It prints the exact inner folder to move and the destination. It never moves or overwrites your files automatically. A `-master` suffix is accepted when the package is directly inside custom_nodes. Run the single Install-Windows.bat at the package root.\n"
+        "# H3 Character Sheet Enhanced\n\n## What this workflow does\n\nGenerates a character-reference video, lets you select frames, refines the selected images using Qwen Image 2.1, applies DLSS enhancement, and assembles the character sheet.\n\nThe workflow includes five image-refinement branches and a separate DLSS-enhanced video output.\n\nOpening the workflow does not automatically install its custom nodes, models or DLSS runtime.\n\n## Installation\n\n1. Download the complete [Muse Character Sheet H3 Windows package](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.2/Muse-CharacterSheet-H3-Windows.zip).\n2. Extract the ZIP.\n3. Place the package folder directly inside `ComfyUI/custom_nodes`.\n4. Close ComfyUI.\n5. Run the single `Install-Windows.bat` at the package root.\n6. Confirm the dependency installation.\n7. For Enhanced, complete the DLSS runtime setup offered by that same installer unless you already have a runtime configured.\n8. Install the required model files, restart ComfyUI and refresh your browser.\n\nDownload the whole package—not the BAT file separately. Git must be installed and available on PATH.\n\nThe correct folder structure is:\n\n`ComfyUI/custom_nodes/Muse-CharacterSheet-H3/__init__.py`\n\nThe BAT should be beside `__init__.py`, with the `Installers` folder alongside them.\n\nIf Windows creates an extra outer folder when extracting, use the inner package folder containing those files. Do not put a second copy of the node inside another copy.\n\nA folder name ending in `-master` is accepted. Keep only one installed copy of the Muse Character Sheet node.\n\nThe installer installs missing dependencies and their Python requirements. It retains existing dependency folders rather than updating or replacing them. Model weights are not downloaded.\n\n## Custom nodes used\n\n| Package | Purpose |\n| --- | --- |\n| [Muse Character Sheet H3](https://github.com/muse-collective-26/Muse-CharacterSheet-H3) | Character generation and sheet assembly |\n| [Muse Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader) | Active H3 model, encoder, VAE and LoRA loading |\n| [KJNodes](https://github.com/kijai/ComfyUI-KJNodes) | Set/Get nodes, image-size utilities and H3 memory-saving patches |\n| [MiniMax H3 Latent Upscaler](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler) | Required when two-stage sampling is enabled |\n| [MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod) | RefMod loader |\n| [RMBG](https://github.com/1038lab/ComfyUI-RMBG) | Background removal |\n| [VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite) | Video output |\n| [iTools](https://github.com/MohammadAboulEla/ComfyUI-iTools) | Prompt preview |\n| [WAS Node Suite (Revised)](https://github.com/ltdrdata/was-node-suite-comfyui) | Text saving and RGB conversion |\n| [Memory Cleanup](https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup) | RAM and VRAM cleanup |\n| [DLSS5 Enhancer](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer) | Image and video enhancement; requires its separate runtime |\n\nUse a ComfyUI version with native MiniMax H3 and Qwen Image 2.1 support.\n\nQwen refinement uses core nodes including `TextEncodeQwenImage21`, `QwenImage21Cache` and `ComfySwitchNode`. These are not separate Muse downloads.\n\nFollow RMBG's model-installation instructions for its selected background-removal model.\n\n## Saved generation settings\n\nThis workflow currently uses the Unified Loader connected to the character-sheet node.\n\n- H3 model: `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`\n- H3 text encoder: `qwen3vl_32b_minimax_h3_int8_convrot.safetensors`\n- Video VAE: `minimax_h3_video_vae_fp16.safetensors`\n- Audio VAE: `minimax_h3_audio_vae_fp32.safetensors`\n- Aspect ratio: 9:16\n- Base resolution: 0.5 megapixels\n- Duration: 10 seconds\n- Sampling: 8 steps, Euler, Simple\n- Two-stage sampling: currently OFF\n- Reference image size: maximum\n- SageAttention: OFF\n- High-Res Stability: OFF\n- Model Attention Backend: Off\n- Low-VRAM Attention: ON, 4 head chunks\n- Chunk Feed-Forward: ON, 2 chunks, threshold 4096\n- Pinned-memory cap: 10 GB\n\nThese describe the saved workflow, not settings you must use for every render.\n\nThe separate “Models & Loras” group is bypassed and disconnected. Its Singularity selection is not the model feeding the character-sheet node in this saved version.\n\nThe Unified Loader is saved as “Both / Mixed”, but its FL2VA output is not connected to the character-sheet node. The character-sheet generation uses the reference-model output.\n\n## H3 models\n\nPlace the selected FastVideo model in:\n\n`ComfyUI/models/diffusion_models/`\n\nRequired encoder and VAEs:\n\n- [H3 INT8 text encoder](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_int8_convrot.safetensors) → `ComfyUI/models/text_encoders/`\n- [H3 video VAE](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors) → `ComfyUI/models/vae/`\n- [H3 audio VAE](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors) → `ComfyUI/models/vae/`\n\nSelect the filenames available in your installation. Model files are not included in the workflow or installer.\n\n## Selected H3 LoRAs\n\n### Reference-mode Turbo\n\nSaved filename:\n\n`minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors`\n\nSaved strength: 1.0.\n\n[Download Reference-mode Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors)\n\nPlace in `ComfyUI/models/loras/H3/`.\n\nThis is the REF2V version, not the FL2V version.\n\n### Realism People\n\nSaved filename:\n\n`h3-realism-people-t2v-i2v-r2v.safetensors`\n\nSaved strength: 0.75. Trigger word: `r34l1sm`.\n\n[Download Realism People](https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors)\n\nPlace in `ComfyUI/models/loras/H3/`.\n\n### Polyhedron\n\nSaved filename:\n\n`polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors`\n\nSaved strength: 0.6. Trigger word: `perfe8ct`.\n\n[Polyhedron creator listing](https://civitai.com/models/2899220)\n\nCheck the filename on the creator's page. The direct download has not been independently verified. If you do not have this LoRA, select `(disabled)` rather than leaving a missing filename selected.\n\nPlace in `ComfyUI/models/loras/H3/`.\n\nThe character-sheet trigger-word controls are enabled in this saved workflow with `r34l1sm, perfe8ct`. Keep those words consistent with the LoRAs you actually use.\n\n## Two-stage sampling\n\nBoth single-stage and two-stage sampling are supported.\n\nTwo-stage sampling is OFF in this saved workflow. Its stored settings are:\n\n- First pass: 2 steps\n- Target resolution: 2 megapixels\n- Temporal chunking: ON\n- Upscaler model: `h3_upscaler_lms_v0.1_fp32.safetensors`\n\nIf you enable it, you need both:\n\n1. The [MiniMax H3 Latent Upscaler node package](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler), included in the dependency installer.\n2. The [latent upscaler model](https://huggingface.co/Alissonerdx/Minimax-H3-ComfyUI/resolve/main/latent_upscaler/h3_upscaler_lms_v0.1_fp32.safetensors), placed in `ComfyUI/models/latent_upscale_models/`.\n\nH3 Multishot is not the package that supplies `MinimaxH3LatentUpscaler3D`.\n\n## Qwen image refinement\n\nThe five refinement branches have these selected models:\n\n- [Qwen Image 2.1 INT8 diffusion model](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors) → `ComfyUI/models/diffusion_models/`\n- [Qwen 3 VL 8B INT8 encoder](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors) → `ComfyUI/models/text_encoders/`\n- [Texture-Fix VAE for Qwen Image 2.1](https://huggingface.co/madebyollin/texture-fix-vae-for-qwen-image-2.1/resolve/main/texture_fix_vae_for_qwen_image_2.1_bf16.safetensors) → `ComfyUI/models/vae/`\n- [Elusarcas Qwen 2.1 Detailer LoRA](https://huggingface.co/reverentelusarca/elusarcas-qwen2-1-detailer-v1/resolve/main/elusarcas-qwen2-1-detailer-v1.safetensors) → `ComfyUI/models/loras/`\n\nThe refinement groups' exposed VAE selection is the Texture-Fix VAE. Their internal saved VAE defaults may still display the base Qwen VAE; use the exposed group controls when checking the selected model.\n\nThe saved refinement settings use 25 steps, CFG 1, Euler and Simple, with detailer LoRA strength 1.\n\n## DLSS 5 runtime — required for enhancement\n\nInstalling the DLSS custom node alone is not enough. It also requires the separate native runtime.\n\nThis workflow's DLSS enhancement targets Windows. See the [DLSS node's requirements](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer#installation) for GPU and driver compatibility.\n\nThe Muse Windows installer offers runtime setup after installing the node packages. Read the upstream licensing notice and confirm only if you agree.\n\nIf you skipped that step, open a terminal in the portable root containing `python_embeded` and `ComfyUI`, then run:\n\n```bat\npython_embeded\\python.exe ComfyUI\\custom_nodes\\ComfyUI-DLSS5-Enhancer\\install_runtime.py --url https://github.com/Merserk/dlss5-visual-enhancer/releases/download/v3.0/DLSS.5.Visual.Enhancer.v3.0.zip\n```\n\nThis downloads approximately 467 MB.\n\nThe correct release path is `/v3.0/`, including the `v`. The older `/3.0/` download address returns 404.\n\nThe runtime is downloaded from its upstream project; its binaries are not bundled in Muse's package.\n\nIf you already have a compatible runtime elsewhere, the upstream installer also supports `--runtime-dir` to register its location.\n\nRestart ComfyUI after setup. A visible DLSS node on the canvas does not mean its runtime has been installed.\n\n## References and RefMods\n\nUpload your own character-reference images. Saved reference filenames and preview paths from another computer are not included assets.\n\nRefMods are optional. In this workflow:\n\n- All eight RefMod selections are `(none)`.\n- Use RefMod is OFF.\n\nDo not select a RefMod unless its files are installed locally.\n\nThe Analyze feature needs a configured vision-capable backend. You can enter descriptions manually instead; installing this workflow does not install an analysis server.\n\n## Before rendering\n\n- Confirm the selected model and LoRA files exist.\n- Supply your own character references.\n- Check that the DLSS runtime setup completed.\n- Leave SageAttention and High-Res Stability off unless you have installed a compatible SageAttention extension.\n- Restart ComfyUI after installing custom nodes or runtime components.\n- Refresh the browser after updating the Muse node.\n\nUpdating the node package does not replace settings or notes inside a workflow you already have open.\n\n[Muse Collective community](https://www.skool.com/muse-collective-7594)"
       ],
       "widgets_values_named": {
-        "text": "# Muse Character Sheet H3\n\n[MiniMax H3](https://www.minimax.io/blog/minimax-h3) is MiniMax's general-purpose, omni-modal generation model. It jointly understands text, image, video, and audio, and generates video with **native stereo audio**: voice, sound effects, and music are modeled jointly in a single forward pass, not layered on afterward. Output is up to 2K resolution, 24fps, and up to about 15 seconds per single generation call.\n\n**Muse Character Sheet H3** is a single-call turnaround-sheet node built on top of the stock `MiniMaxH3ReferenceToVideo` node, in H3's Reference (Omni) mode. Instead of manually writing `<Picture N>` / `<Video N>` tags into a single prompt box, you build the turnaround visually:\n\n- Drop up to 8 character/prop images into **Ref 1-8** and an optional **Location** image, write a description for each (or click **Analyze**)\n- Optionally describe a person visible in an uploaded reference video, so H3 uses it as an identity source alongside — or instead of — an image\n- Write the pose/angle plan for the turnaround along the **CUT** timeline\n\nIt compiles all of that into MiniMax H3's own official Reference-mode prompt format, with every tag numbered exactly the way H3 itself assigns them. This node always renders exactly one H3 call (no chunking, no continuation, no Seed Hunt) — check the `compiled_prompt` output any time you want to see exactly what was sent to H3.\n\nA second, companion node — **Muse Character Sheet Compositor** — is bundled in the same install and takes the 5 frames you extract from the rendered turnaround (Close-up, Front, Left Profile, Right Profile, Back) and lays them out on one finished sheet.\n\n## ⚠️ Required custom nodes — install these BEFORE you run anything\n\n**ComfyUI's own \"Install Missing Custom Nodes\" will NOT catch any of these.** They're used internally by other nodes' own code, not as separate nodes on the canvas, so nothing will flag them as missing — you'll only find out when a render fails partway through with an error. Install all of these now:\n\n- **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — loads model/CLIP/VAE for this workflow.\n- **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Muse Unified Loader for SageAttention support, which is **on by default**.\n- **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — required whenever Two-Stage Sampling runs. **Off by default** on this node, so only install if you turn it on.\n- **[ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG)** — required for the five background-removal nodes in the character-sheet workflow. These use the **RMBG-2.0** model to remove the background from each extracted character view before assembling the sheet.\n\nOptional:\n\n- **[ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)** — only if you're using the lower-VRAM GGUF route (Low VRAM / Balanced quality profiles).\n- **[ComfyUI-MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod)** — only if you enable RefMod Override. Add **Load H3 RefMods** (or **Create H3 RefMod** directly) to the canvas and wire its `mods` output into this node's `refmod_bundle` input. **Off by default.**\n- **[ComfyUI-H3RefModPicker](https://github.com/FranckyB/ComfyUI-H3RefModPicker)** — Companion add-on for ComfyUI-MiniMaxH3Mod\n\n## Model Links\n\n### Standard MiniMax H3 Models (used by the Maximum Quality profile)\n\n[🤗 Comfy-Org/MiniMax-H3](https://huggingface.co/Comfy-Org/MiniMax-H3)\n\n**vae**\n- [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors)\n- [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors)\n\n[🤗 Kijai/MiniMax-H3-experimental](https://huggingface.co/Kijai/MiniMax-H3-experimental)\n- [minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors](https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors) — this node only ever runs Reference mode, so this is the only diffusion model you need\n\n**text_encoders**\n- [qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors)\n\n### Stage-2 Upscale Model (only if you turn on Two-Stage Sampling — off by default)\n\n[🤗 LBH-123-AI/Minimax_h3_latent_Upscaler](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler)\n\n- [minimax_h3_latent_upscaler_3d_fp16.safetensors](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_fp16.safetensors) — the version this node's own default selects\n\n### Lower-VRAM GGUF Models (used by the Low VRAM and Balanced profiles)\n\n[🤗 MiniMax-H3 Curve GGUF](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF)\n\n**diffusion_models — reference model**\n- [MiniMax-H3-ref2va-curve-Q4_0.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q4_0.gguf) — used by the Low VRAM profile\n- [MiniMax-H3-ref2va-curve-Q5_1.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q5_1.gguf) — used by the Balanced profile\n\nThis node has no First/Last-Frame mode, so you don't need any `fl2va/` files from this repo.\n\n[🤗 MiniMax-H3 Encoder GGUF](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF)\n\n**text_encoders — used by the Low VRAM and Balanced profiles**\n- [MiniMax-H3-encoder-Q4_K_M.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-Q4_K_M.gguf)\n- [MiniMax-H3-encoder-mmproj-F16.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-mmproj-F16.gguf) — required matching projector\n\nThe GGUF encoder and matching `mmproj` file must remain together in the same folder. Do not rename either file. For the H3 CLIP loader: set `type` to `minimax`, select the encoder file, select the mmproj file as the matching projector.\n\n### LoRAs\n\n[🤗 lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo)\n- [minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors)\n\n**MysticXXX_MMH3-V1.safetensors** and **H3-GalaxyAce.safetensors** — originally from CivitAI, but bundled directly in this GitHub repo/release under `loras/` instead of linked externally, since not everyone has CivitAI access. *(Link to the actual repo release once these are pushed.)*\n\n### Preview Models (optional — cosmetic sampling preview only, workflow runs fine without them)\n\n[🤗 Kijai/MiniMax-H3-TAE](https://huggingface.co/Kijai/MiniMax-H3-TAE)\n\n- [taeh3.safetensors](https://huggingface.co/Kijai/MiniMax-H3-TAE/resolve/main/vae_approx/taeh3.safetensors)\n- [taeltx2_3.safetensors](https://github.com/madebyollin/taehv/raw/main/safetensors/taeltx2_3.safetensors) — lightweight preview VAE\n\n## Model Storage Locations\n\n- `ComfyUI/models/vae/` — `minimax_h3_video_vae_fp16.safetensors`, `minimax_h3_audio_vae_fp32.safetensors`, `taeltx2_3.safetensors`\n- `ComfyUI/models/vae_approx/` — `taeh3.safetensors`\n- `ComfyUI/models/diffusion_models/` — `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`, `MiniMax-H3-ref2va-curve-Q4_0.gguf`, `MiniMax-H3-ref2va-curve-Q5_1.gguf`\n- `ComfyUI/models/text_encoders/` — `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors`, `MiniMax-H3-encoder-Q4_K_M.gguf`, `MiniMax-H3-encoder-mmproj-F16.gguf`\n- `ComfyUI/models/loras/H3/` — `minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors`, `MysticXXX_MMH3-V1.safetensors`, `H3-GalaxyAce.safetensors`\n- `ComfyUI/models/latent_upscale_models/` — `minimax_h3_latent_upscaler_3d_fp16.safetensors` *(this folder doesn't exist by default — create it yourself; only needed if Two-Stage Sampling is on)*\n\n## Report Issue\n\nPlease update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and make sure the required models and custom nodes above are installed before reporting a bug.\n\n- Muse Character Sheet H3 itself — CUT timeline UI, reference/video identity, compiled prompt: [Muse-CharacterSheet-H3/issues](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/issues)\n- ComfyUI core or the stock MiniMax H3 nodes: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI/frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n\n## Links\n- [MiniMax H3 on Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-H3)\n- [🤗 Comfy-Org/MiniMax-H3 (ComfyUI-ready weights)](https://huggingface.co/Comfy-Org/MiniMax-H3)\n- [Muse Character Sheet H3 on GitHub](https://github.com/muse-collective-26/Muse-CharacterSheet-H3)\n- [MiniMax H3 official prompt-writing guide](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md)\n\n**Sampling defaults**: `euler` sampler, `simple` scheduler, 8 steps, 0.5 megapixels, 9:16 aspect ratio."
+        "text": "# H3 Character Sheet Enhanced\n\n## What this workflow does\n\nGenerates a character-reference video, lets you select frames, refines the selected images using Qwen Image 2.1, applies DLSS enhancement, and assembles the character sheet.\n\nThe workflow includes five image-refinement branches and a separate DLSS-enhanced video output.\n\nOpening the workflow does not automatically install its custom nodes, models or DLSS runtime.\n\n## Installation\n\n1. Download the complete [Muse Character Sheet H3 Windows package](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.2/Muse-CharacterSheet-H3-Windows.zip).\n2. Extract the ZIP.\n3. Place the package folder directly inside `ComfyUI/custom_nodes`.\n4. Close ComfyUI.\n5. Run the single `Install-Windows.bat` at the package root.\n6. Confirm the dependency installation.\n7. For Enhanced, complete the DLSS runtime setup offered by that same installer unless you already have a runtime configured.\n8. Install the required model files, restart ComfyUI and refresh your browser.\n\nDownload the whole package—not the BAT file separately. Git must be installed and available on PATH.\n\nThe correct folder structure is:\n\n`ComfyUI/custom_nodes/Muse-CharacterSheet-H3/__init__.py`\n\nThe BAT should be beside `__init__.py`, with the `Installers` folder alongside them.\n\nIf Windows creates an extra outer folder when extracting, use the inner package folder containing those files. Do not put a second copy of the node inside another copy.\n\nA folder name ending in `-master` is accepted. Keep only one installed copy of the Muse Character Sheet node.\n\nThe installer installs missing dependencies and their Python requirements. It retains existing dependency folders rather than updating or replacing them. Model weights are not downloaded.\n\n## Custom nodes used\n\n| Package | Purpose |\n| --- | --- |\n| [Muse Character Sheet H3](https://github.com/muse-collective-26/Muse-CharacterSheet-H3) | Character generation and sheet assembly |\n| [Muse Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader) | Active H3 model, encoder, VAE and LoRA loading |\n| [KJNodes](https://github.com/kijai/ComfyUI-KJNodes) | Set/Get nodes, image-size utilities and H3 memory-saving patches |\n| [MiniMax H3 Latent Upscaler](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler) | Required when two-stage sampling is enabled |\n| [MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod) | RefMod loader |\n| [RMBG](https://github.com/1038lab/ComfyUI-RMBG) | Background removal |\n| [VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite) | Video output |\n| [iTools](https://github.com/MohammadAboulEla/ComfyUI-iTools) | Prompt preview |\n| [WAS Node Suite (Revised)](https://github.com/ltdrdata/was-node-suite-comfyui) | Text saving and RGB conversion |\n| [Memory Cleanup](https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup) | RAM and VRAM cleanup |\n| [DLSS5 Enhancer](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer) | Image and video enhancement; requires its separate runtime |\n\nUse a ComfyUI version with native MiniMax H3 and Qwen Image 2.1 support.\n\nQwen refinement uses core nodes including `TextEncodeQwenImage21`, `QwenImage21Cache` and `ComfySwitchNode`. These are not separate Muse downloads.\n\nFollow RMBG's model-installation instructions for its selected background-removal model.\n\n## Saved generation settings\n\nThis workflow currently uses the Unified Loader connected to the character-sheet node.\n\n- H3 model: `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`\n- H3 text encoder: `qwen3vl_32b_minimax_h3_int8_convrot.safetensors`\n- Video VAE: `minimax_h3_video_vae_fp16.safetensors`\n- Audio VAE: `minimax_h3_audio_vae_fp32.safetensors`\n- Aspect ratio: 9:16\n- Base resolution: 0.5 megapixels\n- Duration: 10 seconds\n- Sampling: 8 steps, Euler, Simple\n- Two-stage sampling: currently OFF\n- Reference image size: maximum\n- SageAttention: OFF\n- High-Res Stability: OFF\n- Model Attention Backend: Off\n- Low-VRAM Attention: ON, 4 head chunks\n- Chunk Feed-Forward: ON, 2 chunks, threshold 4096\n- Pinned-memory cap: 10 GB\n\nThese describe the saved workflow, not settings you must use for every render.\n\nThe separate “Models & Loras” group is bypassed and disconnected. Its Singularity selection is not the model feeding the character-sheet node in this saved version.\n\nThe Unified Loader is saved as “Both / Mixed”, but its FL2VA output is not connected to the character-sheet node. The character-sheet generation uses the reference-model output.\n\n## H3 models\n\nPlace the selected FastVideo model in:\n\n`ComfyUI/models/diffusion_models/`\n\nRequired encoder and VAEs:\n\n- [H3 INT8 text encoder](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_int8_convrot.safetensors) → `ComfyUI/models/text_encoders/`\n- [H3 video VAE](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors) → `ComfyUI/models/vae/`\n- [H3 audio VAE](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors) → `ComfyUI/models/vae/`\n\nSelect the filenames available in your installation. Model files are not included in the workflow or installer.\n\n## Selected H3 LoRAs\n\n### Reference-mode Turbo\n\nSaved filename:\n\n`minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors`\n\nSaved strength: 1.0.\n\n[Download Reference-mode Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors)\n\nPlace in `ComfyUI/models/loras/H3/`.\n\nThis is the REF2V version, not the FL2V version.\n\n### Realism People\n\nSaved filename:\n\n`h3-realism-people-t2v-i2v-r2v.safetensors`\n\nSaved strength: 0.75. Trigger word: `r34l1sm`.\n\n[Download Realism People](https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors)\n\nPlace in `ComfyUI/models/loras/H3/`.\n\n### Polyhedron\n\nSaved filename:\n\n`polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors`\n\nSaved strength: 0.6. Trigger word: `perfe8ct`.\n\n[Polyhedron creator listing](https://civitai.com/models/2899220)\n\nCheck the filename on the creator's page. The direct download has not been independently verified. If you do not have this LoRA, select `(disabled)` rather than leaving a missing filename selected.\n\nPlace in `ComfyUI/models/loras/H3/`.\n\nThe character-sheet trigger-word controls are enabled in this saved workflow with `r34l1sm, perfe8ct`. Keep those words consistent with the LoRAs you actually use.\n\n## Two-stage sampling\n\nBoth single-stage and two-stage sampling are supported.\n\nTwo-stage sampling is OFF in this saved workflow. Its stored settings are:\n\n- First pass: 2 steps\n- Target resolution: 2 megapixels\n- Temporal chunking: ON\n- Upscaler model: `h3_upscaler_lms_v0.1_fp32.safetensors`\n\nIf you enable it, you need both:\n\n1. The [MiniMax H3 Latent Upscaler node package](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler), included in the dependency installer.\n2. The [latent upscaler model](https://huggingface.co/Alissonerdx/Minimax-H3-ComfyUI/resolve/main/latent_upscaler/h3_upscaler_lms_v0.1_fp32.safetensors), placed in `ComfyUI/models/latent_upscale_models/`.\n\nH3 Multishot is not the package that supplies `MinimaxH3LatentUpscaler3D`.\n\n## Qwen image refinement\n\nThe five refinement branches have these selected models:\n\n- [Qwen Image 2.1 INT8 diffusion model](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors) → `ComfyUI/models/diffusion_models/`\n- [Qwen 3 VL 8B INT8 encoder](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors) → `ComfyUI/models/text_encoders/`\n- [Texture-Fix VAE for Qwen Image 2.1](https://huggingface.co/madebyollin/texture-fix-vae-for-qwen-image-2.1/resolve/main/texture_fix_vae_for_qwen_image_2.1_bf16.safetensors) → `ComfyUI/models/vae/`\n- [Elusarcas Qwen 2.1 Detailer LoRA](https://huggingface.co/reverentelusarca/elusarcas-qwen2-1-detailer-v1/resolve/main/elusarcas-qwen2-1-detailer-v1.safetensors) → `ComfyUI/models/loras/`\n\nThe refinement groups' exposed VAE selection is the Texture-Fix VAE. Their internal saved VAE defaults may still display the base Qwen VAE; use the exposed group controls when checking the selected model.\n\nThe saved refinement settings use 25 steps, CFG 1, Euler and Simple, with detailer LoRA strength 1.\n\n## DLSS 5 runtime — required for enhancement\n\nInstalling the DLSS custom node alone is not enough. It also requires the separate native runtime.\n\nThis workflow's DLSS enhancement targets Windows. See the [DLSS node's requirements](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer#installation) for GPU and driver compatibility.\n\nThe Muse Windows installer offers runtime setup after installing the node packages. Read the upstream licensing notice and confirm only if you agree.\n\nIf you skipped that step, open a terminal in the portable root containing `python_embeded` and `ComfyUI`, then run:\n\n```bat\npython_embeded\\python.exe ComfyUI\\custom_nodes\\ComfyUI-DLSS5-Enhancer\\install_runtime.py --url https://github.com/Merserk/dlss5-visual-enhancer/releases/download/v3.0/DLSS.5.Visual.Enhancer.v3.0.zip\n```\n\nThis downloads approximately 467 MB.\n\nThe correct release path is `/v3.0/`, including the `v`. The older `/3.0/` download address returns 404.\n\nThe runtime is downloaded from its upstream project; its binaries are not bundled in Muse's package.\n\nIf you already have a compatible runtime elsewhere, the upstream installer also supports `--runtime-dir` to register its location.\n\nRestart ComfyUI after setup. A visible DLSS node on the canvas does not mean its runtime has been installed.\n\n## References and RefMods\n\nUpload your own character-reference images. Saved reference filenames and preview paths from another computer are not included assets.\n\nRefMods are optional. In this workflow:\n\n- All eight RefMod selections are `(none)`.\n- Use RefMod is OFF.\n\nDo not select a RefMod unless its files are installed locally.\n\nThe Analyze feature needs a configured vision-capable backend. You can enter descriptions manually instead; installing this workflow does not install an analysis server.\n\n## Before rendering\n\n- Confirm the selected model and LoRA files exist.\n- Supply your own character references.\n- Check that the DLSS runtime setup completed.\n- Leave SageAttention and High-Res Stability off unless you have installed a compatible SageAttention extension.\n- Restart ComfyUI after installing custom nodes or runtime components.\n- Refresh the browser after updating the Muse node.\n\nUpdating the node package does not replace settings or notes inside a workflow you already have open.\n\n[Muse Collective community](https://www.skool.com/muse-collective-7594)"
       },
       "color": "#222",
       "bgcolor": "#000"
@@ -1288,7 +1299,7 @@
         "state": {
           "lastGroupId": 14,
           "lastNodeId": 6147,
-          "lastLinkId": 14888,
+          "lastLinkId": 14890,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -1652,7 +1663,14 @@
                 "link": 15
               }
             ],
-            "outputs": [],
+            "outputs": [
+              {
+                "localized_name": "images",
+                "name": "images",
+                "type": "IMAGE",
+                "links": null
+              }
+            ],
             "title": "Close Up",
             "properties": {
               "cnr_id": "comfy-core",
@@ -1689,7 +1707,14 @@
                 "link": 16
               }
             ],
-            "outputs": [],
+            "outputs": [
+              {
+                "localized_name": "images",
+                "name": "images",
+                "type": "IMAGE",
+                "links": null
+              }
+            ],
             "title": "Front View",
             "properties": {
               "cnr_id": "comfy-core",
@@ -1726,7 +1751,14 @@
                 "link": 18
               }
             ],
-            "outputs": [],
+            "outputs": [
+              {
+                "localized_name": "images",
+                "name": "images",
+                "type": "IMAGE",
+                "links": null
+              }
+            ],
             "title": "Right Profile",
             "properties": {
               "cnr_id": "comfy-core",
@@ -1763,7 +1795,14 @@
                 "link": 17
               }
             ],
-            "outputs": [],
+            "outputs": [
+              {
+                "localized_name": "images",
+                "name": "images",
+                "type": "IMAGE",
+                "links": null
+              }
+            ],
             "title": "Left Profile",
             "properties": {
               "cnr_id": "comfy-core",
@@ -1800,7 +1839,14 @@
                 "link": 19
               }
             ],
-            "outputs": [],
+            "outputs": [
+              {
+                "localized_name": "images",
+                "name": "images",
+                "type": "IMAGE",
+                "links": null
+              }
+            ],
             "title": "Back View",
             "properties": {
               "cnr_id": "comfy-core",
@@ -1822,7 +1868,7 @@
             ],
             "size": [
               340,
-              292
+              316
             ],
             "flags": {},
             "order": 13,
@@ -1858,9 +1904,10 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-rmbg",
+              "ver": "229529e0ea63fb7085848225d74f91f6dc164956",
               "Node name for S&R": "RMBG",
-              "aux_id": "1038lab/ComfyUI-RMBG",
-              "cnr_id": "comfyui-rmbg"
+              "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
               "RMBG-2.0",
@@ -1882,9 +1929,9 @@
               "mask_offset": 0,
               "invert_output": false,
               "refine_foreground": false,
+              "unload_model": false,
               "background": "Color",
-              "background_color": "#ffffff",
-              "unload_model": false
+              "background_color": "#ffffff"
             },
             "color": "#222e40",
             "bgcolor": "#364254"
@@ -1898,7 +1945,7 @@
             ],
             "size": [
               340,
-              292
+              316
             ],
             "flags": {},
             "order": 14,
@@ -1934,9 +1981,10 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-rmbg",
+              "ver": "229529e0ea63fb7085848225d74f91f6dc164956",
               "Node name for S&R": "RMBG",
-              "aux_id": "1038lab/ComfyUI-RMBG",
-              "cnr_id": "comfyui-rmbg"
+              "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
               "RMBG-2.0",
@@ -1958,9 +2006,9 @@
               "mask_offset": 0,
               "invert_output": false,
               "refine_foreground": false,
+              "unload_model": false,
               "background": "Color",
-              "background_color": "#ffffff",
-              "unload_model": false
+              "background_color": "#ffffff"
             },
             "color": "#222e40",
             "bgcolor": "#364254"
@@ -1974,7 +2022,7 @@
             ],
             "size": [
               340,
-              292
+              316
             ],
             "flags": {},
             "order": 12,
@@ -2010,9 +2058,10 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-rmbg",
+              "ver": "229529e0ea63fb7085848225d74f91f6dc164956",
               "Node name for S&R": "RMBG",
-              "aux_id": "1038lab/ComfyUI-RMBG",
-              "cnr_id": "comfyui-rmbg"
+              "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
               "RMBG-2.0",
@@ -2034,9 +2083,9 @@
               "mask_offset": 0,
               "invert_output": false,
               "refine_foreground": false,
+              "unload_model": false,
               "background": "Color",
-              "background_color": "#ffffff",
-              "unload_model": false
+              "background_color": "#ffffff"
             },
             "color": "#222e40",
             "bgcolor": "#364254"
@@ -2050,7 +2099,7 @@
             ],
             "size": [
               340,
-              292
+              316
             ],
             "flags": {},
             "order": 11,
@@ -2086,9 +2135,10 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-rmbg",
+              "ver": "229529e0ea63fb7085848225d74f91f6dc164956",
               "Node name for S&R": "RMBG",
-              "aux_id": "1038lab/ComfyUI-RMBG",
-              "cnr_id": "comfyui-rmbg"
+              "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
               "RMBG-2.0",
@@ -2110,9 +2160,9 @@
               "mask_offset": 0,
               "invert_output": false,
               "refine_foreground": false,
+              "unload_model": false,
               "background": "Color",
-              "background_color": "#ffffff",
-              "unload_model": false
+              "background_color": "#ffffff"
             },
             "color": "#222e40",
             "bgcolor": "#364254"
@@ -2201,7 +2251,7 @@
             ],
             "size": [
               340,
-              292
+              316
             ],
             "flags": {},
             "order": 10,
@@ -2237,9 +2287,10 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-rmbg",
+              "ver": "229529e0ea63fb7085848225d74f91f6dc164956",
               "Node name for S&R": "RMBG",
-              "aux_id": "1038lab/ComfyUI-RMBG",
-              "cnr_id": "comfyui-rmbg"
+              "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
               "RMBG-2.0",
@@ -2261,9 +2312,9 @@
               "mask_offset": 0,
               "invert_output": false,
               "refine_foreground": false,
+              "unload_model": false,
               "background": "Color",
-              "background_color": "#ffffff",
-              "unload_model": false
+              "background_color": "#ffffff"
             },
             "color": "#222e40",
             "bgcolor": "#364254"
@@ -2450,7 +2501,7 @@
         "state": {
           "lastGroupId": 14,
           "lastNodeId": 6147,
-          "lastLinkId": 14888,
+          "lastLinkId": 14890,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -2528,7 +2579,7 @@
             "name": "lora_name",
             "type": "COMBO",
             "linkIds": [
-              14876
+              14889
             ],
             "pos": [
               86.88483074299711,
@@ -2540,7 +2591,7 @@
             "name": "lora_name_1",
             "type": "COMBO",
             "linkIds": [
-              14877
+              14890
             ],
             "pos": [
               86.88483074299711,
@@ -2726,7 +2777,7 @@
                 "widget": {
                   "name": "lora_name"
                 },
-                "link": 14876
+                "link": 14889
               }
             ],
             "outputs": [
@@ -2855,7 +2906,7 @@
                 "widget": {
                   "name": "lora_name"
                 },
-                "link": 14877
+                "link": 14890
               },
               {
                 "localized_name": "strength_model",
@@ -2888,11 +2939,11 @@
               }
             },
             "widgets_values": [
-              "H3\\MysticXXX_MMH3-V1.safetensors",
+              "H3\\polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors",
               0.25
             ],
             "widgets_values_named": {
-              "lora_name": "H3\\MysticXXX_MMH3-V1.safetensors",
+              "lora_name": "H3\\polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors",
               "strength_model": 0.25
             }
           },
@@ -2929,14 +2980,15 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-kjnodes",
+              "ver": "17195fcfa8a05f601b766a0f09c9733284f47416",
               "Node name for S&R": "MiniMaxH3MemoryEfficientSageAttentionPatch",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
               },
-              "aux_id": "kijai/ComfyUI-KJNodes",
-              "cnr_id": "comfyui-kjnodes"
+              "aux_id": "kijai/ComfyUI-KJNodes"
             }
           },
           {
@@ -2972,9 +3024,10 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-kjnodes",
+              "ver": "17195fcfa8a05f601b766a0f09c9733284f47416",
               "Node name for S&R": "MiniMaxLowVRAMAttention",
-              "aux_id": "kijai/ComfyUI-KJNodes",
-              "cnr_id": "comfyui-kjnodes"
+              "aux_id": "kijai/ComfyUI-KJNodes"
             },
             "widgets_values": [
               4
@@ -3016,9 +3069,10 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-kjnodes",
+              "ver": "17195fcfa8a05f601b766a0f09c9733284f47416",
               "Node name for S&R": "MiniMaxChunkFeedForward",
-              "aux_id": "kijai/ComfyUI-KJNodes",
-              "cnr_id": "comfyui-kjnodes"
+              "aux_id": "kijai/ComfyUI-KJNodes"
             },
             "widgets_values": [
               2,
@@ -3294,22 +3348,6 @@
             "type": "COMBO"
           },
           {
-            "id": 14876,
-            "origin_id": -10,
-            "origin_slot": 4,
-            "target_id": 6133,
-            "target_slot": 1,
-            "type": "COMBO"
-          },
-          {
-            "id": 14877,
-            "origin_id": -10,
-            "origin_slot": 5,
-            "target_id": 6128,
-            "target_slot": 1,
-            "type": "COMBO"
-          },
-          {
             "id": 14878,
             "origin_id": -10,
             "origin_slot": 6,
@@ -3364,6 +3402,22 @@
             "target_id": -20,
             "target_slot": 3,
             "type": "VAE"
+          },
+          {
+            "id": 14889,
+            "origin_id": -10,
+            "origin_slot": 4,
+            "target_id": 6133,
+            "target_slot": 1,
+            "type": "COMBO"
+          },
+          {
+            "id": 14890,
+            "origin_id": -10,
+            "origin_slot": 5,
+            "target_id": 6128,
+            "target_slot": 1,
+            "type": "COMBO"
           }
         ],
         "extra": {
@@ -3374,18 +3428,21 @@
   },
   "config": {},
   "extra": {
-    "frontendVersion": "1.52.7",
+    "frontendVersion": "1.55.14",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
     "VHS_KeepIntermediate": true,
     "ds": {
-      "scale": 0.1891475457997598,
+      "scale": 0.2288685304177101,
       "offset": [
-        3157.051126834834,
-        -4122.814291797751
+        1274.2555806002115,
+        -5219.4223191699975
       ]
     }
   },
-  "version": 0.4
+  "version": 0.4,
+  "seed_widgets": {
+    "1": 5
+  }
 }
