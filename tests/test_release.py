@@ -81,6 +81,21 @@ class WorkflowTests(unittest.TestCase):
 
 
 class InstallerTests(unittest.TestCase):
+    def test_dlss_offer_uses_correct_url_and_preserves_confirmation(self):
+        installer = module('installer_dlss', ROOT / 'Installers/install_dependencies.py')
+        with tempfile.TemporaryDirectory() as tmp:
+            custom = Path(tmp)
+            folder = custom / 'ComfyUI-DLSS5-Enhancer'
+            folder.mkdir()
+            script = folder / 'install_runtime.py'
+            script.touch()
+            with patch('builtins.input', return_value='y'), patch.object(installer, 'run') as run:
+                installer.offer_dlss_runtime(custom)
+                run.assert_called_once_with([installer.sys.executable, script, '--url', 'https://github.com/Merserk/dlss5-visual-enhancer/releases/download/v3.0/DLSS.5.Visual.Enhancer.v3.0.zip'])
+            with patch('builtins.input', return_value='n'), patch.object(installer, 'run') as run:
+                installer.offer_dlss_runtime(custom)
+                run.assert_not_called()
+
     def test_selection_and_existing_alias(self):
         installer = module('installer', ROOT / 'Installers/install_dependencies.py')
         self.assertEqual(len(installer.packages(False)), 11)

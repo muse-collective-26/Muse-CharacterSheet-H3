@@ -1,5 +1,11 @@
 # Release notes
 
+## 2026-10-19 — DLSS runtime download correction
+
+- The existing Windows installer now offers DLSS runtime setup using the working `v3.0` release URL, overriding the upstream script's broken `3.0` URL.
+- Retains the upstream licensing notice and confirmation; users with an existing configured runtime may skip this step. No runtime binaries are bundled.
+- Updated manual commands and workflow notes. The existing Windows ZIP is replaced in place, not published as another installer choice.
+
 ## 2026-10-19 — Installer correction
 
 - Added the actual `Comfyui_Minimax_h3_latent_Upscaler` package to both Standard and Enhanced installer plans. H3 Multishot does not supply `MinimaxH3LatentUpscaler3D`.

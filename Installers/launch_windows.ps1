@@ -47,7 +47,7 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Dependency planning failed. Nothing installed.' }
     Write-Host 'Close ComfyUI before proceeding. Models are NOT downloaded. Existing node folders are retained.'
     if ((Read-Host 'Install the listed dependencies? [y/N]') -notmatch '^(y|yes)$') { Write-Host 'Cancelled. Nothing installed.'; exit 0 }
-    & $python $helper --comfyui $comfy --enhanced --install
+    & $python $helper --comfyui $comfy --enhanced --install --offer-dlss-runtime
     if ($LASTEXITCODE -ne 0) { throw 'Dependency installation failed. Review the error above; setup may be partially complete.' }
     Write-Host 'Node setup finished. See INSTALLATION.md for models and the separate DLSS runtime. Restart ComfyUI and refresh your browser.'
     exit 0

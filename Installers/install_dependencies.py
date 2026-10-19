@@ -8,6 +8,20 @@ import sys
 import tempfile
 
 HERE = Path(__file__).resolve().parent
+DLSS_RUNTIME_URL = 'https://github.com/Merserk/dlss5-visual-enhancer/releases/download/v3.0/DLSS.5.Visual.Enhancer.v3.0.zip'
+
+
+def offer_dlss_runtime(custom):
+    package = next(p for p in packages(True) if p['repo'] == 'Blueforcer/ComfyUI-DLSS5-Enhancer')
+    script = locate(custom, package) / 'install_runtime.py'
+    if not script.is_file():
+        raise RuntimeError(f'DLSS runtime installer missing: {script}')
+    print('Enhanced needs a separate DLSS runtime. Download is approximately 467 MB.')
+    print('Skip if already configured. If installing, the upstream script will show its licensing notice and ask for confirmation.')
+    if input('Run DLSS runtime setup now? [y/N] ').strip().lower() in ('y', 'yes'):
+        run([sys.executable, script, '--url', DLSS_RUNTIME_URL])
+    else:
+        print('DLSS runtime setup skipped. Enhanced DLSS cannot run until a runtime is configured; see INSTALLATION.md.')
 
 
 def run(args):
@@ -46,6 +60,7 @@ def main():
     parser.add_argument('--comfyui', required=True, type=Path)
     parser.add_argument('--enhanced', action='store_true', help='Also install the DLSS node pack (NOT its runtime).')
     parser.add_argument('--install', action='store_true', help='Without this flag only print the plan.')
+    parser.add_argument('--offer-dlss-runtime', action='store_true', help='Offer the upstream runtime setup with its licensing confirmation after Enhanced node installation.')
     args = parser.parse_args()
     root = args.comfyui.resolve()
     if not (root / 'main.py').is_file() or not (root / 'custom_nodes').is_dir():
@@ -79,7 +94,10 @@ def main():
     print('Restart ComfyUI and check missing nodes/models before rendering. This is NOT a render certification.')
     print('MiniMax H3 Latent Upscaler, GGUF and H3 Multishot node packages are included. Model weights and SageAttention binaries are not; see INSTALLATION.md.')
     if args.enhanced:
-        print('DLSS runtime is NOT installed. Follow INSTALLATION.md before using Enhanced.')
+        if args.offer_dlss_runtime:
+            offer_dlss_runtime(root / 'custom_nodes')
+        else:
+            print('DLSS runtime setup was not requested. Follow INSTALLATION.md before using Enhanced.')
 
 
 if __name__ == '__main__':

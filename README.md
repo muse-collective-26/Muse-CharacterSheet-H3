@@ -12,7 +12,7 @@ See [release notes](CHANGELOG.md) for the current node fixes, trigger-word contr
 2. Extract the ZIP first. Rename the extracted `Muse-CharacterSheet-H3-master` folder to `Muse-CharacterSheet-H3` and place that whole folder inside your ComfyUI instance's `custom_nodes` folder. Do not move just the BAT file, and do not run it from inside the ZIP.
 3. Close ComfyUI. Open `ComfyUI/custom_nodes/Muse-CharacterSheet-H3` and double-click the top-level `Install-Windows.bat`. Keep the `Installers` folder beside it. Git must be installed and available on PATH. The launcher displays the plan and asks before installing.
 4. The installer includes the **Unified Loader** and the other workflow node dependencies. Existing node folders are retained. **Model weights are not downloaded.** Download/select models using [the model list and setup instructions](INSTALLATION.md).
-5. For Enhanced, complete the separate **DLSS runtime** installation in that guide. Enhanced targets Windows; Standard does not require DLSS. Standard-only and non-portable installation commands are also in the guide.
+5. For Enhanced, accept the **DLSS runtime setup** offered by the same BAT if you do not already have a runtime configured. It uses the corrected v3.0 download link and shows the upstream licensing confirmation. Manual instructions are also in the guide. Enhanced targets Windows; Standard does not require DLSS.
 6. Restart ComfyUI, refresh the browser, then open the [Enhanced workflow](workflows/H3%20Character%20Sheet%20Enhanced.json) or [Standard workflow](workflows/H3%20Character%20Sheet.json). Upload your own references and select installed model files.
 
 ### Updating an existing installation

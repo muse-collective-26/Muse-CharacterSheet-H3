@@ -91,11 +91,11 @@ Check upstream GPU and driver compatibility before choosing Enhanced.
 2. From the Windows portable root, run:
 
    ```bat
-   python_embeded\python.exe ComfyUI\custom_nodes\ComfyUI-DLSS5-Enhancer\install_runtime.py
+   python_embeded\python.exe ComfyUI\custom_nodes\ComfyUI-DLSS5-Enhancer\install_runtime.py --url https://github.com/Merserk/dlss5-visual-enhancer/releases/download/v3.0/DLSS.5.Visual.Enhancer.v3.0.zip
    ```
 
 3. Read and accept the upstream runtime licensing notice if you agree. The setup
-   downloads the separate runtime. It is not bundled in Muse's repository.
+   downloads the separate runtime. It is not bundled in Muse's repository. The root BAT now offers this same setup after installing the nodes. The explicit URL uses the correct `v3.0` release tag; the upstream default `/3.0/` URL returns 404. No licensing confirmation is bypassed.
 4. Restart ComfyUI. If using an existing external runtime, follow upstream's
    `--runtime-dir` instructions. Keep the workflow's DLSS controls unchanged.
 
@@ -180,7 +180,7 @@ Your own references and RefMods must be supplied locally. Saved preview paths an
 ### Windows installer
 
 Download and extract the **complete repository ZIP** as explained above. Put the whole package in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`, close ComfyUI, then double-click its top-level `Install-Windows.bat`. Do not download or move the BAT separately.
-It previews the target and requests confirmation, installs missing node packages including the Unified Loader, MiniMax H3 Latent Upscaler, GGUF and H3 Multishot, and installs Python requirements with the existing PyTorch versions constrained. Existing node folders are retained, not overwritten or updated. Models, SageAttention binaries, and the separately licensed DLSS native runtime are not downloaded. Follow the DLSS runtime instructions above after node installation.
+It previews the target and requests confirmation, installs missing node packages including the Unified Loader, MiniMax H3 Latent Upscaler, GGUF and H3 Multishot, and installs Python requirements with the existing PyTorch versions constrained. Existing node folders are retained, not overwritten or updated. Models and SageAttention binaries are not downloaded. The BAT then offers the separate DLSS runtime download using the verified v3.0 link, retaining the upstream licensing notice and confirmation. You can skip it if a runtime is already configured. The runtime binaries are not bundled or redistributed by Muse.
 
 
 ### If Windows Extract All creates an extra folder
