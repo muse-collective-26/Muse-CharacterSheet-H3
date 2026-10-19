@@ -1,5 +1,12 @@
 # Release notes
 
+## 2026-10-19.2 — Portable templates and layout restoration
+
+- Cleared personal RefMod selections in Standard and Enhanced templates; all eight slots start at `(none)`.
+- Updated the five RMBG nodes in each template for the current `unload_model` input before background mode, retaining Color/white output. Update RMBG when using these templates.
+- Set character-panel width before measuring height and recheck layout on unchanged-timeline restores; added regression checks for transient narrow hosts and stale tall dimensions. The user's exact collapsed-screen case still needs visual confirmation after browser refresh.
+- Download the new workflow to receive template corrections; updating node code alone does not change a workflow already open in the browser.
+
 ## 2026-10-19.1 — Windows installer packaging fix
 
 - Added a complete Windows ZIP with one package folder and a top-level Install-Windows.bat.

@@ -16,6 +16,16 @@ def module(name, path):
 
 
 class WorkflowTests(unittest.TestCase):
+    def test_portable_optional_nodes(self):
+        for path in (ROOT / 'workflows').glob('*.json'):
+            w = json.loads(path.read_text(encoding='utf8'))
+            for g in [w] + w.get('definitions', {}).get('subgraphs', []):
+                for n in g['nodes']:
+                    if n['type'] == 'MiniMaxH3RefModsLoader':
+                        self.assertTrue(all(n['widgets_values'][1+i*3] == '(none)' for i in range(8)))
+                    if n['type'] == 'RMBG':
+                        self.assertEqual(n['widgets_values'][7:10], [False, 'Color', '#ffffff'])
+
     def test_workflows(self):
         for filename in ('H3 Character Sheet.json', 'H3 Character Sheet Enhanced.json'):
             w = json.loads((ROOT / 'workflows' / filename).read_text(encoding='utf8'))

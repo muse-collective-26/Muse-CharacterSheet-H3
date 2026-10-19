@@ -555,7 +555,7 @@
       },
       "widgets_values": [
         true,
-        "isabella_Rae1_mod",
+        "(none)",
         1,
         1,
         "(none)",
@@ -618,7 +618,7 @@
       ],
       "widgets_values_named": {
         "show_info": true,
-        "mod_1": "isabella_Rae1_mod",
+        "mod_1": "(none)",
         "strength_1": 1,
         "copies_1": 1,
         "mod_2": "(none)",
@@ -1870,6 +1870,7 @@
               0,
               false,
               false,
+              false,
               "Color",
               "#ffffff"
             ],
@@ -1882,7 +1883,8 @@
               "invert_output": false,
               "refine_foreground": false,
               "background": "Color",
-              "background_color": "#ffffff"
+              "background_color": "#ffffff",
+              "unload_model": false
             },
             "color": "#222e40",
             "bgcolor": "#364254"
@@ -1944,6 +1946,7 @@
               0,
               false,
               false,
+              false,
               "Color",
               "#ffffff"
             ],
@@ -1956,7 +1959,8 @@
               "invert_output": false,
               "refine_foreground": false,
               "background": "Color",
-              "background_color": "#ffffff"
+              "background_color": "#ffffff",
+              "unload_model": false
             },
             "color": "#222e40",
             "bgcolor": "#364254"
@@ -2018,6 +2022,7 @@
               0,
               false,
               false,
+              false,
               "Color",
               "#ffffff"
             ],
@@ -2030,7 +2035,8 @@
               "invert_output": false,
               "refine_foreground": false,
               "background": "Color",
-              "background_color": "#ffffff"
+              "background_color": "#ffffff",
+              "unload_model": false
             },
             "color": "#222e40",
             "bgcolor": "#364254"
@@ -2092,6 +2098,7 @@
               0,
               false,
               false,
+              false,
               "Color",
               "#ffffff"
             ],
@@ -2104,7 +2111,8 @@
               "invert_output": false,
               "refine_foreground": false,
               "background": "Color",
-              "background_color": "#ffffff"
+              "background_color": "#ffffff",
+              "unload_model": false
             },
             "color": "#222e40",
             "bgcolor": "#364254"
@@ -2241,6 +2249,7 @@
               0,
               false,
               false,
+              false,
               "Color",
               "#ffffff"
             ],
@@ -2253,7 +2262,8 @@
               "invert_output": false,
               "refine_foreground": false,
               "background": "Color",
-              "background_color": "#ffffff"
+              "background_color": "#ffffff",
+              "unload_model": false
             },
             "color": "#222e40",
             "bgcolor": "#364254"

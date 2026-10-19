@@ -912,6 +912,7 @@ class CharacterSheetH3TimelineEditor {
   // LiteGraph, where nothing else will ever resize this DOM widget's node.
   _attachAutoResize(timelineWidget) {
     this.timelineWidget = timelineWidget;
+    this._resizeOnce();
     if (this._resizeObserver) this._resizeObserver.disconnect();
     if (this._resizeDebounce) clearTimeout(this._resizeDebounce);
     this._resizeDebounce = setTimeout(() => {
@@ -925,19 +926,25 @@ class CharacterSheetH3TimelineEditor {
   }
 
   _resizeOnce() {
-    if (!this.timelineWidget || !this.node?.setSize || !this.container) return;
+    if (!this.timelineWidget || !this.node || !this.container) return;
+    // The DOM widget host is briefly narrow while Comfy restores a tab.
+    // Lay out at graph width BEFORE measuring height, not at that transient width.
+    const width = Math.max(this.node.size?.[0] || 1480, 1480);
+    const contentWidth = Math.max(1, width - 2 * (this.timelineWidget.margin ?? 10));
+    this.container.style.width = `${contentWidth}px`;
+    this.container.style.minWidth = `${contentWidth}px`;
     if (!this.container.isConnected || !this.container.offsetHeight) return;
     const contentHeight = Math.max(this.container.offsetHeight || 0, this.container.scrollHeight || 0, 640);
     // Cache this real, settled measurement for computeSize (see onNodeCreated)
     // to echo back — decoupled from this.size so it can't feed LiteGraph's
     // own grow-only arrange loop, only updated here, on an actual measurement.
     this._cachedContentHeight = contentHeight;
-    const width = Math.max(this.node.size?.[0] || 1480, 1480);
     // Include the real socket/widget offset, not an assumed 70px header.
     // The root is intrinsic-height, so resizing the shell cannot stretch it.
     const height = Math.ceil(contentHeight + Math.max(70, this.timelineWidget.y || 0) + 16);
     if (!this.node.size || Math.abs(this.node.size[1] - height) > 2 || this.node.size[0] !== width) {
-      this.node.setSize([width, height]);
+      if (typeof this.node.setSize === "function") this.node.setSize([width, height]);
+      else this.node.size = [width, height];
       this.node.setDirtyCanvas?.(true, true);
     }
   }
@@ -947,7 +954,7 @@ class CharacterSheetH3TimelineEditor {
   // reacting to every one, so it can't chase an external animation either.
   // No-op in Vue nodes mode, same as _resizeOnce.
   _scheduleNodeResize() {
-    if (!this.timelineWidget || !this.node?.setSize) return;
+    if (!this.timelineWidget || !this.node) return;
     if (this._resizeDebounce) clearTimeout(this._resizeDebounce);
     this._resizeDebounce = setTimeout(() => {
       this._resizeDebounce = null;
@@ -3353,6 +3360,7 @@ app.registerExtension({
       const timelineWidget = this.addDOMWidget("mch3_timeline_ui", "mch3_timeline_ui", this._museCharacterSheetH3Editor.container, {
         serialize: false,
         hideOnZoom: false,
+        getMinWidth: () => 1480,
         getMinHeight: () => this._museCharacterSheetH3Editor?._cachedContentHeight || 640,
       });
       // [2026-09-18] Root cause, confirmed via LiteGraph's own console state
@@ -3466,8 +3474,10 @@ app.registerExtension({
           editor._lastConfiguredRawTimelineData = raw;
           editor.timeline = editor._loadState();
           editor.build();
-          editor._scheduleNodeResize();
         }
+        // A tab restore can change host geometry without changing timeline JSON.
+        editor._resizeOnce();
+        editor._scheduleNodeResize();
       }
       return r;
     };
