@@ -8,9 +8,9 @@ See [release notes](CHANGELOG.md) for the current node fixes, trigger-word contr
 
 **Download the complete repository ZIP, not the BAT file on its own. The BAT needs the supporting files included in the ZIP.**
 
-1. **[Download the complete package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/archive/refs/heads/master.zip)** (or use **Code → Download ZIP** above).
+1. **[Download Windows package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.1/Muse-CharacterSheet-H3-Windows.zip)** (or use **Code → Download ZIP** above).
 2. Extract the ZIP first. Rename the extracted `Muse-CharacterSheet-H3-master` folder to `Muse-CharacterSheet-H3` and place that whole folder inside your ComfyUI instance's `custom_nodes` folder. Do not move just the BAT file, and do not run it from inside the ZIP.
-3. Close ComfyUI. Open `ComfyUI/custom_nodes/Muse-CharacterSheet-H3/Installers` and double-click `Install-Windows.bat`. Keep it in that folder beside `install_dependencies.py` and `dependencies.json`. Git must be installed and available on PATH. The launcher displays the plan and asks before installing.
+3. Close ComfyUI. Open `ComfyUI/custom_nodes/Muse-CharacterSheet-H3` and double-click the top-level `Install-Windows.bat`. Keep the `Installers` folder beside it. Git must be installed and available on PATH. The launcher displays the plan and asks before installing.
 4. The installer includes the **Unified Loader** and the other workflow node dependencies. Existing node folders are retained. **Model weights are not downloaded.** Download/select models using [the model list and setup instructions](INSTALLATION.md).
 5. For Enhanced, complete the separate **DLSS runtime** installation in that guide. Enhanced targets Windows; Standard does not require DLSS. Standard-only and non-portable installation commands are also in the guide.
 6. Restart ComfyUI, refresh the browser, then open the [Enhanced workflow](workflows/H3%20Character%20Sheet%20Enhanced.json) or [Standard workflow](workflows/H3%20Character%20Sheet.json). Upload your own references and select installed model files.
@@ -103,3 +103,13 @@ by a clean-install end-to-end GPU render.
 ## Status
 
 Actively developed by Muse Collective. Expect changes.
+
+
+### If Windows Extract All creates an extra folder
+
+The Windows ZIP contains one `Muse-CharacterSheet-H3` package folder. Extract All may put that inside another folder named after the ZIP. Copy only the inner folder containing `__init__.py`, `Install-Windows.bat` and `Installers` directly into `ComfyUI/custom_nodes`.
+
+Correct: `ComfyUI/custom_nodes/Muse-CharacterSheet-H3/__init__.py`.
+Incorrect: `ComfyUI/custom_nodes/Muse-CharacterSheet-H3-Windows/Muse-CharacterSheet-H3/__init__.py`.
+
+The launcher now finds ComfyUI by searching parent folders and detects extra nesting before installing. It prints the exact inner folder to move and the destination. It never moves or overwrites your files automatically. A `-master` suffix is accepted when the package is directly inside custom_nodes. The old BAT inside Installers forwards to the new launcher for compatibility.

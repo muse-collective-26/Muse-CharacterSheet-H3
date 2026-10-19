@@ -51,9 +51,9 @@ requirements stop installation rather than silently switching the GPU build.
 
 **Download the complete ZIP, not the BAT file separately.**
 
-1. [Download the repository ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/archive/refs/heads/master.zip), or click **Code → Download ZIP** on GitHub.
+1. [Download Windows package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.1/Muse-CharacterSheet-H3-Windows.zip), or click **Code → Download ZIP** on GitHub.
 2. Extract it. Rename `Muse-CharacterSheet-H3-master` to `Muse-CharacterSheet-H3` and put the entire folder inside `ComfyUI/custom_nodes`.
-3. Close ComfyUI. Open that package's `Installers` folder and double-click `Install-Windows.bat`. Do not run it inside the ZIP or move it away from its supporting files.
+3. Close ComfyUI. Open the package folder containing `__init__.py` and double-click the top-level `Install-Windows.bat`. Do not run it inside the ZIP or move it away from its supporting files.
 4. Confirm the displayed plan. After installation, set up the models and separate DLSS runtime as described below, restart ComfyUI and refresh the browser.
 
 The BAT, `install_dependencies.py` and `dependencies.json` are all required and already included in the ZIP. Git must be installed and available on PATH.
@@ -179,5 +179,15 @@ Your own references and RefMods must be supplied locally. Saved preview paths an
 
 ### Windows installer
 
-Download and extract the **complete repository ZIP** as explained above. Put the whole package in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`, close ComfyUI, then open its `Installers` folder and double-click `Install-Windows.bat`. Do not download or move the BAT separately.
+Download and extract the **complete repository ZIP** as explained above. Put the whole package in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`, close ComfyUI, then double-click its top-level `Install-Windows.bat`. Do not download or move the BAT separately.
 It previews the target and requests confirmation, installs missing node packages including the Unified Loader, GGUF and H3 Multishot, and installs Python requirements with the existing PyTorch versions constrained. Existing node folders are retained, not overwritten or updated. Models, SageAttention binaries, and the separately licensed DLSS native runtime are not downloaded. Follow the DLSS runtime instructions above after node installation.
+
+
+### If Windows Extract All creates an extra folder
+
+The Windows ZIP contains one `Muse-CharacterSheet-H3` package folder. Extract All may put that inside another folder named after the ZIP. Copy only the inner folder containing `__init__.py`, `Install-Windows.bat` and `Installers` directly into `ComfyUI/custom_nodes`.
+
+Correct: `ComfyUI/custom_nodes/Muse-CharacterSheet-H3/__init__.py`.
+Incorrect: `ComfyUI/custom_nodes/Muse-CharacterSheet-H3-Windows/Muse-CharacterSheet-H3/__init__.py`.
+
+The launcher now finds ComfyUI by searching parent folders and detects extra nesting before installing. It prints the exact inner folder to move and the destination. It never moves or overwrites your files automatically. A `-master` suffix is accepted when the package is directly inside custom_nodes. The old BAT inside Installers forwards to the new launcher for compatibility.

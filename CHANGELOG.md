@@ -1,5 +1,14 @@
 # Release notes
 
+## 2026-10-19.1 — Windows installer packaging fix
+
+- Added a complete Windows ZIP with one package folder and a top-level Install-Windows.bat.
+- Launcher searches ancestors for the intended ComfyUI rather than assuming a fixed folder depth.
+- Detects double-nested folders and prints the exact inner package and destination before installing anything; no automatic file moves or overwrites.
+- Detects incomplete downloads, supports folder names ending in -master and paths with spaces, and retains the old launcher as a forwarding shortcut.
+- README, installation guide and Enhanced workflow notes now link to the complete Windows package. Models remain separate downloads.
+- Added Windows PowerShell layout tests for valid, double-nested, incomplete and Downloads-folder installations. These tests do not install dependencies or render.
+
 ## 2026-10-19 — Character Sheet H3 update
 
 - Clarified installation: download and extract the complete repository ZIP, place the entire package in custom_nodes, then run the included BAT from its Installers folder. Do not download the BAT separately.
