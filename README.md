@@ -4,6 +4,8 @@
 
 See [release notes](CHANGELOG.md) for the current node fixes, trigger-word controls, updated Enhanced workflow and safer attention defaults.
 
+The default Enhanced workflow is `workflows/H3 Character Sheet Enhanced.json`: H3 generation plus Qwen image refinement and DLSS enhancement. `workflows/H3 Character Sheet.json` is the separate Standard workflow, which assembles selected frames with background removal but without Qwen or DLSS processing. Standard retains its older saved loader settings.
+
 ### Quick start — Windows portable
 
 **Download the complete repository ZIP, not the BAT file on its own. The BAT needs the supporting files included in the ZIP.**

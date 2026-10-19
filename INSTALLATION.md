@@ -1,193 +1,222 @@
 # H3 Character Sheet Enhanced
 
-# Standard and Enhanced workflow setup
+## What this workflow does
 
-Install **Muse-CharacterSheet-H3 once**. It supplies `MuseCharacterSheetH3` and
-`MuseCharacterSheetCompositor` for both workflows. The JSON files describe the
-connections; opening them does **not** automatically install packages or models.
+Generates a character-reference video, lets you select frames, refines the selected images using Qwen Image 2.1, applies DLSS enhancement, and assembles the character sheet.
 
-- **Standard:** `workflows/H3 Character Sheet.json` (existing download path retained).
-- **Enhanced:** `workflows/H3 Character Sheet Enhanced.json`.
+The workflow includes five image-refinement branches and a separate DLSS-enhanced video output.
 
-Enhanced adds five Qwen Image 2.1 refinement passes, five DLSS image passes,
-RGB conversion before background removal, and a separate DLSS video output.
-Standard does not execute these enhanced branches. Installing their dependencies
-does not add enhancement processing to Standard.
+Opening the workflow does not automatically install its custom nodes, models or DLSS runtime.
 
-## Required packages for the supplied workflows
+## Installation
 
-| Package | Nodes supplied |
+1. Download the complete [Muse Character Sheet H3 Windows package](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.2/Muse-CharacterSheet-H3-Windows.zip).
+2. Extract the ZIP.
+3. Place the package folder directly inside `ComfyUI/custom_nodes`.
+4. Close ComfyUI.
+5. Run the single `Install-Windows.bat` at the package root.
+6. Confirm the dependency installation.
+7. For Enhanced, complete the DLSS runtime setup offered by that same installer unless you already have a runtime configured.
+8. Install the required model files, restart ComfyUI and refresh your browser.
+
+Download the whole package—not the BAT file separately. Git must be installed and available on PATH.
+
+The correct folder structure is:
+
+`ComfyUI/custom_nodes/Muse-CharacterSheet-H3/__init__.py`
+
+The BAT should be beside `__init__.py`, with the `Installers` folder alongside them.
+
+If Windows creates an extra outer folder when extracting, use the inner package folder containing those files. Do not put a second copy of the node inside another copy.
+
+A folder name ending in `-master` is accepted. Keep only one installed copy of the Muse Character Sheet node.
+
+The installer installs missing dependencies and their Python requirements. It retains existing dependency folders rather than updating or replacing them. Model weights are not downloaded.
+
+## Custom nodes used
+
+| Package | Purpose |
 | --- | --- |
-| [Muse Character Sheet H3](https://github.com/muse-collective-26/Muse-CharacterSheet-H3) | H3 generation and sheet compositor; bundled here |
-| [Muse Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader) | Unified model loader |
-| [KJNodes](https://github.com/kijai/ComfyUI-KJNodes) | Set/Get, H3 attention and feed-forward patches |
-| [RMBG](https://github.com/1038lab/ComfyUI-RMBG) | Background removal; follow its RMBG-2.0 model setup |
-| [VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite) | Video Combine; also needs FFmpeg |
-| [iTools](https://github.com/MohammadAboulEla/ComfyUI-iTools) | Preview Text |
-| [WAS Node Suite (Revised)](https://github.com/ltdrdata/was-node-suite-comfyui) | Save Text File; Enhanced also uses Images to RGB |
-| [Memory Cleanup](https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup) | RAMCleanup and VRAMCleanup |
-| [MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod) | RefMod loader present in both examples, even when use_refmod is off |
-| [DLSS5 Enhancer](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer) | Enhanced only: DLSS5 Settings and Enhance Images |
+| [Muse Character Sheet H3](https://github.com/muse-collective-26/Muse-CharacterSheet-H3) | Character generation and sheet assembly |
+| [Muse Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader) | Active H3 model, encoder, VAE and LoRA loading |
+| [KJNodes](https://github.com/kijai/ComfyUI-KJNodes) | Set/Get nodes, image-size utilities and H3 memory-saving patches |
+| [MiniMax H3 Latent Upscaler](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler) | Required when two-stage sampling is enabled |
+| [MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod) | RefMod loader |
+| [RMBG](https://github.com/1038lab/ComfyUI-RMBG) | Background removal |
+| [VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite) | Video output |
+| [iTools](https://github.com/MohammadAboulEla/ComfyUI-iTools) | Prompt preview |
+| [WAS Node Suite (Revised)](https://github.com/ltdrdata/was-node-suite-comfyui) | Text saving and RGB conversion |
+| [Memory Cleanup](https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup) | RAM and VRAM cleanup |
+| [DLSS5 Enhancer](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer) | Image and video enhancement; requires its separate runtime |
 
-Use ComfyUI with native MiniMax H3 support. Enhanced also requires core
-`TextEncodeQwenImage21`, `QwenImage21Cache`, `ComfySwitchNode` and `SeedNode`.
-These are not separate Muse packages. Update ComfyUI if they are unavailable.
-Subgraphs are included in the workflow, not separately installed custom nodes.
+Use a ComfyUI version with native MiniMax H3 and Qwen Image 2.1 support.
 
-The workflow metadata identifies the correct providers. Manager can help with
-visible missing nodes, but internal dependencies and native runtimes still need
-the checks below. There is no Workflow Encrypt dependency.
+Qwen refinement uses core nodes including `TextEncodeQwenImage21`, `QwenImage21Cache` and `ComfySwitchNode`. These are not separate Muse downloads.
 
-## Install dependencies
+Follow RMBG's model-installation instructions for its selected background-removal model.
 
-First install this repository under `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`.
-Close the ComfyUI instance being configured. Use **that instance's Python**.
-The helper installs missing packages alongside this one and their requirements;
-it does not vendor third-party source, update ComfyUI, replace existing packages,
-or download model weights. Existing PyTorch versions are constrained; incompatible
-requirements stop installation rather than silently switching the GPU build.
+## Saved generation settings
 
-### Windows portable
+This workflow currently uses the Unified Loader connected to the character-sheet node.
 
-**Download the complete ZIP, not the BAT file separately.**
+- H3 model: `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`
+- H3 text encoder: `qwen3vl_32b_minimax_h3_int8_convrot.safetensors`
+- Video VAE: `minimax_h3_video_vae_fp16.safetensors`
+- Audio VAE: `minimax_h3_audio_vae_fp32.safetensors`
+- Aspect ratio: 9:16
+- Base resolution: 0.5 megapixels
+- Duration: 10 seconds
+- Sampling: 8 steps, Euler, Simple
+- Two-stage sampling: currently OFF
+- Reference image size: maximum
+- SageAttention: OFF
+- High-Res Stability: OFF
+- Model Attention Backend: Off
+- Low-VRAM Attention: ON, 4 head chunks
+- Chunk Feed-Forward: ON, 2 chunks, threshold 4096
+- Pinned-memory cap: 10 GB
 
-1. [Download Windows package ZIP](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/releases/download/v2026.10.19.2/Muse-CharacterSheet-H3-Windows.zip), or click **Code → Download ZIP** on GitHub.
-2. Extract it. Rename `Muse-CharacterSheet-H3-master` to `Muse-CharacterSheet-H3` and put the entire folder inside `ComfyUI/custom_nodes`.
-3. Close ComfyUI. Open the package folder containing `__init__.py` and double-click the top-level `Install-Windows.bat`. Do not run it inside the ZIP or move it away from its supporting files.
-4. Confirm the displayed plan. After installation, set up the models and separate DLSS runtime as described below, restart ComfyUI and refresh the browser.
+These describe the saved workflow, not settings you must use for every render.
 
-The BAT, `install_dependencies.py` and `dependencies.json` are all required and already included in the ZIP. Git must be installed and available on PATH.
+The separate “Models & Loras” group is bypassed and disconnected. Its Singularity selection is not the model feeding the character-sheet node in this saved version.
 
-#### Alternative: command-line installation
+The Unified Loader is saved as “Both / Mixed”, but its FL2VA output is not connected to the character-sheet node. The character-sheet generation uses the reference-model output.
 
-Open a terminal in the portable root containing `python_embeded` and `ComfyUI`.
-Preview the plan:
+## H3 models
+
+Place the selected FastVideo model in:
+
+`ComfyUI/models/diffusion_models/`
+
+Required encoder and VAEs:
+
+- [H3 INT8 text encoder](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_int8_convrot.safetensors) → `ComfyUI/models/text_encoders/`
+- [H3 video VAE](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors) → `ComfyUI/models/vae/`
+- [H3 audio VAE](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors) → `ComfyUI/models/vae/`
+
+Select the filenames available in your installation. Model files are not included in the workflow or installer.
+
+## Selected H3 LoRAs
+
+### Reference-mode Turbo
+
+Saved filename:
+
+`minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors`
+
+Saved strength: 1.0.
+
+[Download Reference-mode Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors)
+
+Place in `ComfyUI/models/loras/H3/`.
+
+This is the REF2V version, not the FL2V version.
+
+### Realism People
+
+Saved filename:
+
+`h3-realism-people-t2v-i2v-r2v.safetensors`
+
+Saved strength: 0.75. Trigger word: `r34l1sm`.
+
+[Download Realism People](https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors)
+
+Place in `ComfyUI/models/loras/H3/`.
+
+### Polyhedron
+
+Saved filename:
+
+`polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors`
+
+Saved strength: 0.6. Trigger word: `perfe8ct`.
+
+[Polyhedron creator listing](https://civitai.com/models/2899220)
+
+Check the filename on the creator's page. The direct download has not been independently verified. If you do not have this LoRA, select `(disabled)` rather than leaving a missing filename selected.
+
+Place in `ComfyUI/models/loras/H3/`.
+
+The character-sheet trigger-word controls are enabled in this saved workflow with `r34l1sm, perfe8ct`. Keep those words consistent with the LoRAs you actually use.
+
+## Two-stage sampling
+
+Both single-stage and two-stage sampling are supported.
+
+Two-stage sampling is OFF in this saved workflow. Its stored settings are:
+
+- First pass: 2 steps
+- Target resolution: 2 megapixels
+- Temporal chunking: ON
+- Upscaler model: `h3_upscaler_lms_v0.1_fp32.safetensors`
+
+If you enable it, you need both:
+
+1. The [MiniMax H3 Latent Upscaler node package](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler), included in the dependency installer.
+2. The [latent upscaler model](https://huggingface.co/Alissonerdx/Minimax-H3-ComfyUI/resolve/main/latent_upscaler/h3_upscaler_lms_v0.1_fp32.safetensors), placed in `ComfyUI/models/latent_upscale_models/`.
+
+H3 Multishot is not the package that supplies `MinimaxH3LatentUpscaler3D`.
+
+## Qwen image refinement
+
+The five refinement branches have these selected models:
+
+- [Qwen Image 2.1 INT8 diffusion model](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors) → `ComfyUI/models/diffusion_models/`
+- [Qwen 3 VL 8B INT8 encoder](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors) → `ComfyUI/models/text_encoders/`
+- [Texture-Fix VAE for Qwen Image 2.1](https://huggingface.co/madebyollin/texture-fix-vae-for-qwen-image-2.1/resolve/main/texture_fix_vae_for_qwen_image_2.1_bf16.safetensors) → `ComfyUI/models/vae/`
+- [Elusarcas Qwen 2.1 Detailer LoRA](https://huggingface.co/reverentelusarca/elusarcas-qwen-2.1-detail-enhancer-lora/resolve/main/elusarcas-qwen2-1-detailer-v1.safetensors) → `ComfyUI/models/loras/`
+
+The refinement groups' exposed VAE selection is the Texture-Fix VAE. Their internal saved VAE defaults may still display the base Qwen VAE; use the exposed group controls when checking the selected model.
+
+The saved refinement settings use 25 steps, CFG 1, Euler and Simple, with detailer LoRA strength 1.
+
+## DLSS 5 runtime — required for enhancement
+
+Installing the DLSS custom node alone is not enough. It also requires the separate native runtime.
+
+This workflow's DLSS enhancement targets Windows. See the [DLSS node's requirements](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer#installation) for GPU and driver compatibility.
+
+The Muse Windows installer offers runtime setup after installing the node packages. Read the upstream licensing notice and confirm only if you agree.
+
+If you skipped that step, open a terminal in the portable root containing `python_embeded` and `ComfyUI`, then run:
 
 ```bat
-python_embeded\python.exe ComfyUI\custom_nodes\Muse-CharacterSheet-H3\Installers\install_dependencies.py --comfyui ComfyUI --enhanced
+python_embeded\python.exe ComfyUI\custom_nodes\ComfyUI-DLSS5-Enhancer\install_runtime.py --url https://github.com/Merserk/dlss5-visual-enhancer/releases/download/v3.0/DLSS.5.Visual.Enhancer.v3.0.zip
 ```
 
-Check the printed paths, then install:
+This downloads approximately 467 MB.
 
-```bat
-python_embeded\python.exe ComfyUI\custom_nodes\Muse-CharacterSheet-H3\Installers\install_dependencies.py --comfyui ComfyUI --enhanced --install
-```
+The correct release path is `/v3.0/`, including the `v`. The older `/3.0/` download address returns 404.
 
-Omit `--enhanced` for Standard-only installation. Non-portable users should
-replace `python_embeded\python.exe` with their ComfyUI environment's Python and
-pass the actual ComfyUI folder. Do not use an unrelated system Python.
+The runtime is downloaded from its upstream project; its binaries are not bundled in Muse's package.
 
-Already installed packages are retained to protect local work. Update outdated
-dependencies through their normal update mechanism, restart, and check again.
-The helper is not a guarantee that old installed packages are compatible.
+If you already have a compatible runtime elsewhere, the upstream installer also supports `--runtime-dir` to register its location.
 
-## DLSS 5 setup — Enhanced only
+Restart ComfyUI after setup. A visible DLSS node on the canvas does not mean its runtime has been installed.
 
-Follow the [upstream installation and requirements](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer#installation).
-This enhanced workflow targets the Windows native D3D12 runtime, not RunPod/Linux.
-Check upstream GPU and driver compatibility before choosing Enhanced.
+## References and RefMods
 
-1. Install the DLSS5 node package (the helper above does this, or use Manager).
-2. From the Windows portable root, run:
+Upload your own character-reference images. Saved reference filenames and preview paths from another computer are not included assets.
 
-   ```bat
-   python_embeded\python.exe ComfyUI\custom_nodes\ComfyUI-DLSS5-Enhancer\install_runtime.py --url https://github.com/Merserk/dlss5-visual-enhancer/releases/download/v3.0/DLSS.5.Visual.Enhancer.v3.0.zip
-   ```
+RefMods are optional. In this workflow:
 
-3. Read and accept the upstream runtime licensing notice if you agree. The setup
-   downloads the separate runtime. It is not bundled in Muse's repository. The root BAT now offers this same setup after installing the nodes. The explicit URL uses the correct `v3.0` release tag; the upstream default `/3.0/` URL returns 404. No licensing confirmation is bypassed.
-4. Restart ComfyUI. If using an existing external runtime, follow upstream's
-   `--runtime-dir` instructions. Keep the workflow's DLSS controls unchanged.
+- All eight RefMod selections are `(none)`.
+- Use RefMod is OFF.
 
-Installing only the node pack is insufficient: it can appear on the canvas and
-still fail at execution if its runtime is missing. Do not disable security
-protection indiscriminately if a downloaded executable is flagged.
+Do not select a RefMod unless its files are installed locally.
 
-## Other conditional requirements
-
-- SageAttention and High-Res Stability are OFF by default in this Enhanced template. Only enable SageAttention after installing a compatible extension; enable High-Res Stability only when using SageAttention. KJNodes supplies its patch node,
-  but the compatible [SageAttention](https://github.com/thu-ml/SageAttention)
-  extension must also be installed for the user's GPU/PyTorch/CUDA environment.
-  Do not assume a universal wheel works on every computer.
-- Unified Loader Low VRAM/Balanced profiles require
-  [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) and matching encoder/projector weights.
-- Two-stage H3 sampling requires
-  [Comfyui_Minimax_h3_latent_Upscaler](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler)
-  and its compatible model weights. The installer includes this node package for both Standard and Enhanced workflows. H3 Multishot does not provide it. Single-stage and two-stage sampling are both supported; download the latent upscaler model if using two-stage sampling.
-- Analyze requires a configured vision-capable backend. You can type reference
-  descriptions manually; downloading this workflow does not install an LLM server.
-
-## Models and personal assets
-
-Node installation is separate from model downloads. Select files that actually
-exist in your installation. The examples contain the author's saved model and
-reference selections; upload your own references and choose your own RefMods.
-Paths pointing to the author's computer are not distributed assets.
-
-For Enhanced, the supplied settings retain 8 H3 steps and the Ref2V 8-step Turbo
-LoRA. The maximum-quality reference model is Singularity v1.3 INT8, with an INT8
-H3 text encoder; Automatic may choose another profile according to VRAM.
-Use the exact model creators' sources for those custom weights; they are not
-bundled. The downloads below match the saved Enhanced selections.
-
-Additional Qwen models: [Comfy-Org/Qwen-Image-2.1](https://huggingface.co/Comfy-Org/Qwen-Image-2.1).
-Place diffusion weights in `models/diffusion_models`, encoders in
-`models/text_encoders`, VAEs in `models/vae`, and LoRAs in `models/loras`.
-Check the selected Qwen VAE and detailer LoRA in each refinement subgraph: custom
-VAE/LoRA files are separate downloads, not included in Comfy-Org's base set.
-H3 Turbo source: [lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo).
-
-No MysticXXX, GalaxyAce, Polyhedron, Realism, or detailer weights are bundled here.
-Obtain the selected LoRAs from their creators, or deliberately select alternatives.
+The Analyze feature needs a configured vision-capable backend. You can enter descriptions manually instead; installing this workflow does not install an analysis server.
 
 ## Before rendering
 
-Restart ComfyUI after installation, reload the workflow and resolve missing nodes
-and models. Test Standard and Enhanced separately. Structural workflow checks and
-dependency-script tests are not an end-to-end GPU render test.
+- Confirm the selected model and LoRA files exist.
+- Supply your own character references.
+- Check that the DLSS runtime setup completed.
+- Leave SageAttention and High-Res Stability off unless you have installed a compatible SageAttention extension.
+- Restart ComfyUI after installing custom nodes or runtime components.
+- Refresh the browser after updating the Muse node.
+
+Updating the node package does not replace settings or notes inside a workflow you already have open.
 
 [Muse Collective community](https://www.skool.com/muse-collective-7594)
-
-
-
-## Exact model downloads for this Enhanced workflow
-
-Models are not installed by the dependency installer. Existing models are left untouched.
-
-- **Singularity reference model:** [Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors](https://huggingface.co/WarmBloodAban/Minimax-h3_Singularity/resolve/main/Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors) — `ComfyUI/models/diffusion_models/`
-- **H3 INT8 text encoder:** [qwen3vl_32b_minimax_h3_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_int8_convrot.safetensors) — `ComfyUI/models/text_encoders/`
-- **H3 video VAE:** [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors) — `ComfyUI/models/vae/`
-- **H3 audio VAE:** [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors) — `ComfyUI/models/vae/`
-- **Reference-mode Turbo, 8 steps, 768p (not FL2V):** [minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors) — `ComfyUI/models/loras/H3/`
-- **Realism People; trigger r34l1sm:** [h3-realism-people-t2v-i2v-r2v.safetensors](https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors) — `ComfyUI/models/loras/H3/`
-- **H3 latent upscaler; needed for two-stage sampling:** [h3_upscaler_lms_v0.1_fp32.safetensors](https://huggingface.co/Alissonerdx/Minimax-H3-ComfyUI/resolve/main/latent_upscaler/h3_upscaler_lms_v0.1_fp32.safetensors) — `ComfyUI/models/latent_upscale_models/`
-- **Qwen refinement model:** [qwen_image_2.1_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors) — `ComfyUI/models/diffusion_models/`
-- **Qwen refinement encoder:** [qwen3vl_8b_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors) — `ComfyUI/models/text_encoders/`
-- **Texture-Fix VAE (selected in refinement controls):** [texture_fix_vae_for_qwen_image_2.1_bf16.safetensors](https://huggingface.co/madebyollin/texture-fix-vae-for-qwen-image-2.1/resolve/main/texture_fix_vae_for_qwen_image_2.1_bf16.safetensors) — `ComfyUI/models/vae/`
-- **Qwen detailer LoRA:** [elusarcas-qwen2-1-detailer-v1.safetensors](https://huggingface.co/reverentelusarca/elusarcas-qwen-2.1-detail-enhancer-lora/resolve/main/elusarcas-qwen2-1-detailer-v1.safetensors) — `ComfyUI/models/loras/`
-
-### Polyhedron LoRA
-
-The saved selection is `polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors`, strength 0.6, trigger `perfe8ct`, in `models/loras/H3/`.
-[Polyhedron creator listing on Civitai](https://civitai.com/models/2899220). This listing was located, but automated access could not verify its current download. Check the filename before downloading. If unavailable, select `(disabled)` for this LoRA; no replacement is downloaded automatically.
-
-### Other saved selections
-
-The Unified Loader is saved as `Both / Mixed`, with `minimax_h3_fl2va_pruned_int8_convrot.safetensors` selected for its other branch. Character Sheet itself uses Reference mode. To avoid needing that unused branch, choose the loader's Reference-only setting. Otherwise obtain the matching file from [Comfy-Org's diffusion models](https://huggingface.co/Comfy-Org/MiniMax-H3/tree/main/diffusion_models).
-Automatic profiles depend on VRAM. Low-VRAM and Balanced model slots in this file are disabled: configure suitable GGUF models and their matching encoder/projector before using those profiles. The installer includes GGUF node support, not weights.
-Your own references and RefMods must be supplied locally. Saved preview paths and personal assets are not included.
-
-### Windows installer
-
-Download and extract the **complete repository ZIP** as explained above. Put the whole package in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`, close ComfyUI, then double-click its top-level `Install-Windows.bat`. Do not download or move the BAT separately.
-It previews the target and requests confirmation, installs missing node packages including the Unified Loader, MiniMax H3 Latent Upscaler, GGUF and H3 Multishot, and installs Python requirements with the existing PyTorch versions constrained. Existing node folders are retained, not overwritten or updated. Models and SageAttention binaries are not downloaded. The BAT then offers the separate DLSS runtime download using the verified v3.0 link, retaining the upstream licensing notice and confirmation. You can skip it if a runtime is already configured. The runtime binaries are not bundled or redistributed by Muse.
-
-
-### If Windows Extract All creates an extra folder
-
-The Windows ZIP contains one `Muse-CharacterSheet-H3` package folder. Extract All may put that inside another folder named after the ZIP. Copy only the inner folder containing `__init__.py`, `Install-Windows.bat` and `Installers` directly into `ComfyUI/custom_nodes`.
-
-Correct: `ComfyUI/custom_nodes/Muse-CharacterSheet-H3/__init__.py`.
-Incorrect: `ComfyUI/custom_nodes/Muse-CharacterSheet-H3-Windows/Muse-CharacterSheet-H3/__init__.py`.
-
-The launcher finds ComfyUI by searching parent folders and detects extra nesting before installing. It prints the exact inner folder to move and the destination. It never moves or overwrites your files automatically. A `-master` suffix is accepted when the package is directly inside custom_nodes. Run the single Install-Windows.bat at the package root.
