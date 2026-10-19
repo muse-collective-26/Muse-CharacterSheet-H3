@@ -1,11 +1,88 @@
 [
-  {"folder":"Muse-MiniMax-H3-Unified-Loader","repo":"muse-collective-26/Muse-MiniMax-H3-Unified-Loader","cnr":"muse-minimax-h3-unified-loader","nodes":["MuseMiniMaxH3UnifiedLoader"]},
-  {"folder":"ComfyUI-KJNodes","repo":"kijai/ComfyUI-KJNodes","cnr":"comfyui-kjnodes","nodes":["GetNode","SetNode","MiniMaxLowVRAMAttention","MiniMaxChunkFeedForward","MiniMaxH3MemoryEfficientSageAttentionPatch"]},
-  {"folder":"ComfyUI-RMBG","repo":"1038lab/ComfyUI-RMBG","cnr":"comfyui-rmbg","nodes":["RMBG"]},
-  {"folder":"ComfyUI-VideoHelperSuite","repo":"Kosinkadink/ComfyUI-VideoHelperSuite","cnr":"comfyui-videohelpersuite","nodes":["VHS_VideoCombine"]},
-  {"folder":"ComfyUI-iTools","repo":"MohammadAboulEla/ComfyUI-iTools","cnr":"comfyui-itools","nodes":["iToolsPreviewText"]},
-  {"folder":"was-ns","repo":"ltdrdata/was-node-suite-comfyui","cnr":"was-ns","nodes":["Save Text File","Images to RGB"]},
-  {"folder":"comfyui_memory_cleanup","repo":"LAOGOU-666/Comfyui-Memory_Cleanup","cnr":"comfyui_memory_cleanup","nodes":["RAMCleanup","VRAMCleanup"]},
-  {"folder":"ComfyUI-MiniMaxH3Mod","repo":"Luisacaotica/ComfyUI-MiniMaxH3Mod","nodes":["MiniMaxH3RefModsLoader"]},
-  {"folder":"ComfyUI-DLSS5-Enhancer","repo":"Blueforcer/ComfyUI-DLSS5-Enhancer","enhanced_only":true,"nodes":["DLSS5Settings","DLSS5EnhanceImages"]}
+  {
+    "folder": "Muse-MiniMax-H3-Unified-Loader",
+    "repo": "muse-collective-26/Muse-MiniMax-H3-Unified-Loader",
+    "cnr": "muse-minimax-h3-unified-loader",
+    "nodes": [
+      "MuseMiniMaxH3UnifiedLoader"
+    ]
+  },
+  {
+    "folder": "ComfyUI-KJNodes",
+    "repo": "kijai/ComfyUI-KJNodes",
+    "cnr": "comfyui-kjnodes",
+    "nodes": [
+      "GetNode",
+      "SetNode",
+      "MiniMaxLowVRAMAttention",
+      "MiniMaxChunkFeedForward",
+      "MiniMaxH3MemoryEfficientSageAttentionPatch"
+    ]
+  },
+  {
+    "folder": "ComfyUI-RMBG",
+    "repo": "1038lab/ComfyUI-RMBG",
+    "cnr": "comfyui-rmbg",
+    "nodes": [
+      "RMBG"
+    ]
+  },
+  {
+    "folder": "ComfyUI-VideoHelperSuite",
+    "repo": "Kosinkadink/ComfyUI-VideoHelperSuite",
+    "cnr": "comfyui-videohelpersuite",
+    "nodes": [
+      "VHS_VideoCombine"
+    ]
+  },
+  {
+    "folder": "ComfyUI-iTools",
+    "repo": "MohammadAboulEla/ComfyUI-iTools",
+    "cnr": "comfyui-itools",
+    "nodes": [
+      "iToolsPreviewText"
+    ]
+  },
+  {
+    "folder": "was-ns",
+    "repo": "ltdrdata/was-node-suite-comfyui",
+    "cnr": "was-ns",
+    "nodes": [
+      "Save Text File",
+      "Images to RGB"
+    ]
+  },
+  {
+    "folder": "comfyui_memory_cleanup",
+    "repo": "LAOGOU-666/Comfyui-Memory_Cleanup",
+    "cnr": "comfyui_memory_cleanup",
+    "nodes": [
+      "RAMCleanup",
+      "VRAMCleanup"
+    ]
+  },
+  {
+    "folder": "ComfyUI-MiniMaxH3Mod",
+    "repo": "Luisacaotica/ComfyUI-MiniMaxH3Mod",
+    "nodes": [
+      "MiniMaxH3RefModsLoader"
+    ]
+  },
+  {
+    "folder": "ComfyUI-DLSS5-Enhancer",
+    "repo": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+    "enhanced_only": true,
+    "nodes": [
+      "DLSS5Settings",
+      "DLSS5EnhanceImages"
+    ]
+  },
+  {
+    "folder": "ComfyUI-H3-Multishot",
+    "repo": "jlucasmcrell/ComfyUI-H3-Multishot"
+  },
+  {
+    "folder": "ComfyUI-GGUF",
+    "repo": "city96/ComfyUI-GGUF"
+  }
 ]

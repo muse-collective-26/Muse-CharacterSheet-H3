@@ -1,3 +1,5 @@
+# H3 Character Sheet Enhanced
+
 # Standard and Enhanced workflow setup
 
 Install **Muse-CharacterSheet-H3 once**. It supplies `MuseCharacterSheetH3` and
@@ -92,7 +94,7 @@ protection indiscriminately if a downloaded executable is flagged.
 
 ## Other conditional requirements
 
-- SageAttention is enabled in the saved examples. KJNodes supplies its patch node,
+- SageAttention and High-Res Stability are OFF by default in this Enhanced template. Only enable SageAttention after installing a compatible extension; enable High-Res Stability only when using SageAttention. KJNodes supplies its patch node,
   but the compatible [SageAttention](https://github.com/thu-ml/SageAttention)
   extension must also be installed for the user's GPU/PyTorch/CUDA environment.
   Do not assume a universal wheel works on every computer.
@@ -100,7 +102,7 @@ protection indiscriminately if a downloaded executable is flagged.
   [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) and matching encoder/projector weights.
 - Two-stage H3 sampling requires
   [ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)
-  and a compatible latent upscaler. It is off in both examples.
+  and a compatible latent upscaler. Single-stage and two-stage sampling are both supported; download the latent upscaler if using two-stage sampling.
 - Analyze requires a configured vision-capable backend. You can type reference
   descriptions manually; downloading this workflow does not install an LLM server.
 
@@ -112,20 +114,10 @@ reference selections; upload your own references and choose your own RefMods.
 Paths pointing to the author's computer are not distributed assets.
 
 For Enhanced, the supplied settings retain 8 H3 steps and the Ref2V 8-step Turbo
-LoRA. The revised saved example uses 2 megapixels and also selects the author's
-`Minimax_H3_Unlocked_V2.safetensors` extra LoRA at strength 1; that file is not
-bundled. Select your own available weights before running. The maximum-quality
-reference model is Singularity v1.3 INT8, with an INT8
+LoRA. The maximum-quality reference model is Singularity v1.3 INT8, with an INT8
 H3 text encoder; Automatic may choose another profile according to VRAM.
 Use the exact model creators' sources for those custom weights; they are not
-bundled. The older FastVideo links in the general model notes are alternatives,
-not downloads of the selected Singularity checkpoint.
-
-The saved Unified Loader also retains `Both / Mixed` under Models to Load.
-That selection may request the selected First/Last-frame model as well, even
-though the character-sheet generator uses Reference mode. Review that loader
-control and your installed models before running; the workflow does not download
-them automatically.
+bundled. The downloads below match the saved Enhanced selections.
 
 Additional Qwen models: [Comfy-Org/Qwen-Image-2.1](https://huggingface.co/Comfy-Org/Qwen-Image-2.1).
 Place diffusion weights in `models/diffusion_models`, encoders in
@@ -144,3 +136,37 @@ and models. Test Standard and Enhanced separately. Structural workflow checks an
 dependency-script tests are not an end-to-end GPU render test.
 
 [Muse Collective community](https://www.skool.com/muse-collective-7594)
+
+
+
+## Exact model downloads for this Enhanced workflow
+
+Models are not installed by the dependency installer. Existing models are left untouched.
+
+- **Singularity reference model:** [Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors](https://huggingface.co/WarmBloodAban/Minimax-h3_Singularity/resolve/main/Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors) — `ComfyUI/models/diffusion_models/`
+- **H3 INT8 text encoder:** [qwen3vl_32b_minimax_h3_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_int8_convrot.safetensors) — `ComfyUI/models/text_encoders/`
+- **H3 video VAE:** [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors) — `ComfyUI/models/vae/`
+- **H3 audio VAE:** [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors) — `ComfyUI/models/vae/`
+- **Reference-mode Turbo, 8 steps, 768p (not FL2V):** [minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors) — `ComfyUI/models/loras/H3/`
+- **Realism People; trigger r34l1sm:** [h3-realism-people-t2v-i2v-r2v.safetensors](https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors) — `ComfyUI/models/loras/H3/`
+- **H3 latent upscaler; needed for two-stage sampling:** [h3_upscaler_lms_v0.1_fp32.safetensors](https://huggingface.co/Alissonerdx/Minimax-H3-ComfyUI/resolve/main/latent_upscaler/h3_upscaler_lms_v0.1_fp32.safetensors) — `ComfyUI/models/latent_upscale_models/`
+- **Qwen refinement model:** [qwen_image_2.1_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors) — `ComfyUI/models/diffusion_models/`
+- **Qwen refinement encoder:** [qwen3vl_8b_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors) — `ComfyUI/models/text_encoders/`
+- **Texture-Fix VAE (selected in refinement controls):** [texture_fix_vae_for_qwen_image_2.1_bf16.safetensors](https://huggingface.co/madebyollin/texture-fix-vae-for-qwen-image-2.1/resolve/main/texture_fix_vae_for_qwen_image_2.1_bf16.safetensors) — `ComfyUI/models/vae/`
+- **Qwen detailer LoRA:** [elusarcas-qwen2-1-detailer-v1.safetensors](https://huggingface.co/reverentelusarca/elusarcas-qwen-2.1-detail-enhancer-lora/resolve/main/elusarcas-qwen2-1-detailer-v1.safetensors) — `ComfyUI/models/loras/`
+
+### Polyhedron LoRA
+
+The saved selection is `polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors`, strength 0.6, trigger `perfe8ct`, in `models/loras/H3/`.
+[Polyhedron creator listing on Civitai](https://civitai.com/models/2899220). This listing was located, but automated access could not verify its current download. Check the filename before downloading. If unavailable, select `(disabled)` for this LoRA; no replacement is downloaded automatically.
+
+### Other saved selections
+
+The Unified Loader is saved as `Both / Mixed`, with `minimax_h3_fl2va_pruned_int8_convrot.safetensors` selected for its other branch. Character Sheet itself uses Reference mode. To avoid needing that unused branch, choose the loader's Reference-only setting. Otherwise obtain the matching file from [Comfy-Org's diffusion models](https://huggingface.co/Comfy-Org/MiniMax-H3/tree/main/diffusion_models).
+Automatic profiles depend on VRAM. Low-VRAM and Balanced model slots in this file are disabled: configure suitable GGUF models and their matching encoder/projector before using those profiles. The installer includes GGUF node support, not weights.
+Your own references and RefMods must be supplied locally. Saved preview paths and personal assets are not included.
+
+### Windows installer
+
+Install this repository in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`, close ComfyUI, then double-click `Installers/Install-Windows.bat`.
+It previews the target and requests confirmation, installs missing node packages including the Unified Loader, GGUF and H3 Multishot, and installs Python requirements with the existing PyTorch versions constrained. Existing node folders are retained, not overwritten or updated. Models, SageAttention binaries, and the separately licensed DLSS native runtime are not downloaded. Follow the DLSS runtime instructions above after node installation.

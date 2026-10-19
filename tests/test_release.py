@@ -48,7 +48,10 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(h3['widgets_values_named']['steps'], 8)
         loader = next(n for n in w['nodes'] if n['type'] == 'MuseMiniMaxH3UnifiedLoader')
         self.assertIn('ref2v_turbo_8step', loader['widgets_values_named']['lora_1'])
-        self.assertEqual(h3['outputs'].__len__(), 7)
+        self.assertEqual(h3['outputs'].__len__(), 9)
+        self.assertEqual(loader['widgets_values'][26:28], [False, False])
+        self.assertFalse(loader['widgets_values_named']['sage_attention'])
+        self.assertFalse(loader['widgets_values_named']['high_res_stability'])
         self.assertTrue(all(g['links'] for g in w['definitions']['subgraphs']))
 
     def test_enhanced_preview_sources_are_direct(self):
@@ -70,8 +73,8 @@ class WorkflowTests(unittest.TestCase):
 class InstallerTests(unittest.TestCase):
     def test_selection_and_existing_alias(self):
         installer = module('installer', ROOT / 'Installers/install_dependencies.py')
-        self.assertEqual(len(installer.packages(False)), 8)
-        self.assertEqual(len(installer.packages(True)), 9)
+        self.assertEqual(len(installer.packages(False)), 10)
+        self.assertEqual(len(installer.packages(True)), 11)
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             alias = root / 'different-name'

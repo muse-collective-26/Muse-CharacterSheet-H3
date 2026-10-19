@@ -1,5 +1,23 @@
 # Muse Character Sheet H3
 
+## Latest update — 19 October 2026
+
+See [release notes](CHANGELOG.md) for the current node fixes, trigger-word controls, updated Enhanced workflow and safer attention defaults.
+
+### Quick start — Windows portable
+
+1. Download this repository using **Code → Download ZIP**, extract it, and place the folder in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`. Avoid a second nested copy. Git users can clone it into `custom_nodes` instead.
+2. Close ComfyUI. Double-click **[Installers/Install-Windows.bat](Installers/Install-Windows.bat)** inside that folder. Git must be installed and available on PATH. The launcher finds portable Python (or `.venv`), displays the plan and asks before installing.
+3. The installer includes the **Unified Loader** and the other workflow node dependencies. Existing node folders are retained. **Model weights are not downloaded.** Download/select models using [the model list and setup instructions](INSTALLATION.md).
+4. For Enhanced, complete the separate **DLSS runtime** installation in that guide. Enhanced targets Windows; Standard does not require DLSS. Standard-only and non-portable installation commands are also in the guide.
+5. Restart ComfyUI, refresh the browser, then open the [Enhanced workflow](workflows/H3%20Character%20Sheet%20Enhanced.json) or [Standard workflow](workflows/H3%20Character%20Sheet.json). Upload your own references and select installed model files.
+
+### Updating an existing installation
+
+Back up any local edits and workflows. Update this repository through Manager or run `git pull --ff-only` in its folder. ZIP users should replace the package with the new extracted copy, keeping any backup outside `custom_nodes`. Run the installer to add missing dependencies, then restart ComfyUI and refresh the browser. Existing dependencies are **not** automatically updated: update the Unified Loader and other existing packs separately through Manager/their normal updater.
+
+Download the new workflow explicitly to receive its new notes and defaults. Updating Python/JavaScript does not overwrite your saved workflow. SageAttention and High-Res Stability are **off in the new Enhanced template**; enable them only after setting up compatible SageAttention support. Memory-saving chunking stays enabled.
+
 A ComfyUI custom node pack for generating consistent character turnaround sheets with **MiniMax H3**, using its Reference (Omni) mode. Give it up to 8 character/prop reference images (and optionally a reference video as an identity source), write a short pose/turnaround prompt using MiniMax's own CHUNK/CUT authoring format, and it renders one H3 call producing a clean multi-angle turnaround of your character. A second, companion node then lays the extracted turnaround frames out into one finished character sheet.
 
 This pack registers two nodes:
@@ -31,8 +49,8 @@ require DLSS. Third-party packages are installed separately, not bundled here.
 - **PyAV** (`av`) and **psutil** Python packages.
 - **[ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG)** — required for the five background-removal nodes in the example character-sheet workflow. These use the **RMBG-2.0** model to remove the background from each extracted character view before assembling the sheet.
 - **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — active in Enhanced; retained as a bypassed alternative in Standard, which uses its separate Models & Loras group.
-- **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Unified Loader for SageAttention support, which is on by default.
-- **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — only required if you enable `two_stage_sampling` (registers `MinimaxH3LatentUpscaler3D`, `LTXVSeparateAVLatent`, `LTXVConcatAVLatent`). Off by default.
+- **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Unified Loader's memory/attention patches. SageAttention is optional and off in the updated Enhanced template.
+- **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — required for `two_stage_sampling` (registers `MinimaxH3LatentUpscaler3D`, `LTXVSeparateAVLatent`, `LTXVConcatAVLatent`); included by the dependency installer. Single-stage and two-stage sampling are supported.
 - **[ComfyUI-MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod)** (community package) — the provided workflows contain its loader, so install it to open them without a missing node. RefMod application is off by default. **Apply H3 RefMod** is called internally when enabled.
 
 The node checks for each optional dependency at generation time and gives a clear error naming exactly what's missing, rather than failing to load.

@@ -73,7 +73,7 @@ def main():
         run([sys.executable, '-m', 'pip', 'install', '-c', constraints, '-r', HERE.parent / 'requirements.txt'])
     print('Dependency commands finished. Existing packages were retained, not updated.')
     print('Restart ComfyUI and check missing nodes/models before rendering. This is NOT a render certification.')
-    print('SageAttention, GGUF and two-stage sampling have additional conditional requirements; see INSTALLATION.md.')
+    print('GGUF and H3 Multishot node packages are included. Model weights and SageAttention binaries are not; see INSTALLATION.md.')
     if args.enhanced:
         print('DLSS runtime is NOT installed. Follow INSTALLATION.md before using Enhanced.')
 

@@ -53,6 +53,8 @@ import hashlib
 import io as _io
 import json
 import logging
+from .muse_upscale_memory import execute as _execute_low_memory_upscale
+from . import muse_sampling_memory
 import math
 import os
 import re
@@ -534,9 +536,21 @@ SUPPORTED_MEGAPIXELS = (0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.98, 1.0, 1.2, 
 _V4_FPS = 24
 
 
+def _prepend_trigger_words(prompt, timeline, chunk):
+    """Apply activation words after overrides, outside character dialogue."""
+    settings = chunk
+    words = settings.get("trigger_words")
+    if settings.get("trigger_words_enabled") is not True or not isinstance(words, str) or not words.strip():
+        return prompt
+    return words.strip() + "\n" + prompt
+
+
 def _execute_comfy_node(node_class, **kwargs):
     """Invoke a ComfyUI node's main entrypoint, whether it is a comfy_api io.ComfyNode
     (classmethod 'execute') or a legacy node (instance method named by FUNCTION)."""
+    from nodes import NODE_CLASS_MAPPINGS as comfy_node_classes
+    if node_class is comfy_node_classes.get("SamplerCustomAdvanced"):
+        muse_sampling_memory.prepare(kwargs.get("guider"), kwargs.get("latent_image"), kwargs.get("sigmas"))
     if hasattr(node_class, "execute"):
         return node_class.execute(**kwargs)
     fn_name = getattr(node_class, "FUNCTION", None)
@@ -1302,34 +1316,23 @@ def _rebuild_keyframe_conditioning_for_stage2(
 def _rebuild_refs_conditioning_for_stage2(
         positive, vae, tgt_w_latent, tgt_h_latent, ref_image_size="match",
         chunk_ref_images=None, chunk_ref_videos=None):
-    """Stage 1's minimax_refs visual latents are real VAE-encoded latents
-    sized relative to Stage 1's generation resolution — two-stage sampling's
-    mid-run upscale enlarges the generated video latent but leaves reference
-    conditioning at that lower resolution unless rebuilt here, which is a
-    genuine reference-detail/token-density shortfall (confirmed on the
-    source node via a real two-stage vs single-stage render comparison).
+    """Rebuild canvas-sized image references only; preserve independent refs.
 
-    Reference VIDEOS are deliberately left untouched — their own sizing
-    function never depends on the generation's width/height, so re-running a
-    video ref through it at Stage-1 vs Stage-2 dimensions is identical. Only
-    image refs (ref_image_size == "match" scales by generation pixel area)
-    actually need rebuilding.
-
-    Whenever the ORIGINAL reference image pixels used to build this chunk
-    are still in scope (chunk_ref_images), each image ref block is rebuilt
-    from scratch: re-resized to the Stage-2 canvas with H3's own image-ref
-    sizing rule and freshly VAE-encoded. Falls back to
-    _latent_resize_ref_block (a plain latent-space resize) only when no
-    original pixel is available. No-op when there's no minimax_refs at all.
+    Native 'max' references do not depend on the output canvas. Keep their
+    already encoded detail unchanged, including appended RefMod blocks.
+    In 'match' mode the native source images precede RefMod blocks in the
+    conditioning. Only those original image blocks are freshly encoded.
+    Video, audio and source-less RefMod blocks retain their original layout.
     """
+    if ref_image_size == "max":
+        return positive
     existing_refs = positive[0][1].get("minimax_refs") if positive else None
     if not existing_refs:
         return positive
-
-    orig_images = list((chunk_ref_images or {}).values())
+    orig_images = [img for img in (chunk_ref_images or {}).values() if img is not None]
     tgt_w_px, tgt_h_px = int(tgt_w_latent) * 16, int(tgt_h_latent) * 16
     img_cursor = 0
-    fresh_count, fallback_count = 0, 0
+    fresh_count = 0
     new_refs = []
     for blk in existing_refs:
         if blk.get("kind") != "image":
@@ -1338,14 +1341,10 @@ def _rebuild_refs_conditioning_for_stage2(
         src = orig_images[img_cursor] if img_cursor < len(orig_images) else None
         img_cursor += 1
         if src is None:
-            new_refs.append(_latent_resize_ref_block(blk, tgt_w_latent, tgt_h_latent))
-            fallback_count += 1
+            new_refs.append(blk)
             continue
         h, w = src.shape[1], src.shape[2]
-        if ref_image_size == "match":
-            scale = min(1.0, math.sqrt((tgt_w_px * tgt_h_px) / (w * h)))
-        else:
-            scale = min(1.0, 768 / min(w, h))
+        scale = min(1.0, math.sqrt((tgt_w_px * tgt_h_px) / (w * h)))
         tw = max(CANVAS_MULTIPLE, round(w * scale / CANVAS_MULTIPLE) * CANVAS_MULTIPLE)
         th = max(CANVAS_MULTIPLE, round(h * scale / CANVAS_MULTIPLE) * CANVAS_MULTIPLE)
         resized = _fit_image_to_target(src[:1], tw, th, "stretch")
@@ -1354,14 +1353,9 @@ def _rebuild_refs_conditioning_for_stage2(
         new_blk["latent_h"], new_blk["latent_w"], new_blk["latent"] = th // 16, tw // 16, z
         new_refs.append(new_blk)
         fresh_count += 1
-
     if fresh_count:
-        log.info("[MuseCharacterSheetH3] Stage 2: freshly re-encoded %d Stage-2 visual "
-                  "reference(s) from source pixels.", fresh_count)
-    if fallback_count:
-        log.info("[MuseCharacterSheetH3] Stage 2: scaled %d existing reference latent(s) "
-                  "as legacy fallback (no original source pixels in scope).", fallback_count)
-
+        log.info("[MuseCharacterSheetH3] Stage 2: freshly re-encoded %d matched image "
+                 "reference(s); preserved independent reference blocks.", fresh_count)
     return node_helpers.conditioning_set_values(positive, {"minimax_refs": new_refs})
 
 
@@ -1526,9 +1520,9 @@ class MuseCharacterSheetH3:
             },
         }
 
-    RETURN_TYPES = ("IMAGE", "AUDIO", "STRING", "IMAGE", "AUDIO", "AUDIO", "AUDIO")
+    RETURN_TYPES = ("IMAGE", "AUDIO", "STRING", "IMAGE", "AUDIO", "AUDIO", "AUDIO", "LATENT", "MUSE_H3_REFINE_CONTEXT")
     RETURN_NAMES = ("images", "audio", "compiled_prompt", "ref_images_used",
-                     "ref_audio_1_used", "ref_audio_2_used", "ref_audio_3_used")
+                     "ref_audio_1_used", "ref_audio_2_used", "ref_audio_3_used", "final_latent", "refine_context")
     FUNCTION = "execute"
     CATEGORY = "Muse Collective"
     DESCRIPTION = (
@@ -2148,6 +2142,7 @@ class MuseCharacterSheetH3:
             if use_prompt_override and (prompt_override or "").strip():
                 chunk_prompt = _select_chunk_from_prompt_override(prompt_override, 0, 1)
 
+            chunk_prompt = _prepend_trigger_words(chunk_prompt, tdata, this_chunk_data)
             compiled_prompt = chunk_prompt
 
             log.info("[MuseCharacterSheetH3] seed=%d, length=%d frames.", chunk_seed, chunk_length)
@@ -2206,6 +2201,11 @@ class MuseCharacterSheetH3:
                 high_sigmas, low_sigmas = _unpack_node_result(_execute_comfy_node(
                     SplitSigmas, sigmas=full_sigmas, step=split_step,
                 ))[:2]
+                log.info(
+                    "[MuseCharacterSheetH3] Stage-2 schedule=%s; first-pass=%s; sigmas=%s",
+                    "normal continuation",
+                    split_step, low_sigmas.tolist(),
+                )
 
                 noise1 = _unpack_node_result(_execute_comfy_node(RandomNoise, noise_seed=chunk_seed))[0]
                 pass1_raw, pass1_denoised = _unpack_node_result(_execute_comfy_node(
@@ -2221,7 +2221,8 @@ class MuseCharacterSheetH3:
                     LTXVSeparateAVLatent, av_latent=pass1_denoised,
                 ))[0]
                 audio_carry = _unpack_node_result(_execute_comfy_node(
-                    LTXVSeparateAVLatent, av_latent=pass1_raw,
+                    LTXVSeparateAVLatent,
+                    av_latent=pass1_raw,
                 ))[1]
 
                 video_samples = video_for_upscale["samples"]
@@ -2233,7 +2234,7 @@ class MuseCharacterSheetH3:
                                 "the main model before the Stage-2 upscaler — "
                                 "continuing anyway.")
 
-                upscaled_result = _unpack_node_result(_execute_comfy_node(
+                upscaled_result = _unpack_node_result(_execute_low_memory_upscale(
                     MinimaxH3LatentUpscaler3D,
                     latent={"samples": video_samples},
                     model_name=two_stage_latent_upscale_model,
@@ -2336,7 +2337,17 @@ class MuseCharacterSheetH3:
         for clip_audio, _entry, ui_idx in user_ref_audios:
             ref_audio_outputs[ui_idx] = clip_audio
 
-        return (final_images, final_audio, compiled_prompt, ref_images_used, *ref_audio_outputs)
+        # Append-only outputs: all existing workflow connections retain indices.
+        # Use the original socket model, not the preview-wrapped clone; preserve
+        # loader patches while avoiding preview events targeting the source node.
+        refine_context = {
+            "version": 1, "source_latent": sampled, "model": model, "vae": vae,
+            "positive": positive_stage2 if two_stage_sampling else positive,
+            "seed": chunk_seed, "audio": final_audio,
+            "ref_images": chunk_ref_images, "ref_image_size": ref_image_size,
+        }
+        return (final_images, final_audio, compiled_prompt, ref_images_used,
+                *ref_audio_outputs, sampled, refine_context)
 
 
 @PromptServer.instance.routes.get("/muse_character_sheet_h3/view_streamed_video")

@@ -1,0 +1,23 @@
+const fs = require('fs');
+const assert = require('assert/strict');
+const text = fs.readFileSync(__dirname + '/../js/muse_character_sheet_h3.js', 'utf8');
+const method = text.slice(text.indexOf('  _buildTriggerControls(chunkIdx) {'), text.indexOf('  _buildChunkStyleSoundBlock(chunkIdx, chunk) {'));
+function el() { return {style:{}, children:[], setAttribute(){}, append(...items){this.children.push(...items);}}; }
+global.document = {createElement:el, createTextNode:x=>x};
+const editor = eval('({' + method + '})');
+editor.timeline = {chunks:[{style_line:'Existing style', _previewToken:'old'}]};
+let saved;
+editor.commitChanges = () => {saved = JSON.stringify(editor.timeline);};
+let row = editor._buildTriggerControls(0);
+let toggle = row.children[0].children[0], input = row.children[1];
+assert.equal(toggle.checked, false); assert.equal(input.disabled, true);
+toggle.checked = true; toggle.onchange();
+assert.equal(input.disabled, false);
+input.value = 'perfe8ct, r34l1sm'; input.oninput();
+assert.equal(editor.timeline.chunks[0]._previewToken, undefined);
+editor.timeline = JSON.parse(saved);
+row = editor._buildTriggerControls(0);
+assert.equal(row.children[0].children[0].checked, true);
+assert.equal(row.children[1].value, 'perfe8ct, r34l1sm');
+assert.equal(editor.timeline.chunks[0].style_line, 'Existing style');
+console.log('PASS: trigger enable/disable, text editing, save/reload and style preservation');

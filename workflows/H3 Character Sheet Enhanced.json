@@ -31,13 +31,13 @@
       "title": "Get_Completed Prompt",
       "properties": {
         "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
         "ue_properties": {
           "widget_ue_connectable": {},
           "version": "7.8",
           "input_ue_unconnectable": {}
         },
-        "cnr_id": "comfyui-kjnodes",
-        "aux_id": "kijai/ComfyUI-KJNodes"
+        "cnr_id": "comfyui-kjnodes"
       },
       "widgets_values": [
         "Completed Prompt"
@@ -71,8 +71,9 @@
       ],
       "outputs": [],
       "properties": {
-        "Node name for S&R": "Save Text File",
         "cnr_id": "was-ns",
+        "ver": "3.0.1",
+        "Node name for S&R": "Save Text File",
         "aux_id": "ltdrdata/was-node-suite-comfyui"
       },
       "widgets_values": [
@@ -128,14 +129,21 @@
         }
       ],
       "properties": {
+        "cnr_id": "comfyui-itools",
+        "ver": "ebe75a158b8c19d69a5e4e24c1f25085babda5b4",
         "Node name for S&R": "iToolsPreviewText",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
         },
-        "cnr_id": "comfyui-itools",
         "aux_id": "MohammadAboulEla/ComfyUI-iTools"
+      },
+      "widgets_values": [
+        "r34l1sm, perfe8ct,\nsubject_definitions:\n<Subject 1> is the woman with curly dark hair and a beige ribbed two-piece outfit, barefoot standing against a white wall (from `<Picture 1>`).\n\nsummary:\n[reference generation] The target video shows <Subject 1>.\n\nretention_analysis:\n<Subject 1> (present throughout): fully_preserved - matches `<Picture 1>`.\n\ndetailed_description:\nA plain, seamless WHITE void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue, no other performers.\n[Shot 1] REF 1 stands facing the camera directly, full body visible from head to\ntoe, feet shoulder-width apart, arms relaxed at their sides. The pose is\nalready settled at the start of the cut and holds completely still,\nsquare-on to camera, for the full 3 seconds.\n[Shot 2] At 00:02.041, REF 1 begins turning smoothly to their own left, completing the rotation to\na full side-on left-profile view within the first half of this cut, full\nbody still visible head to toe. They hold that profile position, still and\nlevel, for the remainder of the cut.\n[Shot 3] At 00:04.044, REF 1 continues the same steady rotation, completing the turn to face\ndirectly away from camera - a full back view, full body visible head to\ntoe - within the first half of this cut, then holds that position still for\nthe remainder.\n[Shot 4] At 00:06.033, REF 1 continues the same steady rotation, completing the turn to a full\nside-on right-profile view, full body visible head to toe, within the first\nhalf of this cut, then holds that position still for the remainder.\n[Shot 5] At 00:08.050, REF 1 completes the rotation back to face the camera directly, full body\nvisible, within the first half of this cut. Simultaneously, the camera\nperforms a slow push-in that ends framed as a close-up on the head and\nshoulders only, face square to camera. Both the turn and the push-in finish\nby the midpoint of the cut; the final close-up composition holds completely\nstill for the remainder.\n\noverall_soundscape:\nN/A\n\nnon_diegetic_music:\nN/A"
+      ],
+      "widgets_values_named": {
+        "text2": "r34l1sm, perfe8ct,\nsubject_definitions:\n<Subject 1> is the woman with curly dark hair and a beige ribbed two-piece outfit, barefoot standing against a white wall (from `<Picture 1>`).\n\nsummary:\n[reference generation] The target video shows <Subject 1>.\n\nretention_analysis:\n<Subject 1> (present throughout): fully_preserved - matches `<Picture 1>`.\n\ndetailed_description:\nA plain, seamless WHITE void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue, no other performers.\n[Shot 1] REF 1 stands facing the camera directly, full body visible from head to\ntoe, feet shoulder-width apart, arms relaxed at their sides. The pose is\nalready settled at the start of the cut and holds completely still,\nsquare-on to camera, for the full 3 seconds.\n[Shot 2] At 00:02.041, REF 1 begins turning smoothly to their own left, completing the rotation to\na full side-on left-profile view within the first half of this cut, full\nbody still visible head to toe. They hold that profile position, still and\nlevel, for the remainder of the cut.\n[Shot 3] At 00:04.044, REF 1 continues the same steady rotation, completing the turn to face\ndirectly away from camera - a full back view, full body visible head to\ntoe - within the first half of this cut, then holds that position still for\nthe remainder.\n[Shot 4] At 00:06.033, REF 1 continues the same steady rotation, completing the turn to a full\nside-on right-profile view, full body visible head to toe, within the first\nhalf of this cut, then holds that position still for the remainder.\n[Shot 5] At 00:08.050, REF 1 completes the rotation back to face the camera directly, full body\nvisible, within the first half of this cut. Simultaneously, the camera\nperforms a slow push-in that ends framed as a close-up on the head and\nshoulders only, face square to camera. Both the turn and the push-in finish\nby the midpoint of the cut; the final close-up composition holds completely\nstill for the remainder.\n\noverall_soundscape:\nN/A\n\nnon_diegetic_music:\nN/A"
       },
       "color": "#222",
       "bgcolor": "#000"
@@ -172,9 +180,9 @@
       ],
       "properties": {
         "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
         "previousName": "images",
-        "cnr_id": "comfyui-kjnodes",
-        "aux_id": "kijai/ComfyUI-KJNodes"
+        "cnr_id": "comfyui-kjnodes"
       },
       "widgets_values": [
         "images"
@@ -187,8 +195,8 @@
       "id": 6147,
       "type": "MarkdownNote",
       "pos": [
-        -1058.883120815582,
-        6729.703465595062
+        -881.7446636645132,
+        6734.669964393689
       ],
       "size": [
         1783.395056728434,
@@ -208,10 +216,10 @@
         }
       },
       "widgets_values": [
-        "# H3 Character Sheet Enhanced\n\n# Standard and Enhanced workflow setup\n\nInstall **Muse-CharacterSheet-H3 once**. It supplies `MuseCharacterSheetH3` and\n`MuseCharacterSheetCompositor` for both workflows. The JSON files describe the\nconnections; opening them does **not** automatically install packages or models.\n\n- **Standard:** `workflows/H3 Character Sheet.json` (existing download path retained).\n- **Enhanced:** `workflows/H3 Character Sheet Enhanced.json`.\n\nEnhanced adds five Qwen Image 2.1 refinement passes, five DLSS image passes,\nRGB conversion before background removal, and a separate DLSS video output.\nStandard does not execute these enhanced branches. Installing their dependencies\ndoes not add enhancement processing to Standard.\n\n## Required packages for the supplied workflows\n\n| Package | Nodes supplied |\n| --- | --- |\n| [Muse Character Sheet H3](https://github.com/muse-collective-26/Muse-CharacterSheet-H3) | H3 generation and sheet compositor; bundled here |\n| [Muse Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader) | Unified model loader |\n| [KJNodes](https://github.com/kijai/ComfyUI-KJNodes) | Set/Get, H3 attention and feed-forward patches |\n| [RMBG](https://github.com/1038lab/ComfyUI-RMBG) | Background removal; follow its RMBG-2.0 model setup |\n| [VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite) | Video Combine; also needs FFmpeg |\n| [iTools](https://github.com/MohammadAboulEla/ComfyUI-iTools) | Preview Text |\n| [WAS Node Suite (Revised)](https://github.com/ltdrdata/was-node-suite-comfyui) | Save Text File; Enhanced also uses Images to RGB |\n| [Memory Cleanup](https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup) | RAMCleanup and VRAMCleanup |\n| [MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod) | RefMod loader present in both examples, even when use_refmod is off |\n| [DLSS5 Enhancer](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer) | Enhanced only: DLSS5 Settings and Enhance Images |\n\nUse ComfyUI with native MiniMax H3 support. Enhanced also requires core\n`TextEncodeQwenImage21`, `QwenImage21Cache`, `ComfySwitchNode` and `SeedNode`.\nThese are not separate Muse packages. Update ComfyUI if they are unavailable.\nSubgraphs are included in the workflow, not separately installed custom nodes.\n\nThe workflow metadata identifies the correct providers. Manager can help with\nvisible missing nodes, but internal dependencies and native runtimes still need\nthe checks below. There is no Workflow Encrypt dependency.\n\n## Install dependencies\n\nFirst install this repository under `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`.\nClose the ComfyUI instance being configured. Use **that instance's Python**.\nThe helper installs missing packages alongside this one and their requirements;\nit does not vendor third-party source, update ComfyUI, replace existing packages,\nor download model weights. Existing PyTorch versions are constrained; incompatible\nrequirements stop installation rather than silently switching the GPU build.\n\n### Windows portable\n\nOpen a terminal in the portable root containing `python_embeded` and `ComfyUI`.\nPreview the plan:\n\n```bat\npython_embeded\\python.exe ComfyUI\\custom_nodes\\Muse-CharacterSheet-H3\\Installers\\install_dependencies.py --comfyui ComfyUI --enhanced\n```\n\nCheck the printed paths, then install:\n\n```bat\npython_embeded\\python.exe ComfyUI\\custom_nodes\\Muse-CharacterSheet-H3\\Installers\\install_dependencies.py --comfyui ComfyUI --enhanced --install\n```\n\nOmit `--enhanced` for Standard-only installation. Non-portable users should\nreplace `python_embeded\\python.exe` with their ComfyUI environment's Python and\npass the actual ComfyUI folder. Do not use an unrelated system Python.\n\nAlready installed packages are retained to protect local work. Update outdated\ndependencies through their normal update mechanism, restart, and check again.\nThe helper is not a guarantee that old installed packages are compatible.\n\n## DLSS 5 setup — Enhanced only\n\nFollow the [upstream installation and requirements](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer#installation).\nThis enhanced workflow targets the Windows native D3D12 runtime, not RunPod/Linux.\nCheck upstream GPU and driver compatibility before choosing Enhanced.\n\n1. Install the DLSS5 node package (the helper above does this, or use Manager).\n2. From the Windows portable root, run:\n\n   ```bat\n   python_embeded\\python.exe ComfyUI\\custom_nodes\\ComfyUI-DLSS5-Enhancer\\install_runtime.py\n   ```\n\n3. Read and accept the upstream runtime licensing notice if you agree. The setup\n   downloads the separate runtime. It is not bundled in Muse's repository.\n4. Restart ComfyUI. If using an existing external runtime, follow upstream's\n   `--runtime-dir` instructions. Keep the workflow's DLSS controls unchanged.\n\nInstalling only the node pack is insufficient: it can appear on the canvas and\nstill fail at execution if its runtime is missing. Do not disable security\nprotection indiscriminately if a downloaded executable is flagged.\n\n## Other conditional requirements\n\n- SageAttention is enabled in the saved examples. KJNodes supplies its patch node,\n  but the compatible [SageAttention](https://github.com/thu-ml/SageAttention)\n  extension must also be installed for the user's GPU/PyTorch/CUDA environment.\n  Do not assume a universal wheel works on every computer.\n- Unified Loader Low VRAM/Balanced profiles require\n  [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) and matching encoder/projector weights.\n- Two-stage H3 sampling requires\n  [ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)\n  and a compatible latent upscaler. It is off in both examples.\n- Analyze requires a configured vision-capable backend. You can type reference\n  descriptions manually; downloading this workflow does not install an LLM server.\n\n## Models and personal assets\n\nNode installation is separate from model downloads. Select files that actually\nexist in your installation. The examples contain the author's saved model and\nreference selections; upload your own references and choose your own RefMods.\nPaths pointing to the author's computer are not distributed assets.\n\nFor Enhanced, the supplied settings retain 8 H3 steps and the Ref2V 8-step Turbo\nLoRA. The maximum-quality reference model is Singularity v1.3 INT8, with an INT8\nH3 text encoder; Automatic may choose another profile according to VRAM.\nUse the exact model creators' sources for those custom weights; they are not\nbundled. The older FastVideo links in the general model notes are alternatives,\nnot downloads of the selected Singularity checkpoint.\n\nAdditional Qwen models: [Comfy-Org/Qwen-Image-2.1](https://huggingface.co/Comfy-Org/Qwen-Image-2.1).\nPlace diffusion weights in `models/diffusion_models`, encoders in\n`models/text_encoders`, VAEs in `models/vae`, and LoRAs in `models/loras`.\nCheck the selected Qwen VAE and detailer LoRA in each refinement subgraph: custom\nVAE/LoRA files are separate downloads, not included in Comfy-Org's base set.\nH3 Turbo source: [lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo).\n\nNo MysticXXX, GalaxyAce, Polyhedron, Realism, or detailer weights are bundled here.\nObtain the selected LoRAs from their creators, or deliberately select alternatives.\n\n## Before rendering\n\nRestart ComfyUI after installation, reload the workflow and resolve missing nodes\nand models. Test Standard and Enhanced separately. Structural workflow checks and\ndependency-script tests are not an end-to-end GPU render test.\n\n[Muse Collective community](https://www.skool.com/muse-collective-7594)\n\n\n---\n\n## General H3 reference notes and alternative model links\n\n# Muse Character Sheet H3\n\n[MiniMax H3](https://www.minimax.io/blog/minimax-h3) is MiniMax's general-purpose, omni-modal generation model. It jointly understands text, image, video, and audio, and generates video with **native stereo audio**: voice, sound effects, and music are modeled jointly in a single forward pass, not layered on afterward. Output is up to 2K resolution, 24fps, and up to about 15 seconds per single generation call.\n\n**Muse Character Sheet H3** is a single-call turnaround-sheet node built on top of the stock `MiniMaxH3ReferenceToVideo` node, in H3's Reference (Omni) mode. Instead of manually writing `<Picture N>` / `<Video N>` tags into a single prompt box, you build the turnaround visually:\n\n- Drop up to 8 character/prop images into **Ref 1-8** and an optional **Location** image, write a description for each (or click **Analyze**)\n- Optionally describe a person visible in an uploaded reference video, so H3 uses it as an identity source alongside — or instead of — an image\n- Write the pose/angle plan for the turnaround along the **CUT** timeline\n\nIt compiles all of that into MiniMax H3's own official Reference-mode prompt format, with every tag numbered exactly the way H3 itself assigns them. This node always renders exactly one H3 call (no chunking, no continuation, no Seed Hunt) — check the `compiled_prompt` output any time you want to see exactly what was sent to H3.\n\nA second, companion node — **Muse Character Sheet Compositor** — is bundled in the same install and takes the 5 frames you extract from the rendered turnaround (Close-up, Front, Left Profile, Right Profile, Back) and lays them out on one finished sheet.\n\n## Model Links\n\n### Standard MiniMax H3 Models (used by the Maximum Quality profile)\n\n[🤗 Comfy-Org/MiniMax-H3](https://huggingface.co/Comfy-Org/MiniMax-H3)\n\n**vae**\n- [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors)\n- [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors)\n\n[🤗 Kijai/MiniMax-H3-experimental](https://huggingface.co/Kijai/MiniMax-H3-experimental)\n- [minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors](https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors) — this node only ever runs Reference mode, so this is the only diffusion model you need\n\n**text_encoders**\n- [qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors)\n\n### Stage-2 Upscale Model (only if you turn on Two-Stage Sampling — off by default)\n\n[🤗 LBH-123-AI/Minimax_h3_latent_Upscaler](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler)\n\n- [minimax_h3_latent_upscaler_3d_fp16.safetensors](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_fp16.safetensors) — the version this node's own default selects\n\n### Lower-VRAM GGUF Models (used by the Low VRAM and Balanced profiles)\n\n[🤗 MiniMax-H3 Curve GGUF](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF)\n\n**diffusion_models — reference model**\n- [MiniMax-H3-ref2va-curve-Q4_0.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q4_0.gguf) — used by the Low VRAM profile\n- [MiniMax-H3-ref2va-curve-Q5_1.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q5_1.gguf) — used by the Balanced profile\n\nThis node has no First/Last-Frame mode, so you don't need any `fl2va/` files from this repo.\n\n[🤗 MiniMax-H3 Encoder GGUF](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF)\n\n**text_encoders — used by the Low VRAM and Balanced profiles**\n- [MiniMax-H3-encoder-Q4_K_M.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-Q4_K_M.gguf)\n- [MiniMax-H3-encoder-mmproj-F16.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-mmproj-F16.gguf) — required matching projector\n\nThe GGUF encoder and matching `mmproj` file must remain together in the same folder. Do not rename either file. For the H3 CLIP loader: set `type` to `minimax`, select the encoder file, select the mmproj file as the matching projector.\n\n### LoRAs\n\n[🤗 lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo)\n- [minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors)\n\nCustom LoRAs are not bundled. Obtain selected weights from their creators; see the setup notes above.\n\n### Preview Models (optional — cosmetic sampling preview only, workflow runs fine without them)\n\n[🤗 Kijai/MiniMax-H3-TAE](https://huggingface.co/Kijai/MiniMax-H3-TAE)\n\n- [taeh3.safetensors](https://huggingface.co/Kijai/MiniMax-H3-TAE/resolve/main/vae_approx/taeh3.safetensors)\n- [taeltx2_3.safetensors](https://github.com/madebyollin/taehv/raw/main/safetensors/taeltx2_3.safetensors) — lightweight preview VAE\n\n## Model Storage Locations\n\n- `ComfyUI/models/vae/` — `minimax_h3_video_vae_fp16.safetensors`, `minimax_h3_audio_vae_fp32.safetensors`, `taeltx2_3.safetensors`\n- `ComfyUI/models/vae_approx/` — `taeh3.safetensors`\n- `ComfyUI/models/diffusion_models/` — `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`, `MiniMax-H3-ref2va-curve-Q4_0.gguf`, `MiniMax-H3-ref2va-curve-Q5_1.gguf`\n- `ComfyUI/models/text_encoders/` — `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors`, `MiniMax-H3-encoder-Q4_K_M.gguf`, `MiniMax-H3-encoder-mmproj-F16.gguf`\n- `ComfyUI/models/loras/H3/` — `minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors`, `MysticXXX_MMH3-V1.safetensors`, `H3-GalaxyAce.safetensors`\n- `ComfyUI/models/latent_upscale_models/` — `minimax_h3_latent_upscaler_3d_fp16.safetensors` *(this folder doesn't exist by default — create it yourself; only needed if Two-Stage Sampling is on)*\n\n## Report Issue\n\nPlease update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and make sure the required models and custom nodes above are installed before reporting a bug.\n\n- Muse Character Sheet H3 itself — CUT timeline UI, reference/video identity, compiled prompt: [Muse-CharacterSheet-H3/issues](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/issues)\n- ComfyUI core or the stock MiniMax H3 nodes: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI/frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n\n## Links\n- [MiniMax H3 on Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-H3)\n- [🤗 Comfy-Org/MiniMax-H3 (ComfyUI-ready weights)](https://huggingface.co/Comfy-Org/MiniMax-H3)\n- [Muse Character Sheet H3 on GitHub](https://github.com/muse-collective-26/Muse-CharacterSheet-H3)\n- [MiniMax H3 official prompt-writing guide](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md)\n\n**Sampling defaults**: `euler` sampler, `simple` scheduler, 8 steps, 0.5 megapixels, 9:16 aspect ratio."
+        "# H3 Character Sheet Enhanced\n\n# Standard and Enhanced workflow setup\n\nInstall **Muse-CharacterSheet-H3 once**. It supplies `MuseCharacterSheetH3` and\n`MuseCharacterSheetCompositor` for both workflows. The JSON files describe the\nconnections; opening them does **not** automatically install packages or models.\n\n- **Standard:** `workflows/H3 Character Sheet.json` (existing download path retained).\n- **Enhanced:** `workflows/H3 Character Sheet Enhanced.json`.\n\nEnhanced adds five Qwen Image 2.1 refinement passes, five DLSS image passes,\nRGB conversion before background removal, and a separate DLSS video output.\nStandard does not execute these enhanced branches. Installing their dependencies\ndoes not add enhancement processing to Standard.\n\n## Required packages for the supplied workflows\n\n| Package | Nodes supplied |\n| --- | --- |\n| [Muse Character Sheet H3](https://github.com/muse-collective-26/Muse-CharacterSheet-H3) | H3 generation and sheet compositor; bundled here |\n| [Muse Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader) | Unified model loader |\n| [KJNodes](https://github.com/kijai/ComfyUI-KJNodes) | Set/Get, H3 attention and feed-forward patches |\n| [RMBG](https://github.com/1038lab/ComfyUI-RMBG) | Background removal; follow its RMBG-2.0 model setup |\n| [VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite) | Video Combine; also needs FFmpeg |\n| [iTools](https://github.com/MohammadAboulEla/ComfyUI-iTools) | Preview Text |\n| [WAS Node Suite (Revised)](https://github.com/ltdrdata/was-node-suite-comfyui) | Save Text File; Enhanced also uses Images to RGB |\n| [Memory Cleanup](https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup) | RAMCleanup and VRAMCleanup |\n| [MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod) | RefMod loader present in both examples, even when use_refmod is off |\n| [DLSS5 Enhancer](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer) | Enhanced only: DLSS5 Settings and Enhance Images |\n\nUse ComfyUI with native MiniMax H3 support. Enhanced also requires core\n`TextEncodeQwenImage21`, `QwenImage21Cache`, `ComfySwitchNode` and `SeedNode`.\nThese are not separate Muse packages. Update ComfyUI if they are unavailable.\nSubgraphs are included in the workflow, not separately installed custom nodes.\n\nThe workflow metadata identifies the correct providers. Manager can help with\nvisible missing nodes, but internal dependencies and native runtimes still need\nthe checks below. There is no Workflow Encrypt dependency.\n\n## Install dependencies\n\nFirst install this repository under `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`.\nClose the ComfyUI instance being configured. Use **that instance's Python**.\nThe helper installs missing packages alongside this one and their requirements;\nit does not vendor third-party source, update ComfyUI, replace existing packages,\nor download model weights. Existing PyTorch versions are constrained; incompatible\nrequirements stop installation rather than silently switching the GPU build.\n\n### Windows portable\n\nOpen a terminal in the portable root containing `python_embeded` and `ComfyUI`.\nPreview the plan:\n\n```bat\npython_embeded\\python.exe ComfyUI\\custom_nodes\\Muse-CharacterSheet-H3\\Installers\\install_dependencies.py --comfyui ComfyUI --enhanced\n```\n\nCheck the printed paths, then install:\n\n```bat\npython_embeded\\python.exe ComfyUI\\custom_nodes\\Muse-CharacterSheet-H3\\Installers\\install_dependencies.py --comfyui ComfyUI --enhanced --install\n```\n\nOmit `--enhanced` for Standard-only installation. Non-portable users should\nreplace `python_embeded\\python.exe` with their ComfyUI environment's Python and\npass the actual ComfyUI folder. Do not use an unrelated system Python.\n\nAlready installed packages are retained to protect local work. Update outdated\ndependencies through their normal update mechanism, restart, and check again.\nThe helper is not a guarantee that old installed packages are compatible.\n\n## DLSS 5 setup — Enhanced only\n\nFollow the [upstream installation and requirements](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer#installation).\nThis enhanced workflow targets the Windows native D3D12 runtime, not RunPod/Linux.\nCheck upstream GPU and driver compatibility before choosing Enhanced.\n\n1. Install the DLSS5 node package (the helper above does this, or use Manager).\n2. From the Windows portable root, run:\n\n   ```bat\n   python_embeded\\python.exe ComfyUI\\custom_nodes\\ComfyUI-DLSS5-Enhancer\\install_runtime.py\n   ```\n\n3. Read and accept the upstream runtime licensing notice if you agree. The setup\n   downloads the separate runtime. It is not bundled in Muse's repository.\n4. Restart ComfyUI. If using an existing external runtime, follow upstream's\n   `--runtime-dir` instructions. Keep the workflow's DLSS controls unchanged.\n\nInstalling only the node pack is insufficient: it can appear on the canvas and\nstill fail at execution if its runtime is missing. Do not disable security\nprotection indiscriminately if a downloaded executable is flagged.\n\n## Other conditional requirements\n\n- SageAttention and High-Res Stability are OFF by default in this Enhanced template. Only enable SageAttention after installing a compatible extension; enable High-Res Stability only when using SageAttention. KJNodes supplies its patch node,\n  but the compatible [SageAttention](https://github.com/thu-ml/SageAttention)\n  extension must also be installed for the user's GPU/PyTorch/CUDA environment.\n  Do not assume a universal wheel works on every computer.\n- Unified Loader Low VRAM/Balanced profiles require\n  [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) and matching encoder/projector weights.\n- Two-stage H3 sampling requires\n  [ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)\n  and a compatible latent upscaler. Single-stage and two-stage sampling are both supported; download the latent upscaler if using two-stage sampling.\n- Analyze requires a configured vision-capable backend. You can type reference\n  descriptions manually; downloading this workflow does not install an LLM server.\n\n## Models and personal assets\n\nNode installation is separate from model downloads. Select files that actually\nexist in your installation. The examples contain the author's saved model and\nreference selections; upload your own references and choose your own RefMods.\nPaths pointing to the author's computer are not distributed assets.\n\nFor Enhanced, the supplied settings retain 8 H3 steps and the Ref2V 8-step Turbo\nLoRA. The maximum-quality reference model is Singularity v1.3 INT8, with an INT8\nH3 text encoder; Automatic may choose another profile according to VRAM.\nUse the exact model creators' sources for those custom weights; they are not\nbundled. The downloads below match the saved Enhanced selections.\n\nAdditional Qwen models: [Comfy-Org/Qwen-Image-2.1](https://huggingface.co/Comfy-Org/Qwen-Image-2.1).\nPlace diffusion weights in `models/diffusion_models`, encoders in\n`models/text_encoders`, VAEs in `models/vae`, and LoRAs in `models/loras`.\nCheck the selected Qwen VAE and detailer LoRA in each refinement subgraph: custom\nVAE/LoRA files are separate downloads, not included in Comfy-Org's base set.\nH3 Turbo source: [lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo).\n\nNo MysticXXX, GalaxyAce, Polyhedron, Realism, or detailer weights are bundled here.\nObtain the selected LoRAs from their creators, or deliberately select alternatives.\n\n## Before rendering\n\nRestart ComfyUI after installation, reload the workflow and resolve missing nodes\nand models. Test Standard and Enhanced separately. Structural workflow checks and\ndependency-script tests are not an end-to-end GPU render test.\n\n[Muse Collective community](https://www.skool.com/muse-collective-7594)\n\n\n\n## Exact model downloads for this Enhanced workflow\n\nModels are not installed by the dependency installer. Existing models are left untouched.\n\n- **Singularity reference model:** [Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors](https://huggingface.co/WarmBloodAban/Minimax-h3_Singularity/resolve/main/Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors) — `ComfyUI/models/diffusion_models/`\n- **H3 INT8 text encoder:** [qwen3vl_32b_minimax_h3_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_int8_convrot.safetensors) — `ComfyUI/models/text_encoders/`\n- **H3 video VAE:** [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors) — `ComfyUI/models/vae/`\n- **H3 audio VAE:** [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors) — `ComfyUI/models/vae/`\n- **Reference-mode Turbo, 8 steps, 768p (not FL2V):** [minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors) — `ComfyUI/models/loras/H3/`\n- **Realism People; trigger r34l1sm:** [h3-realism-people-t2v-i2v-r2v.safetensors](https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors) — `ComfyUI/models/loras/H3/`\n- **H3 latent upscaler; needed for two-stage sampling:** [h3_upscaler_lms_v0.1_fp32.safetensors](https://huggingface.co/Alissonerdx/Minimax-H3-ComfyUI/resolve/main/latent_upscaler/h3_upscaler_lms_v0.1_fp32.safetensors) — `ComfyUI/models/latent_upscale_models/`\n- **Qwen refinement model:** [qwen_image_2.1_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors) — `ComfyUI/models/diffusion_models/`\n- **Qwen refinement encoder:** [qwen3vl_8b_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors) — `ComfyUI/models/text_encoders/`\n- **Texture-Fix VAE (selected in refinement controls):** [texture_fix_vae_for_qwen_image_2.1_bf16.safetensors](https://huggingface.co/madebyollin/texture-fix-vae-for-qwen-image-2.1/resolve/main/texture_fix_vae_for_qwen_image_2.1_bf16.safetensors) — `ComfyUI/models/vae/`\n- **Qwen detailer LoRA:** [elusarcas-qwen2-1-detailer-v1.safetensors](https://huggingface.co/reverentelusarca/elusarcas-qwen-2.1-detail-enhancer-lora/resolve/main/elusarcas-qwen2-1-detailer-v1.safetensors) — `ComfyUI/models/loras/`\n\n### Polyhedron LoRA\n\nThe saved selection is `polyhedron_minimax_h3_image_lora_v2__perfe8ct.safetensors`, strength 0.6, trigger `perfe8ct`, in `models/loras/H3/`.\n[Polyhedron creator listing on Civitai](https://civitai.com/models/2899220). This listing was located, but automated access could not verify its current download. Check the filename before downloading. If unavailable, select `(disabled)` for this LoRA; no replacement is downloaded automatically.\n\n### Other saved selections\n\nThe Unified Loader is saved as `Both / Mixed`, with `minimax_h3_fl2va_pruned_int8_convrot.safetensors` selected for its other branch. Character Sheet itself uses Reference mode. To avoid needing that unused branch, choose the loader's Reference-only setting. Otherwise obtain the matching file from [Comfy-Org's diffusion models](https://huggingface.co/Comfy-Org/MiniMax-H3/tree/main/diffusion_models).\nAutomatic profiles depend on VRAM. Low-VRAM and Balanced model slots in this file are disabled: configure suitable GGUF models and their matching encoder/projector before using those profiles. The installer includes GGUF node support, not weights.\nYour own references and RefMods must be supplied locally. Saved preview paths and personal assets are not included.\n\n### Windows installer\n\nInstall this repository in `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`, close ComfyUI, then double-click `Installers/Install-Windows.bat`.\nIt previews the target and requests confirmation, installs missing node packages including the Unified Loader, GGUF and H3 Multishot, and installs Python requirements with the existing PyTorch versions constrained. Existing node folders are retained, not overwritten or updated. Models, SageAttention binaries, and the separately licensed DLSS native runtime are not downloaded. Follow the DLSS runtime instructions above after node installation.\n"
       ],
       "widgets_values_named": {
-        "text": "# Muse Character Sheet H3\n\n[MiniMax H3](https://www.minimax.io/blog/minimax-h3) is MiniMax's general-purpose, omni-modal generation model. It jointly understands text, image, video, and audio, and generates video with **native stereo audio**: voice, sound effects, and music are modeled jointly in a single forward pass, not layered on afterward. Output is up to 2K resolution, 24fps, and up to about 15 seconds per single generation call.\n\n**Muse Character Sheet H3** is a single-call turnaround-sheet node built on top of the stock `MiniMaxH3ReferenceToVideo` node, in H3's Reference (Omni) mode. Instead of manually writing `<Picture N>` / `<Video N>` tags into a single prompt box, you build the turnaround visually:\n\n- Drop up to 8 character/prop images into **Ref 1-8** and an optional **Location** image, write a description for each (or click **Analyze**)\n- Optionally describe a person visible in an uploaded reference video, so H3 uses it as an identity source alongside — or instead of — an image\n- Write the pose/angle plan for the turnaround along the **CUT** timeline\n\nIt compiles all of that into MiniMax H3's own official Reference-mode prompt format, with every tag numbered exactly the way H3 itself assigns them. This node always renders exactly one H3 call (no chunking, no continuation, no Seed Hunt) — check the `compiled_prompt` output any time you want to see exactly what was sent to H3.\n\nA second, companion node — **Muse Character Sheet Compositor** — is bundled in the same install and takes the 5 frames you extract from the rendered turnaround (Close-up, Front, Left Profile, Right Profile, Back) and lays them out on one finished sheet.\n\n## ⚠️ Required custom nodes — install these BEFORE you run anything\n\n**ComfyUI's own \"Install Missing Custom Nodes\" will NOT catch any of these.** They're used internally by other nodes' own code, not as separate nodes on the canvas, so nothing will flag them as missing — you'll only find out when a render fails partway through with an error. Install all of these now:\n\n- **[Muse MiniMax H3 Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader)** — loads model/CLIP/VAE for this workflow.\n- **[ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)** — required by the Muse Unified Loader for SageAttention support, which is **on by default**.\n- **[ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)** — required whenever Two-Stage Sampling runs. **Off by default** on this node, so only install if you turn it on.\n\nOptional:\n\n- **[ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)** — only if you're using the lower-VRAM GGUF route (Low VRAM / Balanced quality profiles).\n- **[ComfyUI-MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod)** — only if you enable RefMod Override. Add **Load H3 RefMods** (or **Create H3 RefMod** directly) to the canvas and wire its `mods` output into this node's `refmod_bundle` input. **Off by default.**\n- **[ComfyUI-H3RefModPicker](https://github.com/FranckyB/ComfyUI-H3RefModPicker)** — Companion add-on for ComfyUI-MiniMaxH3Mod\n\n## Model Links\n\n### Standard MiniMax H3 Models (used by the Maximum Quality profile)\n\n[🤗 Comfy-Org/MiniMax-H3](https://huggingface.co/Comfy-Org/MiniMax-H3)\n\n**vae**\n- [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors)\n- [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors)\n\n[🤗 Kijai/MiniMax-H3-experimental](https://huggingface.co/Kijai/MiniMax-H3-experimental)\n- [minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors](https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors) — this node only ever runs Reference mode, so this is the only diffusion model you need\n\n**text_encoders**\n- [qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors)\n\n### Stage-2 Upscale Model (only if you turn on Two-Stage Sampling — off by default)\n\n[🤗 LBH-123-AI/Minimax_h3_latent_Upscaler](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler)\n\n- [minimax_h3_latent_upscaler_3d_fp16.safetensors](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_fp16.safetensors) — the version this node's own default selects\n\n### Lower-VRAM GGUF Models (used by the Low VRAM and Balanced profiles)\n\n[🤗 MiniMax-H3 Curve GGUF](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF)\n\n**diffusion_models — reference model**\n- [MiniMax-H3-ref2va-curve-Q4_0.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q4_0.gguf) — used by the Low VRAM profile\n- [MiniMax-H3-ref2va-curve-Q5_1.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q5_1.gguf) — used by the Balanced profile\n\nThis node has no First/Last-Frame mode, so you don't need any `fl2va/` files from this repo.\n\n[🤗 MiniMax-H3 Encoder GGUF](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF)\n\n**text_encoders — used by the Low VRAM and Balanced profiles**\n- [MiniMax-H3-encoder-Q4_K_M.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-Q4_K_M.gguf)\n- [MiniMax-H3-encoder-mmproj-F16.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-mmproj-F16.gguf) — required matching projector\n\nThe GGUF encoder and matching `mmproj` file must remain together in the same folder. Do not rename either file. For the H3 CLIP loader: set `type` to `minimax`, select the encoder file, select the mmproj file as the matching projector.\n\n### LoRAs\n\n[🤗 lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo)\n- [minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors)\n\n**MysticXXX_MMH3-V1.safetensors** and **H3-GalaxyAce.safetensors** — originally from CivitAI, but bundled directly in this GitHub repo/release under `loras/` instead of linked externally, since not everyone has CivitAI access. *(Link to the actual repo release once these are pushed.)*\n\n### Preview Models (optional — cosmetic sampling preview only, workflow runs fine without them)\n\n[🤗 Kijai/MiniMax-H3-TAE](https://huggingface.co/Kijai/MiniMax-H3-TAE)\n\n- [taeh3.safetensors](https://huggingface.co/Kijai/MiniMax-H3-TAE/resolve/main/vae_approx/taeh3.safetensors)\n- [taeltx2_3.safetensors](https://github.com/madebyollin/taehv/raw/main/safetensors/taeltx2_3.safetensors) — lightweight preview VAE\n\n## Model Storage Locations\n\n- `ComfyUI/models/vae/` — `minimax_h3_video_vae_fp16.safetensors`, `minimax_h3_audio_vae_fp32.safetensors`, `taeltx2_3.safetensors`\n- `ComfyUI/models/vae_approx/` — `taeh3.safetensors`\n- `ComfyUI/models/diffusion_models/` — `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`, `MiniMax-H3-ref2va-curve-Q4_0.gguf`, `MiniMax-H3-ref2va-curve-Q5_1.gguf`\n- `ComfyUI/models/text_encoders/` — `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors`, `MiniMax-H3-encoder-Q4_K_M.gguf`, `MiniMax-H3-encoder-mmproj-F16.gguf`\n- `ComfyUI/models/loras/H3/` — `minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors`, `MysticXXX_MMH3-V1.safetensors`, `H3-GalaxyAce.safetensors`\n- `ComfyUI/models/latent_upscale_models/` — `minimax_h3_latent_upscaler_3d_fp16.safetensors` *(this folder doesn't exist by default — create it yourself; only needed if Two-Stage Sampling is on)*\n\n## Report Issue\n\nPlease update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and make sure the required models and custom nodes above are installed before reporting a bug.\n\n- Muse Character Sheet H3 itself — CUT timeline UI, reference/video identity, compiled prompt: [Muse-CharacterSheet-H3/issues](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/issues)\n- ComfyUI core or the stock MiniMax H3 nodes: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI/frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n\n## Links\n- [MiniMax H3 on Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-H3)\n- [🤗 Comfy-Org/MiniMax-H3 (ComfyUI-ready weights)](https://huggingface.co/Comfy-Org/MiniMax-H3)\n- [Muse Character Sheet H3 on GitHub](https://github.com/muse-collective-26/Muse-CharacterSheet-H3)\n- [MiniMax H3 official prompt-writing guide](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md)\n\n**Sampling defaults**: `euler` sampler, `simple` scheduler, 8 steps, 0.5 megapixels, 9:16 aspect ratio."
+        "text": "# H3 Character Sheet Enhanced\n\n# Standard and Enhanced workflow setup\n\nInstall **Muse-CharacterSheet-H3 once**. It supplies `MuseCharacterSheetH3` and\n`MuseCharacterSheetCompositor` for both workflows. The JSON files describe the\nconnections; opening them does **not** automatically install packages or models.\n\n- **Standard:** `workflows/H3 Character Sheet.json` (existing download path retained).\n- **Enhanced:** `workflows/H3 Character Sheet Enhanced.json`.\n\nEnhanced adds five Qwen Image 2.1 refinement passes, five DLSS image passes,\nRGB conversion before background removal, and a separate DLSS video output.\nStandard does not execute these enhanced branches. Installing their dependencies\ndoes not add enhancement processing to Standard.\n\n## Required packages for the supplied workflows\n\n| Package | Nodes supplied |\n| --- | --- |\n| [Muse Character Sheet H3](https://github.com/muse-collective-26/Muse-CharacterSheet-H3) | H3 generation and sheet compositor; bundled here |\n| [Muse Unified Loader](https://github.com/muse-collective-26/Muse-MiniMax-H3-Unified-Loader) | Unified model loader |\n| [KJNodes](https://github.com/kijai/ComfyUI-KJNodes) | Set/Get, H3 attention and feed-forward patches |\n| [RMBG](https://github.com/1038lab/ComfyUI-RMBG) | Background removal; follow its RMBG-2.0 model setup |\n| [VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite) | Video Combine; also needs FFmpeg |\n| [iTools](https://github.com/MohammadAboulEla/ComfyUI-iTools) | Preview Text |\n| [WAS Node Suite (Revised)](https://github.com/ltdrdata/was-node-suite-comfyui) | Save Text File; Enhanced also uses Images to RGB |\n| [Memory Cleanup](https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup) | RAMCleanup and VRAMCleanup |\n| [MiniMaxH3Mod](https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod) | RefMod loader present in both examples, even when use_refmod is off |\n| [DLSS5 Enhancer](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer) | Enhanced only: DLSS5 Settings and Enhance Images |\n\nUse ComfyUI with native MiniMax H3 support. Enhanced also requires core\n`TextEncodeQwenImage21`, `QwenImage21Cache`, `ComfySwitchNode` and `SeedNode`.\nThese are not separate Muse packages. Update ComfyUI if they are unavailable.\nSubgraphs are included in the workflow, not separately installed custom nodes.\n\nThe workflow metadata identifies the correct providers. Manager can help with\nvisible missing nodes, but internal dependencies and native runtimes still need\nthe checks below. There is no Workflow Encrypt dependency.\n\n## Install dependencies\n\nFirst install this repository under `ComfyUI/custom_nodes/Muse-CharacterSheet-H3`.\nClose the ComfyUI instance being configured. Use **that instance's Python**.\nThe helper installs missing packages alongside this one and their requirements;\nit does not vendor third-party source, update ComfyUI, replace existing packages,\nor download model weights. Existing PyTorch versions are constrained; incompatible\nrequirements stop installation rather than silently switching the GPU build.\n\n### Windows portable\n\nOpen a terminal in the portable root containing `python_embeded` and `ComfyUI`.\nPreview the plan:\n\n```bat\npython_embeded\\python.exe ComfyUI\\custom_nodes\\Muse-CharacterSheet-H3\\Installers\\install_dependencies.py --comfyui ComfyUI --enhanced\n```\n\nCheck the printed paths, then install:\n\n```bat\npython_embeded\\python.exe ComfyUI\\custom_nodes\\Muse-CharacterSheet-H3\\Installers\\install_dependencies.py --comfyui ComfyUI --enhanced --install\n```\n\nOmit `--enhanced` for Standard-only installation. Non-portable users should\nreplace `python_embeded\\python.exe` with their ComfyUI environment's Python and\npass the actual ComfyUI folder. Do not use an unrelated system Python.\n\nAlready installed packages are retained to protect local work. Update outdated\ndependencies through their normal update mechanism, restart, and check again.\nThe helper is not a guarantee that old installed packages are compatible.\n\n## DLSS 5 setup — Enhanced only\n\nFollow the [upstream installation and requirements](https://github.com/Blueforcer/ComfyUI-DLSS5-Enhancer#installation).\nThis enhanced workflow targets the Windows native D3D12 runtime, not RunPod/Linux.\nCheck upstream GPU and driver compatibility before choosing Enhanced.\n\n1. Install the DLSS5 node package (the helper above does this, or use Manager).\n2. From the Windows portable root, run:\n\n   ```bat\n   python_embeded\\python.exe ComfyUI\\custom_nodes\\ComfyUI-DLSS5-Enhancer\\install_runtime.py\n   ```\n\n3. Read and accept the upstream runtime licensing notice if you agree. The setup\n   downloads the separate runtime. It is not bundled in Muse's repository.\n4. Restart ComfyUI. If using an existing external runtime, follow upstream's\n   `--runtime-dir` instructions. Keep the workflow's DLSS controls unchanged.\n\nInstalling only the node pack is insufficient: it can appear on the canvas and\nstill fail at execution if its runtime is missing. Do not disable security\nprotection indiscriminately if a downloaded executable is flagged.\n\n## Other conditional requirements\n\n- SageAttention is enabled in the saved examples. KJNodes supplies its patch node,\n  but the compatible [SageAttention](https://github.com/thu-ml/SageAttention)\n  extension must also be installed for the user's GPU/PyTorch/CUDA environment.\n  Do not assume a universal wheel works on every computer.\n- Unified Loader Low VRAM/Balanced profiles require\n  [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) and matching encoder/projector weights.\n- Two-stage H3 sampling requires\n  [ComfyUI-H3-Multishot](https://github.com/jlucasmcrell/ComfyUI-H3-Multishot)\n  and a compatible latent upscaler. It is off in both examples.\n- Analyze requires a configured vision-capable backend. You can type reference\n  descriptions manually; downloading this workflow does not install an LLM server.\n\n## Models and personal assets\n\nNode installation is separate from model downloads. Select files that actually\nexist in your installation. The examples contain the author's saved model and\nreference selections; upload your own references and choose your own RefMods.\nPaths pointing to the author's computer are not distributed assets.\n\nFor Enhanced, the supplied settings retain 8 H3 steps and the Ref2V 8-step Turbo\nLoRA. The maximum-quality reference model is Singularity v1.3 INT8, with an INT8\nH3 text encoder; Automatic may choose another profile according to VRAM.\nUse the exact model creators' sources for those custom weights; they are not\nbundled. The older FastVideo links in the general model notes are alternatives,\nnot downloads of the selected Singularity checkpoint.\n\nAdditional Qwen models: [Comfy-Org/Qwen-Image-2.1](https://huggingface.co/Comfy-Org/Qwen-Image-2.1).\nPlace diffusion weights in `models/diffusion_models`, encoders in\n`models/text_encoders`, VAEs in `models/vae`, and LoRAs in `models/loras`.\nCheck the selected Qwen VAE and detailer LoRA in each refinement subgraph: custom\nVAE/LoRA files are separate downloads, not included in Comfy-Org's base set.\nH3 Turbo source: [lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo).\n\nNo MysticXXX, GalaxyAce, Polyhedron, Realism, or detailer weights are bundled here.\nObtain the selected LoRAs from their creators, or deliberately select alternatives.\n\n## Before rendering\n\nRestart ComfyUI after installation, reload the workflow and resolve missing nodes\nand models. Test Standard and Enhanced separately. Structural workflow checks and\ndependency-script tests are not an end-to-end GPU render test.\n\n[Muse Collective community](https://www.skool.com/muse-collective-7594)\n\n\n---\n\n## General H3 reference notes and alternative model links\n\n# Muse Character Sheet H3\n\n[MiniMax H3](https://www.minimax.io/blog/minimax-h3) is MiniMax's general-purpose, omni-modal generation model. It jointly understands text, image, video, and audio, and generates video with **native stereo audio**: voice, sound effects, and music are modeled jointly in a single forward pass, not layered on afterward. Output is up to 2K resolution, 24fps, and up to about 15 seconds per single generation call.\n\n**Muse Character Sheet H3** is a single-call turnaround-sheet node built on top of the stock `MiniMaxH3ReferenceToVideo` node, in H3's Reference (Omni) mode. Instead of manually writing `<Picture N>` / `<Video N>` tags into a single prompt box, you build the turnaround visually:\n\n- Drop up to 8 character/prop images into **Ref 1-8** and an optional **Location** image, write a description for each (or click **Analyze**)\n- Optionally describe a person visible in an uploaded reference video, so H3 uses it as an identity source alongside — or instead of — an image\n- Write the pose/angle plan for the turnaround along the **CUT** timeline\n\nIt compiles all of that into MiniMax H3's own official Reference-mode prompt format, with every tag numbered exactly the way H3 itself assigns them. This node always renders exactly one H3 call (no chunking, no continuation, no Seed Hunt) — check the `compiled_prompt` output any time you want to see exactly what was sent to H3.\n\nA second, companion node — **Muse Character Sheet Compositor** — is bundled in the same install and takes the 5 frames you extract from the rendered turnaround (Close-up, Front, Left Profile, Right Profile, Back) and lays them out on one finished sheet.\n\n## Model Links\n\n### Standard MiniMax H3 Models (used by the Maximum Quality profile)\n\n[🤗 Comfy-Org/MiniMax-H3](https://huggingface.co/Comfy-Org/MiniMax-H3)\n\n**vae**\n- [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors)\n- [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors)\n\n[🤗 Kijai/MiniMax-H3-experimental](https://huggingface.co/Kijai/MiniMax-H3-experimental)\n- [minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors](https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors) — this node only ever runs Reference mode, so this is the only diffusion model you need\n\n**text_encoders**\n- [qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors)\n\n### Stage-2 Upscale Model (only if you turn on Two-Stage Sampling — off by default)\n\n[🤗 LBH-123-AI/Minimax_h3_latent_Upscaler](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler)\n\n- [minimax_h3_latent_upscaler_3d_fp16.safetensors](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_fp16.safetensors) — the version this node's own default selects\n\n### Lower-VRAM GGUF Models (used by the Low VRAM and Balanced profiles)\n\n[🤗 MiniMax-H3 Curve GGUF](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF)\n\n**diffusion_models — reference model**\n- [MiniMax-H3-ref2va-curve-Q4_0.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q4_0.gguf) — used by the Low VRAM profile\n- [MiniMax-H3-ref2va-curve-Q5_1.gguf](https://huggingface.co/joeygambino/MiniMax-H3-curve-GGUF/resolve/main/ref2va/MiniMax-H3-ref2va-curve-Q5_1.gguf) — used by the Balanced profile\n\nThis node has no First/Last-Frame mode, so you don't need any `fl2va/` files from this repo.\n\n[🤗 MiniMax-H3 Encoder GGUF](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF)\n\n**text_encoders — used by the Low VRAM and Balanced profiles**\n- [MiniMax-H3-encoder-Q4_K_M.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-Q4_K_M.gguf)\n- [MiniMax-H3-encoder-mmproj-F16.gguf](https://huggingface.co/joeygambino/MiniMax-H3-encoder-GGUF/resolve/main/MiniMax-H3-encoder-mmproj-F16.gguf) — required matching projector\n\nThe GGUF encoder and matching `mmproj` file must remain together in the same folder. Do not rename either file. For the H3 CLIP loader: set `type` to `minimax`, select the encoder file, select the mmproj file as the matching projector.\n\n### LoRAs\n\n[🤗 lightx2v/Minimax-h3-Turbo](https://huggingface.co/lightx2v/Minimax-h3-Turbo)\n- [minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors)\n\nCustom LoRAs are not bundled. Obtain selected weights from their creators; see the setup notes above.\n\n### Preview Models (optional — cosmetic sampling preview only, workflow runs fine without them)\n\n[🤗 Kijai/MiniMax-H3-TAE](https://huggingface.co/Kijai/MiniMax-H3-TAE)\n\n- [taeh3.safetensors](https://huggingface.co/Kijai/MiniMax-H3-TAE/resolve/main/vae_approx/taeh3.safetensors)\n- [taeltx2_3.safetensors](https://github.com/madebyollin/taehv/raw/main/safetensors/taeltx2_3.safetensors) — lightweight preview VAE\n\n## Model Storage Locations\n\n- `ComfyUI/models/vae/` — `minimax_h3_video_vae_fp16.safetensors`, `minimax_h3_audio_vae_fp32.safetensors`, `taeltx2_3.safetensors`\n- `ComfyUI/models/vae_approx/` — `taeh3.safetensors`\n- `ComfyUI/models/diffusion_models/` — `minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors`, `MiniMax-H3-ref2va-curve-Q4_0.gguf`, `MiniMax-H3-ref2va-curve-Q5_1.gguf`\n- `ComfyUI/models/text_encoders/` — `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors`, `MiniMax-H3-encoder-Q4_K_M.gguf`, `MiniMax-H3-encoder-mmproj-F16.gguf`\n- `ComfyUI/models/loras/H3/` — `minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors`, `MysticXXX_MMH3-V1.safetensors`, `H3-GalaxyAce.safetensors`\n- `ComfyUI/models/latent_upscale_models/` — `minimax_h3_latent_upscaler_3d_fp16.safetensors` *(this folder doesn't exist by default — create it yourself; only needed if Two-Stage Sampling is on)*\n\n## Report Issue\n\nPlease update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and make sure the required models and custom nodes above are installed before reporting a bug.\n\n- Muse Character Sheet H3 itself — CUT timeline UI, reference/video identity, compiled prompt: [Muse-CharacterSheet-H3/issues](https://github.com/muse-collective-26/Muse-CharacterSheet-H3/issues)\n- ComfyUI core or the stock MiniMax H3 nodes: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI/frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n\n## Links\n- [MiniMax H3 on Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-H3)\n- [🤗 Comfy-Org/MiniMax-H3 (ComfyUI-ready weights)](https://huggingface.co/Comfy-Org/MiniMax-H3)\n- [Muse Character Sheet H3 on GitHub](https://github.com/muse-collective-26/Muse-CharacterSheet-H3)\n- [MiniMax H3 official prompt-writing guide](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md)\n\n**Sampling defaults**: `euler` sampler, `simple` scheduler, 8 steps, 0.5 megapixels, 9:16 aspect ratio."
       },
       "color": "#222",
       "bgcolor": "#000"
@@ -255,9 +263,9 @@
         }
       ],
       "properties": {
-        "previewExposures": [],
         "cnr_id": "comfy-core",
-        "ver": "0.36.0"
+        "ver": "0.36.0",
+        "previewExposures": []
       },
       "widgets_values": [
         "Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors",
@@ -314,6 +322,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "ComfyUI-MiniMaxH3Mod",
+        "ver": "6131c1f62c612a074d6aac8435c26ffa19c00563",
         "Node name for S&R": "MiniMaxH3RefModsLoader",
         "refmod_visible_slots": [
           1
@@ -519,6 +529,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "muse-minimax-h3-unified-loader",
+        "ver": "6dc439fb0ae84ab3b0cec298e374a95cc53e3586",
         "Node name for S&R": "MuseMiniMaxH3UnifiedLoader",
         "muse_loader_final_collapsed": {
           "profile": false,
@@ -531,21 +543,20 @@
           "attention": false,
           "advanced": false
         },
-        "cnr_id": "muse-minimax-h3-unified-loader",
         "aux_id": "muse-collective-26/Muse-MiniMax-H3-Unified-Loader"
       },
       "widgets_values": [
         "Automatic",
         "10 GB",
-        "ref2va\\MiniMax-H3-ref2va-curve-Q4_0.gguf",
-        "MiniMax-H3-ref2va-curve-Q5_1.gguf",
+        "(disabled)",
+        "(disabled)",
         "Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors",
-        "fl2va\\MiniMax-H3-fl2va-curve-Q4_0.gguf",
-        "MiniMax-H3-fl2va-curve-Q5_1.gguf",
+        "(disabled)",
+        "(disabled)",
         "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
-        "MiniMax-H3-encoder-Q4_K_M.gguf",
+        "(disabled)",
         "(auto)",
-        "MiniMax-H3-encoder-Q4_K_M.gguf",
+        "(disabled)",
         "(auto)",
         "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
         "(auto)",
@@ -561,30 +572,30 @@
         0.75,
         "Both models",
         true,
-        "Off",
-        true,
-        true,
+        false,
+        false,
         true,
         4,
         true,
         2,
         4096,
+        "Off",
         0,
         "Both / Mixed",
-        "[{\"name\":\"H3\\\\Minimax_H3_Unlocked_V2.safetensors\",\"strength\":1,\"target\":\"Both models\"}]"
+        "[{\"name\":\"(disabled)\",\"strength\":1,\"target\":\"Both models\"}]"
       ],
       "widgets_values_named": {
         "profile": "Automatic",
         "pinned_memory_cap": "10 GB",
-        "low_vram_model": "ref2va\\MiniMax-H3-ref2va-curve-Q4_0.gguf",
-        "balanced_model": "MiniMax-H3-ref2va-curve-Q5_1.gguf",
+        "low_vram_model": "(disabled)",
+        "balanced_model": "(disabled)",
         "maximum_quality_model": "Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors",
-        "low_vram_fl2va": "fl2va\\MiniMax-H3-fl2va-curve-Q4_0.gguf",
-        "balanced_fl2va": "MiniMax-H3-fl2va-curve-Q5_1.gguf",
+        "low_vram_fl2va": "(disabled)",
+        "balanced_fl2va": "(disabled)",
         "maximum_quality_fl2va": "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
-        "low_vram_clip": "MiniMax-H3-encoder-Q4_K_M.gguf",
+        "low_vram_clip": "(disabled)",
         "low_vram_mmproj": "(auto)",
-        "balanced_clip": "MiniMax-H3-encoder-Q4_K_M.gguf",
+        "balanced_clip": "(disabled)",
         "balanced_mmproj": "(auto)",
         "maximum_quality_clip": "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
         "maximum_quality_mmproj": "(auto)",
@@ -600,17 +611,17 @@
         "lora_3_strength": 0.75,
         "lora_3_target": "Both models",
         "attention_enabled": true,
-        "attention_backend": "Off",
-        "sage_attention": true,
-        "high_res_stability": true,
+        "sage_attention": false,
+        "high_res_stability": false,
         "low_vram_attention": true,
         "attention_head_chunks": 4,
         "chunk_feed_forward": true,
         "feed_forward_chunks": 2,
         "feed_forward_threshold": 4096,
+        "attention_backend": "Off",
         "activation_reserve_gb": 0,
         "models_to_load": "Both / Mixed",
-        "extra_loras": "[{\"name\":\"H3\\\\Minimax_H3_Unlocked_V2.safetensors\",\"strength\":1,\"target\":\"Both models\"}]"
+        "extra_loras": "[{\"name\":\"(disabled)\",\"strength\":1,\"target\":\"Both models\"}]"
       },
       "color": "#222",
       "bgcolor": "#000"
@@ -647,8 +658,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "RAMCleanup",
         "cnr_id": "comfyui_memory_cleanup",
+        "ver": "1.1.3",
+        "Node name for S&R": "RAMCleanup",
         "aux_id": "LAOGOU-666/Comfyui-Memory_Cleanup"
       },
       "widgets_values": [
@@ -698,8 +710,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "VRAMCleanup",
         "cnr_id": "comfyui_memory_cleanup",
+        "ver": "1.1.3",
+        "Node name for S&R": "VRAMCleanup",
         "aux_id": "LAOGOU-666/Comfyui-Memory_Cleanup"
       },
       "widgets_values": [
@@ -747,8 +760,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "DLSS5EnhanceImages",
-        "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+        "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+        "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+        "Node name for S&R": "DLSS5EnhanceImages"
       },
       "widgets_values": [
         true
@@ -807,13 +821,14 @@
       ],
       "title": "DLSS5 Enhance",
       "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "4ee72c065db22c9d96c2427954dc69e7b908444b",
         "Node name for S&R": "VHS_VideoCombine",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
         },
-        "cnr_id": "comfyui-videohelpersuite",
         "aux_id": "Kosinkadink/ComfyUI-VideoHelperSuite"
       },
       "widgets_values": {
@@ -831,13 +846,22 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "Character_00160-audio.mp4",
+            "filename": "Character_00221-audio.mp4",
             "subfolder": "Muse\\Video\\Character Sheets",
             "type": "output",
             "format": "video/h264-mp4",
             "frame_rate": 24,
-            "workflow": "Character_00160.png",
-            "fullpath": "E:\\Muse Collective\\MUSE COLLECTIVE WORKFLOWS\\ComfyUI-Easy-Install\\ComfyUI-Easy-Install\\ComfyUI\\output\\Muse\\Video\\Character Sheets\\Character_00160-audio.mp4"
+            "workflow": "Character_00221.png",
+            "fullpath": "E:\\Muse Collective\\MUSE COLLECTIVE WORKFLOWS\\ComfyUI-Easy-Install\\ComfyUI-Easy-Install\\ComfyUI\\output\\Muse\\Video\\Character Sheets\\Character_00221-audio.mp4",
+            "metadata": {
+              "kind": "video",
+              "width": 1632,
+              "height": 2880,
+              "duration": 10.125,
+              "fps": 24,
+              "frame_count": 243
+            },
+            "id": "1d51378b-c97e-4cba-9192-8fdf357eed86"
           },
           "muted": true
         }
@@ -857,13 +881,22 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "Character_00160-audio.mp4",
+            "filename": "Character_00221-audio.mp4",
             "subfolder": "Muse\\Video\\Character Sheets",
             "type": "output",
             "format": "video/h264-mp4",
             "frame_rate": 24,
-            "workflow": "Character_00160.png",
-            "fullpath": "E:\\Muse Collective\\MUSE COLLECTIVE WORKFLOWS\\ComfyUI-Easy-Install\\ComfyUI-Easy-Install\\ComfyUI\\output\\Muse\\Video\\Character Sheets\\Character_00160-audio.mp4"
+            "workflow": "Character_00221.png",
+            "fullpath": "E:\\Muse Collective\\MUSE COLLECTIVE WORKFLOWS\\ComfyUI-Easy-Install\\ComfyUI-Easy-Install\\ComfyUI\\output\\Muse\\Video\\Character Sheets\\Character_00221-audio.mp4",
+            "metadata": {
+              "kind": "video",
+              "width": 1632,
+              "height": 2880,
+              "duration": 10.125,
+              "fps": 24,
+              "frame_count": 243
+            },
+            "id": "1d51378b-c97e-4cba-9192-8fdf357eed86"
           },
           "muted": true
         }
@@ -895,8 +928,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "DLSS5Settings",
-        "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+        "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+        "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+        "Node name for S&R": "DLSS5Settings"
       },
       "widgets_values": [
         "1.5x (Quality)",
@@ -938,7 +972,7 @@
       ],
       "size": [
         3433.5269058429353,
-        4050
+        2686
       ],
       "flags": {},
       "order": 7,
@@ -1022,16 +1056,27 @@
           "name": "ref_audio_3_used",
           "type": "AUDIO",
           "links": null
+        },
+        {
+          "name": "final_latent",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "refine_context",
+          "type": "MUSE_H3_REFINE_CONTEXT",
+          "links": null
         }
       ],
       "properties": {
+        "aux_id": "muse-collective-26/Muse-CharacterSheet-H3",
+        "ver": "558a48e32d38517ae5070e40237cdea06e365af6",
         "Node name for S&R": "MuseCharacterSheetH3",
-        "museH3PreviewId": "c439d4b8-be0a-4571-85fc-a60f24b94a50",
-        "aux_id": "muse-collective-26/Muse-CharacterSheet-H3"
+        "museH3PreviewId": "c439d4b8-be0a-4571-85fc-a60f24b94a50"
       },
       "widgets_values": [
         "9:16 (Portrait Widescreen)",
-        2,
+        0.5,
         32,
         10,
         "max",
@@ -1041,12 +1086,12 @@
         8,
         "euler",
         "simple",
-        false,
+        true,
         2,
         "h3_upscaler_lms_v0.1_fp32.safetensors",
         2,
         true,
-        "{\"combo_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"combo_project_name\":\"Character Sheet\",\"streaming_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"characters\":[null],\"chunk_color_match\":\"luminance\",\"chunks\":[{\"segments\":[{\"prompt\":\"REF 1 stands facing the camera directly, full body visible from head to\\ntoe, feet shoulder-width apart, arms relaxed at their sides. The pose is\\nalready settled at the start of the cut and holds completely still,\\nsquare-on to camera, for the full 3 seconds.\",\"weight\":0.6123138737635296,\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[]},{\"prompt\":\"REF 1 begins turning smoothly to their own left, completing the rotation to\\na full side-on left-profile view within the first half of this cut, full\\nbody still visible head to toe. They hold that profile position, still and\\nlevel, for the remainder of the cut.\",\"weight\":0.6010120751401222,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 continues the same steady rotation, completing the turn to face\\ndirectly away from camera - a full back view, full body visible head to\\ntoe - within the first half of this cut, then holds that position still for\\nthe remainder.\",\"weight\":0.5966088959301319,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 continues the same steady rotation, completing the turn to a full\\nside-on right-profile view, full body visible head to toe, within the first\\nhalf of this cut, then holds that position still for the remainder.\",\"weight\":0.6049383195984717,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 completes the rotation back to face the camera directly, full body\\nvisible, within the first half of this cut. Simultaneously, the camera\\nperforms a slow push-in that ends framed as a close-up on the head and\\nshoulders only, face square to camera. Both the turn and the push-in finish\\nby the midpoint of the cut; the final close-up composition holds completely\\nstill for the remainder.\",\"weight\":0.5851268355677446,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null}],\"prompt_gen_enabled\":false,\"prompt_gen_brief\":\"\",\"prompt_gen_draft_text\":\"\",\"prompt_gen_committed_text\":\"\",\"style_line\":\"r34l1sm, perfe8ct, A plain, seamless WHITE void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue, no other performers.\",\"overall_soundscape\":\"\",\"non_diegetic_music\":\"\",\"firstFrameImage\":{},\"lastFrameImage\":{},\"localCharacters\":[{\"file\":\"musedirector/emma_00015_.png\",\"fileName\":\"emma_00015_.png\",\"description\":\"the young woman, with shoulder-length wavy light brown hair, slender build, wearing a black leather mini-jacket with fur trim and dark cowboy boots.\",\"fit\":\"original\",\"retention\":\"fully_preserved\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/4fd7c060-46a1-45c7-8fa8-3fba0f9d32c7\"},null,null,null,null,null,null,null],\"localLocations\":[null],\"localGuides\":[],\"localRefVideos\":[null,null,null],\"localRefAudios\":[null,null,null],\"seed_override\":null,\"_previewToken\":\"5e8128aa751148daf733ec590ed299940ff76c54e8f905b855a53d9c5ea5b977\"}],\"background\":null,\"locations\":[{\"chunk\":1}],\"firstFrameImage\":{},\"lastFrameImage\":{},\"guideImages\":[],\"refVideos\":[null,null,null],\"refAudios\":[null,null,null],\"dialogue_language\":\"English\",\"prompt_gen_provider\":\"ollama\",\"prompt_gen_base_url\":\"\",\"prompt_gen_model\":\"\",\"prompt_gen_master_enabled\":false,\"prompt_gen_master_brief\":\"\",\"prompt_gen_master_system_prompt\":\"\",\"prompt_gen_master_system_prompt_collapsed\":true,\"prompt_gen_master_draft_text\":\"\",\"prompt_gen_master_committed_text\":\"\",\"prompt_gen_master_format_version\":3,\"prompt_gen_master_upgrade_required\":false}",
+        "{\"combo_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"combo_project_name\":\"Character Sheet\",\"streaming_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"characters\":[{\"file\":\"musedirector/korayhussein_1666858616_2958146933181830982_31729585.jpg\",\"fileName\":\"korayhussein_1666858616_2958146933181830982_31729585.jpg\",\"description\":\"the woman with curly dark hair and a beige ribbed two-piece outfit, barefoot standing against a white wall\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/5a01beae-cd8f-495a-8d02-4de48c00ddd5\"}],\"chunk_color_match\":\"luminance\",\"chunks\":[{\"segments\":[{\"prompt\":\"REF 1 stands facing the camera directly, full body visible from head to\\ntoe, feet shoulder-width apart, arms relaxed at their sides. The pose is\\nalready settled at the start of the cut and holds completely still,\\nsquare-on to camera, for the full 3 seconds.\",\"weight\":0.6123138737635296,\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[]},{\"prompt\":\"REF 1 begins turning smoothly to their own left, completing the rotation to\\na full side-on left-profile view within the first half of this cut, full\\nbody still visible head to toe. They hold that profile position, still and\\nlevel, for the remainder of the cut.\",\"weight\":0.6010120751401222,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 continues the same steady rotation, completing the turn to face\\ndirectly away from camera - a full back view, full body visible head to\\ntoe - within the first half of this cut, then holds that position still for\\nthe remainder.\",\"weight\":0.5966088959301319,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 continues the same steady rotation, completing the turn to a full\\nside-on right-profile view, full body visible head to toe, within the first\\nhalf of this cut, then holds that position still for the remainder.\",\"weight\":0.6049383195984717,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 completes the rotation back to face the camera directly, full body\\nvisible, within the first half of this cut. Simultaneously, the camera\\nperforms a slow push-in that ends framed as a close-up on the head and\\nshoulders only, face square to camera. Both the turn and the push-in finish\\nby the midpoint of the cut; the final close-up composition holds completely\\nstill for the remainder.\",\"weight\":0.5851268355677446,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null}],\"prompt_gen_enabled\":false,\"prompt_gen_brief\":\"\",\"prompt_gen_draft_text\":\"\",\"prompt_gen_committed_text\":\"\",\"style_line\":\"A plain, seamless WHITE void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue, no other performers.\",\"overall_soundscape\":\"\",\"non_diegetic_music\":\"\",\"firstFrameImage\":{},\"lastFrameImage\":{},\"localCharacters\":[{\"file\":\"musedirector/emma_00015_.png\",\"fileName\":\"emma_00015_.png\",\"description\":\"the young woman, with shoulder-length wavy light brown hair, slender build, wearing a black leather mini-jacket with fur trim and dark cowboy boots.\",\"fit\":\"original\",\"retention\":\"fully_preserved\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/4fd7c060-46a1-45c7-8fa8-3fba0f9d32c7\"},null,null,null,null,null,null,null],\"localLocations\":[null],\"localGuides\":[],\"localRefVideos\":[null,null,null],\"localRefAudios\":[null,null,null],\"seed_override\":null,\"trigger_words_enabled\":true,\"trigger_words\":\"r34l1sm, perfe8ct,\",\"_previewToken\":\"bc2d48c73e7f3bea7e6439cea83c829c77ab694f9542b663d3bcf8380dd61cc8\"}],\"background\":null,\"locations\":[{\"chunk\":1}],\"firstFrameImage\":{},\"lastFrameImage\":{},\"guideImages\":[],\"refVideos\":[null,null,null],\"refAudios\":[null,null,null],\"dialogue_language\":\"English\",\"prompt_gen_provider\":\"ollama\",\"prompt_gen_base_url\":\"\",\"prompt_gen_model\":\"\",\"prompt_gen_master_enabled\":false,\"prompt_gen_master_brief\":\"\",\"prompt_gen_master_system_prompt\":\"\",\"prompt_gen_master_system_prompt_collapsed\":true,\"prompt_gen_master_draft_text\":\"\",\"prompt_gen_master_committed_text\":\"\",\"prompt_gen_master_format_version\":3,\"prompt_gen_master_upgrade_required\":false}",
         false,
         1,
         "keep character as is",
@@ -1060,12 +1105,11 @@
         0,
         "",
         "",
-        false,
         ""
       ],
       "widgets_values_named": {
         "aspect_ratio": "9:16 (Portrait Widescreen)",
-        "megapixels": 2,
+        "megapixels": 0.5,
         "multiple": 32,
         "duration_seconds": 10,
         "ref_image_size": "max",
@@ -1075,12 +1119,12 @@
         "steps": 8,
         "sampler_name": "euler",
         "scheduler": "simple",
-        "two_stage_sampling": false,
+        "two_stage_sampling": true,
         "two_stage_first_pass_steps": 2,
         "two_stage_latent_upscale_model": "h3_upscaler_lms_v0.1_fp32.safetensors",
         "two_stage_target_megapixels": 2,
         "two_stage_enable_temporal_chunking": true,
-        "timeline_data": "{\"combo_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"combo_project_name\":\"Character Sheet\",\"streaming_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"characters\":[null],\"chunk_color_match\":\"luminance\",\"chunks\":[{\"segments\":[{\"prompt\":\"REF 1 stands facing the camera directly, full body visible from head to\\ntoe, feet shoulder-width apart, arms relaxed at their sides. The pose is\\nalready settled at the start of the cut and holds completely still,\\nsquare-on to camera, for the full 3 seconds.\",\"weight\":0.6123138737635296,\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[]},{\"prompt\":\"REF 1 begins turning smoothly to their own left, completing the rotation to\\na full side-on left-profile view within the first half of this cut, full\\nbody still visible head to toe. They hold that profile position, still and\\nlevel, for the remainder of the cut.\",\"weight\":0.6010120751401222,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 continues the same steady rotation, completing the turn to face\\ndirectly away from camera - a full back view, full body visible head to\\ntoe - within the first half of this cut, then holds that position still for\\nthe remainder.\",\"weight\":0.5966088959301319,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 continues the same steady rotation, completing the turn to a full\\nside-on right-profile view, full body visible head to toe, within the first\\nhalf of this cut, then holds that position still for the remainder.\",\"weight\":0.6049383195984717,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 completes the rotation back to face the camera directly, full body\\nvisible, within the first half of this cut. Simultaneously, the camera\\nperforms a slow push-in that ends framed as a close-up on the head and\\nshoulders only, face square to camera. Both the turn and the push-in finish\\nby the midpoint of the cut; the final close-up composition holds completely\\nstill for the remainder.\",\"weight\":0.5851268355677446,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null}],\"prompt_gen_enabled\":false,\"prompt_gen_brief\":\"\",\"prompt_gen_draft_text\":\"\",\"prompt_gen_committed_text\":\"\",\"style_line\":\"r34l1sm, perfe8ct, A plain, seamless WHITE void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue, no other performers.\",\"overall_soundscape\":\"\",\"non_diegetic_music\":\"\",\"firstFrameImage\":{},\"lastFrameImage\":{},\"localCharacters\":[{\"file\":\"musedirector/emma_00015_.png\",\"fileName\":\"emma_00015_.png\",\"description\":\"the young woman, with shoulder-length wavy light brown hair, slender build, wearing a black leather mini-jacket with fur trim and dark cowboy boots.\",\"fit\":\"original\",\"retention\":\"fully_preserved\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/4fd7c060-46a1-45c7-8fa8-3fba0f9d32c7\"},null,null,null,null,null,null,null],\"localLocations\":[null],\"localGuides\":[],\"localRefVideos\":[null,null,null],\"localRefAudios\":[null,null,null],\"seed_override\":null,\"_previewToken\":\"5e8128aa751148daf733ec590ed299940ff76c54e8f905b855a53d9c5ea5b977\"}],\"background\":null,\"locations\":[{\"chunk\":1}],\"firstFrameImage\":{},\"lastFrameImage\":{},\"guideImages\":[],\"refVideos\":[null,null,null],\"refAudios\":[null,null,null],\"dialogue_language\":\"English\",\"prompt_gen_provider\":\"ollama\",\"prompt_gen_base_url\":\"\",\"prompt_gen_model\":\"\",\"prompt_gen_master_enabled\":false,\"prompt_gen_master_brief\":\"\",\"prompt_gen_master_system_prompt\":\"\",\"prompt_gen_master_system_prompt_collapsed\":true,\"prompt_gen_master_draft_text\":\"\",\"prompt_gen_master_committed_text\":\"\",\"prompt_gen_master_format_version\":3,\"prompt_gen_master_upgrade_required\":false}",
+        "timeline_data": "{\"combo_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"combo_project_name\":\"Character Sheet\",\"streaming_project_id\":\"project_dd05022c626f4b3c99ae9230886d00bc\",\"characters\":[{\"file\":\"musedirector/korayhussein_1666858616_2958146933181830982_31729585.jpg\",\"fileName\":\"korayhussein_1666858616_2958146933181830982_31729585.jpg\",\"description\":\"the woman with curly dark hair and a beige ribbed two-piece outfit, barefoot standing against a white wall\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/5a01beae-cd8f-495a-8d02-4de48c00ddd5\"}],\"chunk_color_match\":\"luminance\",\"chunks\":[{\"segments\":[{\"prompt\":\"REF 1 stands facing the camera directly, full body visible from head to\\ntoe, feet shoulder-width apart, arms relaxed at their sides. The pose is\\nalready settled at the start of the cut and holds completely still,\\nsquare-on to camera, for the full 3 seconds.\",\"weight\":0.6123138737635296,\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[]},{\"prompt\":\"REF 1 begins turning smoothly to their own left, completing the rotation to\\na full side-on left-profile view within the first half of this cut, full\\nbody still visible head to toe. They hold that profile position, still and\\nlevel, for the remainder of the cut.\",\"weight\":0.6010120751401222,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 continues the same steady rotation, completing the turn to face\\ndirectly away from camera - a full back view, full body visible head to\\ntoe - within the first half of this cut, then holds that position still for\\nthe remainder.\",\"weight\":0.5966088959301319,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 continues the same steady rotation, completing the turn to a full\\nside-on right-profile view, full body visible head to toe, within the first\\nhalf of this cut, then holds that position still for the remainder.\",\"weight\":0.6049383195984717,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null},{\"prompt\":\"REF 1 completes the rotation back to face the camera directly, full body\\nvisible, within the first half of this cut. Simultaneously, the camera\\nperforms a slow push-in that ends framed as a close-up on the head and\\nshoulders only, face square to camera. Both the turn and the push-in finish\\nby the midpoint of the cut; the final close-up composition holds completely\\nstill for the remainder.\",\"weight\":0.5851268355677446,\"duration_hint\":\"2.0\",\"dialogueSpeakers\":[],\"videoRefSlot\":null,\"videoRefMode\":\"motion\",\"videoRefTiming\":\"free\",\"videoRefTargetCharIdx\":null}],\"prompt_gen_enabled\":false,\"prompt_gen_brief\":\"\",\"prompt_gen_draft_text\":\"\",\"prompt_gen_committed_text\":\"\",\"style_line\":\"A plain, seamless WHITE void with soft, even, shadowless studio lighting - no floor line, no props, no set dressing. REF 1 stands centered in frame for the full 10 seconds, performing one continuous, slow, steady turn under a static camera that never moves, pans or zooms. No dialogue, no other performers.\",\"overall_soundscape\":\"\",\"non_diegetic_music\":\"\",\"firstFrameImage\":{},\"lastFrameImage\":{},\"localCharacters\":[{\"file\":\"musedirector/emma_00015_.png\",\"fileName\":\"emma_00015_.png\",\"description\":\"the young woman, with shoulder-length wavy light brown hair, slender build, wearing a black leather mini-jacket with fur trim and dark cowboy boots.\",\"fit\":\"original\",\"retention\":\"fully_preserved\",\"_blobUrl\":\"blob:http://127.0.0.1:8188/4fd7c060-46a1-45c7-8fa8-3fba0f9d32c7\"},null,null,null,null,null,null,null],\"localLocations\":[null],\"localGuides\":[],\"localRefVideos\":[null,null,null],\"localRefAudios\":[null,null,null],\"seed_override\":null,\"trigger_words_enabled\":true,\"trigger_words\":\"r34l1sm, perfe8ct,\",\"_previewToken\":\"bc2d48c73e7f3bea7e6439cea83c829c77ab694f9542b663d3bcf8380dd61cc8\"}],\"background\":null,\"locations\":[{\"chunk\":1}],\"firstFrameImage\":{},\"lastFrameImage\":{},\"guideImages\":[],\"refVideos\":[null,null,null],\"refAudios\":[null,null,null],\"dialogue_language\":\"English\",\"prompt_gen_provider\":\"ollama\",\"prompt_gen_base_url\":\"\",\"prompt_gen_model\":\"\",\"prompt_gen_master_enabled\":false,\"prompt_gen_master_brief\":\"\",\"prompt_gen_master_system_prompt\":\"\",\"prompt_gen_master_system_prompt_collapsed\":true,\"prompt_gen_master_draft_text\":\"\",\"prompt_gen_master_committed_text\":\"\",\"prompt_gen_master_format_version\":3,\"prompt_gen_master_upgrade_required\":false}",
         "use_refmod": false,
         "refmod_retention": 1,
         "refmod_description": "keep character as is",
@@ -1094,7 +1138,6 @@
         "refmod_max_total_tokens": 0,
         "refmod_graph_preset": "",
         "refmod_save_preset_as": "",
-        "test_author_refine_schedule": false,
         "mch3_timeline_ui": ""
       },
       "color": "#222",
@@ -1150,13 +1193,14 @@
       ],
       "title": "Full",
       "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "4ee72c065db22c9d96c2427954dc69e7b908444b",
         "Node name for S&R": "VHS_VideoCombine",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
         },
-        "cnr_id": "comfyui-videohelpersuite",
         "aux_id": "Kosinkadink/ComfyUI-VideoHelperSuite"
       },
       "widgets_values": {
@@ -1174,13 +1218,22 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "Character_00159-audio.mp4",
+            "filename": "Character_00220-audio.mp4",
             "subfolder": "Muse\\Video\\Character Sheets",
             "type": "output",
             "format": "video/h264-mp4",
             "frame_rate": 24,
-            "workflow": "Character_00159.png",
-            "fullpath": "E:\\Muse Collective\\MUSE COLLECTIVE WORKFLOWS\\ComfyUI-Easy-Install\\ComfyUI-Easy-Install\\ComfyUI\\output\\Muse\\Video\\Character Sheets\\Character_00159-audio.mp4"
+            "workflow": "Character_00220.png",
+            "fullpath": "E:\\Muse Collective\\MUSE COLLECTIVE WORKFLOWS\\ComfyUI-Easy-Install\\ComfyUI-Easy-Install\\ComfyUI\\output\\Muse\\Video\\Character Sheets\\Character_00220-audio.mp4",
+            "metadata": {
+              "kind": "video",
+              "width": 1088,
+              "height": 1920,
+              "duration": 10.125,
+              "fps": 24,
+              "frame_count": 243
+            },
+            "id": "d0fbb82f-fbaf-4c51-a9b5-30150a1f9cff"
           }
         }
       },
@@ -1199,13 +1252,22 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "Character_00159-audio.mp4",
+            "filename": "Character_00220-audio.mp4",
             "subfolder": "Muse\\Video\\Character Sheets",
             "type": "output",
             "format": "video/h264-mp4",
             "frame_rate": 24,
-            "workflow": "Character_00159.png",
-            "fullpath": "E:\\Muse Collective\\MUSE COLLECTIVE WORKFLOWS\\ComfyUI-Easy-Install\\ComfyUI-Easy-Install\\ComfyUI\\output\\Muse\\Video\\Character Sheets\\Character_00159-audio.mp4"
+            "workflow": "Character_00220.png",
+            "fullpath": "E:\\Muse Collective\\MUSE COLLECTIVE WORKFLOWS\\ComfyUI-Easy-Install\\ComfyUI-Easy-Install\\ComfyUI\\output\\Muse\\Video\\Character Sheets\\Character_00220-audio.mp4",
+            "metadata": {
+              "kind": "video",
+              "width": 1088,
+              "height": 1920,
+              "duration": 10.125,
+              "fps": 24,
+              "frame_count": 243
+            },
+            "id": "d0fbb82f-fbaf-4c51-a9b5-30150a1f9cff"
           }
         }
       },
@@ -1215,8 +1277,8 @@
       "id": 6199,
       "type": "SaveImage",
       "pos": [
-        8526.805136360601,
-        7224.8901281009785
+        7461.400648975947,
+        6732.3752555207375
       ],
       "size": [
         1990.3619775767456,
@@ -1240,9 +1302,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "SaveImage",
         "cnr_id": "comfy-core",
-        "ver": "0.34.2"
+        "ver": "0.34.2",
+        "Node name for S&R": "SaveImage"
       },
       "widgets_values": [
         "ComfyUI"
@@ -1257,8 +1319,8 @@
       "id": 6307,
       "type": "e83b21ff-369f-407b-8b1e-f11ba11352d8",
       "pos": [
-        7649.940828100928,
-        6914.065663859554
+        7555.474156812653,
+        6937.682331681623
       ],
       "size": [
         210,
@@ -1284,6 +1346,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.39.2",
         "previewExposures": [
           {
             "name": "$$canvas-image-preview",
@@ -1310,9 +1374,7 @@
             "sourceNodeId": "6284",
             "sourcePreviewName": "$$canvas-image-preview"
           }
-        ],
-        "cnr_id": "comfy-core",
-        "ver": "0.39.2"
+        ]
       },
       "widgets_values": [
         42
@@ -1338,14 +1400,6 @@
       23,
       0,
       "STRING"
-    ],
-    [
-      14845,
-      6098,
-      0,
-      1,
-      5,
-      "H3_REF_MODS"
     ],
     [
       14858,
@@ -1458,6 +1512,14 @@
       1,
       3,
       "VAE"
+    ],
+    [
+      14845,
+      6098,
+      0,
+      1,
+      5,
+      "H3_REF_MODS"
     ]
   ],
   "groups": [
@@ -1705,6 +1767,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "UNETLoader",
               "models": [
                 {
@@ -1717,9 +1781,7 @@
                 "widget_ue_connectable": {},
                 "version": "7.8",
                 "input_ue_unconnectable": {}
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              }
             },
             "widgets_values": [
               "minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
@@ -1772,14 +1834,14 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "LoraLoaderModelOnly",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              }
             },
             "widgets_values": [
               "H3\\minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
@@ -1841,14 +1903,14 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "LoraLoaderModelOnly",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              }
             },
             "widgets_values": [
               "H3\\h3-realism-people-t2v-i2v-r2v.safetensors",
@@ -1910,14 +1972,14 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "LoraLoaderModelOnly",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              }
             },
             "widgets_values": [
               "H3\\MysticXXX_MMH3-V1.safetensors",
@@ -1961,13 +2023,14 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfyui-kjnodes",
+              "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
               "Node name for S&R": "MiniMaxH3MemoryEfficientSageAttentionPatch",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
               },
-              "cnr_id": "comfyui-kjnodes",
               "aux_id": "kijai/ComfyUI-KJNodes"
             }
           },
@@ -2004,8 +2067,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "MiniMaxLowVRAMAttention",
               "cnr_id": "comfyui-kjnodes",
+              "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
+              "Node name for S&R": "MiniMaxLowVRAMAttention",
               "aux_id": "kijai/ComfyUI-KJNodes"
             },
             "widgets_values": [
@@ -2048,8 +2112,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "MiniMaxChunkFeedForward",
               "cnr_id": "comfyui-kjnodes",
+              "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
+              "Node name for S&R": "MiniMaxChunkFeedForward",
               "aux_id": "kijai/ComfyUI-KJNodes"
             },
             "widgets_values": [
@@ -2097,6 +2162,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "CLIPLoader",
               "models": [
                 {
@@ -2109,9 +2176,7 @@
                 "widget_ue_connectable": {},
                 "version": "7.8",
                 "input_ue_unconnectable": {}
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              }
             },
             "widgets_values": [
               "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
@@ -2160,6 +2225,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "VAELoader",
               "models": [
                 {
@@ -2172,9 +2239,7 @@
                 "widget_ue_connectable": {},
                 "version": "7.8",
                 "input_ue_unconnectable": {}
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              }
             },
             "widgets_values": [
               "minimax_h3_video_vae_fp16.safetensors"
@@ -2219,6 +2284,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "VAELoader",
               "models": [
                 {
@@ -2231,9 +2298,7 @@
                 "widget_ue_connectable": {},
                 "version": "7.8",
                 "input_ue_unconnectable": {}
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              }
             },
             "widgets_values": [
               "minimax_h3_audio_vae_fp32.safetensors"
@@ -2517,14 +2582,14 @@
             ],
             "title": "Close Up",
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.24.0",
               "Node name for S&R": "ImageFromBatch",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.24.0"
+              }
             },
             "widgets_values": [
               236,
@@ -2570,9 +2635,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "SeedNode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "SeedNode"
             },
             "widgets_values": [
               42,
@@ -2620,14 +2685,14 @@
             ],
             "title": "Front View",
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.24.0",
               "Node name for S&R": "ImageFromBatch",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.24.0"
+              }
             },
             "widgets_values": [
               24,
@@ -2676,14 +2741,14 @@
             ],
             "title": "Right Profile",
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.24.0",
               "Node name for S&R": "ImageFromBatch",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.24.0"
+              }
             },
             "widgets_values": [
               72,
@@ -2732,14 +2797,14 @@
             ],
             "title": "Left Profile",
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.24.0",
               "Node name for S&R": "ImageFromBatch",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.24.0"
+              }
             },
             "widgets_values": [
               168,
@@ -2788,14 +2853,14 @@
             ],
             "title": "Back View",
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.24.0",
               "Node name for S&R": "ImageFromBatch",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.24.0"
+              }
             },
             "widgets_values": [
               120,
@@ -2841,15 +2906,17 @@
             ],
             "title": "Close Up",
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.28.0",
               "Node name for S&R": "PreviewImage",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.28.0"
-            }
+              }
+            },
+            "widgets_values": [],
+            "widgets_values_named": {}
           },
           {
             "id": 6281,
@@ -2885,15 +2952,17 @@
             ],
             "title": "Front View",
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.28.0",
               "Node name for S&R": "PreviewImage",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.28.0"
-            }
+              }
+            },
+            "widgets_values": [],
+            "widgets_values_named": {}
           },
           {
             "id": 6282,
@@ -2929,15 +2998,17 @@
             ],
             "title": "Right Profile",
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.28.0",
               "Node name for S&R": "PreviewImage",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.28.0"
-            }
+              }
+            },
+            "widgets_values": [],
+            "widgets_values_named": {}
           },
           {
             "id": 6283,
@@ -2973,15 +3044,17 @@
             ],
             "title": "Left Profile",
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.28.0",
               "Node name for S&R": "PreviewImage",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.28.0"
-            }
+              }
+            },
+            "widgets_values": [],
+            "widgets_values_named": {}
           },
           {
             "id": 6293,
@@ -3028,8 +3101,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "RMBG",
               "cnr_id": "comfyui-rmbg",
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
               "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
@@ -3102,8 +3176,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "RMBG",
               "cnr_id": "comfyui-rmbg",
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
               "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
@@ -3176,8 +3251,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "RMBG",
               "cnr_id": "comfyui-rmbg",
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
               "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
@@ -3250,8 +3326,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "RMBG",
               "cnr_id": "comfyui-rmbg",
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
               "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
@@ -3314,8 +3391,9 @@
             ],
             "title": "RGB for Background Removal",
             "properties": {
-              "Node name for S&R": "Images to RGB",
               "cnr_id": "was-ns",
+              "ver": "3.0.1",
+              "Node name for S&R": "Images to RGB",
               "aux_id": "ltdrdata/was-node-suite-comfyui"
             },
             "color": "#222e40",
@@ -3356,8 +3434,9 @@
             ],
             "title": "RGB for Background Removal",
             "properties": {
-              "Node name for S&R": "Images to RGB",
               "cnr_id": "was-ns",
+              "ver": "3.0.1",
+              "Node name for S&R": "Images to RGB",
               "aux_id": "ltdrdata/was-node-suite-comfyui"
             },
             "color": "#222e40",
@@ -3398,8 +3477,9 @@
             ],
             "title": "RGB for Background Removal",
             "properties": {
-              "Node name for S&R": "Images to RGB",
               "cnr_id": "was-ns",
+              "ver": "3.0.1",
+              "Node name for S&R": "Images to RGB",
               "aux_id": "ltdrdata/was-node-suite-comfyui"
             },
             "color": "#222e40",
@@ -3440,8 +3520,9 @@
             ],
             "title": "RGB for Background Removal",
             "properties": {
-              "Node name for S&R": "Images to RGB",
               "cnr_id": "was-ns",
+              "ver": "3.0.1",
+              "Node name for S&R": "Images to RGB",
               "aux_id": "ltdrdata/was-node-suite-comfyui"
             },
             "color": "#222e40",
@@ -3482,8 +3563,9 @@
             ],
             "title": "RGB for Background Removal",
             "properties": {
-              "Node name for S&R": "Images to RGB",
               "cnr_id": "was-ns",
+              "ver": "3.0.1",
+              "Node name for S&R": "Images to RGB",
               "aux_id": "ltdrdata/was-node-suite-comfyui"
             },
             "color": "#222e40",
@@ -3534,8 +3616,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "RMBG",
               "cnr_id": "comfyui-rmbg",
+              "ver": "9edb2bec390091fb9b7fb3d68a64a7af713ea2fc",
+              "Node name for S&R": "RMBG",
               "aux_id": "1038lab/ComfyUI-RMBG"
             },
             "widgets_values": [
@@ -3597,15 +3680,17 @@
             ],
             "title": "Back View",
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.28.0",
               "Node name for S&R": "PreviewImage",
               "ue_properties": {
                 "widget_ue_connectable": {},
                 "input_ue_unconnectable": {},
                 "version": "7.8"
-              },
-              "cnr_id": "comfy-core",
-              "ver": "0.28.0"
-            }
+              }
+            },
+            "widgets_values": [],
+            "widgets_values_named": {}
           },
           {
             "id": 6285,
@@ -3664,8 +3749,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "MuseCharacterSheetCompositor",
-              "aux_id": "muse-collective-26/Muse-CharacterSheet-H3"
+              "aux_id": "muse-collective-26/Muse-CharacterSheet-H3",
+              "ver": "558a48e32d38517ae5070e40237cdea06e365af6",
+              "Node name for S&R": "MuseCharacterSheetCompositor"
             },
             "widgets_values": [
               1080,
@@ -3729,9 +3815,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "GetImageSize",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "GetImageSize"
             }
           },
           {
@@ -3913,9 +3999,9 @@
               }
             ],
             "properties": {
-              "previewExposures": [],
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "previewExposures": []
             },
             "widgets_values": [
               0,
@@ -3928,7 +4014,7 @@
               1024,
               "euler",
               "simple",
-              940251214802793,
+              53771993266945,
               "qwen_image_2.1_int8_convrot.safetensors",
               "qwen3vl_8b_int8_convrot.safetensors",
               "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors",
@@ -3946,7 +4032,7 @@
               "height": 1024,
               "scheduler": "euler",
               "scheduler_1": "simple",
-              "seed": 940251214802793,
+              "seed": 53771993266945,
               "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
               "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
               "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors",
@@ -3980,8 +4066,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "DLSS5Settings",
-              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+              "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+              "Node name for S&R": "DLSS5Settings"
             },
             "widgets_values": [
               "1x (DLAA / native)",
@@ -4054,8 +4141,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "DLSS5EnhanceImages",
-              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+              "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+              "Node name for S&R": "DLSS5EnhanceImages"
             },
             "widgets_values": [
               true
@@ -4111,9 +4199,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "GetImageSize",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "GetImageSize"
             }
           },
           {
@@ -4295,9 +4383,9 @@
               }
             ],
             "properties": {
-              "previewExposures": [],
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "previewExposures": []
             },
             "widgets_values": [
               0,
@@ -4310,7 +4398,7 @@
               1024,
               "euler",
               "simple",
-              275620402859032,
+              72072820682811,
               "qwen_image_2.1_int8_convrot.safetensors",
               "qwen3vl_8b_int8_convrot.safetensors",
               "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors",
@@ -4328,7 +4416,7 @@
               "height": 1024,
               "scheduler": "euler",
               "scheduler_1": "simple",
-              "seed": 275620402859032,
+              "seed": 72072820682811,
               "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
               "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
               "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors",
@@ -4362,8 +4450,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "DLSS5Settings",
-              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+              "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+              "Node name for S&R": "DLSS5Settings"
             },
             "widgets_values": [
               "1x (DLAA / native)",
@@ -4436,8 +4525,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "DLSS5EnhanceImages",
-              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+              "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+              "Node name for S&R": "DLSS5EnhanceImages"
             },
             "widgets_values": [
               true
@@ -4493,9 +4583,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "GetImageSize",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "GetImageSize"
             }
           },
           {
@@ -4677,9 +4767,9 @@
               }
             ],
             "properties": {
-              "previewExposures": [],
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "previewExposures": []
             },
             "widgets_values": [
               0,
@@ -4692,7 +4782,7 @@
               1024,
               "euler",
               "simple",
-              1081083454173580,
+              642125670394220,
               "qwen_image_2.1_int8_convrot.safetensors",
               "qwen3vl_8b_int8_convrot.safetensors",
               "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors",
@@ -4710,7 +4800,7 @@
               "height": 1024,
               "scheduler": "euler",
               "scheduler_1": "simple",
-              "seed": 1081083454173580,
+              "seed": 642125670394220,
               "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
               "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
               "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors",
@@ -4744,8 +4834,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "DLSS5Settings",
-              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+              "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+              "Node name for S&R": "DLSS5Settings"
             },
             "widgets_values": [
               "1x (DLAA / native)",
@@ -4818,8 +4909,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "DLSS5EnhanceImages",
-              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+              "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+              "Node name for S&R": "DLSS5EnhanceImages"
             },
             "widgets_values": [
               true
@@ -4875,9 +4967,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "GetImageSize",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "GetImageSize"
             }
           },
           {
@@ -5059,9 +5151,9 @@
               }
             ],
             "properties": {
-              "previewExposures": [],
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "previewExposures": []
             },
             "widgets_values": [
               0,
@@ -5074,7 +5166,7 @@
               1024,
               "euler",
               "simple",
-              793001084654601,
+              306199673697794,
               "qwen_image_2.1_int8_convrot.safetensors",
               "qwen3vl_8b_int8_convrot.safetensors",
               "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors",
@@ -5092,7 +5184,7 @@
               "height": 1024,
               "scheduler": "euler",
               "scheduler_1": "simple",
-              "seed": 793001084654601,
+              "seed": 306199673697794,
               "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
               "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
               "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors",
@@ -5126,8 +5218,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "DLSS5Settings",
-              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+              "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+              "Node name for S&R": "DLSS5Settings"
             },
             "widgets_values": [
               "1x (DLAA / native)",
@@ -5200,8 +5293,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "DLSS5EnhanceImages",
-              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+              "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+              "Node name for S&R": "DLSS5EnhanceImages"
             },
             "widgets_values": [
               true
@@ -5257,9 +5351,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "GetImageSize",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "GetImageSize"
             }
           },
           {
@@ -5441,9 +5535,9 @@
               }
             ],
             "properties": {
-              "previewExposures": [],
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "previewExposures": []
             },
             "widgets_values": [
               0,
@@ -5456,7 +5550,7 @@
               1024,
               "euler",
               "simple",
-              302735936916786,
+              866852982395911,
               "qwen_image_2.1_int8_convrot.safetensors",
               "qwen3vl_8b_int8_convrot.safetensors",
               "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors",
@@ -5474,7 +5568,7 @@
               "height": 1024,
               "scheduler": "euler",
               "scheduler_1": "simple",
-              "seed": 302735936916786,
+              "seed": 866852982395911,
               "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
               "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
               "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors",
@@ -5508,8 +5602,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "DLSS5Settings",
-              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+              "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+              "Node name for S&R": "DLSS5Settings"
             },
             "widgets_values": [
               "1x (DLAA / native)",
@@ -5582,8 +5677,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "DLSS5EnhanceImages",
-              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer"
+              "aux_id": "Blueforcer/ComfyUI-DLSS5-Enhancer",
+              "ver": "796ed5927a202ba50b5c929cd08e16b365041162",
+              "Node name for S&R": "DLSS5EnhanceImages"
             },
             "widgets_values": [
               true
@@ -5772,30 +5868,6 @@
             "type": "IMAGE"
           },
           {
-            "id": 15251,
-            "origin_id": 6308,
-            "origin_slot": 0,
-            "target_id": 6309,
-            "target_slot": 3,
-            "type": "INT"
-          },
-          {
-            "id": 15252,
-            "origin_id": 6308,
-            "origin_slot": 1,
-            "target_id": 6309,
-            "target_slot": 4,
-            "type": "INT"
-          },
-          {
-            "id": 15253,
-            "origin_id": 6286,
-            "origin_slot": 0,
-            "target_id": 6309,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 15254,
             "origin_id": 6287,
             "origin_slot": 0,
@@ -5833,30 +5905,6 @@
             "origin_slot": 0,
             "target_id": 6315,
             "target_slot": 0,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15259,
-            "origin_id": 6312,
-            "origin_slot": 0,
-            "target_id": 6313,
-            "target_slot": 3,
-            "type": "INT"
-          },
-          {
-            "id": 15260,
-            "origin_id": 6312,
-            "origin_slot": 1,
-            "target_id": 6313,
-            "target_slot": 4,
-            "type": "INT"
-          },
-          {
-            "id": 15261,
-            "origin_id": 6287,
-            "origin_slot": 0,
-            "target_id": 6313,
-            "target_slot": 7,
             "type": "IMAGE"
           },
           {
@@ -5900,30 +5948,6 @@
             "type": "IMAGE"
           },
           {
-            "id": 15267,
-            "origin_id": 6316,
-            "origin_slot": 0,
-            "target_id": 6317,
-            "target_slot": 3,
-            "type": "INT"
-          },
-          {
-            "id": 15268,
-            "origin_id": 6316,
-            "origin_slot": 1,
-            "target_id": 6317,
-            "target_slot": 4,
-            "type": "INT"
-          },
-          {
-            "id": 15269,
-            "origin_id": 6288,
-            "origin_slot": 0,
-            "target_id": 6317,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 15270,
             "origin_id": 6289,
             "origin_slot": 0,
@@ -5964,30 +5988,6 @@
             "type": "IMAGE"
           },
           {
-            "id": 15275,
-            "origin_id": 6320,
-            "origin_slot": 0,
-            "target_id": 6321,
-            "target_slot": 3,
-            "type": "INT"
-          },
-          {
-            "id": 15276,
-            "origin_id": 6320,
-            "origin_slot": 1,
-            "target_id": 6321,
-            "target_slot": 4,
-            "type": "INT"
-          },
-          {
-            "id": 15277,
-            "origin_id": 6289,
-            "origin_slot": 0,
-            "target_id": 6321,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 15278,
             "origin_id": 6290,
             "origin_slot": 0,
@@ -6025,6 +6025,102 @@
             "origin_slot": 0,
             "target_id": 6284,
             "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15251,
+            "origin_id": 6308,
+            "origin_slot": 0,
+            "target_id": 6309,
+            "target_slot": 3,
+            "type": "INT"
+          },
+          {
+            "id": 15252,
+            "origin_id": 6308,
+            "origin_slot": 1,
+            "target_id": 6309,
+            "target_slot": 4,
+            "type": "INT"
+          },
+          {
+            "id": 15253,
+            "origin_id": 6286,
+            "origin_slot": 0,
+            "target_id": 6309,
+            "target_slot": 7,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15259,
+            "origin_id": 6312,
+            "origin_slot": 0,
+            "target_id": 6313,
+            "target_slot": 3,
+            "type": "INT"
+          },
+          {
+            "id": 15260,
+            "origin_id": 6312,
+            "origin_slot": 1,
+            "target_id": 6313,
+            "target_slot": 4,
+            "type": "INT"
+          },
+          {
+            "id": 15261,
+            "origin_id": 6287,
+            "origin_slot": 0,
+            "target_id": 6313,
+            "target_slot": 7,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15267,
+            "origin_id": 6316,
+            "origin_slot": 0,
+            "target_id": 6317,
+            "target_slot": 3,
+            "type": "INT"
+          },
+          {
+            "id": 15268,
+            "origin_id": 6316,
+            "origin_slot": 1,
+            "target_id": 6317,
+            "target_slot": 4,
+            "type": "INT"
+          },
+          {
+            "id": 15269,
+            "origin_id": 6288,
+            "origin_slot": 0,
+            "target_id": 6317,
+            "target_slot": 7,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15275,
+            "origin_id": 6320,
+            "origin_slot": 0,
+            "target_id": 6321,
+            "target_slot": 3,
+            "type": "INT"
+          },
+          {
+            "id": 15276,
+            "origin_id": 6320,
+            "origin_slot": 1,
+            "target_id": 6321,
+            "target_slot": 4,
+            "type": "INT"
+          },
+          {
+            "id": 15277,
+            "origin_id": 6289,
+            "origin_slot": 0,
+            "target_id": 6321,
+            "target_slot": 7,
             "type": "IMAGE"
           },
           {
@@ -6473,6 +6569,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "CLIPLoader",
               "models": [
                 {
@@ -6480,9 +6578,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors",
                   "directory": "text_encoders"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen3vl_8b_int8_convrot.safetensors",
@@ -6532,6 +6628,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "VAELoader",
               "models": [
                 {
@@ -6539,9 +6637,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors",
                   "directory": "vae"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen_image_2.1_vae_bf16.safetensors"
@@ -6595,9 +6691,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "EmptyLatentImage",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "EmptyLatentImage"
             },
             "widgets_values": [
               1024,
@@ -6649,9 +6745,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "VAEDecode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "VAEDecode"
             }
           },
           {
@@ -6750,9 +6846,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "KSampler",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "KSampler"
             },
             "widgets_values": [
               1100825138121526,
@@ -6823,9 +6919,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "ComfySwitchNode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "ComfySwitchNode"
             },
             "widgets_values": [
               false
@@ -6885,9 +6981,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "QwenImage21Cache",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "QwenImage21Cache"
             },
             "widgets_values": [
               "auto",
@@ -6968,34 +7064,6 @@
                 "link": null
               },
               {
-                "localized_name": "image_4",
-                "name": "images.image_4",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15064
-              },
-              {
-                "localized_name": "image_5",
-                "name": "images.image_5",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15065
-              },
-              {
-                "localized_name": "image_6",
-                "name": "images.image_6",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15066
-              },
-              {
-                "localized_name": "image_7",
-                "name": "images.image_7",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15067
-              },
-              {
                 "localized_name": "image_8",
                 "name": "images.image_8",
                 "shape": 7,
@@ -7036,6 +7104,34 @@
                 "shape": 7,
                 "type": "IMAGE",
                 "link": 15063
+              },
+              {
+                "localized_name": "image_4",
+                "name": "images.image_4",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15064
+              },
+              {
+                "localized_name": "image_5",
+                "name": "images.image_5",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15065
+              },
+              {
+                "localized_name": "image_6",
+                "name": "images.image_6",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15066
+              },
+              {
+                "localized_name": "image_7",
+                "name": "images.image_7",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15067
               }
             ],
             "outputs": [
@@ -7065,9 +7161,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "TextEncodeQwenImage21",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "TextEncodeQwenImage21"
             },
             "widgets_values": [
               "",
@@ -7116,6 +7212,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "UNETLoader",
               "models": [
                 {
@@ -7123,9 +7221,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors",
                   "directory": "diffusion_models"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen_image_2.1_int8_convrot.safetensors",
@@ -7169,9 +7265,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "LoraLoaderModelOnly",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "LoraLoaderModelOnly"
             },
             "widgets_values": [
               "elusarcas-qwen2-1-detailer-v1.safetensors",
@@ -7475,43 +7571,11 @@
             "type": "INT"
           },
           {
-            "id": 15064,
-            "origin_id": -10,
-            "origin_slot": 17,
-            "target_id": 6234,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15065,
-            "origin_id": -10,
-            "origin_slot": 18,
-            "target_id": 6234,
-            "target_slot": 8,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15066,
-            "origin_id": -10,
-            "origin_slot": 19,
-            "target_id": 6234,
-            "target_slot": 9,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15067,
-            "origin_id": -10,
-            "origin_slot": 20,
-            "target_id": 6234,
-            "target_slot": 10,
-            "type": "IMAGE"
-          },
-          {
             "id": 15068,
             "origin_id": -10,
             "origin_slot": 21,
             "target_id": 6234,
-            "target_slot": 11,
+            "target_slot": 7,
             "type": "IMAGE"
           },
           {
@@ -7519,7 +7583,7 @@
             "origin_id": -10,
             "origin_slot": 22,
             "target_id": 6234,
-            "target_slot": 12,
+            "target_slot": 8,
             "type": "IMAGE"
           },
           {
@@ -7527,7 +7591,7 @@
             "origin_id": -10,
             "origin_slot": 23,
             "target_id": 6234,
-            "target_slot": 13,
+            "target_slot": 9,
             "type": "IMAGE"
           },
           {
@@ -7535,13 +7599,45 @@
             "origin_id": -10,
             "origin_slot": 15,
             "target_id": 6234,
-            "target_slot": 15,
+            "target_slot": 11,
             "type": "IMAGE"
           },
           {
             "id": 15063,
             "origin_id": -10,
             "origin_slot": 16,
+            "target_id": 6234,
+            "target_slot": 12,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15064,
+            "origin_id": -10,
+            "origin_slot": 17,
+            "target_id": 6234,
+            "target_slot": 13,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15065,
+            "origin_id": -10,
+            "origin_slot": 18,
+            "target_id": 6234,
+            "target_slot": 14,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15066,
+            "origin_id": -10,
+            "origin_slot": 19,
+            "target_id": 6234,
+            "target_slot": 15,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15067,
+            "origin_id": -10,
+            "origin_slot": 20,
             "target_id": 6234,
             "target_slot": 16,
             "type": "IMAGE"
@@ -7968,6 +8064,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "CLIPLoader",
               "models": [
                 {
@@ -7975,9 +8073,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors",
                   "directory": "text_encoders"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen3vl_8b_int8_convrot.safetensors",
@@ -8027,6 +8123,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "VAELoader",
               "models": [
                 {
@@ -8034,9 +8132,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors",
                   "directory": "vae"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen_image_2.1_vae_bf16.safetensors"
@@ -8090,9 +8186,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "EmptyLatentImage",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "EmptyLatentImage"
             },
             "widgets_values": [
               1024,
@@ -8144,9 +8240,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "VAEDecode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "VAEDecode"
             }
           },
           {
@@ -8245,9 +8341,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "KSampler",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "KSampler"
             },
             "widgets_values": [
               595221426384143,
@@ -8318,9 +8414,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "ComfySwitchNode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "ComfySwitchNode"
             },
             "widgets_values": [
               false
@@ -8380,9 +8476,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "QwenImage21Cache",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "QwenImage21Cache"
             },
             "widgets_values": [
               "auto",
@@ -8463,6 +8559,34 @@
                 "link": null
               },
               {
+                "localized_name": "image_6",
+                "name": "images.image_6",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 715
+              },
+              {
+                "localized_name": "image_7",
+                "name": "images.image_7",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 716
+              },
+              {
+                "localized_name": "image_8",
+                "name": "images.image_8",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 717
+              },
+              {
+                "localized_name": "image_9",
+                "name": "images.image_9",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 718
+              },
+              {
                 "localized_name": "image_10",
                 "name": "images.image_10",
                 "shape": 7,
@@ -8503,34 +8627,6 @@
                 "shape": 7,
                 "type": "IMAGE",
                 "link": 714
-              },
-              {
-                "localized_name": "image_6",
-                "name": "images.image_6",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 715
-              },
-              {
-                "localized_name": "image_7",
-                "name": "images.image_7",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 716
-              },
-              {
-                "localized_name": "image_8",
-                "name": "images.image_8",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 717
-              },
-              {
-                "localized_name": "image_9",
-                "name": "images.image_9",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 718
               }
             ],
             "outputs": [
@@ -8560,9 +8656,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "TextEncodeQwenImage21",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "TextEncodeQwenImage21"
             },
             "widgets_values": [
               "",
@@ -8611,6 +8707,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "UNETLoader",
               "models": [
                 {
@@ -8618,9 +8716,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors",
                   "directory": "diffusion_models"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen_image_2.1_int8_convrot.safetensors",
@@ -8664,9 +8760,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "LoraLoaderModelOnly",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "LoraLoaderModelOnly"
             },
             "widgets_values": [
               "elusarcas-qwen2-1-detailer-v1.safetensors",
@@ -8970,51 +9066,11 @@
             "type": "INT"
           },
           {
-            "id": 719,
-            "origin_id": -10,
-            "origin_slot": 23,
-            "target_id": 474,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
-            "id": 711,
-            "origin_id": -10,
-            "origin_slot": 15,
-            "target_id": 474,
-            "target_slot": 9,
-            "type": "IMAGE"
-          },
-          {
-            "id": 712,
-            "origin_id": -10,
-            "origin_slot": 16,
-            "target_id": 474,
-            "target_slot": 10,
-            "type": "IMAGE"
-          },
-          {
-            "id": 713,
-            "origin_id": -10,
-            "origin_slot": 17,
-            "target_id": 474,
-            "target_slot": 11,
-            "type": "IMAGE"
-          },
-          {
-            "id": 714,
-            "origin_id": -10,
-            "origin_slot": 18,
-            "target_id": 474,
-            "target_slot": 12,
-            "type": "IMAGE"
-          },
-          {
             "id": 715,
             "origin_id": -10,
             "origin_slot": 19,
             "target_id": 474,
-            "target_slot": 13,
+            "target_slot": 7,
             "type": "IMAGE"
           },
           {
@@ -9022,7 +9078,7 @@
             "origin_id": -10,
             "origin_slot": 20,
             "target_id": 474,
-            "target_slot": 14,
+            "target_slot": 8,
             "type": "IMAGE"
           },
           {
@@ -9030,13 +9086,53 @@
             "origin_id": -10,
             "origin_slot": 21,
             "target_id": 474,
-            "target_slot": 15,
+            "target_slot": 9,
             "type": "IMAGE"
           },
           {
             "id": 718,
             "origin_id": -10,
             "origin_slot": 22,
+            "target_id": 474,
+            "target_slot": 10,
+            "type": "IMAGE"
+          },
+          {
+            "id": 719,
+            "origin_id": -10,
+            "origin_slot": 23,
+            "target_id": 474,
+            "target_slot": 11,
+            "type": "IMAGE"
+          },
+          {
+            "id": 711,
+            "origin_id": -10,
+            "origin_slot": 15,
+            "target_id": 474,
+            "target_slot": 13,
+            "type": "IMAGE"
+          },
+          {
+            "id": 712,
+            "origin_id": -10,
+            "origin_slot": 16,
+            "target_id": 474,
+            "target_slot": 14,
+            "type": "IMAGE"
+          },
+          {
+            "id": 713,
+            "origin_id": -10,
+            "origin_slot": 17,
+            "target_id": 474,
+            "target_slot": 15,
+            "type": "IMAGE"
+          },
+          {
+            "id": 714,
+            "origin_id": -10,
+            "origin_slot": 18,
             "target_id": 474,
             "target_slot": 16,
             "type": "IMAGE"
@@ -9463,6 +9559,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "CLIPLoader",
               "models": [
                 {
@@ -9470,9 +9568,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors",
                   "directory": "text_encoders"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen3vl_8b_int8_convrot.safetensors",
@@ -9522,6 +9618,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "VAELoader",
               "models": [
                 {
@@ -9529,9 +9627,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors",
                   "directory": "vae"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen_image_2.1_vae_bf16.safetensors"
@@ -9585,9 +9681,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "EmptyLatentImage",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "EmptyLatentImage"
             },
             "widgets_values": [
               1024,
@@ -9639,9 +9735,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "VAEDecode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "VAEDecode"
             }
           },
           {
@@ -9740,9 +9836,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "KSampler",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "KSampler"
             },
             "widgets_values": [
               1066896491554005,
@@ -9813,9 +9909,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "ComfySwitchNode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "ComfySwitchNode"
             },
             "widgets_values": [
               false
@@ -9875,9 +9971,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "QwenImage21Cache",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "QwenImage21Cache"
             },
             "widgets_values": [
               "auto",
@@ -9958,34 +10054,6 @@
                 "link": null
               },
               {
-                "localized_name": "image_4",
-                "name": "images.image_4",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15020
-              },
-              {
-                "localized_name": "image_5",
-                "name": "images.image_5",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15021
-              },
-              {
-                "localized_name": "image_6",
-                "name": "images.image_6",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15022
-              },
-              {
-                "localized_name": "image_7",
-                "name": "images.image_7",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15023
-              },
-              {
                 "localized_name": "image_8",
                 "name": "images.image_8",
                 "shape": 7,
@@ -10026,6 +10094,34 @@
                 "shape": 7,
                 "type": "IMAGE",
                 "link": 15019
+              },
+              {
+                "localized_name": "image_4",
+                "name": "images.image_4",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15020
+              },
+              {
+                "localized_name": "image_5",
+                "name": "images.image_5",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15021
+              },
+              {
+                "localized_name": "image_6",
+                "name": "images.image_6",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15022
+              },
+              {
+                "localized_name": "image_7",
+                "name": "images.image_7",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15023
               }
             ],
             "outputs": [
@@ -10055,9 +10151,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "TextEncodeQwenImage21",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "TextEncodeQwenImage21"
             },
             "widgets_values": [
               "",
@@ -10106,6 +10202,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "UNETLoader",
               "models": [
                 {
@@ -10113,9 +10211,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors",
                   "directory": "diffusion_models"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen_image_2.1_int8_convrot.safetensors",
@@ -10159,9 +10255,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "LoraLoaderModelOnly",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "LoraLoaderModelOnly"
             },
             "widgets_values": [
               "elusarcas-qwen2-1-detailer-v1.safetensors",
@@ -10465,43 +10561,11 @@
             "type": "INT"
           },
           {
-            "id": 15020,
-            "origin_id": -10,
-            "origin_slot": 17,
-            "target_id": 6220,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15021,
-            "origin_id": -10,
-            "origin_slot": 18,
-            "target_id": 6220,
-            "target_slot": 8,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15022,
-            "origin_id": -10,
-            "origin_slot": 19,
-            "target_id": 6220,
-            "target_slot": 9,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15023,
-            "origin_id": -10,
-            "origin_slot": 20,
-            "target_id": 6220,
-            "target_slot": 10,
-            "type": "IMAGE"
-          },
-          {
             "id": 15024,
             "origin_id": -10,
             "origin_slot": 21,
             "target_id": 6220,
-            "target_slot": 11,
+            "target_slot": 7,
             "type": "IMAGE"
           },
           {
@@ -10509,7 +10573,7 @@
             "origin_id": -10,
             "origin_slot": 22,
             "target_id": 6220,
-            "target_slot": 12,
+            "target_slot": 8,
             "type": "IMAGE"
           },
           {
@@ -10517,7 +10581,7 @@
             "origin_id": -10,
             "origin_slot": 23,
             "target_id": 6220,
-            "target_slot": 13,
+            "target_slot": 9,
             "type": "IMAGE"
           },
           {
@@ -10525,13 +10589,45 @@
             "origin_id": -10,
             "origin_slot": 15,
             "target_id": 6220,
-            "target_slot": 15,
+            "target_slot": 11,
             "type": "IMAGE"
           },
           {
             "id": 15019,
             "origin_id": -10,
             "origin_slot": 16,
+            "target_id": 6220,
+            "target_slot": 12,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15020,
+            "origin_id": -10,
+            "origin_slot": 17,
+            "target_id": 6220,
+            "target_slot": 13,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15021,
+            "origin_id": -10,
+            "origin_slot": 18,
+            "target_id": 6220,
+            "target_slot": 14,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15022,
+            "origin_id": -10,
+            "origin_slot": 19,
+            "target_id": 6220,
+            "target_slot": 15,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15023,
+            "origin_id": -10,
+            "origin_slot": 20,
             "target_id": 6220,
             "target_slot": 16,
             "type": "IMAGE"
@@ -10958,6 +11054,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "CLIPLoader",
               "models": [
                 {
@@ -10965,9 +11063,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors",
                   "directory": "text_encoders"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen3vl_8b_int8_convrot.safetensors",
@@ -11017,6 +11113,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "VAELoader",
               "models": [
                 {
@@ -11024,9 +11122,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors",
                   "directory": "vae"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen_image_2.1_vae_bf16.safetensors"
@@ -11080,9 +11176,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "EmptyLatentImage",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "EmptyLatentImage"
             },
             "widgets_values": [
               1024,
@@ -11134,9 +11230,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "VAEDecode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "VAEDecode"
             }
           },
           {
@@ -11235,9 +11331,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "KSampler",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "KSampler"
             },
             "widgets_values": [
               268703531913421,
@@ -11308,9 +11404,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "ComfySwitchNode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "ComfySwitchNode"
             },
             "widgets_values": [
               false
@@ -11370,9 +11466,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "QwenImage21Cache",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "QwenImage21Cache"
             },
             "widgets_values": [
               "auto",
@@ -11453,34 +11549,6 @@
                 "link": null
               },
               {
-                "localized_name": "image_4",
-                "name": "images.image_4",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15108
-              },
-              {
-                "localized_name": "image_5",
-                "name": "images.image_5",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15109
-              },
-              {
-                "localized_name": "image_6",
-                "name": "images.image_6",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15110
-              },
-              {
-                "localized_name": "image_7",
-                "name": "images.image_7",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15111
-              },
-              {
                 "localized_name": "image_8",
                 "name": "images.image_8",
                 "shape": 7,
@@ -11521,6 +11589,34 @@
                 "shape": 7,
                 "type": "IMAGE",
                 "link": 15107
+              },
+              {
+                "localized_name": "image_4",
+                "name": "images.image_4",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15108
+              },
+              {
+                "localized_name": "image_5",
+                "name": "images.image_5",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15109
+              },
+              {
+                "localized_name": "image_6",
+                "name": "images.image_6",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15110
+              },
+              {
+                "localized_name": "image_7",
+                "name": "images.image_7",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15111
               }
             ],
             "outputs": [
@@ -11550,9 +11646,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "TextEncodeQwenImage21",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "TextEncodeQwenImage21"
             },
             "widgets_values": [
               "",
@@ -11601,6 +11697,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "UNETLoader",
               "models": [
                 {
@@ -11608,9 +11706,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors",
                   "directory": "diffusion_models"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen_image_2.1_int8_convrot.safetensors",
@@ -11654,9 +11750,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "LoraLoaderModelOnly",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "LoraLoaderModelOnly"
             },
             "widgets_values": [
               "elusarcas-qwen2-1-detailer-v1.safetensors",
@@ -11960,43 +12056,11 @@
             "type": "INT"
           },
           {
-            "id": 15108,
-            "origin_id": -10,
-            "origin_slot": 17,
-            "target_id": 6247,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15109,
-            "origin_id": -10,
-            "origin_slot": 18,
-            "target_id": 6247,
-            "target_slot": 8,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15110,
-            "origin_id": -10,
-            "origin_slot": 19,
-            "target_id": 6247,
-            "target_slot": 9,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15111,
-            "origin_id": -10,
-            "origin_slot": 20,
-            "target_id": 6247,
-            "target_slot": 10,
-            "type": "IMAGE"
-          },
-          {
             "id": 15112,
             "origin_id": -10,
             "origin_slot": 21,
             "target_id": 6247,
-            "target_slot": 11,
+            "target_slot": 7,
             "type": "IMAGE"
           },
           {
@@ -12004,7 +12068,7 @@
             "origin_id": -10,
             "origin_slot": 22,
             "target_id": 6247,
-            "target_slot": 12,
+            "target_slot": 8,
             "type": "IMAGE"
           },
           {
@@ -12012,7 +12076,7 @@
             "origin_id": -10,
             "origin_slot": 23,
             "target_id": 6247,
-            "target_slot": 13,
+            "target_slot": 9,
             "type": "IMAGE"
           },
           {
@@ -12020,13 +12084,45 @@
             "origin_id": -10,
             "origin_slot": 15,
             "target_id": 6247,
-            "target_slot": 15,
+            "target_slot": 11,
             "type": "IMAGE"
           },
           {
             "id": 15107,
             "origin_id": -10,
             "origin_slot": 16,
+            "target_id": 6247,
+            "target_slot": 12,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15108,
+            "origin_id": -10,
+            "origin_slot": 17,
+            "target_id": 6247,
+            "target_slot": 13,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15109,
+            "origin_id": -10,
+            "origin_slot": 18,
+            "target_id": 6247,
+            "target_slot": 14,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15110,
+            "origin_id": -10,
+            "origin_slot": 19,
+            "target_id": 6247,
+            "target_slot": 15,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15111,
+            "origin_id": -10,
+            "origin_slot": 20,
             "target_id": 6247,
             "target_slot": 16,
             "type": "IMAGE"
@@ -12453,6 +12549,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "CLIPLoader",
               "models": [
                 {
@@ -12460,9 +12558,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors",
                   "directory": "text_encoders"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen3vl_8b_int8_convrot.safetensors",
@@ -12512,6 +12608,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "VAELoader",
               "models": [
                 {
@@ -12519,9 +12617,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors",
                   "directory": "vae"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen_image_2.1_vae_bf16.safetensors"
@@ -12575,9 +12671,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "EmptyLatentImage",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "EmptyLatentImage"
             },
             "widgets_values": [
               1024,
@@ -12629,9 +12725,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "VAEDecode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "VAEDecode"
             }
           },
           {
@@ -12730,9 +12826,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "KSampler",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "KSampler"
             },
             "widgets_values": [
               558547828913592,
@@ -12803,9 +12899,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "ComfySwitchNode",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "ComfySwitchNode"
             },
             "widgets_values": [
               false
@@ -12865,9 +12961,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "QwenImage21Cache",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "QwenImage21Cache"
             },
             "widgets_values": [
               "auto",
@@ -12948,34 +13044,6 @@
                 "link": null
               },
               {
-                "localized_name": "image_4",
-                "name": "images.image_4",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15152
-              },
-              {
-                "localized_name": "image_5",
-                "name": "images.image_5",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15153
-              },
-              {
-                "localized_name": "image_6",
-                "name": "images.image_6",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15154
-              },
-              {
-                "localized_name": "image_7",
-                "name": "images.image_7",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": 15155
-              },
-              {
                 "localized_name": "image_8",
                 "name": "images.image_8",
                 "shape": 7,
@@ -13016,6 +13084,34 @@
                 "shape": 7,
                 "type": "IMAGE",
                 "link": 15151
+              },
+              {
+                "localized_name": "image_4",
+                "name": "images.image_4",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15152
+              },
+              {
+                "localized_name": "image_5",
+                "name": "images.image_5",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15153
+              },
+              {
+                "localized_name": "image_6",
+                "name": "images.image_6",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15154
+              },
+              {
+                "localized_name": "image_7",
+                "name": "images.image_7",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 15155
               }
             ],
             "outputs": [
@@ -13045,9 +13141,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "TextEncodeQwenImage21",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "TextEncodeQwenImage21"
             },
             "widgets_values": [
               "",
@@ -13096,6 +13192,8 @@
               }
             ],
             "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
               "Node name for S&R": "UNETLoader",
               "models": [
                 {
@@ -13103,9 +13201,7 @@
                   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors",
                   "directory": "diffusion_models"
                 }
-              ],
-              "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              ]
             },
             "widgets_values": [
               "qwen_image_2.1_int8_convrot.safetensors",
@@ -13149,9 +13245,9 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "LoraLoaderModelOnly",
               "cnr_id": "comfy-core",
-              "ver": "0.37.0"
+              "ver": "0.37.0",
+              "Node name for S&R": "LoraLoaderModelOnly"
             },
             "widgets_values": [
               "elusarcas-qwen2-1-detailer-v1.safetensors",
@@ -13455,43 +13551,11 @@
             "type": "INT"
           },
           {
-            "id": 15152,
-            "origin_id": -10,
-            "origin_slot": 17,
-            "target_id": 6260,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15153,
-            "origin_id": -10,
-            "origin_slot": 18,
-            "target_id": 6260,
-            "target_slot": 8,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15154,
-            "origin_id": -10,
-            "origin_slot": 19,
-            "target_id": 6260,
-            "target_slot": 9,
-            "type": "IMAGE"
-          },
-          {
-            "id": 15155,
-            "origin_id": -10,
-            "origin_slot": 20,
-            "target_id": 6260,
-            "target_slot": 10,
-            "type": "IMAGE"
-          },
-          {
             "id": 15156,
             "origin_id": -10,
             "origin_slot": 21,
             "target_id": 6260,
-            "target_slot": 11,
+            "target_slot": 7,
             "type": "IMAGE"
           },
           {
@@ -13499,7 +13563,7 @@
             "origin_id": -10,
             "origin_slot": 22,
             "target_id": 6260,
-            "target_slot": 12,
+            "target_slot": 8,
             "type": "IMAGE"
           },
           {
@@ -13507,7 +13571,7 @@
             "origin_id": -10,
             "origin_slot": 23,
             "target_id": 6260,
-            "target_slot": 13,
+            "target_slot": 9,
             "type": "IMAGE"
           },
           {
@@ -13515,13 +13579,45 @@
             "origin_id": -10,
             "origin_slot": 15,
             "target_id": 6260,
-            "target_slot": 15,
+            "target_slot": 11,
             "type": "IMAGE"
           },
           {
             "id": 15151,
             "origin_id": -10,
             "origin_slot": 16,
+            "target_id": 6260,
+            "target_slot": 12,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15152,
+            "origin_id": -10,
+            "origin_slot": 17,
+            "target_id": 6260,
+            "target_slot": 13,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15153,
+            "origin_id": -10,
+            "origin_slot": 18,
+            "target_id": 6260,
+            "target_slot": 14,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15154,
+            "origin_id": -10,
+            "origin_slot": 19,
+            "target_id": 6260,
+            "target_slot": 15,
+            "type": "IMAGE"
+          },
+          {
+            "id": 15155,
+            "origin_id": -10,
+            "origin_slot": 20,
             "target_id": 6260,
             "target_slot": 16,
             "type": "IMAGE"
@@ -13535,16 +13631,16 @@
   },
   "config": {},
   "extra": {
-    "frontendVersion": "1.53.10",
+    "frontendVersion": "1.55.17",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
     "VHS_KeepIntermediate": true,
     "ds": {
-      "scale": 0.15906452310759597,
+      "scale": 0.15906452310759908,
       "offset": [
-        3514.5541440637553,
-        -4094.201621564054
+        3439.609682564071,
+        -4731.835633641571
       ]
     }
   },

@@ -38,6 +38,27 @@ const _MUSE_LIVE_PREVIEW_EVENT = "muse_character_sheet_h3_live_preview";
 const _MUSE_CHUNK_PREVIEW_EVENT = "muse_character_sheet_h3_chunk_preview";
 const _MUSE_VIEW_ROUTE = "/muse_character_sheet_h3/view_streamed_video";
 
+// Keep preview pixels outside the DOM: switching workflow tabs recreates nodes.
+// Only the small identity is serialized, never the base64 image. Bound RAM use.
+const _museLivePreviewCache = new Map();
+function musePreviewKey(node, create = false) {
+  const properties = node.properties || (node.properties = {});
+  if (!properties.museH3PreviewId && create) {
+    properties.museH3PreviewId = crypto.randomUUID();
+  }
+  return properties.museH3PreviewId ? `${properties.museH3PreviewId}:${node.id}` : null;
+}
+function rememberMusePreview(node, detail) {
+  const key = musePreviewKey(node, true);
+  _museLivePreviewCache.delete(key);
+  _museLivePreviewCache.set(key, {
+    image: detail.image, mime: detail.mime, step: detail.step, total: detail.total,
+  });
+  while (_museLivePreviewCache.size > 16) {
+    _museLivePreviewCache.delete(_museLivePreviewCache.keys().next().value);
+  }
+}
+
 const MAX_CHARACTER_SLOTS = 8;
 const MAX_LOCATION_SLOTS = 7;
 const REF_AV_SLOTS = 3;
@@ -161,7 +182,7 @@ const ICON_PAUSE = `<svg width="11" height="11" viewBox="0 0 24 24" fill="curren
 // here is still exactly the same visual language this node wants. Only the
 // <style> element's own guard id changed (to "musecharsheeth3-styles"), so
 // this node's stylesheet actually gets injected even when Combo V2's
-// identically-named ".musecombo-v2-*" ruleset already exists on the page —
+// identically-named ".musecharsheeth3-*" ruleset already exists on the page —
 // the class names themselves are deliberately left unchanged (same design,
 // harmless if both happen to be present) rather than renamed wholesale.
 function injectStyles() {
@@ -169,434 +190,435 @@ function injectStyles() {
   const style = document.createElement("style");
   style.id = "musecharsheeth3-styles";
   style.textContent = `
-  .musecombo-v2-root {
+  .musecharsheeth3-root {
     display: flex; flex-direction: column; gap: 14px;
     background: linear-gradient(180deg, #10141c 0%, #0a0c12 100%);
     border: 1px solid #3a3a48; border-radius: 12px;
     padding: 14px; box-sizing: border-box; width: 100%;
+    height: fit-content; flex: 0 0 auto; align-self: flex-start;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     color: #e4e4ea;
   }
-  .musecombo-v2-section-title {
+  .musecharsheeth3-section-title {
     font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
     color: #7a7a8c; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;
   }
-  .musecombo-v2-section-title .musecombo-v2-badge {
+  .musecharsheeth3-section-title .musecharsheeth3-badge {
     background: #ff4d4d22; color: #ff6b6b; border-radius: 4px; padding: 1px 6px;
     font-size: 10.5px; letter-spacing: 0.04em;
   }
-  .musecombo-v2-gear-hint { color: #6a6a7c; font-size: 11.5px; line-height: 1.4; }
+  .musecharsheeth3-gear-hint { color: #6a6a7c; font-size: 11.5px; line-height: 1.4; }
 
   /* Boxed settings panel */
-  .musecombo-v2-boxes-row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .musecombo-v2-box {
+  .musecharsheeth3-boxes-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .musecharsheeth3-box {
     flex: 1; min-width: 170px; background: #1e1e26; border: 1px solid #3a3a48;
     border-top: 3px solid #3a3a48; border-radius: 10px; padding: 10px 12px; box-sizing: border-box;
   }
-  .musecombo-v2-box-generation { border-top-color: #4F8EF7; }
-  .musecombo-v2-box-resolution { border-top-color: #33C481; }
-  .musecombo-v2-box-sampling { border-top-color: #F0665B; }
-  .musecombo-v2-box-reference { border-top-color: #B26BF7; }
-  .musecombo-v2-box-title {
+  .musecharsheeth3-box-generation { border-top-color: #4F8EF7; }
+  .musecharsheeth3-box-resolution { border-top-color: #33C481; }
+  .musecharsheeth3-box-sampling { border-top-color: #F0665B; }
+  .musecharsheeth3-box-reference { border-top-color: #B26BF7; }
+  .musecharsheeth3-box-title {
     font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
     color: #6a6a7a; margin-bottom: 8px;
   }
-  .musecombo-v2-box-row {
+  .musecharsheeth3-box-row {
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
     padding: 5px 0; border-top: 1px solid #22222b;
   }
-  .musecombo-v2-box-row:first-of-type { border-top: none; }
-  .musecombo-v2-box-row label { font-size: 12px; color: #9a9aa8; white-space: nowrap; }
-  .musecombo-v2-box-select, .musecombo-v2-box-number {
+  .musecharsheeth3-box-row:first-of-type { border-top: none; }
+  .musecharsheeth3-box-row label { font-size: 12px; color: #9a9aa8; white-space: nowrap; }
+  .musecharsheeth3-box-select, .musecharsheeth3-box-number {
     background: #101015; border: 1px solid #2e2e3a; border-radius: 6px; color: #e4e4ea;
     font-size: 12.5px; padding: 4px 6px; max-width: 62%; box-sizing: border-box;
   }
-  .musecombo-v2-box-select option { background: #1a1a22; color: #e4e4ea; font-size: 12.5px; }
-  .musecombo-v2-box-checkbox { width: 15px; height: 15px; accent-color: #4F8EF7; cursor: pointer; }
-  .musecombo-v2-box-select:focus, .musecombo-v2-box-number:focus { outline: none; border-color: #4F8EF7; }
+  .musecharsheeth3-box-select option { background: #1a1a22; color: #e4e4ea; font-size: 12.5px; }
+  .musecharsheeth3-box-checkbox { width: 15px; height: 15px; accent-color: #4F8EF7; cursor: pointer; }
+  .musecharsheeth3-box-select:focus, .musecharsheeth3-box-number:focus { outline: none; border-color: #4F8EF7; }
 
-  .musecombo-v2-style-input {
+  .musecharsheeth3-style-input {
     width: 100%; box-sizing: border-box; background: #1a1a22; border: 1px solid #2e2e3a;
     border-radius: 8px; color: #e4e4ea; padding: 8px 10px; font-size: 16px; resize: vertical;
     min-height: 36px; font-family: inherit;
   }
-  .musecombo-v2-style-input:focus { outline: none; border-color: #4F8EF7; }
+  .musecharsheeth3-style-input:focus { outline: none; border-color: #4F8EF7; }
 
   /* Timeline / ruler */
-  .musecombo-v2-chunks-wrap { display: flex; flex-direction: column; gap: 14px; }
-  .musecombo-v2-chunk-section {
+  .musecharsheeth3-chunks-wrap { display: flex; flex-direction: column; gap: 14px; }
+  .musecharsheeth3-chunk-section {
     border: 1px solid #2e2e3a; border-radius: 10px; padding: 10px; background: #16161c;
   }
-  .musecombo-v2-chunk-heading {
+  .musecharsheeth3-chunk-heading {
     font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
     color: #9a9aae; margin-bottom: 8px;
   }
-  .musecombo-v2-chunk-heading-row {
+  .musecharsheeth3-chunk-heading-row {
     display: flex; align-items: center; justify-content: space-between; gap: 12px 16px;
     margin-bottom: 8px; flex-wrap: wrap;
   }
-  .musecombo-v2-chunk-heading-row .musecombo-v2-chunk-heading { margin-bottom: 0; }
-  .musecombo-v2-chunk-actions { display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; }
-  .musecombo-v2-chunk-seed { color: #aab5c8; font-size: 11.5px; font-weight: 650; letter-spacing: 0; text-transform: none; }
-  .musecombo-v2-chunk-style-wrap { margin-bottom: 10px; }
-  .musecombo-v2-chunk-style-title-row { display: flex; align-items: center; gap: 6px; }
-  .musecombo-v2-ruler-wrap { position: relative; }
-  .musecombo-v2-ruler {
+  .musecharsheeth3-chunk-heading-row .musecharsheeth3-chunk-heading { margin-bottom: 0; }
+  .musecharsheeth3-chunk-actions { display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; }
+  .musecharsheeth3-chunk-seed { color: #aab5c8; font-size: 11.5px; font-weight: 650; letter-spacing: 0; text-transform: none; }
+  .musecharsheeth3-chunk-style-wrap { margin-bottom: 10px; }
+  .musecharsheeth3-chunk-style-title-row { display: flex; align-items: center; gap: 6px; }
+  .musecharsheeth3-ruler-wrap { position: relative; }
+  .musecharsheeth3-ruler {
     position: relative; height: 20px; margin-bottom: 4px; border-bottom: 1px solid #3a3a48;
   }
-  .musecombo-v2-ruler-tick {
+  .musecharsheeth3-ruler-tick {
     position: absolute; top: 0; bottom: 0; width: 1px; background: #3a3a48;
   }
-  .musecombo-v2-ruler-tick-minor {
+  .musecharsheeth3-ruler-tick-minor {
     position: absolute; top: 65%; bottom: 0; width: 1px; background: #2a2a34;
   }
-  .musecombo-v2-ruler-tick-label {
+  .musecharsheeth3-ruler-tick-label {
     position: absolute; top: 0; font-size: 11px; font-weight: 650; color: #ffffff; transform: translateX(2px);
   }
-  .musecombo-v2-track {
+  .musecharsheeth3-track {
     display: flex; height: 118px; border-radius: 10px; overflow: hidden; border: 1px solid #3a3a48;
     background: #18181f;
   }
-  .musecombo-v2-cut-block {
+  .musecharsheeth3-cut-block {
     position: relative; display: flex; flex-direction: column; min-width: 40px;
     border-right: 1px solid #0d0d11; cursor: grab; box-sizing: border-box;
   }
-  .musecombo-v2-cut-block.musecombo-v2-dragging { opacity: 0.35; }
-  .musecombo-v2-cut-block.musecombo-v2-drag-over { box-shadow: inset 3px 0 0 #fff; }
-  .musecombo-v2-cut-bar { height: 4px; width: 100%; flex-shrink: 0; }
-  .musecombo-v2-cut-head {
+  .musecharsheeth3-cut-block.musecharsheeth3-dragging { opacity: 0.35; }
+  .musecharsheeth3-cut-block.musecharsheeth3-drag-over { box-shadow: inset 3px 0 0 #fff; }
+  .musecharsheeth3-cut-bar { height: 4px; width: 100%; flex-shrink: 0; }
+  .musecharsheeth3-cut-head {
     display: flex; align-items: center; justify-content: space-between; padding: 5px 7px 3px 7px;
     flex-shrink: 0;
   }
-  .musecombo-v2-cut-label { font-size: 12px; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap; display: flex; align-items: center; gap: 3px; }
-  .musecombo-v2-cut-duration-input {
+  .musecharsheeth3-cut-label { font-size: 12px; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap; display: flex; align-items: center; gap: 3px; }
+  .musecharsheeth3-cut-duration-input {
     width: 44px; background: #14141a; border: 1px solid #2a2a35; border-radius: 3px;
     color: #d4d4dc; font-size: 11px; font-weight: 700; font-family: inherit;
     padding: 1px 2px; text-align: right; -moz-appearance: textfield;
   }
-  .musecombo-v2-cut-duration-input::-webkit-outer-spin-button,
-  .musecombo-v2-cut-duration-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-  .musecombo-v2-cut-duration-input:focus { outline: none; border-color: #4F8EF7; }
-  .musecombo-v2-cut-duration-unit { color: #7a7a8c; font-weight: 400; }
-  .musecombo-v2-cut-actions { display: flex; align-items: center; gap: 5px; color: #5a5a6a; flex-shrink: 0; }
-  .musecombo-v2-cut-actions svg { display: block; }
-  .musecombo-v2-cut-del { cursor: pointer; }
-  .musecombo-v2-cut-del:hover { color: #ff6b6b; }
-  .musecombo-v2-cut-text {
+  .musecharsheeth3-cut-duration-input::-webkit-outer-spin-button,
+  .musecharsheeth3-cut-duration-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .musecharsheeth3-cut-duration-input:focus { outline: none; border-color: #4F8EF7; }
+  .musecharsheeth3-cut-duration-unit { color: #7a7a8c; font-weight: 400; }
+  .musecharsheeth3-cut-actions { display: flex; align-items: center; gap: 5px; color: #5a5a6a; flex-shrink: 0; }
+  .musecharsheeth3-cut-actions svg { display: block; }
+  .musecharsheeth3-cut-del { cursor: pointer; }
+  .musecharsheeth3-cut-del:hover { color: #ff6b6b; }
+  .musecharsheeth3-cut-text {
     width: 100%; flex: 1; box-sizing: border-box; background: transparent; border: none; color: #d4d4dc;
     font-size: 14.5px; line-height: 1.4; padding: 0 7px 8px 7px; resize: none; font-family: inherit;
   }
-  .musecombo-v2-cut-text:focus { outline: none; }
-  .musecombo-v2-cut-resize {
+  .musecharsheeth3-cut-text:focus { outline: none; }
+  .musecharsheeth3-cut-resize {
     position: absolute; top: 0; right: -4px; bottom: 0; width: 8px; cursor: ew-resize; z-index: 4;
   }
-  .musecombo-v2-cut-resize:hover, .musecombo-v2-cut-resize.musecombo-v2-active { background: rgba(255,255,255,0.08); }
-  .musecombo-v2-add-cut-bar {
+  .musecharsheeth3-cut-resize:hover, .musecharsheeth3-cut-resize.musecharsheeth3-active { background: rgba(255,255,255,0.08); }
+  .musecharsheeth3-add-cut-bar {
     width: 100%; box-sizing: border-box; margin-top: 6px; padding: 9px;
     border: 2px solid #8a4d68; border-radius: 8px; background: #b06b8a;
     display: flex; align-items: center; justify-content: center; gap: 6px;
     cursor: pointer; color: #fff; font-weight: 700; font-size: 13px; transition: all 0.15s ease;
   }
-  .musecombo-v2-add-cut-bar:hover { color: #fff; background: #c383a0; border-color: #b06b8a; }
-  .musecombo-v2-add-cut-bar svg { display: block; }
-  .musecombo-v2-track-hint { font-size: 11px; color: #4a4a58; margin-top: 5px; }
+  .musecharsheeth3-add-cut-bar:hover { color: #fff; background: #c383a0; border-color: #b06b8a; }
+  .musecharsheeth3-add-cut-bar svg { display: block; }
+  .musecharsheeth3-track-hint { font-size: 11px; color: #4a4a58; margin-top: 5px; }
 
   /* References row — grid, not flex-wrap. auto-fit collapses empty column
      tracks so the real columns always stretch to consume 100% width. */
-  .musecombo-v2-char-row {
+  .musecharsheeth3-char-row {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 10px;
   }
-  .musecombo-v2-char-slot {
+  .musecharsheeth3-char-slot {
     background: #1e1e26; border: 2px solid #D1A6FA; border-radius: 10px;
     display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
     padding: 5px; cursor: pointer; position: relative; transition: all 0.15s ease; box-sizing: border-box;
   }
-  .musecombo-v2-char-slot:hover { border-color: #4F8EF7; background: #1a1c24; }
-  .musecombo-v2-char-slot.musecombo-v2-filled {
+  .musecharsheeth3-char-slot:hover { border-color: #4F8EF7; background: #1a1c24; }
+  .musecharsheeth3-char-slot.musecharsheeth3-filled {
     border-color: #B26BF7;
     box-shadow: 0 0 0 1px rgba(178,107,247,0.2);
   }
-  .musecombo-v2-char-slot.musecombo-v2-bg-slot { border-color: #F7B94F99; }
-  .musecombo-v2-char-slot.musecombo-v2-bg-slot:hover { border-color: #F7B94F; }
-  .musecombo-v2-char-slot.musecombo-v2-char-slot-disabled {
+  .musecharsheeth3-char-slot.musecharsheeth3-bg-slot { border-color: #F7B94F99; }
+  .musecharsheeth3-char-slot.musecharsheeth3-bg-slot:hover { border-color: #F7B94F; }
+  .musecharsheeth3-char-slot.musecharsheeth3-char-slot-disabled {
     cursor: default; opacity: 0.45; border-style: dashed; border-color: #5a5a6a; background: #16161c;
   }
-  .musecombo-v2-char-slot.musecombo-v2-char-slot-disabled:hover { border-color: #5a5a6a; background: #16161c; }
-  .musecombo-v2-char-label {
+  .musecharsheeth3-char-slot.musecharsheeth3-char-slot-disabled:hover { border-color: #5a5a6a; background: #16161c; }
+  .musecharsheeth3-char-label {
     position: absolute; top: 4px; left: 5px; font-size: 10px; font-weight: 700;
     color: #fff; background: rgba(0,0,0,0.55); border-radius: 4px; padding: 1px 4px;
     z-index: 2; pointer-events: none;
   }
-  .musecombo-v2-char-placeholder { color: #4a4a58; font-size: 10.5px; text-align: center; margin-top: 20px; line-height: 1.4; }
-  .musecombo-v2-char-preview { width: 100%; height: 60px; border-radius: 6px; overflow: hidden; background: #0a0a0d; margin-top: 15px; }
-  .musecombo-v2-char-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .musecombo-v2-char-del {
+  .musecharsheeth3-char-placeholder { color: #4a4a58; font-size: 10.5px; text-align: center; margin-top: 20px; line-height: 1.4; }
+  .musecharsheeth3-char-preview { width: 100%; height: 60px; border-radius: 6px; overflow: hidden; background: #0a0a0d; margin-top: 15px; }
+  .musecharsheeth3-char-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .musecharsheeth3-char-del {
     position: absolute; top: 3px; right: 3px; width: 16px; height: 16px; border-radius: 50%;
     background: rgba(0,0,0,0.6); color: #fff; border: none; display: flex; align-items: center;
     justify-content: center; cursor: pointer; z-index: 3; font-size: 12.5px; line-height: 1;
   }
-  .musecombo-v2-char-del:hover { background: #d33; }
-  .musecombo-v2-analyze-btn {
+  .musecharsheeth3-char-del:hover { background: #d33; }
+  .musecharsheeth3-analyze-btn {
     margin-top: 4px; width: 100%; background: #232330; border: 1px solid #3a3a48; color: #b8b8c8;
     border-radius: 6px; padding: 3px 0; font-size: 10.5px; cursor: pointer; transition: all 0.15s ease;
   }
-  .musecombo-v2-analyze-btn:hover { background: #2a2a38; color: #fff; border-color: #4F8EF7; }
-  .musecombo-v2-analyze-btn.musecombo-v2-loading { opacity: 0.6; pointer-events: none; }
-  .musecombo-v2-clear-chunks-btn {
+  .musecharsheeth3-analyze-btn:hover { background: #2a2a38; color: #fff; border-color: #4F8EF7; }
+  .musecharsheeth3-analyze-btn.musecharsheeth3-loading { opacity: 0.6; pointer-events: none; }
+  .musecharsheeth3-clear-chunks-btn {
     padding: 8px 0; font-size: 12.5px; font-weight: 650;
     color: #ffb4b4; background: #3a1a1a; border: 1px solid #7a3a3a;
   }
-  .musecombo-v2-clear-chunks-btn:hover { color: #fff; background: #522525; border-color: #d86868; }
-  .musecombo-v2-desc-input {
+  .musecharsheeth3-clear-chunks-btn:hover { color: #fff; background: #522525; border-color: #d86868; }
+  .musecharsheeth3-desc-input {
     margin-top: 4px; width: 100%; box-sizing: border-box; background: #101015; border: 1px solid #26262f;
     border-radius: 5px; color: #c8c8d4; font-size: 12px; padding: 3px 4px; resize: vertical;
     min-height: 28px; font-family: inherit; line-height: 1.3;
   }
 
   /* Reference video / audio slots */
-  .musecombo-v2-av-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-  .musecombo-v2-av-slot {
+  .musecharsheeth3-av-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  .musecharsheeth3-av-slot {
     flex: 1; min-width: 220px; background: #1e1e26; border-radius: 10px;
     padding: 8px 10px; box-sizing: border-box; position: relative; transition: border-color 0.15s ease;
   }
-  .musecombo-v2-av-slot-video { border: 2px solid #4F8EF799; }
-  .musecombo-v2-av-slot-video:hover { border-color: #4F8EF7; }
-  .musecombo-v2-av-slot-video.musecombo-v2-filled { border-color: #4F8EF7; box-shadow: 0 0 0 1px rgba(79,142,247,0.25); }
-  .musecombo-v2-av-slot-audio { border: 2px solid #FF8800; }
-  .musecombo-v2-av-slot-audio:hover { border-color: #ffa733; }
-  .musecombo-v2-av-slot-audio.musecombo-v2-filled { border-color: #ffa733; box-shadow: 0 0 0 1px rgba(255,136,0,0.3); }
-  .musecombo-v2-av-slot-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-  .musecombo-v2-av-slot-label { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: #7a7a8c; text-transform: uppercase; }
-  .musecombo-v2-av-slot-del {
+  .musecharsheeth3-av-slot-video { border: 2px solid #4F8EF799; }
+  .musecharsheeth3-av-slot-video:hover { border-color: #4F8EF7; }
+  .musecharsheeth3-av-slot-video.musecharsheeth3-filled { border-color: #4F8EF7; box-shadow: 0 0 0 1px rgba(79,142,247,0.25); }
+  .musecharsheeth3-av-slot-audio { border: 2px solid #FF8800; }
+  .musecharsheeth3-av-slot-audio:hover { border-color: #ffa733; }
+  .musecharsheeth3-av-slot-audio.musecharsheeth3-filled { border-color: #ffa733; box-shadow: 0 0 0 1px rgba(255,136,0,0.3); }
+  .musecharsheeth3-av-slot-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .musecharsheeth3-av-slot-label { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: #7a7a8c; text-transform: uppercase; }
+  .musecharsheeth3-av-slot-del {
     width: 16px; height: 16px; border-radius: 50%; background: #232330; color: #fff; border: none;
     display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12.5px; line-height: 1;
   }
-  .musecombo-v2-av-slot-del:hover { background: #d33; }
-  .musecombo-v2-av-placeholder {
+  .musecharsheeth3-av-slot-del:hover { background: #d33; }
+  .musecharsheeth3-av-placeholder {
     color: #4a4a58; font-size: 11px; text-align: center; padding: 14px 0; cursor: pointer;
     display: flex; flex-direction: column; align-items: center; gap: 4px;
   }
-  .musecombo-v2-av-placeholder:hover { color: #4F8EF7; }
-  .musecombo-v2-av-media video { width: 100%; max-height: 90px; border-radius: 6px; background: #000; display: block; }
-  .musecombo-v2-av-canvas { width: 100%; height: 40px; display: block; border-radius: 6px; background: #0a0a0d; }
-  .musecombo-v2-av-scrub-row { display: flex; align-items: center; gap: 6px; margin: 6px 0 4px 0; }
-  .musecombo-v2-av-play-btn {
+  .musecharsheeth3-av-placeholder:hover { color: #4F8EF7; }
+  .musecharsheeth3-av-media video { width: 100%; max-height: 90px; border-radius: 6px; background: #000; display: block; }
+  .musecharsheeth3-av-canvas { width: 100%; height: 40px; display: block; border-radius: 6px; background: #0a0a0d; }
+  .musecharsheeth3-av-scrub-row { display: flex; align-items: center; gap: 6px; margin: 6px 0 4px 0; }
+  .musecharsheeth3-av-play-btn {
     width: 22px; height: 22px; border-radius: 50%; background: #232330; border: 1px solid #3a3a48;
     color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer;
     flex-shrink: 0; padding: 0;
   }
-  .musecombo-v2-av-play-btn:hover { background: #2a2a38; border-color: #4F8EF7; }
-  .musecombo-v2-av-scrub { flex: 1; margin: 0; accent-color: #4F8EF7; cursor: pointer; }
-  .musecombo-v2-av-trim-row { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
-  .musecombo-v2-av-trim-btn {
+  .musecharsheeth3-av-play-btn:hover { background: #2a2a38; border-color: #4F8EF7; }
+  .musecharsheeth3-av-scrub { flex: 1; margin: 0; accent-color: #4F8EF7; cursor: pointer; }
+  .musecharsheeth3-av-trim-row { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+  .musecharsheeth3-av-trim-btn {
     flex: 1; background: #232330; border: 1px solid #3a3a48; color: #b8b8c8; border-radius: 6px;
     padding: 3px 0; font-size: 10.5px; cursor: pointer;
   }
-  .musecombo-v2-av-trim-btn:hover { background: #2a2a38; color: #fff; border-color: #4F8EF7; }
-  .musecombo-v2-av-trim-input {
+  .musecharsheeth3-av-trim-btn:hover { background: #2a2a38; color: #fff; border-color: #4F8EF7; }
+  .musecharsheeth3-av-trim-input {
     flex: 1; width: 0; min-width: 0; background: #101015; border: 1px solid #2e2e3a; border-radius: 6px;
     color: #d8d8e0; font-size: 10.5px; padding: 3px 4px; text-align: center;
   }
-  .musecombo-v2-av-trim-input:focus { outline: none; border-color: #4F8EF7; }
-  .musecombo-v2-av-trim-readout { font-size: 15px; font-weight: 700; color: #ffffff; text-align: center; margin-top: 6px; }
-  .musecombo-v2-av-filename { font-size: 10px; color: #5a5a6a; margin-top: 3px; word-break: break-all; }
+  .musecharsheeth3-av-trim-input:focus { outline: none; border-color: #4F8EF7; }
+  .musecharsheeth3-av-trim-readout { font-size: 15px; font-weight: 700; color: #ffffff; text-align: center; margin-top: 6px; }
+  .musecharsheeth3-av-filename { font-size: 10px; color: #5a5a6a; margin-top: 3px; word-break: break-all; }
 
   /* Small secondary selectors (retention markers, video role, CUT speaker) */
-  .musecombo-v2-mini-row {
+  .musecharsheeth3-mini-row {
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
     margin-top: 6px;
   }
-  .musecombo-v2-mini-row label { font-size: 12.5px; color: #8a8a98; }
-  .musecombo-v2-mini-select {
+  .musecharsheeth3-mini-row label { font-size: 12.5px; color: #8a8a98; }
+  .musecharsheeth3-mini-select {
     background: #101015; border: 1px solid #2e2e3a; border-radius: 5px; color: #d4d4dc;
     font-size: 13.5px; padding: 4px 7px; max-width: 62%; box-sizing: border-box;
   }
-  .musecombo-v2-mini-select option { background: #1a1a22; color: #e4e4ea; font-size: 13.5px; }
+  .musecharsheeth3-mini-select option { background: #1a1a22; color: #e4e4ea; font-size: 13.5px; }
   /* [2026-09-18] The character ref grid (Ref N) can pack down to a narrow
      128px column (repeat(auto-fit, minmax(128px,1fr))) — there, the select's
      content-driven width could still push past its 62% cap and spill over
      the slot's edge, unlike the video row above which never had this
      problem. Scoped to just the char slots: label on top, select full-width
      below, both centered, so it can't overflow regardless of column width. */
-  .musecombo-v2-char-slot .musecombo-v2-mini-row {
+  .musecharsheeth3-char-slot .musecharsheeth3-mini-row {
     flex-direction: column; align-items: center; justify-content: flex-start; gap: 4px;
   }
-  .musecombo-v2-char-slot .musecombo-v2-mini-select { max-width: 100%; width: 100%; text-align: center; }
+  .musecharsheeth3-char-slot .musecharsheeth3-mini-select { max-width: 100%; width: 100%; text-align: center; }
 
-  .musecombo-v2-dialogue-speakers { padding-top: 5px; }
-  .musecombo-v2-dialogue-speaker-row { display:flex; align-items:center; gap:6px; padding:4px 7px; flex-wrap:wrap; border-top:1px solid #24242d; }
-  .musecombo-v2-dialogue-line { min-width:160px; max-width:48%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#d4d4dc; font-size:12.5px; }
-  .musecombo-v2-dialogue-speaker-label { font-size:12.5px; color:#8a8a98; white-space:nowrap; }
-  .musecombo-v2-speaker-chip {
+  .musecharsheeth3-dialogue-speakers { padding-top: 5px; }
+  .musecharsheeth3-dialogue-speaker-row { display:flex; align-items:center; gap:6px; padding:4px 7px; flex-wrap:wrap; border-top:1px solid #24242d; }
+  .musecharsheeth3-dialogue-line { min-width:160px; max-width:48%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#d4d4dc; font-size:12.5px; }
+  .musecharsheeth3-dialogue-speaker-label { font-size:12.5px; color:#8a8a98; white-space:nowrap; }
+  .musecharsheeth3-speaker-chip {
     background: #101015; border: 1px solid #2e2e3a; border-radius: 20px; color: #8a8a98;
     font-size: 12px; padding: 3px 10px; cursor: pointer; transition: all 0.15s ease;
   }
-  .musecombo-v2-speaker-chip:hover { border-color: #4F8EF7; color: #d4d4dc; }
-  .musecombo-v2-speaker-chip-active { background: #4F8EF722; border-color: #4F8EF7; color: #cfe0ff; }
-  .musecombo-v2-cut-video-guide {
+  .musecharsheeth3-speaker-chip:hover { border-color: #4F8EF7; color: #d4d4dc; }
+  .musecharsheeth3-speaker-chip-active { background: #4F8EF722; border-color: #4F8EF7; color: #cfe0ff; }
+  .musecharsheeth3-cut-video-guide {
     margin: 0 7px 8px 7px; padding: 6px 8px; border-radius: 7px;
     border: 1px solid #2a5149; background: #0d1d1c;
   }
-  .musecombo-v2-cut-video-guide .musecombo-v2-mini-row { margin-top: 3px; }
-  .musecombo-v2-cut-video-guide-note { margin-top: 5px; color: #6f9f98; font-size: 11.5px; line-height: 1.35; }
-  .musecombo-v2-cut-lock-badge {
+  .musecharsheeth3-cut-video-guide .musecharsheeth3-mini-row { margin-top: 3px; }
+  .musecharsheeth3-cut-video-guide-note { margin-top: 5px; color: #6f9f98; font-size: 11.5px; line-height: 1.35; }
+  .musecharsheeth3-cut-lock-badge {
     display: inline-flex; align-items: center; margin-left: 7px; padding: 1px 6px;
     border: 1px solid #54c8b0; border-radius: 10px; color: #8be4d2;
     background: #12332e; font-size: 10.5px; line-height: 1.4; vertical-align: middle;
   }
-  .musecombo-v2-cut-block.musecombo-v2-reference-locked { box-shadow: inset 0 0 0 1px rgba(84,200,176,.45); }
+  .musecharsheeth3-cut-block.musecharsheeth3-reference-locked { box-shadow: inset 0 0 0 1px rgba(84,200,176,.45); }
 
-  .musecombo-v2-lang-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 5px 0; border-top: 1px solid #22222b; }
-  .musecombo-v2-lang-row label { font-size: 12px; color: #9a9aa8; white-space: nowrap; }
-  .musecombo-v2-lang-input {
+  .musecharsheeth3-lang-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 5px 0; border-top: 1px solid #22222b; }
+  .musecharsheeth3-lang-row label { font-size: 12px; color: #9a9aa8; white-space: nowrap; }
+  .musecharsheeth3-lang-input {
     background: #101015; border: 1px solid #2e2e3a; border-radius: 6px; color: #e4e4ea;
     font-size: 12px; padding: 4px 6px; max-width: 62%; box-sizing: border-box;
   }
 
   /* 2026 UI refresh ------------------------------------------------------- */
-  .musecombo-v2-root {
-    --musecombo-v2-bg: linear-gradient(180deg, #10141c 0%, #0a0c12 100%);
-    --musecombo-v2-panel: #111824;
-    --musecombo-v2-panel-2: #151d2a;
-    --musecombo-v2-border: #2b374b;
-    --musecombo-v2-muted: #8994a8;
+  .musecharsheeth3-root {
+    --musecharsheeth3-bg: linear-gradient(180deg, #10141c 0%, #0a0c12 100%);
+    --musecharsheeth3-panel: #111824;
+    --musecharsheeth3-panel-2: #151d2a;
+    --musecharsheeth3-border: #2b374b;
+    --musecharsheeth3-muted: #8994a8;
     gap: 12px; padding: 12px;
-    background: var(--musecombo-v2-bg);
+    background: var(--musecharsheeth3-bg);
     border-color: #303b50; border-radius: 14px;
     box-shadow: 0 18px 55px rgba(0,0,0,.32);
   }
-  .musecombo-v2-app-header {
+  .musecharsheeth3-app-header {
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
     min-height: 42px; padding: 2px 6px 8px; border-bottom: 1px solid #253044;
   }
-  .musecombo-v2-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .musecombo-v2-brand-mark {
+  .musecharsheeth3-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .musecharsheeth3-brand-mark {
     display: grid; place-items: center; width: 40px; height: 40px; flex: 0 0 40px;
     border-radius: 8px; color: #e9ddff; font-size: 18px; overflow: hidden;
     background: #0f042e; box-shadow: 0 0 20px rgba(45,15,90,.5);
   }
-  .musecombo-v2-brand-title { color: #f4f1fa; font-size: 17px; font-weight: 750; letter-spacing: -.01em; }
-  .musecombo-v2-header-status { color: #c985ef; font-size: 11.5px; text-align: right; }
+  .musecharsheeth3-brand-title { color: #f4f1fa; font-size: 17px; font-weight: 750; letter-spacing: -.01em; }
+  .musecharsheeth3-header-status { color: #c985ef; font-size: 11.5px; text-align: right; }
 
-  .musecombo-v2-boxes-row.musecombo-v2-settings-grid {
+  .musecharsheeth3-boxes-row.musecharsheeth3-settings-grid {
     display: grid; grid-template-columns: repeat(4, minmax(190px, 1fr)); gap: 10px;
   }
-  .musecombo-v2-box {
+  .musecharsheeth3-box {
     min-width: 0; background: linear-gradient(145deg, rgba(22,30,43,.98), rgba(14,21,32,.98));
-    border: 1px solid var(--musecombo-v2-border); border-top-width: 1px; border-radius: 10px;
+    border: 1px solid var(--musecharsheeth3-border); border-top-width: 1px; border-radius: 10px;
     padding: 10px 12px;
   }
-  .musecombo-v2-settings-grid .musecombo-v2-box { position: relative; overflow: hidden; }
-  .musecombo-v2-settings-grid .musecombo-v2-box::before {
+  .musecharsheeth3-settings-grid .musecharsheeth3-box { position: relative; overflow: hidden; }
+  .musecharsheeth3-settings-grid .musecharsheeth3-box::before {
     content: ""; position: absolute; inset: 0 0 auto; height: 42px; pointer-events: none;
-    background: linear-gradient(90deg, var(--musecombo-v2-accent-soft), transparent 85%);
+    background: linear-gradient(90deg, var(--musecharsheeth3-accent-soft), transparent 85%);
   }
-  .musecombo-v2-box-generation { --musecombo-v2-accent: #9b79ee; --musecombo-v2-accent-soft: rgba(112,78,187,.32); border-color: #64519a; }
-  .musecombo-v2-box-resolution { --musecombo-v2-accent: #58ddd4; --musecombo-v2-accent-soft: rgba(27,142,137,.28); border-color: #287a78; }
-  .musecombo-v2-box-sampling { --musecombo-v2-accent: #f3a536; --musecombo-v2-accent-soft: rgba(180,96,24,.30); border-color: #8c5b25; }
-  .musecombo-v2-box-reference { --musecombo-v2-accent: #ed6da8; --musecombo-v2-accent-soft: rgba(166,48,104,.30); border-color: #834568; }
-  .musecombo-v2-box-analyze {
-    --musecombo-v2-accent: #c985ef; --musecombo-v2-accent-soft: rgba(140,80,190,.28); border-color: #7a4f96;
+  .musecharsheeth3-box-generation { --musecharsheeth3-accent: #9b79ee; --musecharsheeth3-accent-soft: rgba(112,78,187,.32); border-color: #64519a; }
+  .musecharsheeth3-box-resolution { --musecharsheeth3-accent: #58ddd4; --musecharsheeth3-accent-soft: rgba(27,142,137,.28); border-color: #287a78; }
+  .musecharsheeth3-box-sampling { --musecharsheeth3-accent: #f3a536; --musecharsheeth3-accent-soft: rgba(180,96,24,.30); border-color: #8c5b25; }
+  .musecharsheeth3-box-reference { --musecharsheeth3-accent: #ed6da8; --musecharsheeth3-accent-soft: rgba(166,48,104,.30); border-color: #834568; }
+  .musecharsheeth3-box-analyze {
+    --musecharsheeth3-accent: #c985ef; --musecharsheeth3-accent-soft: rgba(140,80,190,.28); border-color: #7a4f96;
     display: flex; flex-direction: column; gap: 6px;
   }
-  .musecombo-v2-settings-grid .musecombo-v2-box-analyze { grid-column: 1 / -1; }
-  .musecombo-v2-box-title {
+  .musecharsheeth3-settings-grid .musecharsheeth3-box-analyze { grid-column: 1 / -1; }
+  .musecharsheeth3-box-title {
     position: relative; min-height: 24px; display: flex; align-items: center; gap: 8px;
-    color: var(--musecombo-v2-accent, #a9b4c8); font-size: 12px; letter-spacing: .055em;
+    color: var(--musecharsheeth3-accent, #a9b4c8); font-size: 12px; letter-spacing: .055em;
   }
-  .musecombo-v2-title-index {
+  .musecharsheeth3-title-index {
     display: inline-grid; place-items: center; width: 24px; height: 24px;
-    border-radius: 5px; color: #fff; background: var(--musecombo-v2-accent, #6d778a);
+    border-radius: 5px; color: #fff; background: var(--musecharsheeth3-accent, #6d778a);
     font-size: 11px; font-weight: 800; letter-spacing: 0;
   }
-  .musecombo-v2-box-row { position: relative; min-height: 28px; border-top-color: rgba(255,255,255,.045); }
-  .musecombo-v2-box-row label { color: #d8dce5; }
-  .musecombo-v2-box-select, .musecombo-v2-box-number, .musecombo-v2-lang-input, .musecombo-v2-mini-select {
+  .musecharsheeth3-box-row { position: relative; min-height: 28px; border-top-color: rgba(255,255,255,.045); }
+  .musecharsheeth3-box-row label { color: #d8dce5; }
+  .musecharsheeth3-box-select, .musecharsheeth3-box-number, .musecharsheeth3-lang-input, .musecharsheeth3-mini-select {
     background: rgba(7,12,20,.55); border-color: #2b3748; min-height: 28px;
   }
-  .musecombo-v2-box-checkbox { appearance: none; width: 30px; height: 17px; border-radius: 20px;
+  .musecharsheeth3-box-checkbox { appearance: none; width: 30px; height: 17px; border-radius: 20px;
     background: #3a4351; position: relative; transition: .16s ease; }
-  .musecombo-v2-box-checkbox::after { content: ""; position: absolute; width: 13px; height: 13px;
+  .musecharsheeth3-box-checkbox::after { content: ""; position: absolute; width: 13px; height: 13px;
     left: 2px; top: 2px; border-radius: 50%; background: #e8edf5; transition: .16s ease; }
-  .musecombo-v2-box-checkbox:checked { background: #c34483; }
-  .musecombo-v2-box-checkbox:checked::after { transform: translateX(13px); }
+  .musecharsheeth3-box-checkbox:checked { background: #c34483; }
+  .musecharsheeth3-box-checkbox:checked::after { transform: translateX(13px); }
 
-  .musecombo-v2-section-shell, .musecombo-v2-reference-workspace {
+  .musecharsheeth3-section-shell, .musecharsheeth3-reference-workspace {
     background: linear-gradient(145deg, rgba(17,24,36,.96), rgba(10,17,27,.98));
     border: 1px solid #334056; border-radius: 10px; padding: 10px; box-sizing: border-box;
   }
-  .musecombo-v2-section-title { color: #7bdbe0; margin: 0; min-height: 30px; font-size: 12px; }
-  .musecombo-v2-section-title .musecombo-v2-badge { background: rgba(243,165,54,.13); color: #e9ae51; }
-  .musecombo-v2-chunks-wrap { gap: 12px; }
-  .musecombo-v2-chunk-section { border-color: #ffffff; background: var(--musecombo-v2-bg); padding: 10px; }
-  .musecombo-v2-chunk-heading { color: #ffffff; }
+  .musecharsheeth3-section-title { color: #7bdbe0; margin: 0; min-height: 30px; font-size: 12px; }
+  .musecharsheeth3-section-title .musecharsheeth3-badge { background: rgba(243,165,54,.13); color: #e9ae51; }
+  .musecharsheeth3-chunks-wrap { gap: 12px; }
+  .musecharsheeth3-chunk-section { border-color: #ffffff; background: var(--musecharsheeth3-bg); padding: 10px; }
+  .musecharsheeth3-chunk-heading { color: #ffffff; }
 
-  .musecombo-v2-chunk-style-wrap { display:flex; flex-direction:column; gap:10px; min-width:0; }
+  .musecharsheeth3-chunk-style-wrap { display:flex; flex-direction:column; gap:10px; min-width:0; }
   /* Soundscape & Music box is hidden on this node — Overall Style is the
      wrap's only card now, so stretch it (and its textarea) to fill the same
      height as the Now Generating/Chunk Preview column beside it. */
-  .musecombo-v2-creative-style-fill { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0; }
-  .musecombo-v2-creative-style-fill .musecombo-v2-style-input { flex: 1 1 auto; min-height: 0 !important; }
-  .musecombo-v2-creative-card {
+  .musecharsheeth3-creative-style-fill { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0; }
+  .musecharsheeth3-creative-style-fill .musecharsheeth3-style-input { flex: 1 1 auto; min-height: 0 !important; }
+  .musecharsheeth3-creative-card {
     min-width: 0; border: 1px solid #285c83; border-radius: 9px; padding: 9px 10px;
     background: linear-gradient(145deg, rgba(18,34,52,.92), rgba(12,22,34,.88));
   }
-  .musecombo-v2-creative-card.musecombo-v2-creative-sound { border-color: #287877; background: linear-gradient(145deg, rgba(13,48,52,.72), rgba(10,27,35,.88)); }
-  .musecombo-v2-chunk-top-row {
+  .musecharsheeth3-creative-card.musecharsheeth3-creative-sound { border-color: #287877; background: linear-gradient(145deg, rgba(13,48,52,.72), rgba(10,27,35,.88)); }
+  .musecharsheeth3-chunk-top-row {
     display: grid; grid-template-columns: minmax(320px, .72fr) minmax(560px, 1.28fr); gap: 14px;
     align-items: stretch; margin-bottom: 10px;
   }
-  .musecombo-v2-creative-card.musecombo-v2-creative-preview {
+  .musecharsheeth3-creative-card.musecharsheeth3-creative-preview {
     border-color: #6a4fa8; background: linear-gradient(145deg, rgba(40,28,58,.85), rgba(22,16,34,.9));
     display: flex; flex-direction: column; gap: 6px; min-width: 0; min-height: 0;
   }
-  .musecombo-v2-creative-card.musecombo-v2-preview-split { flex-direction: row; gap: 10px; }
-  .musecombo-v2-preview-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-  .musecombo-v2-chunk-preview-status { font-size: 11px; color: #b9a8dd; flex: 0 0 auto; }
-  .musecombo-v2-live-preview-status { color: #ff9d6f; }
-  .musecombo-v2-chunk-preview-video {
+  .musecharsheeth3-creative-card.musecharsheeth3-preview-split { flex-direction: row; gap: 10px; }
+  .musecharsheeth3-preview-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  .musecharsheeth3-chunk-preview-status { font-size: 11px; color: #b9a8dd; flex: 0 0 auto; }
+  .musecharsheeth3-live-preview-status { color: #ff9d6f; }
+  .musecharsheeth3-chunk-preview-video {
     width: 100%; flex: 1 1 auto; min-height: 300px; background: #000; border-radius: 7px;
     border: 1px solid #4a3878; object-fit: contain;
   }
-  .musecombo-v2-live-preview-img {
+  .musecharsheeth3-live-preview-img {
     width: 100%; flex: 1 1 auto; min-height: 300px; background: #000; border-radius: 7px;
     border: 1px solid #4a3878; object-fit: contain;
   }
-  .musecombo-v2-creative-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .musecombo-v2-creative-field { min-width: 0; }
-  .musecombo-v2-creative-field .musecombo-v2-box-title { color: #80deda; }
-  .musecombo-v2-style-input { background: rgba(7,12,20,.45); border-color: #2b3a4e; min-height: 76px !important; font-size: 12.5px; line-height: 1.45; }
-  .musecombo-v2-track {
+  .musecharsheeth3-creative-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .musecharsheeth3-creative-field { min-width: 0; }
+  .musecharsheeth3-creative-field .musecharsheeth3-box-title { color: #80deda; }
+  .musecharsheeth3-style-input { background: rgba(7,12,20,.45); border-color: #2b3a4e; min-height: 76px !important; font-size: 12.5px; line-height: 1.45; }
+  .musecharsheeth3-track {
     height: auto; min-height: 240px; align-items: stretch; border-color: #39465a;
     background: #101722; gap: 6px; padding: 6px; box-sizing: border-box; overflow: visible;
   }
-  .musecombo-v2-cut-block {
+  .musecharsheeth3-cut-block {
     min-height: 240px; border: 1px solid #3b485a; border-radius: 7px;
     overflow: hidden; background: #17202d;
   }
-  .musecombo-v2-cut-text { flex: 1 0 132px; min-height: 132px; font-size: 16px; line-height: 1.5; padding: 4px 10px 10px; }
-  .musecombo-v2-cut-video-guide { flex: 0 0 auto; }
+  .musecharsheeth3-cut-text { flex: 1 0 132px; min-height: 132px; font-size: 16px; line-height: 1.5; padding: 4px 10px 10px; }
+  .musecharsheeth3-cut-video-guide { flex: 0 0 auto; }
 
-  .musecombo-v2-reference-workspace { width: 100%; }
-  .musecombo-v2-reference-section {
+  .musecharsheeth3-reference-workspace { width: 100%; }
+  .musecharsheeth3-reference-section {
     width: 100%; box-sizing: border-box; margin-top: 10px; padding: 10px;
     border: 1px solid #277b83; border-radius: 9px;
     background: linear-gradient(145deg, rgba(12,43,49,.68), rgba(10,24,33,.90));
   }
-  .musecombo-v2-reference-section:first-child { margin-top: 0; }
-  .musecombo-v2-reference-section-title {
+  .musecharsheeth3-reference-section:first-child { margin-top: 0; }
+  .musecharsheeth3-reference-section-title {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
     margin-bottom: 8px; color: #69e0df; font-size: 12px; font-weight: 750;
     letter-spacing: .055em; text-transform: uppercase;
   }
-  .musecombo-v2-reference-section-subtitle { color: #77869c; font-size: 10.5px; font-weight: 500; text-transform: none; letter-spacing: 0; }
-  .musecombo-v2-char-row { grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 7px; }
-  .musecombo-v2-char-slot { min-width: 0; min-height: 300px; border-width: 1px; border-style: dashed; background: rgba(10,18,28,.72); }
-  .musecombo-v2-char-slot:not(.musecombo-v2-filled) { justify-content: center; }
-  .musecombo-v2-char-slot:not(.musecombo-v2-filled) .musecombo-v2-char-placeholder { margin-top: 0; }
-  .musecombo-v2-char-preview { position: relative; flex: 1 0 160px; min-height: 160px; height: auto; margin-top: 0; }
-  .musecombo-v2-char-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-  .musecombo-v2-av-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 8px; }
+  .musecharsheeth3-reference-section-subtitle { color: #77869c; font-size: 10.5px; font-weight: 500; text-transform: none; letter-spacing: 0; }
+  .musecharsheeth3-char-row { grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 7px; }
+  .musecharsheeth3-char-slot { min-width: 0; min-height: 300px; border-width: 1px; border-style: dashed; background: rgba(10,18,28,.72); }
+  .musecharsheeth3-char-slot:not(.musecharsheeth3-filled) { justify-content: center; }
+  .musecharsheeth3-char-slot:not(.musecharsheeth3-filled) .musecharsheeth3-char-placeholder { margin-top: 0; }
+  .musecharsheeth3-char-preview { position: relative; flex: 1 0 160px; min-height: 160px; height: auto; margin-top: 0; }
+  .musecharsheeth3-char-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .musecharsheeth3-av-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 8px; }
   /* [2026-09-18] Only two real elements left in this row (Ref Video 1's own
      slot + its viewer) once audio is hidden — the multi-slot auto-fit grid
      above was sized for up to 5 items and leaves empty unused track space
@@ -616,100 +638,100 @@ function injectStyles() {
      since the slot has more content than the viewer. The viewer alone
      gets the fixed 300px height (matching the reference character slots);
      the slot is left free to size to its own natural content height. */
-  .musecombo-v2-av-row.musecombo-v2-av-row-video-only { display: flex !important; flex-wrap: nowrap; align-items: flex-start; }
-  .musecombo-v2-av-row-video-only > .musecombo-v2-av-slot-video { flex: 1 1 0; min-width: 0; }
-  .musecombo-v2-av-row-video-only > .musecombo-v2-video-viewer { flex: 1 1 0; min-width: 0; height: 300px; }
-  .musecombo-v2-av-slot { width: 100%; min-width: 0; min-height: 176px; background: rgba(9,17,27,.64); }
-  .musecombo-v2-av-slot-video, .musecombo-v2-av-slot-audio { border-width: 1px; }
-  .musecombo-v2-reference-help { margin: 8px 2px 0; color: #708096; font-size: 10.5px; line-height: 1.45; }
+  .musecharsheeth3-av-row.musecharsheeth3-av-row-video-only { display: flex !important; flex-wrap: nowrap; align-items: flex-start; }
+  .musecharsheeth3-av-row-video-only > .musecharsheeth3-av-slot-video { flex: 1 1 0; min-width: 0; }
+  .musecharsheeth3-av-row-video-only > .musecharsheeth3-video-viewer { flex: 1 1 0; min-width: 0; height: 300px; }
+  .musecharsheeth3-av-slot { width: 100%; min-width: 0; min-height: 176px; background: rgba(9,17,27,.64); }
+  .musecharsheeth3-av-slot-video, .musecharsheeth3-av-slot-audio { border-width: 1px; }
+  .musecharsheeth3-reference-help { margin: 8px 2px 0; color: #708096; font-size: 10.5px; line-height: 1.45; }
 
   /* Readability pass: designed to remain legible when the graph is viewed from
      a little distance, rather than relying on browser/canvas zoom. */
-  .musecombo-v2-root { font-size: 14px; line-height: 1.45; }
-  .musecombo-v2-brand-title { font-size: 19px; }
-  .musecombo-v2-header-status { font-size: 13px; }
-  .musecombo-v2-box-title, .musecombo-v2-section-title, .musecombo-v2-reference-section-title,
-  .musecombo-v2-chunk-heading { font-size: 13.5px; }
-  .musecombo-v2-box-row label, .musecombo-v2-lang-row label, .musecombo-v2-mini-row label { font-size: 13.5px; }
-  .musecombo-v2-box-select, .musecombo-v2-box-number, .musecombo-v2-lang-input,
-  .musecombo-v2-mini-select { font-size: 13.5px; }
-  .musecombo-v2-style-input, .musecombo-v2-cut-text, .musecombo-v2-desc-input { font-size: 14px; }
-  .musecombo-v2-cut-label, .musecombo-v2-av-slot-label { font-size: 13px; }
-  .musecombo-v2-track-hint, .musecombo-v2-reference-help, .musecombo-v2-gear-hint,
-  .musecombo-v2-reference-section-subtitle { font-size: 12.5px; }
-  .musecombo-v2-char-label, .musecombo-v2-char-placeholder, .musecombo-v2-analyze-btn,
-  .musecombo-v2-av-placeholder { font-size: 12px; }
-  .musecombo-v2-ruler-tick-label { font-size: 13px; }
-  .musecombo-v2-cut-label { font-size: 16px; }
-  .musecombo-v2-cut-duration-input { width:54px; font-size:15px; }
-  .musecombo-v2-dialogue-line, .musecombo-v2-dialogue-speaker-label { font-size:15px; }
-  .musecombo-v2-dialogue-speaker-row { gap:8px; padding:7px 10px; }
-  .musecombo-v2-speaker-chip { font-size:14.5px; padding:5px 12px; }
-  .musecombo-v2-chunk-preview-status { font-size:13px; }
+  .musecharsheeth3-root { font-size: 14px; line-height: 1.45; }
+  .musecharsheeth3-brand-title { font-size: 19px; }
+  .musecharsheeth3-header-status { font-size: 13px; }
+  .musecharsheeth3-box-title, .musecharsheeth3-section-title, .musecharsheeth3-reference-section-title,
+  .musecharsheeth3-chunk-heading { font-size: 13.5px; }
+  .musecharsheeth3-box-row label, .musecharsheeth3-lang-row label, .musecharsheeth3-mini-row label { font-size: 13.5px; }
+  .musecharsheeth3-box-select, .musecharsheeth3-box-number, .musecharsheeth3-lang-input,
+  .musecharsheeth3-mini-select { font-size: 13.5px; }
+  .musecharsheeth3-style-input, .musecharsheeth3-cut-text, .musecharsheeth3-desc-input { font-size: 14px; }
+  .musecharsheeth3-cut-label, .musecharsheeth3-av-slot-label { font-size: 13px; }
+  .musecharsheeth3-track-hint, .musecharsheeth3-reference-help, .musecharsheeth3-gear-hint,
+  .musecharsheeth3-reference-section-subtitle { font-size: 12.5px; }
+  .musecharsheeth3-char-label, .musecharsheeth3-char-placeholder, .musecharsheeth3-analyze-btn,
+  .musecharsheeth3-av-placeholder { font-size: 12px; }
+  .musecharsheeth3-ruler-tick-label { font-size: 13px; }
+  .musecharsheeth3-cut-label { font-size: 16px; }
+  .musecharsheeth3-cut-duration-input { width:54px; font-size:15px; }
+  .musecharsheeth3-dialogue-line, .musecharsheeth3-dialogue-speaker-label { font-size:15px; }
+  .musecharsheeth3-dialogue-speaker-row { gap:8px; padding:7px 10px; }
+  .musecharsheeth3-speaker-chip { font-size:14.5px; padding:5px 12px; }
+  .musecharsheeth3-chunk-preview-status { font-size:13px; }
 
-  .musecombo-v2-number-control { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex: 1; min-width: 0; }
-  .musecombo-v2-number-control .musecombo-v2-box-number { width: 68px; flex: 0 0 68px; max-width: none; text-align: right; }
-  .musecombo-v2-number-control .musecombo-v2-box-select { width: 72px; flex: 0 0 72px; max-width: none; }
-  .musecombo-v2-number-control-plain { justify-content: flex-end; }
-  .musecombo-v2-number-control-plain .musecombo-v2-box-number,
-  .musecombo-v2-number-control-plain .musecombo-v2-box-select {
+  .musecharsheeth3-number-control { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex: 1; min-width: 0; }
+  .musecharsheeth3-number-control .musecharsheeth3-box-number { width: 68px; flex: 0 0 68px; max-width: none; text-align: right; }
+  .musecharsheeth3-number-control .musecharsheeth3-box-select { width: 72px; flex: 0 0 72px; max-width: none; }
+  .musecharsheeth3-number-control-plain { justify-content: flex-end; }
+  .musecharsheeth3-number-control-plain .musecharsheeth3-box-number,
+  .musecharsheeth3-number-control-plain .musecharsheeth3-box-select {
     flex: 1 1 auto; width: 100%; max-width: 220px; text-align: right; font-weight: 650;
   }
 
-  .musecombo-v2-chunk-section {
+  .musecharsheeth3-chunk-section {
     border: 2px solid #ffffff;
     box-shadow: 0 0 0 1px rgba(255,255,255,.14), inset 0 1px 0 rgba(255,255,255,.08);
   }
-  .musecombo-v2-chunk-heading { color: #ffffff; font-weight: 850; text-shadow: 0 0 12px rgba(255,255,255,.2); }
+  .musecharsheeth3-chunk-heading { color: #ffffff; font-weight: 850; text-shadow: 0 0 12px rgba(255,255,255,.2); }
 
   @media (max-width: 980px) {
-    .musecombo-v2-boxes-row.musecombo-v2-settings-grid { grid-template-columns: repeat(2, minmax(210px, 1fr)); }
-    .musecombo-v2-chunk-style-wrap { grid-template-columns: 1fr; }
-    .musecombo-v2-chunk-top-row { grid-template-columns: 1fr; }
-    .musecombo-v2-char-row { grid-template-columns: repeat(5, minmax(82px, 1fr)); }
+    .musecharsheeth3-boxes-row.musecharsheeth3-settings-grid { grid-template-columns: repeat(2, minmax(210px, 1fr)); }
+    .musecharsheeth3-chunk-style-wrap { grid-template-columns: 1fr; }
+    .musecharsheeth3-chunk-top-row { grid-template-columns: 1fr; }
+    .musecharsheeth3-char-row { grid-template-columns: repeat(5, minmax(82px, 1fr)); }
   }
   @media (max-width: 640px) {
-    .musecombo-v2-boxes-row.musecombo-v2-settings-grid { grid-template-columns: 1fr; }
-    .musecombo-v2-creative-fields, .musecombo-v2-av-row { grid-template-columns: 1fr; }
-    .musecombo-v2-char-row { grid-template-columns: repeat(2, minmax(88px, 1fr)); }
-    .musecombo-v2-header-status { display: none; }
+    .musecharsheeth3-boxes-row.musecharsheeth3-settings-grid { grid-template-columns: 1fr; }
+    .musecharsheeth3-creative-fields, .musecharsheeth3-av-row { grid-template-columns: 1fr; }
+    .musecharsheeth3-char-row { grid-template-columns: repeat(2, minmax(88px, 1fr)); }
+    .musecharsheeth3-header-status { display: none; }
   }
 
-  .musecombo-v2-main-grid { display: flex; align-items: flex-start; gap: 16px; width: 100%; box-sizing: border-box; }
-  .musecombo-v2-left-col {
+  .musecharsheeth3-main-grid { display: flex; align-items: flex-start; gap: 16px; width: 100%; box-sizing: border-box; }
+  .musecharsheeth3-left-col {
     display: flex; flex-direction: column; gap: 12px;
     flex: 0 0 33%; max-width: 33%; min-width: 320px; box-sizing: border-box;
   }
-  .musecombo-v2-left-col .musecombo-v2-boxes-row.musecombo-v2-settings-grid {
+  .musecharsheeth3-left-col .musecharsheeth3-boxes-row.musecharsheeth3-settings-grid {
     display: flex; flex-direction: column; gap: 12px; width: 100%;
   }
-  .musecombo-v2-left-col .musecombo-v2-box { width: 100%; box-sizing: border-box; }
-  .musecombo-v2-left-col .musecombo-v2-box-title { font-size: 16px; min-height: 32px; }
-  .musecombo-v2-left-col .musecombo-v2-title-index { width: 28px; height: 28px; font-size: 13px; }
-  .musecombo-v2-left-col .musecombo-v2-box-row label { font-size: 15px; }
-  .musecombo-v2-left-col .musecombo-v2-box-select, .musecombo-v2-left-col .musecombo-v2-box-number,
-  .musecombo-v2-left-col .musecombo-v2-lang-input, .musecombo-v2-left-col .musecombo-v2-mini-select {
+  .musecharsheeth3-left-col .musecharsheeth3-box { width: 100%; box-sizing: border-box; }
+  .musecharsheeth3-left-col .musecharsheeth3-box-title { font-size: 16px; min-height: 32px; }
+  .musecharsheeth3-left-col .musecharsheeth3-title-index { width: 28px; height: 28px; font-size: 13px; }
+  .musecharsheeth3-left-col .musecharsheeth3-box-row label { font-size: 15px; }
+  .musecharsheeth3-left-col .musecharsheeth3-box-select, .musecharsheeth3-left-col .musecharsheeth3-box-number,
+  .musecharsheeth3-left-col .musecharsheeth3-lang-input, .musecharsheeth3-left-col .musecharsheeth3-mini-select {
     font-size: 15px; min-height: 34px;
   }
-  .musecombo-v2-left-col .musecombo-v2-box { padding: 14px 16px; }
-  .musecombo-v2-left-col .musecombo-v2-box-checkbox { width: 36px; height: 20px; }
-  .musecombo-v2-left-col .musecombo-v2-box-checkbox::after { width: 16px; height: 16px; }
-  .musecombo-v2-left-col .musecombo-v2-box-checkbox:checked::after { transform: translateX(16px); }
+  .musecharsheeth3-left-col .musecharsheeth3-box { padding: 14px 16px; }
+  .musecharsheeth3-left-col .musecharsheeth3-box-checkbox { width: 36px; height: 20px; }
+  .musecharsheeth3-left-col .musecharsheeth3-box-checkbox::after { width: 16px; height: 16px; }
+  .musecharsheeth3-left-col .musecharsheeth3-box-checkbox:checked::after { transform: translateX(16px); }
 
 
-  .musecombo-v2-right-col { display: flex; flex-direction: column; gap: 10px; flex: 1 1 0%; min-width: 0; box-sizing: border-box; }
-  .musecombo-v2-right-col .musecombo-v2-section-title { margin: 0; }
-  .musecombo-v2-right-col .musecombo-v2-chunks-wrap { gap: 12px; }
+  .musecharsheeth3-right-col { display: flex; flex-direction: column; gap: 10px; flex: 1 1 0%; min-width: 0; box-sizing: border-box; }
+  .musecharsheeth3-right-col .musecharsheeth3-section-title { margin: 0; }
+  .musecharsheeth3-right-col .musecharsheeth3-chunks-wrap { gap: 12px; }
 
-  .musecombo-v2-chunk-collapse-btn {
+  .musecharsheeth3-chunk-collapse-btn {
     width: auto; padding: 11px 22px; font-size: 15px; font-weight: 750; border-radius: 8px;
     color: #d8e8ff; background: #2a4a7a; border: 2px solid #4F8EF7; white-space: nowrap;
   }
-  .musecombo-v2-chunk-collapse-btn:hover { color: #fff; background: #3a5f9a; border-color: #6fa8ff; }
+  .musecharsheeth3-chunk-collapse-btn:hover { color: #fff; background: #3a5f9a; border-color: #6fa8ff; }
 
   @media (max-width: 900px) {
-    .musecombo-v2-main-grid { flex-direction: column; }
-    .musecombo-v2-left-col { flex: 1 1 auto; max-width: 100%; }
+    .musecharsheeth3-main-grid { flex-direction: column; }
+    .musecharsheeth3-left-col { flex: 1 1 auto; max-width: 100%; }
   }
   `;
   document.head.appendChild(style);
@@ -797,7 +819,7 @@ class CharacterSheetH3TimelineEditor {
     }
     this.timeline = this._loadState();
     this.container = document.createElement("div");
-    this.container.className = "musecombo-v2-root";
+    this.container.className = "musecharsheeth3-root";
     this._executionLayoutHandler = (event) => {
       const id = event.detail?.node_id ?? event.detail?.node;
       if (id == null || String(id) === String(this.node.id)) this._scheduleNodeResize();
@@ -843,6 +865,7 @@ class CharacterSheetH3TimelineEditor {
   // card's <img>, without a full re-render. Safe no-op if that chunk's card
   // isn't currently built.
   _applyLiveChunkPreview(chunkIdx, detail) {
+    rememberMusePreview(this.node, detail);
     const img = this._liveChunkPreviewImgEls[chunkIdx];
     if (!img) return;
     // Each step sends a short animated WebP (a real multi-frame clip decoded
@@ -853,7 +876,7 @@ class CharacterSheetH3TimelineEditor {
     img.src = `data:${detail.mime || "image/jpeg"};base64,${detail.image}`;
     img.hidden = false;
     const status = img.previousSibling;
-    if (status?.classList?.contains("musecombo-v2-live-preview-status")) {
+    if (status?.classList?.contains("musecharsheeth3-live-preview-status")) {
       const total = detail.total ? ` / ${detail.total}` : "";
       status.textContent = `Now Generating — step ${detail.step || "?"}${total}`;
     }
@@ -868,7 +891,7 @@ class CharacterSheetH3TimelineEditor {
     video.src = api.apiURL(`${_MUSE_VIEW_ROUTE}?token=${encodeURIComponent(token)}`);
     video.load();
     const status = video.previousSibling;
-    if (status?.classList?.contains("musecombo-v2-chunk-preview-status")) {
+    if (status?.classList?.contains("musecharsheeth3-chunk-preview-status")) {
       status.textContent = "Rendered";
     }
   }
@@ -891,7 +914,6 @@ class CharacterSheetH3TimelineEditor {
     this.timelineWidget = timelineWidget;
     if (this._resizeObserver) this._resizeObserver.disconnect();
     if (this._resizeDebounce) clearTimeout(this._resizeDebounce);
-    if (window.LiteGraph?.vueNodesMode) return;
     this._resizeDebounce = setTimeout(() => {
       this._resizeDebounce = null;
       this._resizeOnce();
@@ -903,15 +925,17 @@ class CharacterSheetH3TimelineEditor {
   }
 
   _resizeOnce() {
-    if (window.LiteGraph?.vueNodesMode) return;
     if (!this.timelineWidget || !this.node?.setSize || !this.container) return;
+    if (!this.container.isConnected || !this.container.offsetHeight) return;
     const contentHeight = Math.max(this.container.offsetHeight || 0, this.container.scrollHeight || 0, 640);
     // Cache this real, settled measurement for computeSize (see onNodeCreated)
     // to echo back — decoupled from this.size so it can't feed LiteGraph's
     // own grow-only arrange loop, only updated here, on an actual measurement.
     this._cachedContentHeight = contentHeight;
     const width = Math.max(this.node.size?.[0] || 1480, 1480);
-    const height = Math.ceil(contentHeight + 70);
+    // Include the real socket/widget offset, not an assumed 70px header.
+    // The root is intrinsic-height, so resizing the shell cannot stretch it.
+    const height = Math.ceil(contentHeight + Math.max(70, this.timelineWidget.y || 0) + 16);
     if (!this.node.size || Math.abs(this.node.size[1] - height) > 2 || this.node.size[0] !== width) {
       this.node.setSize([width, height]);
       this.node.setDirtyCanvas?.(true, true);
@@ -923,7 +947,6 @@ class CharacterSheetH3TimelineEditor {
   // reacting to every one, so it can't chase an external animation either.
   // No-op in Vue nodes mode, same as _resizeOnce.
   _scheduleNodeResize() {
-    if (window.LiteGraph?.vueNodesMode) return;
     if (!this.timelineWidget || !this.node?.setSize) return;
     if (this._resizeDebounce) clearTimeout(this._resizeDebounce);
     this._resizeDebounce = setTimeout(() => {
@@ -1075,36 +1098,36 @@ class CharacterSheetH3TimelineEditor {
     this.container.innerHTML = "";
 
     const appHeader = document.createElement("div");
-    appHeader.className = "musecombo-v2-app-header";
+    appHeader.className = "musecharsheeth3-app-header";
     const brand = document.createElement("div");
-    brand.className = "musecombo-v2-brand";
-    brand.innerHTML = `<span class="musecombo-v2-brand-mark">&#127917;</span><span class="musecombo-v2-brand-title">Muse Character Sheet H3</span>`;
+    brand.className = "musecharsheeth3-brand";
+    brand.innerHTML = `<span class="musecharsheeth3-brand-mark">&#127917;</span><span class="musecharsheeth3-brand-title">Muse Character Sheet H3</span>`;
     appHeader.appendChild(brand);
     const headerStatus = document.createElement("div");
-    headerStatus.className = "musecombo-v2-header-status";
+    headerStatus.className = "musecharsheeth3-header-status";
     headerStatus.textContent = "Reference (Omni)  •  Up to 8 images + Location, 3 videos, 3 audio clips";
     appHeader.appendChild(headerStatus);
     this.container.appendChild(appHeader);
 
     const mainGrid = document.createElement("div");
-    mainGrid.className = "musecombo-v2-main-grid";
+    mainGrid.className = "musecharsheeth3-main-grid";
 
     const leftCol = document.createElement("div");
-    leftCol.className = "musecombo-v2-left-col";
+    leftCol.className = "musecharsheeth3-left-col";
     leftCol.appendChild(this._buildSettingsBoxes());
 
     mainGrid.appendChild(leftCol);
 
     const rightCol = document.createElement("div");
-    rightCol.className = "musecombo-v2-right-col";
+    rightCol.className = "musecharsheeth3-right-col";
 
     const cutsTitle = document.createElement("div");
-    cutsTitle.className = "musecombo-v2-section-title";
-    cutsTitle.innerHTML = `&#9986;&nbsp; Timeline / Cuts <span class="musecombo-v2-badge">drag edges to time, drag blocks to reorder</span>`;
+    cutsTitle.className = "musecharsheeth3-section-title";
+    cutsTitle.innerHTML = `&#9986;&nbsp; Timeline / Cuts <span class="musecharsheeth3-badge">drag edges to time, drag blocks to reorder</span>`;
     rightCol.appendChild(cutsTitle);
 
     this.chunksWrap = document.createElement("div");
-    this.chunksWrap.className = "musecombo-v2-chunks-wrap";
+    this.chunksWrap.className = "musecharsheeth3-chunks-wrap";
     rightCol.appendChild(this.chunksWrap);
 
     mainGrid.appendChild(rightCol);
@@ -1117,7 +1140,7 @@ class CharacterSheetH3TimelineEditor {
   // ── Boxed settings panel (re-skins the real native widgets) ────────────────
   _buildSettingsBoxes() {
     const row = document.createElement("div");
-    row.className = "musecombo-v2-boxes-row musecombo-v2-settings-grid";
+    row.className = "musecharsheeth3-boxes-row musecharsheeth3-settings-grid";
 
     row.appendChild(this._buildGenerationBox());
     row.appendChild(this._buildResolutionBox());
@@ -1134,15 +1157,15 @@ class CharacterSheetH3TimelineEditor {
   // zero effect on generation.
   _buildRefModBox() {
     const box = document.createElement("div");
-    box.className = "musecombo-v2-box musecombo-v2-box-refmod";
+    box.className = "musecharsheeth3-box musecharsheeth3-box-refmod";
 
     const title = document.createElement("div");
-    title.className = "musecombo-v2-box-title";
-    title.innerHTML = `<span class="musecombo-v2-title-index">05</span><span>RefMod Override</span>`;
+    title.className = "musecharsheeth3-box-title";
+    title.innerHTML = `<span class="musecharsheeth3-title-index">05</span><span>RefMod Override</span>`;
     box.appendChild(title);
 
     const hint = document.createElement("div");
-    hint.className = "musecombo-v2-reference-help";
+    hint.className = "musecharsheeth3-reference-help";
     hint.style.marginTop = "0";
     hint.textContent = "Optional, off by default. Needs ComfyUI-MiniMaxH3Mod installed and a bundle "
       + "wired into the refmod_bundle input (Load H3 RefMods' 'mods' output). Runs alongside the normal "
@@ -1159,14 +1182,14 @@ class CharacterSheetH3TimelineEditor {
     }
     if (this.realWidgets.refmod_description) {
       const descLabel = document.createElement("div");
-      descLabel.className = "musecombo-v2-box-title";
+      descLabel.className = "musecharsheeth3-box-title";
       descLabel.style.cssText = "margin-top:8px;font-size:11px;opacity:0.75;";
       descLabel.textContent = "Description (outfit / styling for this render)";
       box.appendChild(descLabel);
 
       const widget = this.realWidgets.refmod_description;
       const textarea = document.createElement("textarea");
-      textarea.className = "musecombo-v2-style-input";
+      textarea.className = "musecharsheeth3-style-input";
       textarea.style.minHeight = "52px";
       textarea.placeholder = "e.g. wearing a black leather jacket over a white top, hair down and "
         + "loose. The mod only carries identity (face/hair color) — not wardrobe. To borrow an outfit "
@@ -1188,7 +1211,7 @@ class CharacterSheetH3TimelineEditor {
     // of it). Grouped under its own divider so the common controls above
     // (Enable / Retention / Description) stay uncluttered.
     const advDivider = document.createElement("div");
-    advDivider.className = "musecombo-v2-box-title";
+    advDivider.className = "musecharsheeth3-box-title";
     advDivider.style.cssText = "margin-top:12px;font-size:11px;opacity:0.75;";
     advDivider.textContent = "Advanced (matches Apply H3 RefMod's own widgets)";
     box.appendChild(advDivider);
@@ -1230,16 +1253,16 @@ class CharacterSheetH3TimelineEditor {
   // _numberRow/_seedRow use, so it sits sized/positioned like every other row.
   _refModStringRow(labelText, widget) {
     const rowEl = document.createElement("div");
-    rowEl.className = "musecombo-v2-box-row";
+    rowEl.className = "musecharsheeth3-box-row";
     const label = document.createElement("label");
     label.textContent = labelText;
     rowEl.appendChild(label);
 
     const controls = document.createElement("div");
-    controls.className = "musecombo-v2-number-control musecombo-v2-number-control-plain";
+    controls.className = "musecharsheeth3-number-control musecharsheeth3-number-control-plain";
     const input = document.createElement("input");
     input.type = "text";
-    input.className = "musecombo-v2-box-number";
+    input.className = "musecharsheeth3-box-number";
     input.value = widget.value || "";
     input.addEventListener("input", () => {
       widget.value = input.value;
@@ -1253,11 +1276,11 @@ class CharacterSheetH3TimelineEditor {
 
   _buildGenerationBox() {
     const box = document.createElement("div");
-    box.className = "musecombo-v2-box musecombo-v2-box-generation";
+    box.className = "musecharsheeth3-box musecharsheeth3-box-generation";
 
     const title = document.createElement("div");
-    title.className = "musecombo-v2-box-title";
-    title.innerHTML = `<span class="musecombo-v2-title-index">01</span><span>Generation</span>`;
+    title.className = "musecharsheeth3-box-title";
+    title.innerHTML = `<span class="musecharsheeth3-title-index">01</span><span>Generation</span>`;
     box.appendChild(title);
 
     if (this.realWidgets.duration_seconds) {
@@ -1273,7 +1296,7 @@ class CharacterSheetH3TimelineEditor {
 
     const clearBtn = document.createElement("button");
     clearBtn.type = "button";
-    clearBtn.className = "musecombo-v2-analyze-btn musecombo-v2-clear-chunks-btn";
+    clearBtn.className = "musecharsheeth3-analyze-btn musecharsheeth3-clear-chunks-btn";
     clearBtn.style.width = "100%";
     clearBtn.style.marginTop = "8px";
     clearBtn.textContent = "Clear CUTs / Reset Timeline";
@@ -1309,11 +1332,11 @@ class CharacterSheetH3TimelineEditor {
 
   _buildResolutionBox() {
     const box = document.createElement("div");
-    box.className = "musecombo-v2-box musecombo-v2-box-resolution";
+    box.className = "musecharsheeth3-box musecharsheeth3-box-resolution";
 
     const title = document.createElement("div");
-    title.className = "musecombo-v2-box-title";
-    title.innerHTML = `<span class="musecombo-v2-title-index">02</span><span>Resolution</span>`;
+    title.className = "musecharsheeth3-box-title";
+    title.innerHTML = `<span class="musecharsheeth3-title-index">02</span><span>Resolution</span>`;
     box.appendChild(title);
 
     if (this.realWidgets.aspect_ratio) box.appendChild(this._selectRow("Aspect Ratio", this.realWidgets.aspect_ratio));
@@ -1324,11 +1347,11 @@ class CharacterSheetH3TimelineEditor {
 
   _buildSamplingBox() {
     const box = document.createElement("div");
-    box.className = "musecombo-v2-box musecombo-v2-box-sampling";
+    box.className = "musecharsheeth3-box musecharsheeth3-box-sampling";
 
     const title = document.createElement("div");
-    title.className = "musecombo-v2-box-title";
-    title.innerHTML = `<span class="musecombo-v2-title-index">03</span><span>Sampling</span>`;
+    title.className = "musecharsheeth3-box-title";
+    title.innerHTML = `<span class="musecharsheeth3-title-index">03</span><span>Sampling</span>`;
     box.appendChild(title);
 
     if (this.realWidgets.sampler_name) box.appendChild(this._selectRow("Sampler", this.realWidgets.sampler_name));
@@ -1340,7 +1363,7 @@ class CharacterSheetH3TimelineEditor {
 
     if (this.realWidgets.two_stage_sampling) {
       const twoStageDivider = document.createElement("div");
-      twoStageDivider.className = "musecombo-v2-box-title";
+      twoStageDivider.className = "musecharsheeth3-box-title";
       twoStageDivider.style.cssText = "margin-top:10px;font-size:11px;opacity:0.75;";
       twoStageDivider.textContent = "Two-Stage Sampling (experimental)";
       box.appendChild(twoStageDivider);
@@ -1365,11 +1388,11 @@ class CharacterSheetH3TimelineEditor {
 
   _buildReferenceBox() {
     this.refBox = document.createElement("div");
-    this.refBox.className = "musecombo-v2-box musecombo-v2-box-reference";
+    this.refBox.className = "musecharsheeth3-box musecharsheeth3-box-reference";
 
     const title = document.createElement("div");
-    title.className = "musecombo-v2-box-title";
-    title.innerHTML = `<span class="musecombo-v2-title-index">04</span><span>Image Settings</span>`;
+    title.className = "musecharsheeth3-box-title";
+    title.innerHTML = `<span class="musecharsheeth3-title-index">04</span><span>Image Settings</span>`;
     this.refBox.appendChild(title);
 
     if (this.realWidgets.ref_image_size) {
@@ -1381,30 +1404,30 @@ class CharacterSheetH3TimelineEditor {
 
   _buildTimelineBox() {
     const panel = document.createElement("div");
-    panel.className = "musecombo-v2-box musecombo-v2-box-analyze";
+    panel.className = "musecharsheeth3-box musecharsheeth3-box-analyze";
 
     const boxTitle = document.createElement("div");
-    boxTitle.className = "musecombo-v2-box-title";
-    boxTitle.innerHTML = `<span class="musecombo-v2-title-index">06</span><span>Timeline &amp; Analyze</span>`;
+    boxTitle.className = "musecharsheeth3-box-title";
+    boxTitle.innerHTML = `<span class="musecharsheeth3-title-index">06</span><span>Timeline &amp; Analyze</span>`;
     panel.appendChild(boxTitle);
 
     const fileBtnRow1 = document.createElement("div");
     fileBtnRow1.style.display = "flex";
     fileBtnRow1.style.gap = "6px";
     const saveBtn = document.createElement("button");
-    saveBtn.className = "musecombo-v2-analyze-btn";
+    saveBtn.className = "musecharsheeth3-analyze-btn";
     saveBtn.style.width = "auto";
     saveBtn.style.flex = "1";
     saveBtn.textContent = "Save Timeline";
     saveBtn.addEventListener("click", () => this.saveTimeline());
     const saveAsBtn = document.createElement("button");
-    saveAsBtn.className = "musecombo-v2-analyze-btn";
+    saveAsBtn.className = "musecharsheeth3-analyze-btn";
     saveAsBtn.style.width = "auto";
     saveAsBtn.style.flex = "1";
     saveAsBtn.textContent = "Save Timeline As";
     saveAsBtn.addEventListener("click", () => this.saveTimelineAs());
     const loadBtn = document.createElement("button");
-    loadBtn.className = "musecombo-v2-analyze-btn";
+    loadBtn.className = "musecharsheeth3-analyze-btn";
     loadBtn.style.width = "auto";
     loadBtn.style.flex = "1";
     loadBtn.textContent = "Load Timeline";
@@ -1422,13 +1445,13 @@ class CharacterSheetH3TimelineEditor {
     ));
 
     const filenamesRow = document.createElement("div");
-    filenamesRow.className = "musecombo-v2-box-row";
+    filenamesRow.className = "musecharsheeth3-box-row";
     const filenamesLabel = document.createElement("label");
     filenamesLabel.textContent = "Show Filenames";
     filenamesRow.appendChild(filenamesLabel);
     const filenamesCheckbox = document.createElement("input");
     filenamesCheckbox.type = "checkbox";
-    filenamesCheckbox.className = "musecombo-v2-box-checkbox";
+    filenamesCheckbox.className = "musecharsheeth3-box-checkbox";
     filenamesCheckbox.checked = this.timeline.show_filenames !== false;
     filenamesCheckbox.addEventListener("change", () => {
       this.timeline.show_filenames = filenamesCheckbox.checked;
@@ -1439,7 +1462,7 @@ class CharacterSheetH3TimelineEditor {
     panel.appendChild(filenamesRow);
 
     const analyzeHeading = document.createElement("div");
-    analyzeHeading.className = "musecombo-v2-gear-hint";
+    analyzeHeading.className = "musecharsheeth3-gear-hint";
     analyzeHeading.style.fontWeight = "700";
     analyzeHeading.style.color = "#9a9aae";
     analyzeHeading.style.marginTop = "4px";
@@ -1455,12 +1478,12 @@ class CharacterSheetH3TimelineEditor {
     ];
 
     const providerRow = document.createElement("div");
-    providerRow.className = "musecombo-v2-box-row";
+    providerRow.className = "musecharsheeth3-box-row";
     const providerLabel = document.createElement("label");
     providerLabel.textContent = "Provider";
     providerRow.appendChild(providerLabel);
     const providerSelect = document.createElement("select");
-    providerSelect.className = "musecombo-v2-box-select";
+    providerSelect.className = "musecharsheeth3-box-select";
     for (const opt of providerOptions) {
       const o = document.createElement("option");
       o.value = opt.value;
@@ -1476,13 +1499,13 @@ class CharacterSheetH3TimelineEditor {
     panel.appendChild(providerRow);
 
     const urlRow = document.createElement("div");
-    urlRow.className = "musecombo-v2-box-row";
+    urlRow.className = "musecharsheeth3-box-row";
     const urlLabel = document.createElement("label");
     urlLabel.textContent = "Base URL";
     urlRow.appendChild(urlLabel);
     const urlInput = document.createElement("input");
     urlInput.type = "text";
-    urlInput.className = "musecombo-v2-box-number";
+    urlInput.className = "musecharsheeth3-box-number";
     urlInput.style.width = "100%";
     urlInput.placeholder = "blank = provider default";
     urlInput.value = this.timeline.analyze_base_url || "";
@@ -1494,13 +1517,13 @@ class CharacterSheetH3TimelineEditor {
     panel.appendChild(urlRow);
 
     const modelRow = document.createElement("div");
-    modelRow.className = "musecombo-v2-box-row";
+    modelRow.className = "musecharsheeth3-box-row";
     const modelLabel = document.createElement("label");
     modelLabel.textContent = "Model";
     modelRow.appendChild(modelLabel);
     const modelInput = document.createElement("input");
     modelInput.type = "text";
-    modelInput.className = "musecombo-v2-box-number";
+    modelInput.className = "musecharsheeth3-box-number";
     modelInput.style.width = "100%";
     modelInput.placeholder = "blank = provider default";
     modelInput.value = this.timeline.analyze_model || "";
@@ -1512,7 +1535,7 @@ class CharacterSheetH3TimelineEditor {
     panel.appendChild(modelRow);
 
     const analyzeHint = document.createElement("div");
-    analyzeHint.className = "musecombo-v2-gear-hint";
+    analyzeHint.className = "musecharsheeth3-gear-hint";
     analyzeHint.textContent = "Controls the Analyze button on every reference slot. Ollama/LM Studio run locally, no API key needed — but small local models follow detailed instructions less reliably than larger hosted ones. Gemini needs GEMINI_API_KEY set as an environment variable before starting ComfyUI. Custom expects an OpenAI-compatible /chat/completions endpoint.";
     panel.appendChild(analyzeHint);
 
@@ -1521,13 +1544,13 @@ class CharacterSheetH3TimelineEditor {
 
   _selectRow(labelText, widget, onChange) {
     const rowEl = document.createElement("div");
-    rowEl.className = "musecombo-v2-box-row";
+    rowEl.className = "musecharsheeth3-box-row";
     const label = document.createElement("label");
     label.textContent = labelText;
     rowEl.appendChild(label);
 
     const select = document.createElement("select");
-    select.className = "musecombo-v2-box-select";
+    select.className = "musecharsheeth3-box-select";
     let opts = widget.options?.values;
     if (!Array.isArray(opts)) opts = Array.isArray(widget.options) ? widget.options : [];
     (opts || []).forEach((v) => {
@@ -1548,7 +1571,7 @@ class CharacterSheetH3TimelineEditor {
 
   _numberRow(labelText, widget, onChange, stepOverride) {
     const rowEl = document.createElement("div");
-    rowEl.className = "musecombo-v2-box-row";
+    rowEl.className = "musecharsheeth3-box-row";
     const label = document.createElement("label");
     label.textContent = labelText;
     rowEl.appendChild(label);
@@ -1564,11 +1587,11 @@ class CharacterSheetH3TimelineEditor {
     // explicitly rather than trusting options.step.
     const step = stepOverride ?? (widget.options?.step ?? 0.5);
     const controls = document.createElement("div");
-    controls.className = "musecombo-v2-number-control musecombo-v2-number-control-plain";
+    controls.className = "musecharsheeth3-number-control musecharsheeth3-number-control-plain";
 
     const input = document.createElement("input");
     input.type = "number";
-    input.className = "musecombo-v2-box-number";
+    input.className = "musecharsheeth3-box-number";
     input.min = min;
     input.max = max;
     input.step = step;
@@ -1613,16 +1636,16 @@ class CharacterSheetH3TimelineEditor {
     };
 
     const rowEl = document.createElement("div");
-    rowEl.className = "musecombo-v2-box-row";
+    rowEl.className = "musecharsheeth3-box-row";
     const label = document.createElement("label");
     label.textContent = labelText;
     rowEl.appendChild(label);
 
     const controls = document.createElement("div");
-    controls.className = "musecombo-v2-number-control musecombo-v2-number-control-plain";
+    controls.className = "musecharsheeth3-number-control musecharsheeth3-number-control-plain";
 
     const select = document.createElement("select");
-    select.className = "musecombo-v2-box-select";
+    select.className = "musecharsheeth3-box-select";
     values.forEach((value, index) => {
       const option = document.createElement("option");
       option.value = String(index);
@@ -1654,14 +1677,14 @@ class CharacterSheetH3TimelineEditor {
 
   _boolRow(labelText, widget, onChange) {
     const rowEl = document.createElement("div");
-    rowEl.className = "musecombo-v2-box-row";
+    rowEl.className = "musecharsheeth3-box-row";
     const label = document.createElement("label");
     label.textContent = labelText;
     rowEl.appendChild(label);
 
     const input = document.createElement("input");
     input.type = "checkbox";
-    input.className = "musecombo-v2-box-checkbox";
+    input.className = "musecharsheeth3-box-checkbox";
     input.checked = !!widget.value;
     input.addEventListener("change", () => {
       widget.value = input.checked;
@@ -1678,14 +1701,14 @@ class CharacterSheetH3TimelineEditor {
   // and a couple of node-local display toggles, none of which are node inputs.
   _miniSelectRow(labelText, currentValue, options, onChange) {
     const rowEl = document.createElement("div");
-    rowEl.className = "musecombo-v2-mini-row";
+    rowEl.className = "musecharsheeth3-mini-row";
     rowEl.addEventListener("click", (e) => e.stopPropagation());
     const label = document.createElement("label");
     label.textContent = labelText;
     rowEl.appendChild(label);
 
     const select = document.createElement("select");
-    select.className = "musecombo-v2-mini-select";
+    select.className = "musecharsheeth3-mini-select";
     options.forEach((opt) => {
       const o = document.createElement("option");
       o.value = opt.value;
@@ -1705,14 +1728,14 @@ class CharacterSheetH3TimelineEditor {
   // timeline_data, not a real widget.
   _dialogueLanguageRow() {
     const rowEl = document.createElement("div");
-    rowEl.className = "musecombo-v2-lang-row";
+    rowEl.className = "musecharsheeth3-lang-row";
     const label = document.createElement("label");
     label.textContent = "Dialogue Language";
     rowEl.appendChild(label);
 
     const input = document.createElement("input");
     input.type = "text";
-    input.className = "musecombo-v2-lang-input";
+    input.className = "musecharsheeth3-lang-input";
     input.value = this.timeline.dialogue_language || "English";
     input.addEventListener("input", () => {
       this.timeline.dialogue_language = input.value || "English";
@@ -1724,7 +1747,7 @@ class CharacterSheetH3TimelineEditor {
 
   _seedRow(widget) {
     const rowEl = document.createElement("div");
-    rowEl.className = "musecombo-v2-box-row";
+    rowEl.className = "musecharsheeth3-box-row";
     const label = document.createElement("label");
     label.textContent = "Seed";
     rowEl.appendChild(label);
@@ -1732,13 +1755,13 @@ class CharacterSheetH3TimelineEditor {
     // Same wrapper _numberRow uses, so this sits sized/positioned exactly
     // like every other numeric row instead of stretching to its own width.
     const controls = document.createElement("div");
-    controls.className = "musecombo-v2-number-control musecombo-v2-number-control-plain";
+    controls.className = "musecharsheeth3-number-control musecharsheeth3-number-control-plain";
 
     const input = document.createElement("input");
     input.type = "text";
     input.inputMode = "numeric";
     input.pattern = "[0-9]*";
-    input.className = "musecombo-v2-box-number";
+    input.className = "musecharsheeth3-box-number";
     input.value = String(widget.value);
     input.addEventListener("change", () => {
       const digits = input.value.replace(/[^0-9]/g, "");
@@ -1799,27 +1822,27 @@ class CharacterSheetH3TimelineEditor {
   _buildChunkSection(chunkIdx, chunkDurSeconds) {
     const chunk = this.timeline.chunks[chunkIdx];
     const wrap = document.createElement("div");
-    wrap.className = "musecombo-v2-chunk-section";
+    wrap.className = "musecharsheeth3-chunk-section";
 
     const headingRow = document.createElement("div");
-    headingRow.className = "musecombo-v2-chunk-heading-row";
+    headingRow.className = "musecharsheeth3-chunk-heading-row";
     const heading = document.createElement("div");
-    heading.className = "musecombo-v2-chunk-heading";
+    heading.className = "musecharsheeth3-chunk-heading";
     const activeSeed = Number(this.realWidgets.seed?.value ?? 0);
     heading.textContent = "SHOT";
     const seedLabel = document.createElement("span");
-    seedLabel.className = "musecombo-v2-chunk-seed";
+    seedLabel.className = "musecharsheeth3-chunk-seed";
     seedLabel.textContent = `Seed ${activeSeed}`;
     heading.append("  ", seedLabel);
     headingRow.appendChild(heading);
 
     const actions = document.createElement("div");
-    actions.className = "musecombo-v2-chunk-actions";
+    actions.className = "musecharsheeth3-chunk-actions";
     // Collapse toggle — persists on the chunk itself so it survives
     // renderTimeline() re-renders triggered by unrelated edits.
     const collapseBtn = document.createElement("button");
     collapseBtn.type = "button";
-    collapseBtn.className = "musecombo-v2-analyze-btn musecombo-v2-chunk-collapse-btn";
+    collapseBtn.className = "musecharsheeth3-analyze-btn musecharsheeth3-chunk-collapse-btn";
     const setCollapseLabel = () => { collapseBtn.textContent = chunk.collapsed ? "▸ Show" : "▾ Hide"; };
     setCollapseLabel();
     collapseBtn.title = "Show or hide this section's contents";
@@ -1834,12 +1857,12 @@ class CharacterSheetH3TimelineEditor {
     wrap.appendChild(headingRow);
 
     const contentWrap = document.createElement("div");
-    contentWrap.className = "musecombo-v2-chunk-content";
+    contentWrap.className = "musecharsheeth3-chunk-content";
     if (chunk.collapsed) contentWrap.style.display = "none";
     wrap.appendChild(contentWrap);
 
     const topRow = document.createElement("div");
-    topRow.className = "musecombo-v2-chunk-top-row";
+    topRow.className = "musecharsheeth3-chunk-top-row";
     topRow.appendChild(this._buildChunkStyleSoundBlock(chunkIdx, chunk));
     topRow.appendChild(this._buildChunkPreviewBox(chunkIdx, chunk));
     contentWrap.appendChild(topRow);
@@ -1849,25 +1872,25 @@ class CharacterSheetH3TimelineEditor {
     // the old shared-vs-local-override split collapsed to just this one
     // panel. See the [2026-09-17] note at the top of this file.
     this.chunkRefsArea = document.createElement("div");
-    this.chunkRefsArea.className = "musecombo-v2-reference-workspace musecombo-v2-reference-workspace-inchunk";
+    this.chunkRefsArea.className = "musecharsheeth3-reference-workspace musecharsheeth3-reference-workspace-inchunk";
     contentWrap.appendChild(this.chunkRefsArea);
     this.renderReferences();
 
     const rulerWrap = document.createElement("div");
-    rulerWrap.className = "musecombo-v2-ruler-wrap";
+    rulerWrap.className = "musecharsheeth3-ruler-wrap";
     contentWrap.appendChild(rulerWrap);
 
     const ruler = document.createElement("div");
-    ruler.className = "musecombo-v2-ruler";
+    ruler.className = "musecharsheeth3-ruler";
     const tickCount = Math.min(20, Math.max(4, Math.round(chunkDurSeconds)));
     for (let t = 0; t <= tickCount; t++) {
       const pct = (t / tickCount) * 100;
       const tick = document.createElement("div");
-      tick.className = "musecombo-v2-ruler-tick";
+      tick.className = "musecharsheeth3-ruler-tick";
       tick.style.left = pct + "%";
       ruler.appendChild(tick);
       const lbl = document.createElement("div");
-      lbl.className = "musecombo-v2-ruler-tick-label";
+      lbl.className = "musecharsheeth3-ruler-tick-label";
       lbl.style.left = pct + "%";
       lbl.textContent = this._formatDuration((t / tickCount) * chunkDurSeconds);
       ruler.appendChild(lbl);
@@ -1875,7 +1898,7 @@ class CharacterSheetH3TimelineEditor {
         for (let m = 1; m <= 9; m++) {
           const minorPct = ((t + m / 10) / tickCount) * 100;
           const minorTick = document.createElement("div");
-          minorTick.className = "musecombo-v2-ruler-tick-minor";
+          minorTick.className = "musecharsheeth3-ruler-tick-minor";
           minorTick.style.left = minorPct + "%";
           ruler.appendChild(minorTick);
         }
@@ -1884,7 +1907,7 @@ class CharacterSheetH3TimelineEditor {
     rulerWrap.appendChild(ruler);
 
     const track = document.createElement("div");
-    track.className = "musecombo-v2-track";
+    track.className = "musecharsheeth3-track";
     this.tracks[chunkIdx] = track;
     rulerWrap.appendChild(track);
 
@@ -1894,7 +1917,7 @@ class CharacterSheetH3TimelineEditor {
     });
 
     const addBar = document.createElement("div");
-    addBar.className = "musecombo-v2-add-cut-bar";
+    addBar.className = "musecharsheeth3-add-cut-bar";
     addBar.innerHTML = ICON_PLUS + "<span>Add an extra cut</span>";
     addBar.title = "Add CUT";
     addBar.addEventListener("click", () => {
@@ -1917,22 +1940,49 @@ class CharacterSheetH3TimelineEditor {
   }
 
   // Style / Overall Soundscape / Non-Diegetic Music for the (one) chunk.
+  _buildTriggerControls(chunkIdx) {
+    const chunk = this.timeline.chunks[chunkIdx];
+    const row = document.createElement("div");
+    row.style.cssText = "display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;";
+    const label = document.createElement("label");
+    label.style.cssText = "display:flex;align-items:center;gap:6px;";
+    const toggle = document.createElement("input");
+    toggle.type = "checkbox";
+    toggle.checked = chunk.trigger_words_enabled === true;
+    toggle.setAttribute("aria-label", "Enable trigger words");
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = chunk.trigger_words || "";
+    input.placeholder = "e.g. perfe8ct, r34l1sm";
+    input.setAttribute("aria-label", "Trigger words");
+    input.style.cssText = "flex:1;min-width:160px;background:#101924;color:#fff;border:1px solid #40536a;border-radius:4px;padding:7px;";
+    input.disabled = !toggle.checked;
+    row.title = "Adds these words before the complete prompt, including a socket prompt override. Does not load a LoRA or change Overall Style.";
+    const save = () => { delete chunk._previewToken; this.commitChanges(); };
+    toggle.onchange = () => { chunk.trigger_words_enabled = toggle.checked; input.disabled = !toggle.checked; save(); };
+    input.oninput = () => { chunk.trigger_words = input.value; save(); };
+    label.append(toggle, document.createTextNode("Trigger words"));
+    row.append(label, input);
+    return row;
+  }
+
   _buildChunkStyleSoundBlock(chunkIdx, chunk) {
     const wrap = document.createElement("div");
-    wrap.className = "musecombo-v2-chunk-style-wrap";
+    wrap.className = "musecharsheeth3-chunk-style-wrap";
 
     const styleCard = document.createElement("div");
-    styleCard.className = "musecombo-v2-creative-card musecombo-v2-creative-style";
+    styleCard.className = "musecharsheeth3-creative-card musecharsheeth3-creative-style";
     const styleTitleRow = document.createElement("div");
-    styleTitleRow.className = "musecombo-v2-chunk-style-title-row";
+    styleTitleRow.className = "musecharsheeth3-chunk-style-title-row";
     const styleLabel = document.createElement("div");
-    styleLabel.className = "musecombo-v2-box-title";
+    styleLabel.className = "musecharsheeth3-box-title";
     styleLabel.textContent = "✦ Overall Style";
     styleTitleRow.appendChild(styleLabel);
     styleCard.appendChild(styleTitleRow);
+    styleCard.appendChild(this._buildTriggerControls(chunkIdx));
 
     const styleInput = document.createElement("textarea");
-    styleInput.className = "musecombo-v2-style-input";
+    styleInput.className = "musecharsheeth3-style-input";
     styleInput.style.minHeight = "26px";
     styleInput.placeholder = "e.g. Photorealistic, warm golden-hour light, cinematic shallow depth of field... (lighting/palette/camera feel — not location, that belongs in this shot's own CUT text)";
     styleInput.value = chunk.style_line || "";
@@ -1941,7 +1991,7 @@ class CharacterSheetH3TimelineEditor {
       this.commitChanges();
     });
     styleCard.appendChild(styleInput);
-    styleCard.classList.add("musecombo-v2-creative-style-fill");
+    styleCard.classList.add("musecharsheeth3-creative-style-fill");
     wrap.appendChild(styleCard);
 
     // [2026-09-17] Soundscape & Music box hidden per Andy's request — this
@@ -1962,22 +2012,24 @@ class CharacterSheetH3TimelineEditor {
   // frame it showed).
   _buildChunkPreviewBox(chunkIdx, chunk) {
     const outer = document.createElement("div");
-    outer.className = "musecombo-v2-creative-card musecombo-v2-creative-preview";
+    outer.className = "musecharsheeth3-creative-card musecharsheeth3-creative-preview";
 
     const liveCol = document.createElement("div");
-    liveCol.className = "musecombo-v2-preview-col";
+    liveCol.className = "musecharsheeth3-preview-col";
     const liveTitle = document.createElement("div");
-    liveTitle.className = "musecombo-v2-box-title";
+    liveTitle.className = "musecharsheeth3-box-title";
     liveTitle.textContent = "◉ Now Generating";
     liveCol.appendChild(liveTitle);
     const liveStatus = document.createElement("div");
-    liveStatus.className = "musecombo-v2-chunk-preview-status musecombo-v2-live-preview-status";
+    liveStatus.className = "musecharsheeth3-chunk-preview-status musecharsheeth3-live-preview-status";
     liveStatus.textContent = "Idle";
     liveCol.appendChild(liveStatus);
     const liveImg = document.createElement("img");
-    liveImg.className = "musecombo-v2-live-preview-img";
+    liveImg.className = "musecharsheeth3-live-preview-img";
     liveCol.appendChild(liveImg);
     this._liveChunkPreviewImgEls[chunkIdx] = liveImg;
+    const cachedPreview = _museLivePreviewCache.get(musePreviewKey(this.node));
+    if (cachedPreview) this._applyLiveChunkPreview(chunkIdx, cachedPreview);
 
     outer.appendChild(liveCol);
     return outer;
@@ -2017,24 +2069,24 @@ class CharacterSheetH3TimelineEditor {
 
   _buildDialogueSpeakerRows(chunkIdx, seg) {
     const wrap = document.createElement("div");
-    wrap.className = "musecombo-v2-dialogue-speakers";
+    wrap.className = "musecharsheeth3-dialogue-speakers";
     const slots = this._speakerSlotsForChunk(chunkIdx);
     this._syncDialogueSpeakers(seg).forEach((assignment) => {
       const row = document.createElement("div");
-      row.className = "musecombo-v2-dialogue-speaker-row";
+      row.className = "musecharsheeth3-dialogue-speaker-row";
       const line = document.createElement("div");
-      line.className = "musecombo-v2-dialogue-line";
+      line.className = "musecharsheeth3-dialogue-line";
       line.textContent = `“${assignment.text}”`;
       line.title = assignment.text;
       row.appendChild(line);
       const label = document.createElement("span");
-      label.className = "musecombo-v2-dialogue-speaker-label";
+      label.className = "musecharsheeth3-dialogue-speaker-label";
       label.textContent = "Who's speaking:";
       row.appendChild(label);
       slots.forEach((slotIdx) => {
         const chip = document.createElement("button");
         chip.type = "button";
-        chip.className = "musecombo-v2-speaker-chip" + (assignment.speakerCharIdx === slotIdx ? " musecombo-v2-speaker-chip-active" : "");
+        chip.className = "musecharsheeth3-speaker-chip" + (assignment.speakerCharIdx === slotIdx ? " musecharsheeth3-speaker-chip-active" : "");
         chip.textContent = `Ref ${slotIdx + 1}`;
         chip.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -2159,7 +2211,7 @@ class CharacterSheetH3TimelineEditor {
     if (!Number.isInteger(seg.videoRefTargetCharIdx)) seg.videoRefTargetCharIdx = null;
 
     const wrap = document.createElement("div");
-    wrap.className = "musecombo-v2-cut-video-guide";
+    wrap.className = "musecharsheeth3-cut-video-guide";
     wrap.addEventListener("click", (e) => e.stopPropagation());
 
     const videoOptions = [{ value: "none", label: "None" }];
@@ -2228,7 +2280,7 @@ class CharacterSheetH3TimelineEditor {
       ));
 
       const note = document.createElement("div");
-      note.className = "musecombo-v2-cut-video-guide-note";
+      note.className = "musecharsheeth3-cut-video-guide-note";
       if (this._isReferenceTimingLocked(seg)) {
         const duration = this._referenceWindowDuration(seg);
         note.textContent = `Locked: ${duration.toFixed(2)}s guide → ${duration.toFixed(2)}s cut. Other unlocked cuts share the remaining time.`;
@@ -2247,14 +2299,14 @@ class CharacterSheetH3TimelineEditor {
     seg.duration_hint = seconds.toFixed(1);
 
     const block = document.createElement("div");
-    block.className = "musecombo-v2-cut-block";
+    block.className = "musecharsheeth3-cut-block";
     const timingLocked = this._isReferenceTimingLocked(seg);
-    if (timingLocked) block.classList.add("musecombo-v2-reference-locked");
+    if (timingLocked) block.classList.add("musecharsheeth3-reference-locked");
     block.draggable = true;
     block.style.flex = `${seg.weight || 1} 0 0`;
 
     const bar = document.createElement("div");
-    bar.className = "musecombo-v2-cut-bar";
+    bar.className = "musecharsheeth3-cut-bar";
     bar.style.background = color.bar;
     block.appendChild(bar);
 
@@ -2263,15 +2315,15 @@ class CharacterSheetH3TimelineEditor {
       : chunk.segments.filter((sg, idx) => idx !== i && !this._isReferenceTimingLocked(sg));
 
     const head = document.createElement("div");
-    head.className = "musecombo-v2-cut-head";
+    head.className = "musecharsheeth3-cut-head";
     const label = document.createElement("div");
-    label.className = "musecombo-v2-cut-label";
+    label.className = "musecharsheeth3-cut-label";
     label.style.color = color.bar;
     label.append(`CUT ${i + 1} · `);
     if (timingLocked) {
       label.append(`~${this._formatDuration(seconds)}`);
       const lockBadge = document.createElement("span");
-      lockBadge.className = "musecombo-v2-cut-lock-badge";
+      lockBadge.className = "musecharsheeth3-cut-lock-badge";
       lockBadge.textContent = `LOCKED TO REF ${this._referenceWindowDuration(seg).toFixed(2)}s`;
       label.appendChild(lockBadge);
     } else if (!otherUnlockedSegs.length) {
@@ -2279,7 +2331,7 @@ class CharacterSheetH3TimelineEditor {
     } else {
       const durationInput = document.createElement("input");
       durationInput.type = "number";
-      durationInput.className = "musecombo-v2-cut-duration-input";
+      durationInput.className = "musecharsheeth3-cut-duration-input";
       durationInput.step = "0.01";
       durationInput.min = String(MIN_CUT_SECONDS);
       durationInput.title = "Type this CUT's exact duration in seconds — the difference is redistributed " +
@@ -2314,20 +2366,20 @@ class CharacterSheetH3TimelineEditor {
       });
       label.appendChild(durationInput);
       const unit = document.createElement("span");
-      unit.className = "musecombo-v2-cut-duration-unit";
+      unit.className = "musecharsheeth3-cut-duration-unit";
       unit.textContent = "s";
       label.appendChild(unit);
     }
     head.appendChild(label);
 
     const actions = document.createElement("div");
-    actions.className = "musecombo-v2-cut-actions";
+    actions.className = "musecharsheeth3-cut-actions";
     const dragHandle = document.createElement("span");
     dragHandle.innerHTML = ICON_DRAG;
     actions.appendChild(dragHandle);
     if (chunk.segments.length > 1) {
       const del = document.createElement("span");
-      del.className = "musecombo-v2-cut-del";
+      del.className = "musecharsheeth3-cut-del";
       del.innerHTML = ICON_TRASH;
       del.title = "Delete CUT";
       del.addEventListener("click", () => {
@@ -2341,7 +2393,7 @@ class CharacterSheetH3TimelineEditor {
     block.appendChild(head);
 
     const text = document.createElement("textarea");
-    text.className = "musecombo-v2-cut-text";
+    text.className = "musecharsheeth3-cut-text";
     text.placeholder = "What happens in this shot — action, dialogue, camera move...";
     text.value = seg.prompt || "";
     block.appendChild(text);
@@ -2375,7 +2427,7 @@ class CharacterSheetH3TimelineEditor {
     }
     if (dragResizePartnerIdx >= 0) {
       const handle = document.createElement("div");
-      handle.className = "musecombo-v2-cut-resize";
+      handle.className = "musecharsheeth3-cut-resize";
       handle.title = dragResizePartnerIdx === i + 1
         ? "Resize CUT"
         : `Resize against CUT ${dragResizePartnerIdx + 1}; locked reference CUTs stay fixed`;
@@ -2385,16 +2437,16 @@ class CharacterSheetH3TimelineEditor {
 
     // Drag-to-reorder (whole block)
     block.addEventListener("dragstart", (e) => {
-      block.classList.add("musecombo-v2-dragging");
+      block.classList.add("musecharsheeth3-dragging");
       e.dataTransfer.setData("text/plain", String(i));
       e.dataTransfer.effectAllowed = "move";
     });
-    block.addEventListener("dragend", () => block.classList.remove("musecombo-v2-dragging"));
-    block.addEventListener("dragover", (e) => { e.preventDefault(); block.classList.add("musecombo-v2-drag-over"); });
-    block.addEventListener("dragleave", () => block.classList.remove("musecombo-v2-drag-over"));
+    block.addEventListener("dragend", () => block.classList.remove("musecharsheeth3-dragging"));
+    block.addEventListener("dragover", (e) => { e.preventDefault(); block.classList.add("musecharsheeth3-drag-over"); });
+    block.addEventListener("dragleave", () => block.classList.remove("musecharsheeth3-drag-over"));
     block.addEventListener("drop", (e) => {
       e.preventDefault();
-      block.classList.remove("musecombo-v2-drag-over");
+      block.classList.remove("musecharsheeth3-drag-over");
       const fromIdx = parseInt(e.dataTransfer.getData("text/plain"), 10);
       if (Number.isNaN(fromIdx) || fromIdx === i) return;
       const [moved] = chunk.segments.splice(fromIdx, 1);
@@ -2474,13 +2526,13 @@ class CharacterSheetH3TimelineEditor {
     this.chunkRefsArea.innerHTML = "";
 
     const panelTitle = document.createElement("div");
-    panelTitle.className = "musecombo-v2-section-title";
+    panelTitle.className = "musecharsheeth3-section-title";
     const panelTitleText = document.createElement("span");
     panelTitleText.innerHTML = "&#9851;&nbsp; References for this chunk";
     panelTitle.appendChild(panelTitleText);
     const clearSharedRefs = document.createElement("button");
     clearSharedRefs.type = "button";
-    clearSharedRefs.className = "musecombo-v2-analyze-btn";
+    clearSharedRefs.className = "musecharsheeth3-analyze-btn";
     clearSharedRefs.style.cssText = "margin-left:auto;width:auto;padding:4px 12px;";
     clearSharedRefs.textContent = "Clear ALL References";
     clearSharedRefs.title = "Remove every reference currently shown in this section";
@@ -2489,13 +2541,13 @@ class CharacterSheetH3TimelineEditor {
     this.chunkRefsArea.appendChild(panelTitle);
 
     const imageSection = document.createElement("div");
-    imageSection.className = "musecombo-v2-reference-section musecombo-v2-reference-section-images";
+    imageSection.className = "musecharsheeth3-reference-section musecharsheeth3-reference-section-images";
     const imageTitle = document.createElement("div");
-    imageTitle.className = "musecombo-v2-reference-section-title";
-    imageTitle.innerHTML = `<span>References <span style="text-transform:none;font-weight:600">(Images)</span></span><span class="musecombo-v2-reference-section-subtitle">Full-width identity, product and location references</span>`;
+    imageTitle.className = "musecharsheeth3-reference-section-title";
+    imageTitle.innerHTML = `<span>References <span style="text-transform:none;font-weight:600">(Images)</span></span><span class="musecharsheeth3-reference-section-subtitle">Full-width identity, product and location references</span>`;
     const clearImages = document.createElement("button");
     clearImages.type = "button";
-    clearImages.className = "musecombo-v2-analyze-btn";
+    clearImages.className = "musecharsheeth3-analyze-btn";
     clearImages.style.cssText = "margin-left:auto;width:auto;padding:4px 12px;";
     clearImages.textContent = "Clear All Images";
     clearImages.title = "Clear character and location images only — keep song/audio/videos";
@@ -2507,7 +2559,7 @@ class CharacterSheetH3TimelineEditor {
     // sizing — not a separate full-width row underneath. Matches the source
     // panel exactly (confirmed against a real screenshot of it).
     const charRow = document.createElement("div");
-    charRow.className = "musecombo-v2-char-row";
+    charRow.className = "musecharsheeth3-char-row";
     for (let i = 0; i < MAX_CHARACTER_SLOTS; i++) {
       charRow.appendChild(this._buildCharSlot(i));
     }
@@ -2521,7 +2573,7 @@ class CharacterSheetH3TimelineEditor {
     // only the UI control is gone.
 
     const poolHint = document.createElement("div");
-    poolHint.className = "musecombo-v2-reference-help";
+    poolHint.className = "musecharsheeth3-reference-help";
     poolHint.textContent = "MiniMax allows nine visual references per call. Ref 1-8 plus the active Location share that pool.";
     imageSection.appendChild(poolHint);
 
@@ -2539,7 +2591,7 @@ class CharacterSheetH3TimelineEditor {
     // two real elements, auto-fit grid columns would leave empty unused
     // track space rather than actually stretching these two to fill the row.
     const avRow = document.createElement("div");
-    avRow.className = "musecombo-v2-av-row musecombo-v2-av-row-video-only";
+    avRow.className = "musecharsheeth3-av-row musecharsheeth3-av-row-video-only";
     avRow.appendChild(this._buildRefAvSlot("video", 0));
     avRow.appendChild(this._buildRefVideoViewer());
     this.chunkRefsArea.appendChild(avRow);
@@ -2553,7 +2605,7 @@ class CharacterSheetH3TimelineEditor {
   // same as everything else in this panel.
   _buildRefVideoViewer() {
     const wrap = document.createElement("div");
-    wrap.className = "musecombo-v2-av-slot musecombo-v2-video-viewer";
+    wrap.className = "musecharsheeth3-av-slot musecharsheeth3-video-viewer";
     // The row's own fixed height + align-items:stretch already matches this
     // wrapper's OUTER height to Ref Video 1's slot automatically; flex column
     // here is what makes the <video> itself actually fill that height instead
@@ -2561,7 +2613,7 @@ class CharacterSheetH3TimelineEditor {
     wrap.style.cssText = "display:flex;flex-direction:column;min-height:0;";
 
     const label = document.createElement("div");
-    label.className = "musecombo-v2-av-slot-label";
+    label.className = "musecharsheeth3-av-slot-label";
     label.textContent = "Ref Video 1 — Viewer";
     wrap.appendChild(label);
 
@@ -2569,7 +2621,7 @@ class CharacterSheetH3TimelineEditor {
     this._refVideoViewerEl = null;
     if (!entry || !(entry.file || entry._blobUrl)) {
       const placeholder = document.createElement("div");
-      placeholder.className = "musecombo-v2-av-placeholder";
+      placeholder.className = "musecharsheeth3-av-placeholder";
       placeholder.textContent = "Upload a clip into Ref Video 1 to preview it here.";
       wrap.appendChild(placeholder);
       return wrap;
@@ -2611,18 +2663,18 @@ class CharacterSheetH3TimelineEditor {
   _buildLocationSlot(index, entry) {
     const data = entry || { chunk: 1 };
     const filled = !!(data.file || data.image_b64);
-    // Returns the .musecombo-v2-char-slot directly (no extra sizing wrapper)
+    // Returns the .musecharsheeth3-char-slot directly (no extra sizing wrapper)
     // so it's a uniform grid cell alongside Ref 1-8, not a wider one.
     const slot = document.createElement("div");
-    slot.className = "musecombo-v2-char-slot" + (filled ? " musecombo-v2-filled" : "");
+    slot.className = "musecharsheeth3-char-slot" + (filled ? " musecharsheeth3-filled" : "");
     slot.style.borderColor = "#9b7332";
     const label = document.createElement("div");
-    label.className = "musecombo-v2-char-label";
+    label.className = "musecharsheeth3-char-label";
     label.textContent = index === 0 ? "Location" : `Location ${index + 1}`;
     slot.appendChild(label);
     if (filled) {
       const del = document.createElement("button");
-      del.className = "musecombo-v2-char-del";
+      del.className = "musecharsheeth3-char-del";
       del.innerHTML = "&times;";
       del.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -2633,13 +2685,13 @@ class CharacterSheetH3TimelineEditor {
       });
       slot.appendChild(del);
       const preview = document.createElement("div");
-      preview.className = "musecombo-v2-char-preview";
+      preview.className = "musecharsheeth3-char-preview";
       const img = document.createElement("img");
       img.src = data.file ? comfyViewUrl(data.file) : (data._blobUrl || data.image_b64);
       preview.appendChild(img);
       slot.appendChild(preview);
       const description = document.createElement("textarea");
-      description.className = "musecombo-v2-desc-input";
+      description.className = "musecharsheeth3-desc-input";
       description.placeholder = "Describe the complete surrounding environment...";
       description.value = data.description || "";
       description.addEventListener("click", (e) => e.stopPropagation());
@@ -2650,7 +2702,7 @@ class CharacterSheetH3TimelineEditor {
       slot.appendChild(description);
     } else {
       const placeholder = document.createElement("div");
-      placeholder.className = "musecombo-v2-char-placeholder";
+      placeholder.className = "musecharsheeth3-char-placeholder";
       placeholder.innerHTML = `${ICON_UPLOAD}<br>Drop location image`;
       slot.appendChild(placeholder);
       slot.addEventListener("click", () => this._promptLocationFilePick(index));
@@ -2701,17 +2753,17 @@ class CharacterSheetH3TimelineEditor {
     const entry = this.timeline[listKey][idx];
 
     const slot = document.createElement("div");
-    slot.className = "musecombo-v2-av-slot " + (isVideo ? "musecombo-v2-av-slot-video" : "musecombo-v2-av-slot-audio") + (entry ? " musecombo-v2-filled" : "");
+    slot.className = "musecharsheeth3-av-slot " + (isVideo ? "musecharsheeth3-av-slot-video" : "musecharsheeth3-av-slot-audio") + (entry ? " musecharsheeth3-filled" : "");
 
     const head = document.createElement("div");
-    head.className = "musecombo-v2-av-slot-head";
+    head.className = "musecharsheeth3-av-slot-head";
     const label = document.createElement("div");
-    label.className = "musecombo-v2-av-slot-label";
+    label.className = "musecharsheeth3-av-slot-label";
     label.textContent = `${isVideo ? "Ref Video" : "Ref Audio"} ${idx + 1}`;
     head.appendChild(label);
     if (entry) {
       const del = document.createElement("button");
-      del.className = "musecombo-v2-av-slot-del";
+      del.className = "musecharsheeth3-av-slot-del";
       del.innerHTML = "&times;";
       del.title = "Remove";
       del.addEventListener("click", () => {
@@ -2732,7 +2784,7 @@ class CharacterSheetH3TimelineEditor {
 
     if (!entry) {
       const placeholder = document.createElement("div");
-      placeholder.className = "musecombo-v2-av-placeholder";
+      placeholder.className = "musecharsheeth3-av-placeholder";
       placeholder.innerHTML = `${ICON_UPLOAD}<span>Drop or click to upload ${isVideo ? "video" : "audio"}</span>`;
       placeholder.addEventListener("click", () => this._promptAvFilePick(kind, idx));
       slot.appendChild(placeholder);
@@ -2792,7 +2844,7 @@ class CharacterSheetH3TimelineEditor {
 
   _buildAvMedia(kind, idx, entry) {
     const wrap = document.createElement("div");
-    wrap.className = "musecombo-v2-av-media";
+    wrap.className = "musecharsheeth3-av-media";
 
     // _blobUrl only lives for the page session that created it; entry.file
     // (the real uploaded server path) is always durable, so it wins once it
@@ -2816,7 +2868,7 @@ class CharacterSheetH3TimelineEditor {
       wrap.appendChild(mediaEl);
 
       const canvas = document.createElement("canvas");
-      canvas.className = "musecombo-v2-av-canvas";
+      canvas.className = "musecharsheeth3-av-canvas";
       canvas.width = 260;
       canvas.height = 40;
       wrap.appendChild(canvas);
@@ -2824,7 +2876,7 @@ class CharacterSheetH3TimelineEditor {
     }
 
     const readout = document.createElement("div");
-    readout.className = "musecombo-v2-av-trim-readout";
+    readout.className = "musecharsheeth3-av-trim-readout";
 
     if (kind === "audio") {
       const finalizeDuration = () => {
@@ -2839,10 +2891,10 @@ class CharacterSheetH3TimelineEditor {
       mediaEl.addEventListener("loadedmetadata", finalizeDuration);
 
       const scrubRow = document.createElement("div");
-      scrubRow.className = "musecombo-v2-av-scrub-row";
+      scrubRow.className = "musecharsheeth3-av-scrub-row";
 
       const playBtn = document.createElement("button");
-      playBtn.className = "musecombo-v2-av-play-btn";
+      playBtn.className = "musecharsheeth3-av-play-btn";
       playBtn.innerHTML = ICON_PLAY;
       playBtn.title = "Play/Pause";
       playBtn.addEventListener("click", (e) => {
@@ -2856,7 +2908,7 @@ class CharacterSheetH3TimelineEditor {
 
       const scrub = document.createElement("input");
       scrub.type = "range";
-      scrub.className = "musecombo-v2-av-scrub";
+      scrub.className = "musecharsheeth3-av-scrub";
       scrub.min = "0";
       scrub.max = String(entry.sourceDurationSec || 100);
       scrub.step = "0.05";
@@ -2868,9 +2920,9 @@ class CharacterSheetH3TimelineEditor {
     }
 
     const trimRow = document.createElement("div");
-    trimRow.className = "musecombo-v2-av-trim-row";
+    trimRow.className = "musecharsheeth3-av-trim-row";
     const setInBtn = document.createElement("button");
-    setInBtn.className = "musecombo-v2-av-trim-btn";
+    setInBtn.className = "musecharsheeth3-av-trim-btn";
     setInBtn.textContent = "Set In";
     setInBtn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -2888,7 +2940,7 @@ class CharacterSheetH3TimelineEditor {
       inInput.value = entry.trimStartSec.toFixed(2);
     });
     const setOutBtn = document.createElement("button");
-    setOutBtn.className = "musecombo-v2-av-trim-btn";
+    setOutBtn.className = "musecharsheeth3-av-trim-btn";
     setOutBtn.textContent = "Set Out";
     setOutBtn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -2909,10 +2961,10 @@ class CharacterSheetH3TimelineEditor {
     wrap.appendChild(trimRow);
 
     const manualRow = document.createElement("div");
-    manualRow.className = "musecombo-v2-av-trim-row musecombo-v2-av-trim-manual-row";
+    manualRow.className = "musecharsheeth3-av-trim-row musecharsheeth3-av-trim-manual-row";
     const inInput = document.createElement("input");
     inInput.type = "number";
-    inInput.className = "musecombo-v2-av-trim-input";
+    inInput.className = "musecharsheeth3-av-trim-input";
     inInput.step = "0.05";
     inInput.min = "0";
     inInput.placeholder = "In (s)";
@@ -2940,7 +2992,7 @@ class CharacterSheetH3TimelineEditor {
 
     const outInput = document.createElement("input");
     outInput.type = "number";
-    outInput.className = "musecombo-v2-av-trim-input";
+    outInput.className = "musecharsheeth3-av-trim-input";
     outInput.step = "0.05";
     outInput.min = "0";
     outInput.placeholder = "Out (s)";
@@ -2975,7 +3027,7 @@ class CharacterSheetH3TimelineEditor {
     this._updateAvReadout(readout, entry);
 
     const filename = document.createElement("div");
-    filename.className = "musecombo-v2-av-filename";
+    filename.className = "musecharsheeth3-av-filename";
     filename.textContent = entry.fileName || "";
     filename.style.display = this.timeline.show_filenames === false ? "none" : "";
     wrap.appendChild(filename);
@@ -2985,14 +3037,14 @@ class CharacterSheetH3TimelineEditor {
       const pairedChar = this.timeline.characters[idx];
       const pairedFilled = pairedChar && (pairedChar.file || pairedChar.image_b64);
       const pairNote = document.createElement("div");
-      pairNote.className = "musecombo-v2-audio-pair-note";
+      pairNote.className = "musecharsheeth3-audio-pair-note";
       pairNote.textContent = pairedFilled
         ? `Paired with Ref ${idx + 1} — this is automatically her/his voice reference.`
         : `No character in Ref ${idx + 1} — describe the voice below, or leave blank for an unattributed reference.`;
       wrap.appendChild(pairNote);
 
       const descInput = document.createElement("textarea");
-      descInput.className = "musecombo-v2-desc-input";
+      descInput.className = "musecharsheeth3-desc-input";
       descInput.placeholder = "optional — only used when there's no matching character, e.g. \"Sarah — warm, mid-range\"";
       descInput.value = entry.description || "";
       descInput.addEventListener("click", (e) => e.stopPropagation());
@@ -3010,12 +3062,12 @@ class CharacterSheetH3TimelineEditor {
 
     if (kind === "video") {
       const audioToggleRow = document.createElement("label");
-      audioToggleRow.className = "musecombo-v2-av-audio-toggle";
+      audioToggleRow.className = "musecharsheeth3-av-audio-toggle";
       audioToggleRow.addEventListener("click", (e) => e.stopPropagation());
 
       const audioToggle = document.createElement("input");
       audioToggle.type = "checkbox";
-      audioToggle.className = "musecombo-v2-box-checkbox";
+      audioToggle.className = "musecharsheeth3-box-checkbox";
       audioToggle.checked = !!entry.includeAudio;
       audioToggle.addEventListener("change", () => {
         entry.includeAudio = audioToggle.checked;
@@ -3029,7 +3081,7 @@ class CharacterSheetH3TimelineEditor {
       wrap.appendChild(audioToggleRow);
 
       const sceneAnchorInput = document.createElement("textarea");
-      sceneAnchorInput.className = "musecombo-v2-desc-input";
+      sceneAnchorInput.className = "musecharsheeth3-desc-input";
       sceneAnchorInput.placeholder = "scene anchor (environment, objects, layout, colors) — optional style-line addition";
       sceneAnchorInput.value = entry.sceneAnchor || "";
       sceneAnchorInput.addEventListener("click", (e) => e.stopPropagation());
@@ -3040,7 +3092,7 @@ class CharacterSheetH3TimelineEditor {
       wrap.appendChild(sceneAnchorInput);
 
       const subjectDescInput = document.createElement("textarea");
-      subjectDescInput.className = "musecombo-v2-desc-input";
+      subjectDescInput.className = "musecharsheeth3-desc-input";
       // [2026-09-18] Corrected — this box was previously mislabeled as a plain
       // camera-path note that explicitly said identity was never copied. It's
       // always written straight to entry.description, which now (ported from
@@ -3076,7 +3128,7 @@ class CharacterSheetH3TimelineEditor {
       // path the empty placeholder uses.
       const replaceBtn = document.createElement("button");
       replaceBtn.type = "button";
-      replaceBtn.className = "musecombo-v2-analyze-btn";
+      replaceBtn.className = "musecharsheeth3-analyze-btn";
       replaceBtn.style.width = "100%";
       replaceBtn.style.marginTop = "6px";
       replaceBtn.textContent = "Replace Video";
@@ -3116,7 +3168,7 @@ class CharacterSheetH3TimelineEditor {
     const filled = data && (data.file || data.image_b64);
 
     const slot = document.createElement("div");
-    slot.className = "musecombo-v2-char-slot" + (filled ? " musecombo-v2-filled" : "");
+    slot.className = "musecharsheeth3-char-slot" + (filled ? " musecharsheeth3-filled" : "");
 
     // [2026-09-18] Ref 1 is RefMod's identity slot once RefMod Override is
     // on — confirmed with Andy: its own image must not also get fed as
@@ -3124,26 +3176,26 @@ class CharacterSheetH3TimelineEditor {
     // (matches the old "locked to sidebar Ref N" read-only pattern this
     // project already uses elsewhere for an overridden slot).
     if (idx === 0 && this.realWidgets.use_refmod?.value) {
-      slot.classList.add("musecombo-v2-char-slot-disabled");
+      slot.classList.add("musecharsheeth3-char-slot-disabled");
       const label = document.createElement("div");
-      label.className = "musecombo-v2-char-label";
+      label.className = "musecharsheeth3-char-label";
       label.textContent = "Ref 1";
       slot.appendChild(label);
       const note = document.createElement("div");
-      note.className = "musecombo-v2-char-placeholder";
+      note.className = "musecharsheeth3-char-placeholder";
       note.textContent = "Controlled by RefMod Override — see the RefMod Override card";
       slot.appendChild(note);
       return slot;
     }
 
     const label = document.createElement("div");
-    label.className = "musecombo-v2-char-label";
+    label.className = "musecharsheeth3-char-label";
     label.textContent = `Ref ${idx + 1}`;
     slot.appendChild(label);
 
     if (filled) {
       const del = document.createElement("button");
-      del.className = "musecombo-v2-char-del";
+      del.className = "musecharsheeth3-char-del";
       del.innerHTML = "&times;";
       del.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -3155,14 +3207,14 @@ class CharacterSheetH3TimelineEditor {
       slot.appendChild(del);
 
       const preview = document.createElement("div");
-      preview.className = "musecombo-v2-char-preview";
+      preview.className = "musecharsheeth3-char-preview";
       const img = document.createElement("img");
       img.src = data.file ? comfyViewUrl(data.file) : (data._blobUrl || data.image_b64);
       preview.appendChild(img);
       slot.appendChild(preview);
 
       const descInput = document.createElement("textarea");
-      descInput.className = "musecombo-v2-desc-input";
+      descInput.className = "musecharsheeth3-desc-input";
       descInput.placeholder = "description...";
       descInput.value = data.description || "";
       descInput.addEventListener("click", (e) => e.stopPropagation());
@@ -3172,7 +3224,7 @@ class CharacterSheetH3TimelineEditor {
       });
 
       const analyzeBtn = document.createElement("button");
-      analyzeBtn.className = "musecombo-v2-analyze-btn";
+      analyzeBtn.className = "musecharsheeth3-analyze-btn";
       analyzeBtn.textContent = data.description ? "Re-Analyze" : "Analyze";
       analyzeBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
@@ -3188,7 +3240,7 @@ class CharacterSheetH3TimelineEditor {
       ));
     } else {
       const placeholder = document.createElement("div");
-      placeholder.className = "musecombo-v2-char-placeholder";
+      placeholder.className = "musecharsheeth3-char-placeholder";
       placeholder.innerHTML = `${ICON_UPLOAD}<br>Drop image`;
       slot.appendChild(placeholder);
       slot.addEventListener("click", () => this._promptFilePick(idx));
@@ -3242,8 +3294,8 @@ class CharacterSheetH3TimelineEditor {
   }
 
   async runAnalysis(idx, btn, descInput) {
-    if (btn.classList.contains("musecombo-v2-loading")) return;
-    btn.classList.add("musecombo-v2-loading");
+    if (btn.classList.contains("musecharsheeth3-loading")) return;
+    btn.classList.add("musecharsheeth3-loading");
     btn.textContent = "Analyzing...";
     const data = this.timeline.characters[idx];
     try {
@@ -3264,16 +3316,16 @@ class CharacterSheetH3TimelineEditor {
         descInput.value = result.description;
         btn.textContent = "Success!";
         this.commitChanges();
-        setTimeout(() => { btn.classList.remove("musecombo-v2-loading"); btn.textContent = "Re-Analyze"; }, 1200);
+        setTimeout(() => { btn.classList.remove("musecharsheeth3-loading"); btn.textContent = "Re-Analyze"; }, 1200);
       } else {
         alert("Analysis error: " + result.message);
-        btn.classList.remove("musecombo-v2-loading");
+        btn.classList.remove("musecharsheeth3-loading");
         btn.textContent = "Analyze";
       }
     } catch (err) {
       console.error("[MuseCharacterSheetH3] analysis request failed", err);
       alert("Analyze request failed — is ComfyUI running, and is Ollama (or your chosen provider) reachable?");
-      btn.classList.remove("musecombo-v2-loading");
+      btn.classList.remove("musecharsheeth3-loading");
       btn.textContent = "Analyze";
     }
   }
@@ -3301,6 +3353,7 @@ app.registerExtension({
       const timelineWidget = this.addDOMWidget("mch3_timeline_ui", "mch3_timeline_ui", this._museCharacterSheetH3Editor.container, {
         serialize: false,
         hideOnZoom: false,
+        getMinHeight: () => this._museCharacterSheetH3Editor?._cachedContentHeight || 640,
       });
       // [2026-09-18] Root cause, confirmed via LiteGraph's own console state
       // (vueNodesMode: false, node.size[1]: 5931 vs. real container
@@ -3322,6 +3375,25 @@ app.registerExtension({
         return [Math.max(this.size?.[0] || width || 1480, 1480), this._museCharacterSheetH3Editor?._cachedContentHeight || 640];
       };
       this._museCharacterSheetH3Editor._attachAutoResize(timelineWidget);
+
+      // Canvas culling must include the HTML panel, even when its natural
+      // height exceeds the saved node size. Use unscaled layout pixels:
+      // getBoundingClientRect would feed canvas zoom into graph coordinates.
+      const previousBounding = this.onBounding;
+      this.onBounding = function (bounds) {
+        previousBounding?.call(this, bounds);
+        if (this.flags?.collapsed || this.collapsed) return;
+        const root = this._museCharacterSheetH3Editor?.container;
+        if (!root) return;
+        const height = Math.max(root.offsetHeight || 0, root.scrollHeight || 0);
+        const width = Math.max(root.offsetWidth || 0, root.scrollWidth || 0);
+        if (!height || !width) return; // Hidden/unmounted DOM must not erase bounds.
+        const margin = timelineWidget.margin ?? 0;
+        const right = this.pos[0] + margin + width;
+        const bottom = this.pos[1] + (timelineWidget.y || 0) + margin + height;
+        bounds[2] = Math.max(bounds[2], right - bounds[0]);
+        bounds[3] = Math.max(bounds[3], bottom - bounds[1]);
+      };
 
       // [2026-09-18] Was a hardcoded [1480, 900] — this runs on every node
       // (re)creation, including a tab switch reloading an already-open
